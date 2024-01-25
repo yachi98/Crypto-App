@@ -1,6 +1,7 @@
 "use client";
 
 import { getGlobalData } from "@/redux/features/globalSlice";
+import { getCoinData } from "@/redux/features/coinMarketSlice";
 import { AppDispatch } from "@/redux/store";
 import { useDispatch } from "react-redux";
 
@@ -11,6 +12,10 @@ const Home = () => {
 
   useEffect(() => {
     dispatch(getGlobalData());
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(getCoinData());
   }, [dispatch]);
 
   return <main className="flex flex-col items-center justify-between"></main>;

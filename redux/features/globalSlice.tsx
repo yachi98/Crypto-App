@@ -58,7 +58,6 @@ const globalSlice = createSlice({
       .addCase(getGlobalData.fulfilled, (state, action) => {
         state.globalData = action.payload.data;
         state.isLoading = false;
-        console.log("API data:", action.payload.data);
       })
       .addCase(getGlobalData.rejected, (state, action) => {
         state.isLoading = false;
