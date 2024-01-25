@@ -96,7 +96,7 @@ const coinMarketSlice = createSlice({
       })
       .addCase(getCoinData.fulfilled, (state, action) => {
         state.coinMarketData = action.payload;
-        console.log(action.payload);
+        console.log(action.payload.data);
         state.isLoading = false;
       })
       .addCase(getCoinData.rejected, (state, action) => {
