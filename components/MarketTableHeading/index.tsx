@@ -1,5 +1,4 @@
 const MarketTableHeading = () => {
-  // hello
   return (
     <div className="bg-black w-full h-[700px] text-[#DEDEDE] text-sm font-light rounded-2xl p-5 flex gap-3">
       <span className="px-1">#</span>
