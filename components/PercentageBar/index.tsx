@@ -6,7 +6,7 @@ const PercentageBar = ({
   percentage: number;
 }) => {
   return (
-    <div className="w-full h-[6px] relative">
+    <div className="w-[80px] h-[6px] relative">
       <span
         className={`rounded-[6px] h-[6px] block ${fill} opacity-40 relative`}
       ></span>

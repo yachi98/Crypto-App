@@ -5,6 +5,7 @@ import InfoBar from "@/components/InfoBar";
 import NavBar from "@/components/NavBar";
 import PriceChart from "@/components/PriceChart";
 import "./globals.css";
+import CoinMarketTable from "@/components/CoinMarketTable";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -25,6 +26,7 @@ export default function RootLayout({
           <NavBar />
           <InfoBar />
           <PriceChart />
+          <CoinMarketTable />
           <body className={`${inter.className} bg-zinc-950`}>{children}</body>
         </div>
       </Providers>

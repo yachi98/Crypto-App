@@ -77,6 +77,7 @@ export const getCoinData = createAsyncThunk(
       const { data } = await axios.get(
         "https://api.coingecko.com/api/v3/coins/markets?vs_currency=USD&order=market_cap_desc&per_page=100&page=1&sparkline=false&locale=en"
       );
+      console.log(data);
       return data;
     } catch (error) {
       return rejectWithValue(error);
@@ -96,7 +97,7 @@ const coinMarketSlice = createSlice({
       })
       .addCase(getCoinData.fulfilled, (state, action) => {
         state.coinMarketData = action.payload;
-        console.log(action.payload.data);
+        console.log(action.payload);
         state.isLoading = false;
       })
       .addCase(getCoinData.rejected, (state, action) => {

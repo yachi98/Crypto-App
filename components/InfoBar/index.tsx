@@ -53,7 +53,6 @@ const InfoBar = () => {
         </span>
       </div>
       <div className="flex items-center gap-1">
-        {/* <BitCoinIcon /> */}
         <span className="text-white text-xs">BTC</span>
         <span className="text-white text-xs font-light">
           {Math.floor(btcPercentage)}%
@@ -66,7 +65,6 @@ const InfoBar = () => {
         </div>
       </div>
       <div className="flex items-center gap-1">
-        {/* <EthereumIcon /> */}
         <span className="text-white text-xs">ETH</span>
         <span className="text-white text-xs font-light">
           {Math.floor(ethPercentage)}%
