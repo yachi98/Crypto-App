@@ -11,7 +11,7 @@ const PortfolioSwitch = () => {
   };
 
   return (
-    <div className="w-[180px] items-center bg-zinc-900 rounded-xl text-white text-xs font-light flex justify-center">
+    <div className="w-[180px] items-center backdrop-filter bg-black bg-opacity-40 backdrop-blur rounded-xl text-white text-xs font-light flex justify-center">
       <motion.button
         className={`${
           isClicked ? "" : "bg-gradient-to-r from-purple-400 to-orange-300"

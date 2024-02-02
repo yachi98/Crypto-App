@@ -13,7 +13,9 @@ const CoinMarketTable = () => {
 
   return (
     <div>
+      <h1 className="text-white text-light p-4">Market Overview</h1>
       <MarketTableHeading />
+
       {hasCoins &&
         coinMarketData.map((coin: Coin) => (
           <RowCoinItem key={coin.id} coin={coin} />

@@ -57,7 +57,7 @@ const InfoBar = () => {
         <span className="text-white text-xs font-light">
           {Math.floor(btcPercentage)}%
         </span>
-        <div className="w-[50px] ml-1.5">
+        <div className="w-[50px] ml-4">
           <PercentageBar
             fill="bg-gradient-to-r from-purple-400 to-orange-300"
             percentage={btcPercentage}
@@ -65,11 +65,11 @@ const InfoBar = () => {
         </div>
       </div>
       <div className="flex items-center gap-1">
-        <span className="text-white text-xs">ETH</span>
+        <span className="text-white text-xs ml-5">ETH</span>
         <span className="text-white text-xs font-light">
           {Math.floor(ethPercentage)}%
         </span>
-        <div className="w-[50px] ml-1.5">
+        <div className="w-[50px] ml-4">
           <PercentageBar
             fill="bg-gradient-to-r from-purple-400 to-orange-300"
             percentage={ethPercentage}

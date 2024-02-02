@@ -6,7 +6,7 @@ const CoinMarketBar = ({
   percentage: number;
 }) => {
   return (
-    <div className="w-[200px] h-[6px] relative">
+    <div className="w-[290px] h-[6px] relative">
       <span
         className={`rounded-[6px] h-[3px] block ${fill} opacity-40 relative`}
       ></span>

@@ -8,38 +8,50 @@ import Image from "next/image";
 import Link from "next/link";
 
 const RowCoinItem = ({ coin }: { coin: Coin }) => {
-  const priceChange24h: number = getFormattedPrice(
-    coin.price_change_percentage_24h
+  console.log("hi", coin);
+  const priceChange1h: number = getFormattedPrice(
+    coin.price_change_percentage_1h_in_currency
   );
-
-  // const priceChange1h: number = getFormattedPrice(coin.price_change_percentage_1h);
+  const priceChange24h: number = getFormattedPrice(
+    coin.price_change_percentage_24h_in_currency
+  );
+  const priceChange7d: number = getFormattedPrice(
+    coin.price_change_percentage_7d_in_currency
+  );
 
   return (
     <div className="bg-black w-full  text-[#DEDEDE] text-sm font-light p-5 flex gap-3 items-center">
       <span>{coin.market_cap_rank}</span>
       <Image src={coin.image} alt={coin.name} width={30} height={30} />
-
       <span className="w-[14%] px-1">
         {coin.name.charAt(0).toUpperCase() + coin.name.slice(1).toLowerCase()} (
         {coin.symbol.toUpperCase()})
       </span>
       <span className="w-[6%] px-1">{formatNumber(coin.current_price)}</span>
       <span className="w-[6%] px-1">
-        <PriceChange price={priceChange24h} />
+        <PriceChange price={priceChange1h} />
       </span>
       <span className="w-[6%] px-1">
         <PriceChange price={priceChange24h} />
       </span>
       <span className="w-[6%] px-1">
-        <PriceChange price={priceChange24h} />
+        <PriceChange price={priceChange7d} />
       </span>
-      <span className="w-full max-w-[18%] px-1">
+      <span className="w-full max-w-[20%] px-1">
+        <div className="flex justify-between text-xs">
+          <span className="text-white">{formatNumber(coin.total_volume)}</span>
+          <span>{formatNumber(coin.market_cap)}</span>
+        </div>
         <CoinMarketBar
           fill="bg-[#FFFF]"
           percentage={getPercentage(coin.total_volume, coin.market_cap)}
         />
       </span>
-      <span className="w-full max-w-[18%] px-1">
+      <span className="w-full max-w-[20%] px-1">
+        <div className="flex justify-between text-xs">
+          <span className="text-white">{formatNumber(coin.total_volume)}</span>
+          <span>{formatNumber(coin.market_cap)}</span>
+        </div>
         <CoinMarketBar
           fill="bg-[#FFFF]"
           percentage={getPercentage(coin.circulating_supply, coin.total_supply)}

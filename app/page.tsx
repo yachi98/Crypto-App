@@ -1,7 +1,7 @@
 "use client";
 
 import { getGlobalData } from "@/redux/features/globalSlice";
-import { getCoinData, getAllCoinsData } from "@/redux/features/coinMarketSlice";
+import { getCoinData } from "@/redux/features/coinMarketSlice";
 import { AppDispatch, useAppSelector } from "@/redux/store";
 import { useDispatch } from "react-redux";
 
@@ -17,7 +17,7 @@ const Home = () => {
 
   useEffect(() => {
     dispatch(getCoinData());
-    dispatch(getAllCoinsData());
+    // dispatch(getAllCoinsData());
     console.log("All Coins Data:", allCoinsList);
   }, []);
 
