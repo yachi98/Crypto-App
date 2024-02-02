@@ -34,6 +34,8 @@ export const getCoinData = createAsyncThunk(
   }
 );
 
+let a;
+
 // export const getAllCoinsData = createAsyncThunk(
 //   "coinMarket/getAllCoinsData",
 //   async (_, { rejectWithValue }) => {
