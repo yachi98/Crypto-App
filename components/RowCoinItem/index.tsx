@@ -8,7 +8,6 @@ import Image from "next/image";
 import Link from "next/link";
 
 const RowCoinItem = ({ coin }: { coin: Coin }) => {
-  console.log("hi", coin);
   const priceChange1h: number = getFormattedPrice(
     coin.price_change_percentage_1h_in_currency
   );
