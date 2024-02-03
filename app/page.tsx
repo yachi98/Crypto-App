@@ -9,9 +9,6 @@ import { useEffect } from "react";
 
 const Home = () => {
   const dispatch: AppDispatch = useDispatch();
-  // const { allCoinsList } = useAppSelector(
-  //   (state) => state.coinMarketData.allCoinsList
-  // );
 
   useEffect(() => {
     dispatch(getGlobalData());
@@ -19,7 +16,6 @@ const Home = () => {
 
   useEffect(() => {
     dispatch(getCoinData());
-    // dispatch(getAllCoinsData());
   }, []);
 
   return <main className="flex flex-col items-center justify-between"></main>;

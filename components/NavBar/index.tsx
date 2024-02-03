@@ -21,7 +21,6 @@ const NavBar = () => {
         <SearchBar />
       </div>
       <SorterCurrency />
-      {/* <ThemeToggle /> */}
     </div>
   );
 };

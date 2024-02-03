@@ -18,9 +18,3 @@ const nextConfig = {
 };
 
 module.exports = nextConfig;
-
-// const withTM = require("next-transpile-modules")(["next-themes"]);
-
-// module.exports = withTM({
-//   // other next.config.js configuration
-// });
