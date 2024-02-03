@@ -19,7 +19,7 @@ const RowCoinItem = ({ coin }: { coin: Coin }) => {
   );
 
   return (
-    <div className="bg-black w-full  text-[#DEDEDE] text-sm font-light p-5 flex gap-3 items-center">
+    <div className=" bg-black w-full  text-[#DEDEDE] text-sm font-light p-5 flex gap-3 items-center">
       <span>{coin.market_cap_rank}</span>
       <Image src={coin.image} alt={coin.name} width={30} height={30} />
       <span className="w-[14%] px-1">
