@@ -3,7 +3,7 @@
 import React from "react";
 import SearchIcon from "../../public/SearchIcon.svg";
 import SorterCurrency from "../SortCurrency";
-import ThemeToggle from "../ThemeToggle";
+// import ThemeToggle from "../ThemeToggle";
 import PortfolioSwitch from "../PortfolioSwitch";
 import LogoIcon from "@/public/Logo.svg";
 import SearchBar from "@/components/SearchBar";
@@ -21,7 +21,6 @@ const NavBar = () => {
         <SearchBar />
       </div>
       <SorterCurrency />
-      <ThemeToggle />
     </div>
   );
 };
