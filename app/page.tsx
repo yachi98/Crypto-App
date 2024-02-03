@@ -1,7 +1,7 @@
 "use client";
 
 import { getGlobalData } from "@/redux/features/globalSlice";
-import { getCoinData, getAllCoinsData } from "@/redux/features/coinMarketSlice";
+import { getCoinData } from "@/redux/features/coinMarketSlice";
 import { AppDispatch, useAppSelector } from "@/redux/store";
 import { useDispatch } from "react-redux";
 
@@ -9,7 +9,9 @@ import { useEffect } from "react";
 
 const Home = () => {
   const dispatch: AppDispatch = useDispatch();
-  const { allCoinsList } = useAppSelector((state) => state.coinMarketData);
+  // const { allCoinsList } = useAppSelector(
+  //   (state) => state.coinMarketData.allCoinsList
+  // );
 
   useEffect(() => {
     dispatch(getGlobalData());
@@ -17,8 +19,7 @@ const Home = () => {
 
   useEffect(() => {
     dispatch(getCoinData());
-    dispatch(getAllCoinsData());
-    console.log("All Coins Data:", allCoinsList);
+    // dispatch(getAllCoinsData());
   }, []);
 
   return <main className="flex flex-col items-center justify-between"></main>;

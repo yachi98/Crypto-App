@@ -42,7 +42,7 @@ const RowCoinItem = ({ coin }: { coin: Coin }) => {
           <span>{formatNumber(coin.market_cap)}</span>
         </div>
         <CoinMarketBar
-          fill="bg-[#FFFF]"
+          fill={priceChange24h > 0 ? "bg-[#00B1A7]" : "bg-[#FE2264]"}
           percentage={getPercentage(coin.total_volume, coin.market_cap)}
         />
       </span>
@@ -52,7 +52,7 @@ const RowCoinItem = ({ coin }: { coin: Coin }) => {
           <span>{formatNumber(coin.market_cap)}</span>
         </div>
         <CoinMarketBar
-          fill="bg-[#FFFF]"
+          fill={priceChange24h > 0 ? "bg-[#00B1A7]" : "bg-[#FE2264]"}
           percentage={getPercentage(coin.circulating_supply, coin.total_supply)}
         />
       </span>

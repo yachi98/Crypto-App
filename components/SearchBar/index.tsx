@@ -1,7 +1,3 @@
-// interface SearchBarProps {
-//   text: string;
-// }
-
 const SearchBar = () => {
   return (
     <input

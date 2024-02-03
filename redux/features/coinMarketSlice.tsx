@@ -48,8 +48,6 @@ export const getAllCoinsData = createAsyncThunk(
   }
 );
 
-//api.coingecko.com/api/v3/coins/markets?vs_currency=${currency}&order=${orderBy}_${orderDir}&per_page=${perPage}&page=${page}&sparkline=true&price_change_percentage=1h%2C24h%2C7d
-
 const coinMarketSlice = createSlice({
   name: "coinMarket",
   initialState,
