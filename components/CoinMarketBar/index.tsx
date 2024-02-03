@@ -18,4 +18,6 @@ const CoinMarketBar = ({
   );
 };
 
+let a;
+
 export default CoinMarketBar;
