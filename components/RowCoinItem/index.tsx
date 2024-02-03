@@ -38,8 +38,16 @@ const RowCoinItem = ({ coin }: { coin: Coin }) => {
       </span>
       <span className="w-full max-w-[20%] px-1">
         <div className="flex justify-between text-xs">
-          <span className="text-white">{formatNumber(coin.total_volume)}</span>
-          <span>{formatNumber(coin.market_cap)}</span>
+          <span
+            className={priceChange24h > 0 ? "text-[#00B1A7]" : "text-[#FE2264]"}
+          >
+            {formatNumber(coin.total_volume)}
+          </span>
+          <span
+            className={priceChange24h > 0 ? "text-[#00B1A7]" : "text-[#FE2264]"}
+          >
+            {formatNumber(coin.market_cap)}
+          </span>
         </div>
         <CoinMarketBar
           fill={priceChange24h > 0 ? "bg-[#00B1A7]" : "bg-[#FE2264]"}
@@ -48,8 +56,16 @@ const RowCoinItem = ({ coin }: { coin: Coin }) => {
       </span>
       <span className="w-full max-w-[20%] px-1">
         <div className="flex justify-between text-xs">
-          <span className="text-white">{formatNumber(coin.total_volume)}</span>
-          <span>{formatNumber(coin.market_cap)}</span>
+          <span
+            className={priceChange24h > 0 ? "text-[#00B1A7]" : "text-[#FE2264]"}
+          >
+            {formatNumber(coin.total_volume)}
+          </span>
+          <span
+            className={priceChange24h > 0 ? "text-[#00B1A7]" : "text-[#FE2264]"}
+          >
+            {formatNumber(coin.market_cap)}
+          </span>
         </div>
         <CoinMarketBar
           fill={priceChange24h > 0 ? "bg-[#00B1A7]" : "bg-[#FE2264]"}

@@ -12,12 +12,12 @@ const CoinMarketBar = ({
       ></span>
       <span
         className={`w-full h-[3px] absolute left-0 top-0 rounded-[6px] ${fill}`}
-        style={{ width: `${percentage}%` }}
+        style={{
+          width: `${percentage}%`,
+        }}
       ></span>
     </div>
   );
 };
-
-let a;
 
 export default CoinMarketBar;
