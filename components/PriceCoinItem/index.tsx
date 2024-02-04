@@ -32,7 +32,7 @@ const PriceCoinItem = ({ coin }: { coin: Coin }) => {
       whileTap={{ scale: 1.2 }}
       transition={{ type: "spring", stiffness: 100, damping: 10 }}
     >
-      <div className="flex gap-3">
+      <div className="flex gap-3 items-center">
         <div className="ml-2">
           <Image src={coin.image} alt={coin.name} width={30} height={30} />
         </div>

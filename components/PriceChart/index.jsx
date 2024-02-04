@@ -1,11 +1,48 @@
 "use client";
 
 import PriceCoinItem from "../PriceCoinItem";
-import { AppDispatch, useAppSelector } from "@/redux/store";
+import { useAppSelector } from "@/redux/store";
 import { Coin } from "@/interfaces/coin.interface";
-import { useState } from "react";
+import React from "react";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const PriceChart = () => {
+  var settings = {
+    dots: true,
+    infinite: false,
+    speed: 500,
+    slidesToShow: 6,
+    slidesToScroll: 6,
+    initialSlide: 0,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+          infinite: true,
+          dots: true,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          initialSlide: 2,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
+  };
   const { coinMarketData } = useAppSelector((state) => state.coinMarketData);
 
   const hasCoins = coinMarketData.length > 0;
@@ -13,12 +50,14 @@ const PriceChart = () => {
   return (
     <div>
       <h1 className="text-white p-4 text-light">Price chart</h1>
-      <div className="flex gap-2 p-2">
+      <Slider {...settings}>
         {hasCoins &&
           coinMarketData.map((coin) => (
-            <PriceCoinItem key={coin.id} coin={coin} className="mr-2" />
+            <div key={coin.id} className="mr-2">
+              <PriceCoinItem coin={coin} />
+            </div>
           ))}
-      </div>
+      </Slider>
     </div>
   );
 };

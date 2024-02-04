@@ -2,7 +2,7 @@
 
 import MarketTableHeading from "../MarketTableHeading";
 import RowCoinItem from "@/components/RowCoinItem/";
-import { AppDispatch, useAppSelector } from "@/redux/store";
+import { useAppSelector } from "@/redux/store";
 import { Coin } from "@/interfaces/coin.interface";
 
 const CoinMarketTable = () => {
