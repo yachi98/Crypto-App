@@ -11,7 +11,9 @@ const PriceChange = ({ price }: { price: number }) => {
         }`}
       />
       <span
-        className={`ml-1 ${isPositive ? "text-[#00B1A7]" : "text-[#FE2264]"}`}
+        className={` text-sm ml-1 ${
+          isPositive ? "text-[#00B1A7]" : "text-[#FE2264]"
+        }`}
       >
         {price}%
       </span>
