@@ -2,9 +2,9 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { Coin } from "@/interfaces/coin.interface";
 
-// interface GraphMarketInfo {
-//   [coin: string]: number;
-// }
+interface GraphMarketInfo {
+  [coin: string]: number; // object
+}
 
 interface GraphMarketData {
   selectedCoins: Coin[];
@@ -20,10 +20,10 @@ const initialState: GraphMarketData = {
 
 export const getGraphData = createAsyncThunk(
   "graphMarketData/getGraphData",
-  async (coinId, { rejectWithValue }) => {
+  async ({ coinId }: { coinId: string }, { rejectWithValue }) => {
     try {
       const { data } = await axios.get(
-        `https://api.coingecko.com/api/v3/coins/${coinId}/market_chart?vs_currency=usd&days=23&x_cg_demo_api_key=${process.env.NEXT_PUBLIC_API_KEY}`
+        `https://api.coingecko.com/api/v3/coins/${coinId}/market_chart?vs_currency=usd&days=14&precision=full&x_cg_demo_api_key=${process.env.NEXT_PUBLIC_API_KEY}`
       );
       console.log("data", data);
       return data;
@@ -33,7 +33,21 @@ export const getGraphData = createAsyncThunk(
   }
 );
 
-// https://api.coingecko.com/api/v3/coins/id/market_chart?vs_currency=usd&days=23&x_cg_demo_api_key=${process.env.NEXT_PUBLIC_API_KEY}
+// export const getGraphData = createAsyncThunk(
+//   "graphMarketData/getGraphData",
+//   async (_, { rejectWithValue }) => {
+//     try {
+//       const { data } = await axios.get(
+//         `https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=14&precision=full&x_cg_demo_api_key=${process.env.NEXT_PUBLIC_API_KEY}`
+//       );
+
+//       console.log("data", data);
+//       return data;
+//     } catch (error) {
+//       return rejectWithValue(error);
+//     }
+//   }
+// );
 
 const graphMarketSlice = createSlice({
   name: "graphMarketData",
@@ -47,7 +61,7 @@ const graphMarketSlice = createSlice({
       })
       .addCase(getGraphData.fulfilled, (state, action) => {
         state.selectedCoins = action.payload;
-        state.selectedCoins = [...state.selectedCoins, action.payload];
+        // state.selectedCoins = [...state.selectedCoins, action.payload];
         console.log(action.payload);
         state.isLoading = false;
       })
