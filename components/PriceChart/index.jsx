@@ -2,20 +2,41 @@
 
 import PriceCoinItem from "../PriceCoinItem";
 import { useAppSelector } from "@/redux/store";
-import { Coin } from "@/interfaces/coin.interface";
+import ChevronRIcon from "@/public/ChevronRIcon.svg";
+import ChevronLIcon from "@/public/ChevronLIcon.svg";
 import React from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
+const PrevArrow = ({ onClick }) => (
+  <button
+    className="backdrop-filter bg-black bg-opacity-40 backdrop-blur text-white rounded-xl absolute left-0 top-[50%] transform -translate-y-1/2 z-999 p-3 -ml-3"
+    onClick={onClick}
+  >
+    <ChevronLIcon />
+  </button>
+);
+
+const NextArrow = ({ onClick }) => (
+  <button
+    className="backdrop-filter bg-black bg-opacity-40 backdrop-blur text-white rounded-xl absolute right-0 top-[50%] transform -translate-y-1/2 z-999 p-3 -mr-3"
+    onClick={onClick}
+  >
+    <ChevronRIcon />
+  </button>
+);
+
 const PriceChart = () => {
   var settings = {
-    dots: true,
+    dots: false,
     infinite: false,
     speed: 500,
     slidesToShow: 6,
     slidesToScroll: 6,
     initialSlide: 0,
+    prevArrow: <PrevArrow />,
+    nextArrow: <NextArrow />,
     responsive: [
       {
         breakpoint: 1024,
