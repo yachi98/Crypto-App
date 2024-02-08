@@ -33,22 +33,6 @@ export const getGraphData = createAsyncThunk(
   }
 );
 
-// export const getGraphData = createAsyncThunk(
-//   "graphMarketData/getGraphData",
-//   async (_, { rejectWithValue }) => {
-//     try {
-//       const { data } = await axios.get(
-//         `https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=14&precision=full&x_cg_demo_api_key=${process.env.NEXT_PUBLIC_API_KEY}`
-//       );
-
-//       console.log("data", data);
-//       return data;
-//     } catch (error) {
-//       return rejectWithValue(error);
-//     }
-//   }
-// );
-
 const graphMarketSlice = createSlice({
   name: "graphMarketData",
   initialState,
@@ -61,7 +45,6 @@ const graphMarketSlice = createSlice({
       })
       .addCase(getGraphData.fulfilled, (state, action) => {
         state.selectedCoins = action.payload;
-        // state.selectedCoins = [...state.selectedCoins, action.payload];
         console.log(action.payload);
         state.isLoading = false;
       })
