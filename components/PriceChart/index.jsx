@@ -11,7 +11,7 @@ import "slick-carousel/slick/slick-theme.css";
 
 const PrevArrow = ({ onClick }) => (
   <button
-    className="backdrop-filter bg-black bg-opacity-40 backdrop-blur text-white rounded-xl absolute left-0 top-[50%] transform -translate-y-1/2 z-999 p-3 -ml-3"
+    className="backdrop-filter bg-black bg-opacity-40 backdrop-blur text-white rounded-xl absolute left-0 top-[50%] transform -translate-y-1/2 z-50 p-3 -ml-5"
     onClick={onClick}
   >
     <ChevronLIcon />
@@ -20,7 +20,7 @@ const PrevArrow = ({ onClick }) => (
 
 const NextArrow = ({ onClick }) => (
   <button
-    className="backdrop-filter bg-black bg-opacity-40 backdrop-blur text-white rounded-xl absolute right-0 top-[50%] transform -translate-y-1/2 z-999 p-3 -mr-3"
+    className="backdrop-filter bg-black bg-opacity-40 backdrop-blur text-white rounded-xl absolute right-0 top-[50%] transform -translate-y-1/2 z-50 p-3 -mr-5"
     onClick={onClick}
   >
     <ChevronRIcon />
