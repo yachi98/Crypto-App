@@ -41,10 +41,10 @@ const PriceCoinGraph = ({
 
     if (priceChange > 0) {
       gradientFill.addColorStop(0, "rgba(0,245,228,.5)");
-      gradientFill.addColorStop(0.7, "rgba(0,245,228,.1)");
+      //   gradientFill.addColorStop(0.7, "rgba(0,245,228,.1)");
     } else {
       gradientFill.addColorStop(0, "rgba(255,0,97,.5)");
-      gradientFill.addColorStop(0.7, "rgba(255,0,97,.1)");
+      //   gradientFill.addColorStop(0.7, "rgba(255,0,97,.1)");
     }
 
     gradientFill.addColorStop(1, "transparent");

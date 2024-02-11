@@ -19,7 +19,7 @@ const RowCoinItem = ({ coin }: { coin: Coin }) => {
     coin.price_change_percentage_7d_in_currency
   );
 
-  // const graphLine: number[] = coin.sparkline_in_7d.price;
+  const graphLine: number[] = coin.sparkline_in_7d.price;
 
   return (
     <div className=" bg-black w-full  text-[#DEDEDE] text-sm font-light p-5 flex gap-3 items-center">
@@ -77,7 +77,7 @@ const RowCoinItem = ({ coin }: { coin: Coin }) => {
       </span>
       <span className="w-[14%] pl-3 h-[50px]">
         <PriceCoinGraph
-          prices={coin.sparkline_in_7d.price}
+          prices={graphLine}
           priceChange={priceChange7d}
           reduceBy={6}
         />
