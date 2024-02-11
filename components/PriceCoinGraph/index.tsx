@@ -20,7 +20,6 @@ const PriceCoinGraph = ({
 }: {
   prices: number[];
   priceChange: number;
-
   reduceBy: number;
 }) => {
   const dataSet: number[] = getReducedArray(prices, reduceBy);
