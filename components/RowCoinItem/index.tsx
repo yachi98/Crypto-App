@@ -4,6 +4,7 @@ import PriceChange from "@/components/PriceChange";
 import getFormattedPrice from "@/utils/getFormattedDate";
 import CoinMarketBar from "../CoinMarketBar";
 import getPercentage from "@/utils/getPercentage";
+import PriceCoinGraph from "../PriceCoinGraph";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -19,7 +20,7 @@ const RowCoinItem = ({ coin }: { coin: Coin }) => {
   );
 
   return (
-    <div className=" bg-black w-full rounded-2xl  text-[#DEDEDE] text-sm font-light p-5 flex gap-3 items-center mt-2 shadow">
+    <div className="bg-black w-full text-[#DEDEDE] text-sm font-light rounded-3xl p-5 mb-2 flex gap-3 items-center">
       <span>{coin.market_cap_rank}</span>
       <Image src={coin.image} alt={coin.name} width={30} height={30} />
       <span className="w-[14%] px-1">
@@ -72,7 +73,13 @@ const RowCoinItem = ({ coin }: { coin: Coin }) => {
           percentage={getPercentage(coin.circulating_supply, coin.total_supply)}
         />
       </span>
-      <span className="w-[6%] px-1"></span>
+      <span className="w-[14%] pl-3 h-[50px]">
+        <PriceCoinGraph
+          prices={coin.sparkline_in_7d.price}
+          priceChange={priceChange7d}
+          reduceBy={6}
+        />
+      </span>
     </div>
   );
 };

@@ -45,7 +45,6 @@ const graphMarketSlice = createSlice({
       })
       .addCase(getGraphData.fulfilled, (state, action) => {
         state.selectedCoins = action.payload;
-        console.log(action.payload);
         state.isLoading = false;
       })
       .addCase(getGraphData.rejected, (state, action) => {
