@@ -19,10 +19,8 @@ const RowCoinItem = ({ coin }: { coin: Coin }) => {
     coin.price_change_percentage_7d_in_currency
   );
 
-  const graphLine: number[] = coin.sparkline_in_7d.price;
-
   return (
-    <div className="bg-black w-full text-[#DEDEDE] text-sm font-light p-5 flex gap-3 items-center border-b border-zinc-800">
+    <div className="bg-black w-full text-[#DEDEDE] text-sm font-light rounded-3xl p-5 mb-2 flex gap-3 items-center">
       <span>{coin.market_cap_rank}</span>
       <Image src={coin.image} alt={coin.name} width={30} height={30} />
       <span className="w-[14%] px-1">
@@ -77,7 +75,7 @@ const RowCoinItem = ({ coin }: { coin: Coin }) => {
       </span>
       <span className="w-[14%] pl-3 h-[50px]">
         <PriceCoinGraph
-          prices={graphLine}
+          prices={coin.sparkline_in_7d.price}
           priceChange={priceChange7d}
           reduceBy={6}
         />
