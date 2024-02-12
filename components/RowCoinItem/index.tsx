@@ -22,7 +22,7 @@ const RowCoinItem = ({ coin }: { coin: Coin }) => {
   const graphLine: number[] = coin.sparkline_in_7d.price;
 
   return (
-    <div className=" bg-black w-full  text-[#DEDEDE] text-sm font-light p-5 flex gap-3 items-center">
+    <div className="bg-black w-full text-[#DEDEDE] text-sm font-light p-5 flex gap-3 items-center border-b border-zinc-800">
       <span>{coin.market_cap_rank}</span>
       <Image src={coin.image} alt={coin.name} width={30} height={30} />
       <span className="w-[14%] px-1">

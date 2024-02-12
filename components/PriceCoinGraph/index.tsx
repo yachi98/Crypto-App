@@ -60,6 +60,7 @@ const PriceCoinGraph = ({
         borderWidth: 2,
         pointRadius: 0,
         fill: true,
+        tension: 0.4,
       },
     ],
   };
