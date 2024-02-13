@@ -7,6 +7,7 @@ import PriceChart from "@/components/PriceChart";
 import "./globals.css";
 import CoinMarketTable from "@/components/CoinMarketTable";
 import CoinGraphChart from "@/components/CoinGraphChart";
+import TimeSelectorBar from "@/components/TimeSelector";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -28,6 +29,7 @@ export default function RootLayout({
           <InfoBar />
           <PriceChart />
           <CoinGraphChart />
+          <TimeSelectorBar />
           <CoinMarketTable />
           <body className={`${inter.className} bg-zinc-950`}>{children}</body>
         </div>
