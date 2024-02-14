@@ -31,7 +31,7 @@ export default function RootLayout({
           <CoinGraphChart />
           <TimeSelectorBar />
           <CoinMarketTable />
-          <body className={`${inter.className} bg-zinc-950`}>{children}</body>
+          <body className={`${inter.className} bg-gray-950`}>{children}</body>
         </div>
       </Providers>
     </html>

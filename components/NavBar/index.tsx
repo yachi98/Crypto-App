@@ -11,7 +11,7 @@ import SearchBar from "@/components/SearchBar";
 const NavBar = () => {
   return (
     <div>
-      <div className="w-full bg-zinc-950 flex items-centre justify-left gap-6 p-3 mt-2">
+      <div className="w-full bg-gray-950 flex items-centre justify-left gap-6 p-3 mt-2">
         <div className="flex gap-2 items-center">
           <LogoIcon />
           <h1 className="text-white">CoinWave</h1>

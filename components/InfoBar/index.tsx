@@ -28,7 +28,7 @@ const InfoBar = () => {
   );
 
   return (
-    <div className="w-full bg-zinc-950 flex items-center gap-x-16 p-4 h-[30px] justify-left mt-2">
+    <div className="w-full bg-gray-950 flex items-center gap-x-16 p-4 h-[30px] justify-left mt-2">
       <div className="flex items-center gap-1">
         <CoinIcon />
         <span className="text-white text-xs font-light">
