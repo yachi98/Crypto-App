@@ -47,7 +47,7 @@ export const getSelectedCoinData = createAsyncThunk(
         id: coinId,
         prices: timeFormattedPrices,
         total_volumes: timeFormattedVolumes,
-      };
+      } as Coin;
       return coinData;
     } catch (error) {
       return rejectWithValue(error);

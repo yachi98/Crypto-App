@@ -1,6 +1,7 @@
 "use client";
 
 import { useAppSelector } from "@/redux/store";
+import { useRef } from "react";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -12,22 +13,23 @@ import {
 
 import { Line } from "react-chartjs-2";
 import getNumArray from "@/utils/getGraphArray";
-// import getReducedArray from "@/utils/getGraphReducedArray";
-import PriceChange from "../PriceChange";
-import { useRef } from "react";
+import getReducedArray from "@/utils/getGraphReducedArray";
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Filler);
 
 const CoinPriceGraph = ({
   prices,
   total_volumes,
+  reduceBy,
 }: {
   prices: number[];
   total_volumes: number[];
+  reduceBy: number;
 }) => {
   const lineChartRef = useRef<ChartJS<"line", number[], string>>(null);
+  const dataSet: number[] = getReducedArray(prices, reduceBy);
 
-  console.log(prices);
+  console.log("collect", prices);
 
   const data = {
     labels: getNumArray(prices.length),
@@ -85,13 +87,17 @@ const CoinGraphChart = () => {
     (state) => state.selectedCoinData
   );
 
-  const current_price =
-    selectedCoins.length > 0 ? selectedCoins[0].current_price : 0;
+  const selectedCoinPrices =
+    selectedCoins.length > 0 ? selectedCoins[0].prices : [];
 
   return (
     <div className="flex gap-3 mt-4">
       <div className="w-[50%] h-[450px] bg-black rounded-2xl p-6">
-        <CoinPriceGraph prices={[current_price]} />
+        <CoinPriceGraph
+          prices={selectedCoinPrices}
+          total_volumes={[]}
+          reduceBy={0}
+        />
       </div>
       <div className="w-[50%] h-[450px] bg-black rounded-2xl">
         <h2 className="text-[#DEDEDE] text-xl p-6 mt-3">Volume 24h</h2>
