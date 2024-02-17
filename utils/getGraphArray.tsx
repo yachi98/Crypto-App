@@ -1,6 +1,6 @@
-const getGraphArray = (n: number): number[] => {
+const getGraphArray = (num: number): number[] => {
   const result: number[] = [];
-  for (let i = 1; i <= n; i++) {
+  for (let i = 1; i <= num; i++) {
     result.push(i);
   }
   return result;

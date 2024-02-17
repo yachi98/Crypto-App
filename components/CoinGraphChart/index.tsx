@@ -8,48 +8,32 @@ import {
   PointElement,
   LineElement,
   Filler,
-  ScriptableContext,
 } from "chart.js";
 
 import { Line } from "react-chartjs-2";
 import getNumArray from "@/utils/getGraphArray";
-import getReducedArray from "@/utils/getGraphReducedArray";
+// import getReducedArray from "@/utils/getGraphReducedArray";
+import PriceChange from "../PriceChange";
 import { useRef } from "react";
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Filler);
 
 const CoinPriceGraph = ({
   prices,
-  priceChange,
-  reduceBy,
+  total_volumes,
 }: {
   prices: number[];
-  priceChange: number;
-  reduceBy: number;
+  total_volumes: number[];
 }) => {
-  const dataSet: number[] = getReducedArray(prices, reduceBy);
+  const lineChartRef = useRef<ChartJS<"line", number[], string>>(null);
 
-  const getBackgroundColor = (
-    context: ScriptableContext<"line">
-  ): CanvasGradient => {
-    const ctx: CanvasRenderingContext2D = context.chart.ctx;
-    const height: number = ctx.canvas.clientHeight;
-    const gradientFill: CanvasGradient = ctx.createLinearGradient(
-      0,
-      0,
-      0,
-      height
-    );
-
-    gradientFill.addColorStop(1, "transparent");
-    return gradientFill;
-  };
+  console.log(prices);
 
   const data = {
-    labels: getNumArray(dataSet.length),
+    labels: getNumArray(prices.length),
     datasets: [
       {
-        data: dataSet,
+        data: prices,
         borderColor: "white",
         backgroundColor: "white",
         borderWidth: 2,
@@ -93,39 +77,27 @@ const CoinPriceGraph = ({
     borderWidth: 0,
   };
 
-  return <Line options={options} data={data} />;
+  return <Line ref={lineChartRef} options={options} data={data} />;
 };
 
 const CoinGraphChart = () => {
-  const { coinMarketData } = useAppSelector((state) => state.coinMarketData);
+  const { selectedCoins, timeDay } = useAppSelector(
+    (state) => state.selectedCoinData
+  );
+
+  const current_price =
+    selectedCoins.length > 0 ? selectedCoins[0].current_price : 0;
 
   return (
     <div className="flex gap-3 mt-4">
-      <div className="w-[50%] h-[450px] bg-black rounded-2xl">
-        {/* {coinMarketData && coinMarketData.length && (
-          <CoinPriceGraph
-            prices={coin.current_price}
-            priceChange={coinMarketData[0].priceChange}
-            reduceBy={10}
-          />
-        )} */}
+      <div className="w-[50%] h-[450px] bg-black rounded-2xl p-6">
+        <CoinPriceGraph prices={[current_price]} />
       </div>
       <div className="w-[50%] h-[450px] bg-black rounded-2xl">
         <h2 className="text-[#DEDEDE] text-xl p-6 mt-3">Volume 24h</h2>
-        {/* <Bar
-          prices={coinMarketData.map((coin) => coin.current_price)}
-          options={options}
-          data={barData}
-        /> */}
       </div>
     </div>
   );
 };
 
 export default CoinGraphChart;
-
-// {coinMarketData.map((coin: Coin) => (
-//   <h3 key={coin.id} className="text-[#DEDEDE] text-xl p-6 mt-3">
-//     {coin.name}
-//   </h3>
-//    ))}

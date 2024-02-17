@@ -2,11 +2,13 @@ import { useSelector, TypedUseSelectorHook } from "react-redux";
 import { configureStore } from "@reduxjs/toolkit";
 import globalReducer from "@/redux/features/globalSlice";
 import coinMarketReducer from "@/redux/features/coinMarketSlice";
+import selectedCoinReducer from "@/redux/features/selectedCoins";
 
 export const store = configureStore({
   reducer: {
     globalData: globalReducer,
     coinMarketData: coinMarketReducer,
+    selectedCoinData: selectedCoinReducer,
   },
 });
 

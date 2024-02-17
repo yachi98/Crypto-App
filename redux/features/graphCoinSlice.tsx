@@ -25,7 +25,6 @@ export const getGraphData = createAsyncThunk(
       const { data } = await axios.get(
         `https://api.coingecko.com/api/v3/coins/${coinId}/market_chart?vs_currency=usd&days=14&precision=full&x_cg_demo_api_key=${process.env.NEXT_PUBLIC_API_KEY}`
       );
-      console.log("data", data);
       return data;
     } catch (error) {
       return rejectWithValue(error);
