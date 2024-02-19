@@ -29,21 +29,15 @@ export const getSelectedCoinData = createAsyncThunk(
       );
       const { prices, total_volumes } = data;
 
-      const timeFormattedPrices = prices.map((item: [number, number]) => [
-        formatTime(item[0].toString(), timeDay),
-        item[1],
-      ]);
-
-      const timeFormattedVolumes = total_volumes.map(
-        (item: [number, number]) => [
-          formatTime(item[0].toString(), timeDay),
-          item[1],
-        ]
+      const timeFormattedPrices = prices.map(
+        (item: [string, number]) => item[1]
       );
 
-      console.log("data", data);
+      const timeFormattedVolumes = total_volumes.map(
+        (item: [string, number]) => item[0]
+      );
 
-      const coinData: Coin = {
+      const coinData = {
         id: coinId,
         prices: timeFormattedPrices,
         total_volumes: timeFormattedVolumes,

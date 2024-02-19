@@ -1,6 +1,7 @@
 "use client";
 
 import { useAppSelector } from "@/redux/store";
+import { Coin } from "@/interfaces/coin.interface";
 import { useRef } from "react";
 import {
   Chart as ChartJS,
@@ -13,32 +14,21 @@ import {
 
 import { Line } from "react-chartjs-2";
 import getNumArray from "@/utils/getGraphArray";
-import getReducedArray from "@/utils/getGraphReducedArray";
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Filler);
 
-const CoinPriceGraph = ({
-  prices,
-  total_volumes,
-  reduceBy,
-}: {
-  prices: number[];
-  total_volumes: number[];
-  reduceBy: number;
-}) => {
-  const lineChartRef = useRef<ChartJS<"line", number[], string>>(null);
-  const dataSet: number[] = getReducedArray(prices, reduceBy);
-
-  console.log("collect", prices);
+const CoinPriceGraph = ({ coin }: { coin: Coin }) => {
+  console.log("prices", coin.prices);
+  console.log("volumes", coin.total_volumes);
 
   const data = {
-    labels: getNumArray(prices.length),
+    labels: getNumArray(coin.prices.length),
     datasets: [
       {
-        data: prices,
+        data: coin.prices,
         borderColor: "white",
-        backgroundColor: "white",
-        borderWidth: 2,
+        // backgroundColor: "white",
+        borderWidth: 1,
         pointRadius: 0,
         fill: true,
         tension: 0.4,
@@ -58,7 +48,7 @@ const CoinPriceGraph = ({
           color: "#ffffff",
         },
         border: {
-          display: false,
+          display: true,
         },
         stacked: true,
       },
@@ -68,7 +58,7 @@ const CoinPriceGraph = ({
       },
       "y-axis-2": {
         display: false,
-        beginAtZero: false,
+        beginAtZero: true,
       },
       "y-axis-3": {
         display: false,
@@ -79,27 +69,23 @@ const CoinPriceGraph = ({
     borderWidth: 0,
   };
 
-  return <Line ref={lineChartRef} options={options} data={data} />;
+  return <Line options={options} data={data} />;
 };
 
 const CoinGraphChart = () => {
-  const { selectedCoins, timeDay } = useAppSelector(
-    (state) => state.selectedCoinData
-  );
+  const { selectedCoins } = useAppSelector((state) => state.selectedCoinData);
+  const lineChartRef = useRef<ChartJS<"line", number[], string>>(null);
+  const barChartRef = useRef<ChartJS<"bar", number[], string>>(null);
 
-  const selectedCoinPrices =
-    selectedCoins.length > 0 ? selectedCoins[0].prices : [];
+  const selectedCoin = selectedCoins.length > 0 ? selectedCoins[0] : null;
 
   return (
     <div className="flex gap-3 mt-4">
-      <div className="w-[50%] h-[450px] bg-black rounded-2xl p-6">
-        <CoinPriceGraph
-          prices={selectedCoinPrices}
-          total_volumes={[]}
-          reduceBy={0}
-        />
+      <div className="w-[50%] h-[450px] bg-black rounded-2xl p-2">
+        <h2 className="text-[#DEDEDE] text-xl p-6 mt-3">Volume 24h</h2>
+        {selectedCoin && <CoinPriceGraph coin={selectedCoin} />}
       </div>
-      <div className="w-[50%] h-[450px] bg-black rounded-2xl">
+      <div className="w-[50%] h-[450px] bg-black rounded-2xl p-2">
         <h2 className="text-[#DEDEDE] text-xl p-6 mt-3">Volume 24h</h2>
       </div>
     </div>
