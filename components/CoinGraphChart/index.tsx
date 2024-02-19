@@ -18,9 +18,6 @@ import getNumArray from "@/utils/getGraphArray";
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Filler);
 
 const CoinPriceGraph = ({ coin }: { coin: Coin }) => {
-  console.log("prices", coin.prices);
-  console.log("volumes", coin.total_volumes);
-
   const data = {
     labels: getNumArray(coin.prices.length),
     datasets: [
