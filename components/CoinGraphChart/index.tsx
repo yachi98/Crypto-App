@@ -24,11 +24,10 @@ const CoinPriceGraph = ({ coin }: { coin: Coin }) => {
       {
         data: coin.prices,
         borderColor: "white",
-        // backgroundColor: "white",
         borderWidth: 1,
         pointRadius: 0,
         fill: true,
-        tension: 0.4,
+        tension: 0.8,
       },
     ],
   };
