@@ -43,7 +43,7 @@ const TimeSelectorBar = () => {
   };
 
   return (
-    <div className="bg-black flex gap-8 text-xs justify-center p-2 rounded-2xl mt-2">
+    <div className="bg-black flex gap-8 text-xs justify-center p-2 rounded-2xl mt-3">
       {timeSelector.map((timeSelectorItem) => (
         <motion.button
           whileTap={{ scale: 1.3 }}

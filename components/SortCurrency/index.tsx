@@ -13,7 +13,7 @@ const SorterCurrency = () => {
     <div className="relative">
       <button
         onClick={() => setShowDropdown(!showDropdown)}
-        className="w-[100px] bg-black rounded-xl text-white text-xs font-light p-2 flex items-center justify-center gap-3"
+        className="w-[100px] bg-gradient-to-r from-black to-gray-900 rounded-xl text-white text-xs font-light p-2 flex items-center justify-center gap-3"
       >
         <SwitchIcon />
         USD
@@ -25,7 +25,7 @@ const SorterCurrency = () => {
           initial={{ y: 15 }}
           animate={{ y: 0 }}
           transition={{ duration: 0.5 }}
-          className="absolute top-full left-0 backdrop-filter bg-black bg-opacity-40 backdrop-blur overflow-hidden z-30 mt-2 flex flex-col gap-2 w-[100px] text-left rounded-xl p-3 text-white"
+          className="absolute top-full left-0 backdrop-filter bg-gradient-to-r from-black to-gray-900 bg-opacity-40 backdrop-blur overflow-hidden z-30 mt-2 flex flex-col gap-2 w-[100px] text-left rounded-xl p-3 text-white"
         >
           <button
             className={`p-1 flex gap-2 items-center rounded-xl cursor-pointer bg-transparent text-white border-none text-xs transition duration-200 ease-in-out text-left ${
