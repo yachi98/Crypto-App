@@ -7,18 +7,16 @@ import MoonIcon from "@/public/MoonIcon.svg";
 
 const ThemeToggle = () => {
   const { resolvedTheme, setTheme } = useTheme();
-  const [mounted, setMounded] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   const handleThemeChange = () => {
-    if (resolvedTheme === "dark") {
-      setTheme("light");
-    } else {
-      setTheme("dark");
-    }
+    const newTheme = resolvedTheme === "dark" ? "light" : "dark";
+    console.log("hi", resolvedTheme, newTheme);
+    setTheme(newTheme);
   };
 
   useEffect(() => {
-    setMounded(true);
+    setMounted(true);
   }, []);
 
   if (!mounted) {
@@ -27,11 +25,10 @@ const ThemeToggle = () => {
 
   return (
     <button
-      className="w-[45px] bg-black rounded-xl text-white text-xs flex items-center justify-center cursor-pointer"
+      className="w-[55px] bg-gradient-to-r from-black to-gray-900 rounded-xl text-white text-xs flex items-center justify-center cursor-pointer p-2"
       onClick={handleThemeChange}
     >
-      {resolvedTheme === "dark" && <SunIcon />}
-      {resolvedTheme === "light" && <MoonIcon />}
+      {resolvedTheme === "dark" ? <SunIcon /> : <MoonIcon />}
     </button>
   );
 };
