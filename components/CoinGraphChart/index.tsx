@@ -23,7 +23,7 @@ ChartJS.register(
   BarElement
 );
 
-const commonOptions = {
+const options = {
   responsive: true,
   scales: {
     x: {
@@ -71,7 +71,7 @@ const CoinLineGraph = ({ coin }: { coin: Coin }) => {
     ],
   };
 
-  return <Line options={commonOptions} data={data} />;
+  return <Line options={options} data={data} />;
 };
 
 const CoinBarGraph = ({ coin }: { coin: Coin }) => {
@@ -89,7 +89,7 @@ const CoinBarGraph = ({ coin }: { coin: Coin }) => {
     ],
   };
 
-  return <Bar options={commonOptions} data={data} />;
+  return <Bar options={options} data={data} />;
 };
 
 const CoinGraphChart = () => {
