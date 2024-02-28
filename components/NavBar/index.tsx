@@ -20,7 +20,7 @@ const NavBar = () => {
 
         <div className="flex gap-3 items-center">
           <div className="relative flex w-[400px] items-center justify-end">
-            <SearchIcon className="absolute left-2" />
+            <SearchIcon className="absolute left-2 z-10" />
             <SearchBar />
           </div>
           <SorterCurrency />
