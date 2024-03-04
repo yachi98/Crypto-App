@@ -33,7 +33,7 @@ const options = {
         display: false,
       },
       ticks: {
-        display: true,
+        display: false,
         color: "#ffffff",
       },
       border: {
@@ -41,13 +41,16 @@ const options = {
       },
       stacked: true,
     },
+    y: {
+      display: false,
+    },
     "y-axis-1": {
       display: false,
       beginAtZero: false,
     },
     "y-axis-2": {
       display: false,
-      beginAtZero: true,
+      beginAtZero: false,
     },
     "y-axis-3": {
       display: false,
@@ -70,7 +73,7 @@ const getBackgroundColor = (
     height
   );
 
-  gradientFill.addColorStop(0, "rgba(0, 147, 176, 0.5)");
+  gradientFill.addColorStop(0, "rgba(11, 147, 176, 0.8)");
   gradientFill.addColorStop(0.7, "rgba(0, 147, 176, 0.1)");
   gradientFill.addColorStop(1, "transparent");
   return gradientFill;
@@ -131,26 +134,31 @@ const CoinGraphChart = () => {
 
   return (
     <div className="flex gap-3 mt-4">
-      <div className="w-[50%] h-[450px] bg-black rounded-2xl p-2">
+      <div className="w-[50%] h-[450px] bg-gradient-to-r from-black to-gray-950 rounded-2xl p-6">
         {coinInfo && (
-          <div className="flex flex-col">
-            <span className="px-1 text-[#DEDEDE] flex text-sm p-2">
+          <div className="flex flex-col gap-8">
+            <span className="px-1 text-[#DEDEDE] flex text-base">
               {coinInfo.name.charAt(0).toUpperCase() +
                 coinInfo.name.slice(1).toLowerCase()}{" "}
               ({coinInfo.symbol.toUpperCase()})
             </span>
-            <span className="w-[6%] px-1 text-[#DEDEDE] text-2xl">
+            <span className="text-[#DEDEDE] text-3xl">
               {formatNumber(coinInfo.current_price)}
             </span>
           </div>
         )}
         {selectedCoin && <CoinLineGraph coin={selectedCoin} />}
       </div>
-      <div className="w-[50%] h-[450px] bg-black rounded-2xl p-2">
-        <div className="flex flex-col">
-          <span className="text-[#DEDEDE] text-sm p-2">Volume 24h</span>
-          <span className="text-[#DEDEDE] text-sm p-2">{todayDate}</span>
-        </div>
+      <div className="w-[50%] h-[450px] bg-gradient-to-r from-black to-gray-950 rounded-2xl p-6">
+        {coinInfo && (
+          <div className="flex flex-col gap-8">
+            <span className="text-[#DEDEDE] text-base">Volume 24h</span>
+            <span className="text-[#DEDEDE] text-3xl">
+              {formatNumber(coinInfo.price_change_percentage_24h_in_currency)}
+            </span>
+            <span className="text-[#DEDEDE] text-base">{todayDate}</span>
+          </div>
+        )}
         {selectedCoin && <CoinBarGraph coin={selectedCoin} />}
       </div>
     </div>
