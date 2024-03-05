@@ -121,15 +121,12 @@ const CoinGraphChart = () => {
   const { selectedCoins } = useAppSelector((state) => state.selectedCoinData);
 
   const selectedCoin = selectedCoins.length > 0 ? selectedCoins[0] : null;
-  console.log("selectedCoin", selectedCoin);
 
   const { coinMarketData } = useAppSelector((state) => state.coinMarketData);
 
   const coinInfo = coinMarketData.find(
     (data) => selectedCoin && data.id === selectedCoin.id
   );
-
-  console.log("coinInfo", coinInfo);
 
   const todayDate: string = new Date().toLocaleDateString("en-US", {
     year: "numeric",
