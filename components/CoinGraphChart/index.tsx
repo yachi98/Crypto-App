@@ -1,7 +1,7 @@
 "use client";
 
 import { useAppSelector } from "@/redux/store";
-import { Coin } from "@/interfaces/coin.interface";
+import { SelectedCoin } from "@/interfaces/selectedcoin.interface";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -10,9 +10,11 @@ import {
   LineElement,
   Filler,
   BarElement,
+  ScriptableContext,
 } from "chart.js";
 import { Line, Bar } from "react-chartjs-2";
 import getNumArray from "@/utils/getGraphArray";
+import formatNumber from "@/utils/formatNumber";
 
 ChartJS.register(
   CategoryScale,
@@ -23,7 +25,7 @@ ChartJS.register(
   BarElement
 );
 
-const commonOptions = {
+const options = {
   responsive: true,
   scales: {
     x: {
@@ -31,7 +33,7 @@ const commonOptions = {
         display: false,
       },
       ticks: {
-        display: true,
+        display: false,
         color: "#ffffff",
       },
       border: {
@@ -39,13 +41,16 @@ const commonOptions = {
       },
       stacked: true,
     },
+    y: {
+      display: false,
+    },
     "y-axis-1": {
       display: false,
       beginAtZero: false,
     },
     "y-axis-2": {
       display: false,
-      beginAtZero: true,
+      beginAtZero: false,
     },
     "y-axis-3": {
       display: false,
@@ -56,55 +61,120 @@ const commonOptions = {
   borderWidth: 0,
 };
 
-const CoinLineGraph = ({ coin }: { coin: Coin }) => {
-  const data = {
-    labels: getNumArray(coin.prices.length),
-    datasets: [
-      {
-        data: coin.prices,
-        borderColor: "white",
-        borderWidth: 1,
-        pointRadius: 0,
-        fill: true,
-        tension: 0.8,
-      },
-    ],
-  };
+const getBackgroundColor = (
+  context: ScriptableContext<"line">
+): CanvasGradient => {
+  const ctx: CanvasRenderingContext2D = context.chart.ctx;
+  const height: number = ctx.canvas.clientHeight;
+  const gradientFill: CanvasGradient = ctx.createLinearGradient(
+    0,
+    0,
+    0,
+    height
+  );
 
-  return <Line options={commonOptions} data={data} />;
+  gradientFill.addColorStop(0, "rgba(255, 169, 77, 0.9)");
+  gradientFill.addColorStop(0.7, "rgba(159, 122, 234, 0.9)");
+  gradientFill.addColorStop(1, "transparent");
+  return gradientFill;
 };
 
-const CoinBarGraph = ({ coin }: { coin: Coin }) => {
+const CoinLineGraph = ({ coin }: { coin: SelectedCoin }) => {
   const data = {
     labels: getNumArray(coin.prices.length),
     datasets: [
       {
         data: coin.prices,
-        borderColor: "white",
-        borderWidth: 1,
+        borderColor: "rgba(159, 122, 234)",
+        borderWidth: 2,
         pointRadius: 0,
         fill: true,
         tension: 0.8,
+        backgroundColor: getBackgroundColor,
       },
     ],
   };
 
-  return <Bar options={commonOptions} data={data} />;
+  return <Line options={options} data={data} />;
+};
+
+const CoinBarGraph = ({ coin }: { coin: SelectedCoin }) => {
+  const data = {
+    labels: getNumArray(coin.total_volumes.length),
+    datasets: [
+      {
+        data: coin.total_volumes,
+        borderColor: "rgba(159, 122, 234, 0.9)",
+        borderWidth: 1,
+        pointRadius: 0,
+        fill: true,
+        tension: 0.8,
+        backgroundColor: getBackgroundColor,
+      },
+    ],
+  };
+
+  return <Bar options={options} data={data} />;
 };
 
 const CoinGraphChart = () => {
   const { selectedCoins } = useAppSelector((state) => state.selectedCoinData);
+
   const selectedCoin = selectedCoins.length > 0 ? selectedCoins[0] : null;
+
+  const { coinMarketData } = useAppSelector((state) => state.coinMarketData);
+
+  const coinInfo = coinMarketData.find(
+    (data) => selectedCoin && data.id === selectedCoin.id
+  );
+
+  const todayDate: string = new Date().toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
 
   return (
     <div className="flex gap-3 mt-4">
-      <div className="w-[50%] h-[450px] bg-black rounded-2xl p-2">
-        <h2 className="text-[#DEDEDE] text-xl p-6 mt-3">Volume 24h</h2>
-        {selectedCoin && <CoinLineGraph coin={selectedCoin} />}
+      <div className="bg-gradient-to-r from-black to-gray-950 rounded-2xl w-1/2 aspect-w-16 aspect-h-9 m-2 flex flex-col p-6">
+        {coinInfo && (
+          <div className="flex flex-col gap-8">
+            <span className="text-[#DEDEDE] flex text-base">
+              {coinInfo.name.charAt(0).toUpperCase() +
+                coinInfo.name.slice(1).toLowerCase()}{" "}
+              ({coinInfo.symbol.toUpperCase()})
+            </span>
+            <span className="text-[#DEDEDE] text-3xl">
+              {formatNumber(coinInfo.current_price)}
+            </span>
+          </div>
+        )}
+        {selectedCoin && (
+          <div className="w-[100%] h-[100%]">
+            {" "}
+            <CoinLineGraph coin={selectedCoin} />{" "}
+          </div>
+        )}
       </div>
-      <div className="w-[50%] h-[450px] bg-black rounded-2xl p-2">
-        <h2 className="text-[#DEDEDE] text-xl p-6 mt-3">Volume 24h</h2>
-        {selectedCoin && <CoinBarGraph coin={selectedCoin} />}
+      <div className="bg-gradient-to-r from-black to-gray-950 rounded-2xl w-1/2 aspect-w-16 aspect-h-9 m-2 flex flex-col p-6">
+        {selectedCoin && (
+          <div className="flex flex-col gap-8">
+            <span className="text-[#DEDEDE] flex text-base">Volume 24h</span>
+            <span className="text-[#DEDEDE] text-3xl">
+              {formatNumber(
+                selectedCoin.total_volumes[
+                  selectedCoin.total_volumes.length - 1
+                ]
+              )}
+            </span>
+            <span className="text-[#DEDEDE] text-base">{todayDate}</span>
+          </div>
+        )}
+        {selectedCoin && (
+          <div className="w-[100%] h-[100%]">
+            <CoinBarGraph coin={selectedCoin} />
+          </div>
+        )}
       </div>
     </div>
   );

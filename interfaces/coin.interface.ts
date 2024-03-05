@@ -1,7 +1,5 @@
 export interface Coin {
   id: string;
-  prices: [string, number][];
-  total_volumes: [string, number][];
   symbol: string;
   name: string;
   image: string;

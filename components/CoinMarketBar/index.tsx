@@ -5,6 +5,8 @@ const CoinMarketBar = ({
   fill: string;
   percentage: number;
 }) => {
+  const clampedPercentage = Math.max(0, Math.min(percentage, 100));
+
   return (
     <div className="w-[290px] relative">
       <span
@@ -13,7 +15,7 @@ const CoinMarketBar = ({
       <span
         className={`w-full h-[3px] absolute left-0 top-0 rounded-[6px] ${fill}`}
         style={{
-          width: `${percentage}%`,
+          width: `${clampedPercentage}%`,
         }}
       ></span>
     </div>
