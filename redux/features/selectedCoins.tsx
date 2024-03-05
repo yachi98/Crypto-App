@@ -1,20 +1,23 @@
-import { Coin } from "@/interfaces/coin.interface";
+import { SelectedCoin } from "@/interfaces/selectedcoin.interface";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import formatTime from "@/utils/formatTime";
 
-interface SelectedCoinData {
-  selectedCoins: Coin[];
+interface SelectedCoinState {
+  selectedCoins: SelectedCoin[];
   timeDay: string;
   isLoading: boolean;
   hasError: boolean;
 }
 
-const initialState: SelectedCoinData = {
+const initialState: SelectedCoinState = {
   selectedCoins: [],
   timeDay: "1",
   isLoading: true,
   hasError: false,
+};
+
+const formatChartData = (data: [number, number][]): number[] => {
+  return data.map((item) => item[1]);
 };
 
 export const getSelectedCoinData = createAsyncThunk(
@@ -29,19 +32,18 @@ export const getSelectedCoinData = createAsyncThunk(
       );
       const { prices, total_volumes } = data;
 
-      const timeFormattedPrices = prices.map(
-        (item: [string, number]) => item[1]
-      );
+      const timeFormattedPrices = formatChartData(prices);
+      const timeFormattedVolumes = formatChartData(total_volumes);
 
-      const timeFormattedVolumes = total_volumes.map(
-        (item: [string, number]) => item[0]
-      );
-
-      const coinData = {
+      const coinData: {
+        id: string;
+        prices: number[];
+        total_volumes: number[];
+      } = {
         id: coinId,
         prices: timeFormattedPrices,
         total_volumes: timeFormattedVolumes,
-      } as Coin;
+      };
       return coinData;
     } catch (error) {
       return rejectWithValue(error);
@@ -60,7 +62,7 @@ const getSelectedCoinSlice = createSlice({
         state.hasError = false;
       })
       .addCase(getSelectedCoinData.fulfilled, (state, action) => {
-        state.selectedCoins = [action.payload];
+        state.selectedCoins = [...state.selectedCoins, action.payload];
         state.isLoading = false;
       })
       .addCase(getSelectedCoinData.rejected, (state, action) => {
