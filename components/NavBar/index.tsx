@@ -7,6 +7,7 @@ import ThemeToggle from "../ThemeToggle";
 import PortfolioSwitch from "../PortfolioSwitch";
 import LogoIcon from "@/public/Logo.svg";
 import SearchBar from "@/components/SearchBar";
+import UserProfile from "../UserProfile";
 
 const NavBar = () => {
   return (
@@ -23,6 +24,7 @@ const NavBar = () => {
             <SearchIcon className="absolute left-2 z-10" />
             <SearchBar />
           </div>
+          <UserProfile />
           <SorterCurrency />
           <ThemeToggle />
         </div>
