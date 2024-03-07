@@ -125,10 +125,6 @@ const CoinGraphChart = () => {
 
   const { coinMarketData } = useAppSelector((state) => state.coinMarketData);
 
-  useEffect(() => {
-    console.log(selectedCoins);
-  }, [selectedCoins]);
-
   const coinInfo = coinMarketData.find(
     (data) => selectedCoin && data.id === selectedCoin.id
   );
