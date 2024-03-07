@@ -2,7 +2,7 @@
 
 import { useAppSelector } from "@/redux/store";
 import { SelectedCoin } from "@/interfaces/selectedcoin.interface";
-import { useEffect } from "react";
+
 import {
   Chart as ChartJS,
   CategoryScale,
