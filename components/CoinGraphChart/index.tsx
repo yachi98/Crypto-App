@@ -2,6 +2,7 @@
 
 import { useAppSelector } from "@/redux/store";
 import { SelectedCoin } from "@/interfaces/selectedcoin.interface";
+import { useEffect } from "react";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -123,6 +124,10 @@ const CoinGraphChart = () => {
   const selectedCoin = selectedCoins.length > 0 ? selectedCoins[0] : null;
 
   const { coinMarketData } = useAppSelector((state) => state.coinMarketData);
+
+  useEffect(() => {
+    console.log(selectedCoins);
+  }, [selectedCoins]);
 
   const coinInfo = coinMarketData.find(
     (data) => selectedCoin && data.id === selectedCoin.id
