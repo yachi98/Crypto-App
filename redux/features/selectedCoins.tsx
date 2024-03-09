@@ -62,7 +62,7 @@ const getSelectedCoinSlice = createSlice({
         state.hasError = false;
       })
       .addCase(getSelectedCoinData.fulfilled, (state, action) => {
-        state.selectedCoins = [...state.selectedCoins, action.payload];
+        state.selectedCoins = [action.payload];
         state.isLoading = false;
       })
       .addCase(getSelectedCoinData.rejected, (state, action) => {

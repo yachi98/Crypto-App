@@ -2,6 +2,9 @@
 
 import React, { useState } from "react";
 import { motion } from "framer-motion";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "@/redux/store";
+import { getSelectedCoinData } from "@/redux/features/selectedCoins";
 
 interface TimeSelectorItem {
   value: string;
@@ -37,8 +40,10 @@ const timeSelector: TimeSelectorItem[] = [
 
 const TimeSelectorBar = () => {
   const [selectedTime, setSelectedTime] = useState("1");
+  const dispatch: AppDispatch = useDispatch();
 
   const handleTimeSelect = (days: string) => {
+    dispatch(getSelectedCoinData({ coinId: "bitcoin", timeDay: days }));
     setSelectedTime(days);
   };
 
@@ -46,11 +51,9 @@ const TimeSelectorBar = () => {
     <div className="bg-black flex gap-8 text-xs justify-center p-2 rounded-2xl mt-3">
       {timeSelector.map((timeSelectorItem) => (
         <motion.button
-          whileTap={{ scale: 1.3 }}
-          transition={{ type: "spring", stiffness: 100, damping: 10 }}
           key={timeSelectorItem.value}
           onClick={() => handleTimeSelect(timeSelectorItem.days)}
-          className={`p-1  rounded-3xl w-[50px] ${
+          className={`p-1 rounded-3xl w-[50px] ${
             selectedTime === timeSelectorItem.days
               ? "bg-white text-black"
               : "bg-transparent text-white"

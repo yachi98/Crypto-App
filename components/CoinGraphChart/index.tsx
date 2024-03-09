@@ -2,6 +2,7 @@
 
 import { useAppSelector } from "@/redux/store";
 import { SelectedCoin } from "@/interfaces/selectedcoin.interface";
+
 import {
   Chart as ChartJS,
   CategoryScale,
