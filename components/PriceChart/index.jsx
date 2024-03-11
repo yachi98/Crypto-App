@@ -66,7 +66,7 @@ const PriceChart = () => {
   };
   const { coinMarketData } = useAppSelector((state) => state.coinMarketData);
 
-  const hasCoins = coinMarketData.length > 0;
+  const hasCoins = coinMarketData.length > 0 && coinMarketData;
 
   return (
     <div>

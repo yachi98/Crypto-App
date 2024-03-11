@@ -1,29 +1,42 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "@/redux/store";
 import ArrowIcon from "@/public/ArrowIcon.svg";
 import SwitchIcon from "@/public/SwitchIcon.svg";
+import { getCoinData } from "@/redux/features/coinMarketSlice";
 
 interface CurrencySelectorItem {
   value: string;
+  symbol: string;
 }
 
 const currencySelector: CurrencySelectorItem[] = [
   {
-    value: "£ GBP",
+    value: "usd",
+    symbol: "$",
   },
   {
-    value: "€ EUR",
+    value: "gbp",
+    symbol: "£",
   },
   {
-    value: "¥ JPY",
+    value: "eur",
+    symbol: "€",
+  },
+  {
+    value: "jpy",
+    symbol: "$",
   },
 ];
 
 const SorterCurrency = () => {
   const [showDropdown, setShowDropdown] = useState(false);
-  const [currency, setCurrency] = useState("USD");
+  const [currency, setCurrency] = useState("usd");
+  const dispatch: AppDispatch = useDispatch();
 
   const handleCurrency = (selectedCurrency: string) => {
+    dispatch(getCoinData({ currency: selectedCurrency }));
     setCurrency(selectedCurrency);
     setShowDropdown(false);
   };
@@ -37,7 +50,8 @@ const SorterCurrency = () => {
         }`}
       >
         <SwitchIcon />
-        {currency}
+        {currencySelector.find((item) => item.value === currency)?.symbol}{" "}
+        {currency.toUpperCase()}
         <ArrowIcon />
       </button>
 
@@ -54,7 +68,7 @@ const SorterCurrency = () => {
               className="text-xs text-left hover:text-white"
               key={currencyItem.value}
             >
-              {currencyItem.value}
+              {currencyItem.symbol} {currencyItem.value.toUpperCase()}
             </button>
           ))}
         </motion.div>

@@ -1,3 +1,5 @@
+"use client";
+
 import { Coin } from "@/interfaces/coin.interface";
 import Image from "next/image";
 import formatNumber from "@/utils/formatNumber";
