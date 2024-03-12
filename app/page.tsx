@@ -4,7 +4,7 @@ import { getGlobalData } from "@/redux/features/globalSlice";
 import { getCoinData } from "@/redux/features/coinMarketSlice";
 import { getGraphData } from "@/redux/features/graphCoinSlice";
 import { getSelectedCoinData } from "@/redux/features/selectedCoins";
-import { AppDispatch, useAppSelector } from "@/redux/store";
+import { AppDispatch } from "@/redux/store";
 import { useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 
@@ -17,7 +17,7 @@ const Home = () => {
   }, []);
 
   useEffect(() => {
-    dispatch(getCoinData());
+    dispatch(getCoinData({ currency: "usd" }));
   }, []);
 
   useEffect(() => {
