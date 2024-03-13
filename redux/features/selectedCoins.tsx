@@ -23,12 +23,16 @@ const formatChartData = (data: [number, number][]): number[] => {
 export const getSelectedCoinData = createAsyncThunk(
   "selectedCoinData/getSelectedCoinData",
   async (
-    { coinId, timeDay }: { coinId: string; timeDay: string },
+    {
+      coinId,
+      timeDay,
+      currency,
+    }: { coinId: string; timeDay: string; currency: string },
     { rejectWithValue }
   ) => {
     try {
       const { data } = await axios.get(
-        `https://api.coingecko.com/api/v3/coins/${coinId}/market_chart?vs_currency=usd&days=${timeDay}&precision=full&x_cg_demo_api_key=${process.env.NEXT_PUBLIC_API_KEY}`
+        `https://api.coingecko.com/api/v3/coins/${coinId}/market_chart?vs_currency=${currency}&days=${timeDay}&precision=full&x_cg_demo_api_key=${process.env.NEXT_PUBLIC_API_KEY}`
       );
       const { prices, total_volumes } = data;
 
@@ -54,7 +58,11 @@ export const getSelectedCoinData = createAsyncThunk(
 const getSelectedCoinSlice = createSlice({
   name: "getSelectedCoinData",
   initialState,
-  reducers: {},
+  reducers: {
+    changeTime: (state, action) => {
+      state.timeDay = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getSelectedCoinData.pending, (state) => {
@@ -72,5 +80,5 @@ const getSelectedCoinSlice = createSlice({
       });
   },
 });
-
+export const { changeTime } = getSelectedCoinSlice.actions;
 export default getSelectedCoinSlice.reducer;

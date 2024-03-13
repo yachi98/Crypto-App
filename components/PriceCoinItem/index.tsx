@@ -5,12 +5,15 @@ import Image from "next/image";
 import formatNumber from "@/utils/formatNumber";
 import getFormattedPrice from "@/utils/getFormattedDate";
 import PriceChange from "@/components/PriceChange";
+import { useAppSelector } from "@/redux/store";
 import { useState } from "react";
 import { motion } from "framer-motion";
 
 const PriceCoinItem = ({ coin }: { coin: Coin }) => {
   const [isSelected, setSelected] = useState(false);
   const [selectedCount, setSelectedCount] = useState(0);
+
+  const { symbol } = useAppSelector((state) => state.currencySlice);
 
   const handleClick = () => {
     if (!isSelected && selectedCount >= 3) {
@@ -46,6 +49,7 @@ const PriceCoinItem = ({ coin }: { coin: Coin }) => {
           </span>
           <div className="flex gap-12">
             <span className="w-[6%] px-1 text-white text-sm">
+              {symbol}
               {formatNumber(coin.current_price)}
             </span>
             <PriceChange price={priceChange1h} />
