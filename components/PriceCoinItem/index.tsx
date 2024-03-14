@@ -47,7 +47,7 @@ const PriceCoinItem = ({ coin }: { coin: Coin }) => {
               coin.name.slice(1).toLowerCase()}{" "}
             ({coin.symbol.toUpperCase()})
           </span>
-          <div className="flex gap-12">
+          <div className="flex gap-14">
             <span className="w-[6%] px-1 text-white text-sm">
               {symbol}
               {formatNumber(coin.current_price)}
