@@ -1,4 +1,5 @@
 import { Coin } from "@/interfaces/coin.interface";
+import { useAppSelector } from "@/redux/store";
 import formatNumber from "@/utils/formatNumber";
 import PriceChange from "@/components/PriceChange";
 import getFormattedPrice from "@/utils/getFormattedDate";
@@ -9,6 +10,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 const RowCoinItem = ({ coin }: { coin: Coin }) => {
+  const { symbol } = useAppSelector((state) => state.currencySlice);
   const priceChange1h: number = getFormattedPrice(
     coin.price_change_percentage_1h_in_currency
   );
@@ -27,7 +29,10 @@ const RowCoinItem = ({ coin }: { coin: Coin }) => {
         {coin.name.charAt(0).toUpperCase() + coin.name.slice(1).toLowerCase()} (
         {coin.symbol.toUpperCase()})
       </span>
-      <span className="w-[6%] px-1">{formatNumber(coin.current_price)}</span>
+      <span className="w-[6%] px-1">
+        {symbol}
+        {formatNumber(coin.current_price)}
+      </span>
       <span className="w-[6%] px-1">
         <PriceChange price={priceChange1h} />
       </span>
