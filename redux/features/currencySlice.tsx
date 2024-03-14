@@ -22,7 +22,7 @@ export const currencySlice = createSlice({
           state.symbol = "$";
           break;
         case "jpy":
-          state.symbol = "J";
+          state.symbol = "¥";
           break;
         default:
           state.symbol = "$";

@@ -5,7 +5,6 @@ import { motion } from "framer-motion";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/redux/store";
 import { changeTime } from "@/redux/features/selectedCoins";
-import { getSelectedCoinData } from "@/redux/features/selectedCoins";
 
 interface TimeSelectorItem {
   value: string;
