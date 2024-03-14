@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/redux/store";
 import ArrowIcon from "@/public/ArrowIcon.svg";
 import SwitchIcon from "@/public/SwitchIcon.svg";
-import { getCoinData } from "@/redux/features/coinMarketSlice";
+import { changeCurr } from "@/redux/features/currencySlice";
 
 interface CurrencySelectorItem {
   value: string;
@@ -26,7 +26,7 @@ const currencySelector: CurrencySelectorItem[] = [
   },
   {
     value: "jpy",
-    symbol: "$",
+    symbol: "¥",
   },
 ];
 
@@ -36,7 +36,7 @@ const SorterCurrency = () => {
   const dispatch: AppDispatch = useDispatch();
 
   const handleCurrency = (selectedCurrency: string) => {
-    dispatch(getCoinData({ currency: selectedCurrency }));
+    dispatch(changeCurr(selectedCurrency));
     setCurrency(selectedCurrency);
     setShowDropdown(false);
   };

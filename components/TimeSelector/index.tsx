@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/redux/store";
-import { getSelectedCoinData } from "@/redux/features/selectedCoins";
+import { changeTime } from "@/redux/features/selectedCoins";
 
 interface TimeSelectorItem {
   value: string;
@@ -43,7 +43,7 @@ const TimeSelectorBar = () => {
   const dispatch: AppDispatch = useDispatch();
 
   const handleTimeSelect = (days: string) => {
-    dispatch(getSelectedCoinData({ coinId: "bitcoin", timeDay: days }));
+    dispatch(changeTime(days));
     setSelectedTime(days);
   };
 
