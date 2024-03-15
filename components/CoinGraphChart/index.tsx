@@ -120,6 +120,7 @@ const CoinBarGraph = ({ coin }: { coin: SelectedCoin }) => {
 
 const CoinGraphChart = () => {
   const { selectedCoins } = useAppSelector((state) => state.selectedCoinData);
+  const { symbol } = useAppSelector((state) => state.currencySlice);
 
   const selectedCoin = selectedCoins.length > 0 ? selectedCoins[0] : null;
 
@@ -146,6 +147,7 @@ const CoinGraphChart = () => {
               ({coinInfo.symbol.toUpperCase()})
             </span>
             <span className="text-[#DEDEDE] text-3xl">
+              {symbol}
               {formatNumber(coinInfo.current_price)}
             </span>
           </div>
@@ -162,6 +164,7 @@ const CoinGraphChart = () => {
           <div className="flex flex-col gap-8">
             <span className="text-[#DEDEDE] flex text-base">Volume 24h</span>
             <span className="text-[#DEDEDE] text-3xl">
+              {symbol}
               {formatNumber(
                 selectedCoin.total_volumes[
                   selectedCoin.total_volumes.length - 1
