@@ -2,6 +2,7 @@
 
 import { useAppSelector } from "@/redux/store";
 import { SelectedCoin } from "@/interfaces/selectedcoin.interface";
+import TimeSelectorBar from "../TimeSelector";
 
 import {
   Chart as ChartJS,
@@ -162,7 +163,10 @@ const CoinGraphChart = () => {
       <div className="bg-black rounded-2xl w-1/2 aspect-w-16 aspect-h-9 m-2 flex flex-col p-6">
         {selectedCoin && (
           <div className="flex flex-col gap-8">
-            <span className="text-[#DEDEDE] flex text-base">Volume 24h</span>
+            <div className="flex items-center justify-between">
+              <span className="text-[#DEDEDE] flex text-base">Volume 24h</span>
+              <TimeSelectorBar />
+            </div>
             <span className="text-[#DEDEDE] text-3xl">
               {symbol}
               {formatNumber(

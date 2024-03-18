@@ -13,27 +13,27 @@ interface TimeSelectorItem {
 
 const timeSelector: TimeSelectorItem[] = [
   {
-    value: "1D",
+    value: "1d",
     days: "1",
   },
   {
-    value: "7D",
+    value: "7d",
     days: "7",
   },
   {
-    value: "14D",
+    value: "14d",
     days: "14",
   },
   {
-    value: "1M",
+    value: "1m",
     days: "30",
   },
   {
-    value: "1Y",
+    value: "1y",
     days: "365",
   },
   {
-    value: "5Y",
+    value: "5y",
     days: "1825",
   },
 ];
@@ -48,12 +48,12 @@ const TimeSelectorBar = () => {
   };
 
   return (
-    <div className="bg-black flex gap-8 text-xs justify-center p-2 rounded-2xl mt-3">
+    <div className="flex gap-2 text-xs p-1">
       {timeSelector.map((timeSelectorItem) => (
         <motion.button
           key={timeSelectorItem.value}
           onClick={() => handleTimeSelect(timeSelectorItem.days)}
-          className={`p-1 rounded-3xl w-[50px] ${
+          className={`p-1 rounded-3xl border border-[#DEDEDE] w-[50px] ${
             selectedTime === timeSelectorItem.days
               ? "bg-white text-black"
               : "bg-transparent text-white"
