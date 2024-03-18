@@ -28,6 +28,7 @@ export default function RootLayout({
           <InfoBar />
           <PriceChart />
           <CoinGraphChart />
+
           <CoinMarketTable />
           <body className={`${inter.className} bg-gray-950`}>{children}</body>
         </div>
