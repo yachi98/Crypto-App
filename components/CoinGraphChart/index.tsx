@@ -74,8 +74,8 @@ const getBackgroundColor = (
     0,
     height
   );
-  gradientFill.addColorStop(1, "rgba(159, 122, 234, 0.2)");
-  gradientFill.addColorStop(0.7, "rgba(159, 122, 234, 0.2)");
+  gradientFill.addColorStop(1, "rgba(159, 122, 234, 0.1)");
+  gradientFill.addColorStop(0.7, "rgba(159, 122, 234, 0.1)");
   gradientFill.addColorStop(1, "transparent");
   return gradientFill;
 };
