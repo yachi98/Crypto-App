@@ -8,6 +8,7 @@ import PortfolioSwitch from "../PortfolioSwitch";
 import LogoIcon from "@/public/Logo.svg";
 import SearchBar from "@/components/SearchBar";
 import UserProfile from "../UserProfile";
+import CoinConverter from "../CoinConverter";
 
 const NavBar = () => {
   return (
@@ -26,6 +27,7 @@ const NavBar = () => {
           </div>
           <UserProfile />
           <SorterCurrency />
+          <CoinConverter />
           <ThemeToggle />
         </div>
       </div>

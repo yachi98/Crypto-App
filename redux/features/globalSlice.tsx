@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 interface CoinInfo {
-  [coin: string]: number; // key (usd) : value
+  [coin: string]: number;
 }
 
 interface GlobalData {

@@ -1,4 +1,4 @@
-import CoinIcon from "@/public/CoinIcon.svg";
+import HomeIcon from "@/public/HomeIcon.svg";
 import PortfolioIcon from "@/public/PortfolioIcon.svg";
 import { motion } from "framer-motion";
 import { useState } from "react";
@@ -20,8 +20,8 @@ const PortfolioSwitch = () => {
         whileTap={{ scale: 1.3 }}
         transition={{ type: "spring", stiffness: 100, damping: 10 }}
       >
-        <CoinIcon />
-        Coins
+        <HomeIcon />
+        Home
       </motion.button>
       <motion.button
         className={`${

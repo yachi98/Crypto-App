@@ -137,7 +137,7 @@ const CoinGraphChart = () => {
   });
 
   return (
-    <div className="flex gap-3 mt-4">
+    <div className="flex mt-2">
       <div className="bg-black rounded-2xl w-1/2 aspect-w-16 aspect-h-9 m-2 flex flex-col p-6">
         {coinInfo && (
           <div className="flex flex-col gap-8">
