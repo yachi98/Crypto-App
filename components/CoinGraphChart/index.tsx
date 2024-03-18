@@ -151,6 +151,7 @@ const CoinGraphChart = () => {
               {symbol}
               {formatNumber(coinInfo.current_price)}
             </span>
+            <span className="text-[#DEDEDE] text-base">{todayDate}</span>
           </div>
         )}
         {selectedCoin && (
