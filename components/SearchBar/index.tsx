@@ -37,7 +37,12 @@ const SearchBar = () => {
           className="absolute left-0 bg-gradient-to-r from-black to-gray-900 overflow-hidden z-30 flex flex-col gap-2 w-full text-left rounded-b-xl p-3 text-white text-xs font-light"
         >
           {filteredCoins.map((coin: Coin) => (
-            <div key={coin.id}>{coin.name}</div>
+            <div
+              className="text-[#CECECE] hover:text-white cursor-pointer"
+              key={coin.id}
+            >
+              {coin.name}
+            </div>
           ))}
         </motion.div>
       )}
