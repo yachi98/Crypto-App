@@ -2,6 +2,7 @@
 
 import { useAppSelector } from "@/redux/store";
 import { SelectedCoin } from "@/interfaces/selectedcoin.interface";
+import TimeSelectorBar from "../TimeSelector";
 
 import {
   Chart as ChartJS,
@@ -73,9 +74,8 @@ const getBackgroundColor = (
     0,
     height
   );
-
-  gradientFill.addColorStop(0, "rgba(255, 169, 77, 0.9)");
-  gradientFill.addColorStop(0.7, "rgba(159, 122, 234, 0.9)");
+  gradientFill.addColorStop(1, "rgba(159, 122, 234, 0.1)");
+  gradientFill.addColorStop(0.7, "rgba(159, 122, 234, 0.1)");
   gradientFill.addColorStop(1, "transparent");
   return gradientFill;
 };
@@ -138,7 +138,7 @@ const CoinGraphChart = () => {
 
   return (
     <div className="flex mt-2">
-      <div className="bg-black rounded-2xl w-1/2 aspect-w-16 aspect-h-9 m-2 flex flex-col p-6">
+      <div className="bg-gradient-to-r from-black to-gray-900 rounded-2xl w-1/2 aspect-w-16 aspect-h-9 m-2 flex flex-col p-6">
         {coinInfo && (
           <div className="flex flex-col gap-8">
             <span className="text-[#DEDEDE] flex text-base">
@@ -150,6 +150,7 @@ const CoinGraphChart = () => {
               {symbol}
               {formatNumber(coinInfo.current_price)}
             </span>
+            <span className="text-[#DEDEDE] text-base">{todayDate}</span>
           </div>
         )}
         {selectedCoin && (
@@ -159,10 +160,13 @@ const CoinGraphChart = () => {
           </div>
         )}
       </div>
-      <div className="bg-black rounded-2xl w-1/2 aspect-w-16 aspect-h-9 m-2 flex flex-col p-6">
+      <div className="bg-gradient-to-r from-black to-gray-900 rounded-2xl w-1/2 aspect-w-16 aspect-h-9 m-2 flex flex-col p-6">
         {selectedCoin && (
           <div className="flex flex-col gap-8">
-            <span className="text-[#DEDEDE] flex text-base">Volume 24h</span>
+            <div className="flex items-center justify-between">
+              <span className="text-[#DEDEDE] flex text-base">Volume 24h</span>
+              <TimeSelectorBar />
+            </div>
             <span className="text-[#DEDEDE] text-3xl">
               {symbol}
               {formatNumber(
