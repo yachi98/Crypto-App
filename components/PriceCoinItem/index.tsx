@@ -20,17 +20,12 @@ const PriceCoinItem = ({ coin }: { coin: Coin }) => {
   const { symbol } = useAppSelector((state) => state.currencySlice);
 
   useEffect(() => {
-    if (coin.id === coinId) {
-      setSelected(true);
-    } else {
-      setSelected(false);
-    }
+    coin.id === coinId ? setSelected(true) : setSelected(false);
   }, [coinId]);
 
   const coinSelector = (coin: Coin) => {
     if (coin.id !== coinId) {
       dispatch(changeCoin(coin.id));
-      setSelected(true);
     }
   };
 
