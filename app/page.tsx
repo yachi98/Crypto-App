@@ -10,9 +10,8 @@ import { useEffect, useState } from "react";
 
 const Home = () => {
   const dispatch: AppDispatch = useDispatch();
-  const { coinId } = useAppSelector((state) => state.selectedCoinData);
+  const { coinId, timeDay } = useAppSelector((state) => state.selectedCoinData);
   const { currency } = useAppSelector((state) => state.currencySlice);
-  const { timeDay } = useAppSelector((state) => state.selectedCoinData);
 
   useEffect(() => {
     dispatch(getGlobalData());
