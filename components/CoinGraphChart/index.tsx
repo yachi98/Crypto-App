@@ -123,7 +123,6 @@ const CoinGraphChart = () => {
   const { symbol } = useAppSelector((state) => state.currencySlice);
 
   const selectedCoin = selectedCoins.length > 0 ? selectedCoins[0] : null;
-
   const { coinMarketData } = useAppSelector((state) => state.coinMarketData);
 
   const coinInfo = coinMarketData.find(
