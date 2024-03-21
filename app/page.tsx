@@ -6,7 +6,7 @@ import { getSelectedCoinData } from "@/redux/features/selectedCoins";
 import { useAppSelector } from "@/redux/store";
 import { AppDispatch } from "@/redux/store";
 import { useDispatch } from "react-redux";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 const Home = () => {
   const dispatch: AppDispatch = useDispatch();
