@@ -5,22 +5,28 @@ import Image from "next/image";
 import formatNumber from "@/utils/formatNumber";
 import getFormattedPrice from "@/utils/getFormattedDate";
 import PriceChange from "@/components/PriceChange";
+import { changeCoin } from "@/redux/features/selectedCoins";
+import { useEffect } from "react";
 import { useAppSelector } from "@/redux/store";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "@/redux/store";
 import { useState } from "react";
 import { motion } from "framer-motion";
 
 const PriceCoinItem = ({ coin }: { coin: Coin }) => {
   const [isSelected, setSelected] = useState(false);
-  const [selectedCount, setSelectedCount] = useState(0);
-
+  const { coinId } = useAppSelector((state) => state.selectedCoinData);
+  const dispatch: AppDispatch = useDispatch();
   const { symbol } = useAppSelector((state) => state.currencySlice);
 
-  const handleClick = () => {
-    if (!isSelected && selectedCount >= 3) {
-      setSelectedCount(3);
-      return;
+  useEffect(() => {
+    coin.id === coinId ? setSelected(true) : setSelected(false);
+  }, [coinId]);
+
+  const coinSelector = (coin: Coin) => {
+    if (coin.id !== coinId) {
+      dispatch(changeCoin(coin.id));
     }
-    setSelected(!isSelected);
   };
 
   const priceChange1h: number = getFormattedPrice(
@@ -28,7 +34,7 @@ const PriceCoinItem = ({ coin }: { coin: Coin }) => {
   );
   return (
     <motion.button
-      onClick={handleClick}
+      onClick={() => coinSelector(coin)}
       className={`rounded-3xl pl-2 border-white transition ${
         isSelected
           ? "bg-gradient-to-r from-purple-400 to-orange-300"

@@ -4,6 +4,7 @@ import axios from "axios";
 
 interface SelectedCoinState {
   selectedCoins: SelectedCoin[];
+  coinId: string;
   timeDay: string;
   isLoading: boolean;
   hasError: boolean;
@@ -11,6 +12,7 @@ interface SelectedCoinState {
 
 const initialState: SelectedCoinState = {
   selectedCoins: [],
+  coinId: "bitcoin",
   timeDay: "1",
   isLoading: true,
   hasError: false,
@@ -62,6 +64,10 @@ const getSelectedCoinSlice = createSlice({
     changeTime: (state, action) => {
       state.timeDay = action.payload;
     },
+    changeCoin: (state, action) => {
+      const newCoinId = action.payload;
+      state.coinId = newCoinId;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -80,5 +86,5 @@ const getSelectedCoinSlice = createSlice({
       });
   },
 });
-export const { changeTime } = getSelectedCoinSlice.actions;
+export const { changeTime, changeCoin } = getSelectedCoinSlice.actions;
 export default getSelectedCoinSlice.reducer;
