@@ -9,9 +9,17 @@ const ThemeToggle = () => {
   const { resolvedTheme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
+  // const handleThemeChange = () => {
+  //   const newTheme = resolvedTheme === "dark" ? "light" : "dark";
+  //   setTheme(newTheme);
+  // };
+
   const handleThemeChange = () => {
-    const newTheme = resolvedTheme === "dark" ? "light" : "dark";
-    setTheme(newTheme);
+    if (resolvedTheme === "dark") {
+      setTheme("light");
+    } else {
+      setTheme("dark");
+    }
   };
 
   useEffect(() => {
@@ -24,7 +32,7 @@ const ThemeToggle = () => {
 
   return (
     <button
-      className="w-[55px] bg-gradient-to-r from-black to-gray-900 rounded-xl text-white text-xs flex items-center justify-center cursor-pointer p-2"
+      className="w-[55px] dark:bg-gradient-to-r from-black to-gray-900 bg-lilac  rounded-xl text-white text-xs flex items-center justify-center cursor-pointer p-2"
       onClick={handleThemeChange}
     >
       {resolvedTheme === "dark" ? <SunIcon /> : <MoonIcon />}
