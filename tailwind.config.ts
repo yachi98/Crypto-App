@@ -8,6 +8,11 @@ const config: Config = {
   ],
   darkTheme: "class",
   theme: {
+    // colors: {
+    //   "light-theme": "#f3f5f9",
+    //   "dark-theme": "bg-gray-950",
+    //   "dark-gradient": "bg-gradient-to-r from-black to-gray-900",
+    // },
     extend: {
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",

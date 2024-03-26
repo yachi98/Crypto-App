@@ -21,7 +21,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" style={{ colorScheme: "dark" }}>
+    <html lang="en">
       <Providers>
         <div className="max-w-screen-2xl mx-auto">
           <NavBar />
@@ -30,7 +30,7 @@ export default function RootLayout({
           <CoinGraphChart />
           <CoinMarketTable />
           <body
-            className={`${inter.className} bg-[#F3F5F9] dark dark:bg-gray-950`}
+            className={`${inter.className} dark-theme bg-gray-950 bg:light-theme`}
           >
             {children}
           </body>
