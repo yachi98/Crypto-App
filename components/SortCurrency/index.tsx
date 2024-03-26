@@ -42,16 +42,16 @@ const SorterCurrency = () => {
     setShowDropDown(false);
   };
 
-  const handleClickOutside = (e: MouseEvent) => {
-    if (
-      containerRef.current &&
-      !containerRef.current.contains(e.target as Node)
-    ) {
-      setShowDropDown(false);
-    }
-  };
-
   useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (
+        containerRef.current &&
+        !containerRef.current.contains(e.target as Node)
+      ) {
+        setShowDropDown(false);
+      }
+    };
+
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
