@@ -35,10 +35,10 @@ const PriceCoinItem = ({ coin }: { coin: Coin }) => {
   return (
     <motion.button
       onClick={() => coinSelector(coin)}
-      className={`rounded-3xl pl-2 border-white transition ${
+      className={`rounded-3xl pl-2 border-white transition bg-[#f3f5f9] ${
         isSelected
           ? "bg-gradient-to-r from-purple-400 to-orange-300"
-          : "bg-gradient-to-r from-black to-gray-900"
+          : "dark:bg-gradient-to-r from-black to-gray-900"
       } w-[250px] h-[75px] flex items-center flex-shrink-0`}
       whileTap={{ scale: 1.2 }}
       transition={{ type: "spring", stiffness: 100, damping: 10 }}
