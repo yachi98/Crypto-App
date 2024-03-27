@@ -16,7 +16,7 @@ const NavBar = () => {
       <div className="w-full dark:bg-gray-950 bg-light-theme flex items-center justify-between gap-6 p-3 mt-2">
         <div className="flex gap-3 items-center">
           <LogoIcon />
-          <h1 className="text-white">CoinWave</h1>
+          <h1 className="dark:text-white text-black">CoinWave</h1>
           <PortfolioSwitch />
         </div>
 
