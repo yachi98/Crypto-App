@@ -14,8 +14,6 @@ const config: Config = {
       "light-theme": "#f3f5f9",
       "dark-theme": "bg-gray-950",
       "dark-gradient": "bg-gradient-to-r from-black to-gray-900",
-      "light-gradient": "bg-red-500",
-      "light-typo": "text-black",
     },
     extend: {
       backgroundImage: {
