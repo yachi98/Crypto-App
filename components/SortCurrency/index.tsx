@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/redux/store";
@@ -31,20 +31,37 @@ const currencySelector: CurrencySelectorItem[] = [
 ];
 
 const SorterCurrency = () => {
-  const [showDropdown, setShowDropdown] = useState(false);
+  const [showDropdown, setShowDropDown] = useState(false);
   const [currency, setCurrency] = useState("usd");
   const dispatch: AppDispatch = useDispatch();
+  const containerRef = useRef<HTMLDivElement>(null);
 
   const handleCurrency = (selectedCurrency: string) => {
     dispatch(changeCurr(selectedCurrency));
     setCurrency(selectedCurrency);
-    setShowDropdown(false);
+    setShowDropDown(false);
   };
 
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (
+        containerRef.current &&
+        !containerRef.current.contains(e.target as Node)
+      ) {
+        setShowDropDown(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   return (
-    <div className="relative">
+    <div className="relative" ref={containerRef}>
       <button
-        onClick={() => setShowDropdown(!showDropdown)}
+        onClick={() => setShowDropDown(!showDropdown)}
         className={`w-[120px] bg-gradient-to-r from-black to-gray-900 p-2 rounded-xl text-xs text-white font-light flex gap-3 items-center  justify-center ${
           showDropdown ? "rounded-bl-none rounded-br-none" : ""
         }`}

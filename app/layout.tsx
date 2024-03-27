@@ -29,7 +29,11 @@ export default function RootLayout({
           <PriceChart />
           <CoinGraphChart />
           <CoinMarketTable />
-          <body className={`${inter.className} bg-gray-950`}>{children}</body>
+          <body
+            className={`${inter.className} dark:bg-gray-950 bg-light-theme`}
+          >
+            {children}
+          </body>
         </div>
       </Providers>
     </html>
