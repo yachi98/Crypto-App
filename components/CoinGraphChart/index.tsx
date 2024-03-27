@@ -140,16 +140,18 @@ const CoinGraphChart = () => {
       <div className="dark:bg-gradient-to-r from-black to-gray-900 bg-white rounded-2xl w-1/2 aspect-w-16 aspect-h-9 m-2 flex flex-col p-6">
         {coinInfo && (
           <div className="flex flex-col gap-8">
-            <span className="text-[#DEDEDE] flex text-base">
+            <span className="dark:text-[#DEDEDE] flex text-base">
               {coinInfo.name.charAt(0).toUpperCase() +
                 coinInfo.name.slice(1).toLowerCase()}{" "}
               ({coinInfo.symbol.toUpperCase()})
             </span>
-            <span className="text-[#DEDEDE] text-3xl">
+            <span className="dark:text-[#DEDEDE] text-black text-3xl">
               {symbol}
               {formatNumber(coinInfo.current_price)}
             </span>
-            <span className="text-[#DEDEDE] text-base">{todayDate}</span>
+            <span className="dark:text-[#DEDEDE] text-black text-base">
+              {todayDate}
+            </span>
           </div>
         )}
         {selectedCoin && (
@@ -163,10 +165,12 @@ const CoinGraphChart = () => {
         {selectedCoin && (
           <div className="flex flex-col gap-8">
             <div className="flex items-center justify-between">
-              <span className="text-[#DEDEDE] flex text-base">Volume 24h</span>
+              <span className="dark:text-[#DEDEDE] text-black flex text-base">
+                Volume 24h
+              </span>
               <TimeSelectorBar />
             </div>
-            <span className="text-[#DEDEDE] text-3xl">
+            <span className="dark:text-[#DEDEDE] text-black text-3xl">
               {symbol}
               {formatNumber(
                 selectedCoin.total_volumes[
@@ -174,7 +178,9 @@ const CoinGraphChart = () => {
                 ]
               )}
             </span>
-            <span className="text-[#DEDEDE] text-base">{todayDate}</span>
+            <span className="dark:text-[#DEDEDE] text-black text-base">
+              {todayDate}
+            </span>
           </div>
         )}
         {selectedCoin && (

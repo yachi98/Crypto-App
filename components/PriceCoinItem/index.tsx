@@ -35,7 +35,7 @@ const PriceCoinItem = ({ coin }: { coin: Coin }) => {
   return (
     <motion.button
       onClick={() => coinSelector(coin)}
-      className={`rounded-3xl pl-2 border-white transition bg-[#f3f5f9] ${
+      className={`rounded-3xl pl-2 border-white transition bg-white  ${
         isSelected
           ? "bg-gradient-to-r from-purple-400 to-orange-300"
           : "dark:bg-gradient-to-r from-black to-gray-900"
