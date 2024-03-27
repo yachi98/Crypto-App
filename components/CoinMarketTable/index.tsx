@@ -40,7 +40,9 @@ const CoinMarketTable = () => {
   return (
     <div>
       <div className="flex justify-between items-center w-full">
-        <h1 className="text-white text-light p-4">Market Overview</h1>
+        <h1 className="dark:text-white text-black text-light p-4">
+          Market Overview
+        </h1>
         <div className="relative flex items-center overflow-hidden">
           <label
             className={`bg-black p-3 border-2 border-black cursor-pointer ${

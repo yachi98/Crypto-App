@@ -1,6 +1,6 @@
 const MarketTableHeading = () => {
   return (
-    <div className="bg-black w-full  text-[#DEDEDE] text-sm font-light rounded-2xl p-5 flex gap-3 mb-2">
+    <div className=" dark:bg-black bg-white w-full dark:text-[#DEDEDE] text-black text-sm font-light rounded-2xl p-5 flex gap-3 mb-2">
       <span className="px-1">#</span>
       <span className="px-1 w-[16%]">Name</span>
       <span className="w-[6%] px-1">Price</span>
