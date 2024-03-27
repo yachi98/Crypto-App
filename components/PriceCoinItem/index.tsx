@@ -48,13 +48,13 @@ const PriceCoinItem = ({ coin }: { coin: Coin }) => {
           <Image src={coin.image} alt={coin.name} width={30} height={30} />
         </div>
         <div className="flex flex-col">
-          <span className="px-1 dark:text-white text-black flex text-sm">
+          <span className="px-1 dark:text-white text-grey flex text-sm">
             {coin.name.charAt(0).toUpperCase() +
               coin.name.slice(1).toLowerCase()}{" "}
             ({coin.symbol.toUpperCase()})
           </span>
           <div className="flex gap-14">
-            <span className="w-[6%] px-1 dark:text-white text-black text-sm">
+            <span className="w-[6%] px-1 dark:text-white text-grey text-sm">
               {symbol}
               {formatNumber(coin.current_price)}
             </span>
