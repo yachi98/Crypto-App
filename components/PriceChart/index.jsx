@@ -11,7 +11,7 @@ import "slick-carousel/slick/slick-theme.css";
 
 const PrevArrow = ({ onClick }) => (
   <button
-    className="backdrop-filter bg-black bg-opacity-40 backdrop-blur text-white rounded-xl absolute left-0 top-[50%] transform -translate-y-1/2 z-50 p-3 -ml-10"
+    className="backdrop-filter dark:bg-black bg-white dark:bg-opacity-40 backdrop-blur text-white rounded-xl absolute left-0 top-[50%] transform -translate-y-1/2 z-50 p-3 -ml-10"
     onClick={onClick}
   >
     <ChevronLIcon />
@@ -20,7 +20,7 @@ const PrevArrow = ({ onClick }) => (
 
 const NextArrow = ({ onClick }) => (
   <button
-    className="backdrop-filter bg-black bg-opacity-40 backdrop-blur text-white rounded-xl absolute right-0 top-[50%] transform -translate-y-1/2 z-50 p-3 -mr-10"
+    className="backdrop-filter dark:bg-black bg-white dark:bg-opacity-40 backdrop-blur text-white rounded-xl absolute right-0 top-[50%] transform -translate-y-1/2 z-50 p-3 -mr-10"
     onClick={onClick}
   >
     <ChevronRIcon />
@@ -69,7 +69,7 @@ const PriceChart = () => {
 
   return (
     <div>
-      <h1 className="text-white p-4 text-light">Price chart</h1>
+      <h1 className="dark:text-white text-black p-4 text-light">Price chart</h1>
       <Slider {...settings}>
         {hasCoins &&
           coinMarketData.map((coin) => (

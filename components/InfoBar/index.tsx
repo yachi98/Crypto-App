@@ -28,33 +28,33 @@ const InfoBar = () => {
   );
 
   return (
-    <div className="w-full bg-gray-950 flex items-center gap-x-16 p-4 h-[30px] justify-left mt-2">
+    <div className="w-full dark:bg-gray-950 bg-light-theme flex items-center gap-x-16 p-4 h-[30px] justify-left mt-2">
       <div className="flex items-center gap-1">
         <CoinIcon />
-        <span className="text-white text-xs font-light">
+        <span className="dark:text-white text-black  text-light-typo text-xs font-light">
           Coins: {globalData.active_cryptocurrencies}
         </span>
       </div>
       <div className="flex items-center gap-1">
         <ConvertIcon />
-        <span className="text-white text-xs font-light">
+        <span className="dark:text-white text-black  text-xs font-light">
           Exchange: {globalData.markets}
         </span>
       </div>
       <div className="flex items-center gap-1">
         <CaretIcon />
-        <span className="text-white text-xs font-light">
+        <span className="dark:text-white text-black  text-xs font-light">
           {formatNumber(globalData.total_volume.usd)}
         </span>
       </div>
       <div className="flex items-center gap-1">
-        <span className="text-white text-xs font-light">
+        <span className="dark:text-white text-black  text-xs font-light">
           ${formatNumber(globalData.total_market_cap.usd)}
         </span>
       </div>
       <div className="flex items-center gap-1">
-        <span className="text-white text-xs">BTC</span>
-        <span className="text-white text-xs font-light">
+        <span className="dark:text-white text-black  text-xs">BTC</span>
+        <span className="dark:text-white text-black  text-xs font-light">
           {Math.floor(btcPercentage)}%
         </span>
         <div className="w-[50px] ml-4">
@@ -65,8 +65,8 @@ const InfoBar = () => {
         </div>
       </div>
       <div className="flex items-center gap-1">
-        <span className="text-white text-xs ml-5">ETH</span>
-        <span className="text-white text-xs font-light">
+        <span className="dark:text-white text-xs ml-5">ETH</span>
+        <span className="dark:text-white text-xs font-light">
           {Math.floor(ethPercentage)}%
         </span>
         <div className="w-[50px] ml-4">
