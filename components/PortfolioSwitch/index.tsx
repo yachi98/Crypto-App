@@ -15,7 +15,7 @@ const PortfolioSwitch = () => {
       <motion.button
         className={`${
           isClicked
-            ? "dark:text-white"
+            ? "dark:text-white text-black"
             : "bg-gradient-to-r from-purple-400 to-orange-300"
         } p-2 rounded-xl w-[100px] flex gap-1`}
         onClick={handleToggle}
@@ -29,7 +29,7 @@ const PortfolioSwitch = () => {
         className={`${
           isClicked
             ? "bg-gradient-to-r from-purple-400 to-orange-300"
-            : "dark:text-white"
+            : "dark:text-white text-black"
         } p-2 rounded-xl w-[100px] flex gap-1`}
         onClick={handleToggle}
         whileTap={{ scale: 1.3 }}
