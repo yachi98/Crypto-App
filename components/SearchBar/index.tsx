@@ -24,7 +24,7 @@ const SearchBar = () => {
       <input
         onChange={handleInputChange}
         type="text"
-        className={`w-full bg-gradient-to-r from-black to-gray-900 p-2 rounded-xl outline-none placeholder-white text-xs pl-7 text-white font-light ${
+        className={`w-full dark:bg-gradient-to-r from-black to-gray-900 bg-white p-2 rounded-xl outline-none dark:placeholder-white placeholder-black text-xs pl-7 text-white font-light ${
           showDropDown ? "rounded-bl-none rounded-br-none" : ""
         }`}
         placeholder="Search..."
@@ -34,7 +34,7 @@ const SearchBar = () => {
           initial={{ y: -10 }}
           animate={{ y: 0 }}
           transition={{ duration: 0.5 }}
-          className="absolute left-0 bg-gradient-to-r from-black to-gray-900 overflow-hidden z-30 flex flex-col gap-2 w-full text-left rounded-b-xl p-3 text-white text-xs font-light"
+          className="absolute left-0 dark:bg-gradient-to-r from-black to-gray-900 bg-white overflow-hidden z-30 flex flex-col gap-2 w-full text-left rounded-b-xl p-3 text-white text-xs font-light"
         >
           {filteredCoins.map((coin: Coin) => (
             <div
