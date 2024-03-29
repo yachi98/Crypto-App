@@ -29,6 +29,7 @@ ChartJS.register(
 
 const options = {
   responsive: true,
+  maintainAspectRatio: false,
   scales: {
     x: {
       grid: {
@@ -137,7 +138,7 @@ const CoinGraphChart = () => {
 
   return (
     <div className="flex mt-2">
-      <div className="dark:bg-gradient-to-r from-black to-gray-900 bg-white rounded-2xl w-1/2 aspect-w-16 aspect-h-9 m-2 flex flex-col p-6">
+      <div className="dark:bg-gradient-to-r from-black to-gray-900 bg-white rounded-2xl w-1/2 h-[450px] m-2 flex flex-col p-6">
         {coinInfo && (
           <div className="flex flex-col gap-8">
             <span className="dark:text-[#DEDEDE] flex text-base">
@@ -161,7 +162,7 @@ const CoinGraphChart = () => {
           </div>
         )}
       </div>
-      <div className="dark:bg-gradient-to-r from-black to-gray-900 bg-white rounded-2xl w-1/2 aspect-w-16 aspect-h-9 m-2 flex flex-col p-6">
+      <div className="dark:bg-gradient-to-r from-black to-gray-900 bg-white rounded-2xl w-1/2 h-[450px] m-2 flex flex-col p-6">
         {selectedCoin && (
           <div className="flex flex-col gap-8">
             <div className="flex items-center justify-between">

@@ -53,9 +53,9 @@ const TimeSelectorBar = () => {
         <motion.button
           key={timeSelectorItem.value}
           onClick={() => handleTimeSelect(timeSelectorItem.days)}
-          className={`p-1 rounded-3xl border border-[grey] w-[50px]  ${
+          className={`p-1 rounded-3xl border-none w-[50px]  ${
             selectedTime === timeSelectorItem.days
-              ? "bg-white text-black"
+              ? "dark:bg-white dark:text-black bg-black text-white"
               : "bg-transparent text-grey"
           } rounded-md mr-2 last:mr-0`}
         >
