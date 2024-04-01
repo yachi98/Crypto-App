@@ -97,7 +97,7 @@ const CoinLineGraph = ({ coin }: { coin: SelectedCoin }) => {
     ],
   };
 
-  return <Line options={options} data={data} />;
+  return <Line width="300px" height="200px" options={options} data={data} />;
 };
 
 const CoinBarGraph = ({ coin }: { coin: SelectedCoin }) => {
