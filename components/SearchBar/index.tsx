@@ -24,7 +24,7 @@ const SearchBar = () => {
       <input
         onChange={handleInputChange}
         type="text"
-        className={`w-full dark:bg-gradient-to-r from-black to-gray-900 bg-white p-2 rounded-xl outline-none dark:placeholder-white placeholder-black text-xs pl-7 text-white font-light ${
+        className={`w-full dark:bg-gradient-to-r from-black to-gray-900 bg-white p-2 rounded-xl outline-none dark:placeholder-white placeholder-black text-xs pl-7 dark:text-white text-black font-light ${
           showDropDown ? "rounded-bl-none rounded-br-none" : ""
         }`}
         placeholder="Search..."
