@@ -56,7 +56,7 @@ const CoinMarketTable = () => {
             <input
               ref={inputRef}
               type="text"
-              className={`bg-black rounded-xl placeholder-white text-xs font-light p-3 border-none outline-none ${
+              className={`dark:bg-black bg-white rounded-xl dark:placeholder-white text-xs font-light p-3 border-none outline-none ${
                 showDropDown
                   ? "w-[160px] rounded-tr-xl rounded-br-xl rounded-bl-none rounded-tl-none"
                   : "rounded-xl"

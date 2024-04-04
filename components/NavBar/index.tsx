@@ -14,10 +14,14 @@ const NavBar = () => {
   return (
     <div>
       <div className="w-full dark:bg-gray-950 bg-light-theme flex items-center justify-between gap-6 p-3 mt-2">
-        <div className="flex gap-3 items-center">
-          <LogoIcon />
-          <h1 className="dark:text-white text-black">CoinWave</h1>
-          <PortfolioSwitch />
+        <div className="flex gap-6 items-center dark:text-white text-black">
+          <div className="flex items-center">
+            <LogoIcon />
+            <h1>CoinWave</h1>
+          </div>
+          <div>
+            <PortfolioSwitch />
+          </div>
         </div>
 
         <div className="flex gap-3 items-center">
