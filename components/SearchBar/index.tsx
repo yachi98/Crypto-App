@@ -38,7 +38,7 @@ const SearchBar = () => {
         >
           {filteredCoins.map((coin: Coin) => (
             <div
-              className="text-[#CECECE] hover:text-white cursor-pointer"
+              className="dark:text-[#CECECE] text-black cursor-pointer"
               key={coin.id}
             >
               {coin.name}
