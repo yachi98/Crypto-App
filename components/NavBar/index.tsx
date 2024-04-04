@@ -13,10 +13,12 @@ import CoinConverter from "../CoinConverter";
 const NavBar = () => {
   return (
     <div>
-      <div className="w-full dark:bg-gray-950 bg-light-theme flex items-center justify-between gap-6 p-3 mt-2">
-        <div className="flex gap-6 items-center dark:text-white text-black">
-          <div className="flex items-center">
-            <LogoIcon />
+      <div className="w-full dark:bg-gray-950 bg-light-theme flex items-center justify-between p-3 mt-2">
+        <div className="flex gap-6 items-center dark:text-white text-black mr-8">
+          <div className="flex items-center justify-end relative w-[105px]">
+            <div className="absolute -left-4">
+              <LogoIcon />
+            </div>
             <h1>CoinWave</h1>
           </div>
           <div>
