@@ -32,10 +32,6 @@ const timeSelector: TimeSelectorItem[] = [
     value: "1y",
     days: "365",
   },
-  {
-    value: "5y",
-    days: "1825",
-  },
 ];
 
 const TimeSelectorBar = () => {
