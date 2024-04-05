@@ -6,7 +6,7 @@ import { getGlobalData } from "@/redux/features/globalSlice";
 import { AppDispatch, useAppSelector } from "@/redux/store";
 import formatNumber from "@/utils/formatNumber";
 import CoinIcon from "@/public/CoinIcon.svg";
-import ConvertIcon from "@/public/convertIcon.svg";
+import ConvertIcon from "@/public/ConvertIcon.svg";
 import CaretIcon from "@/public/CaretIcon.svg";
 import BitCoinIcon from "@/public/BitCoinIcon.svg";
 import EthereumIcon from "@/public/EthereumIcon.svg";
