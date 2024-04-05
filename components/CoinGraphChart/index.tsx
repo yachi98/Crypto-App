@@ -116,7 +116,7 @@ const CoinBarGraph = ({ coin }: { coin: SelectedCoin }) => {
     ],
   };
 
-  return <Bar options={options} data={data} />;
+  return <Bar options={options} data={data as any} />;
 };
 
 const CoinGraphChart = () => {
