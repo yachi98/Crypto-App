@@ -157,8 +157,7 @@ const CoinGraphChart = () => {
         )}
         {selectedCoin && (
           <div className="w-[100%] h-[100%]">
-            {" "}
-            <CoinLineGraph coin={selectedCoin} />{" "}
+            <CoinLineGraph coin={selectedCoin} />
           </div>
         )}
       </div>
