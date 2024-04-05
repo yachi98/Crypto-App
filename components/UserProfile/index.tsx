@@ -44,19 +44,19 @@ const UserProfile = () => {
           transition={{ duration: 0.2 }}
           className="absolute left-0 backdrop-filter dark:bg-gradient-to-r from-black to-gray-900 bg-white backdrop-blur overflow-hidden z-30 gap-3 w-full flex flex-col justify-left rounded-b-xl p-3 text-[#c7c7c7] text-xs font-light"
         >
-          <button className="flex items-center gap-2 hover:text-white">
+          <button className="flex items-center gap-2 dark:text-white text-black">
             <ProfileIcon />
             <span>Account</span>
           </button>
-          <button className="flex items-center gap-2 hover:text-white">
+          <button className="flex items-center gap-2 dark:text-white text-black">
             <SettingsIcon />
             <span>Settings</span>
           </button>
-          <button className="flex items-center gap-2 hover:text-white">
+          <button className="flex items-center gap-2 dark:text-white text-black">
             <HelpIcon />
             <span>Help</span>
           </button>
-          <button className="flex items-center gap-2 hover:text-white">
+          <button className="flex items-center gap-2 dark:text-white text-black">
             <LogOutIcon />
             <span>Log out</span>
           </button>

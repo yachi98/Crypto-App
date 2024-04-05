@@ -45,7 +45,7 @@ const CoinMarketTable = () => {
         </h1>
         <div className="relative flex items-center overflow-hidden">
           <label
-            className={`bg-black p-3 border-3 border-black cursor-pointer ${
+            className={`dark:bg-black p-3 border-3 border-black bg-white cursor-pointer ${
               showDropDown ? "rounded-bl-xl rounded-tl-xl" : "rounded-xl"
             }`}
             onClick={() => setShowDropDown(!showDropDown)}
@@ -56,7 +56,7 @@ const CoinMarketTable = () => {
             <input
               ref={inputRef}
               type="text"
-              className={`dark:bg-black bg-white rounded-xl dark:placeholder-white text-xs font-light p-3 border-none outline-none ${
+              className={`dark:bg-black bg-white  rounded-xl dark:placeholder-white text-xs font-light p-3 border-none outline-none ${
                 showDropDown
                   ? "w-[160px] rounded-tr-xl rounded-br-xl rounded-bl-none rounded-tl-none"
                   : "rounded-xl"
