@@ -23,18 +23,16 @@ export default function RootLayout({
   return (
     <html lang="en">
       <Providers>
-        <div className="max-w-screen-2xl mx-auto">
+        <body
+          className={`${inter.className} dark:bg-gray-950 bg-light-theme max-w-screen-2xl m-auto`}
+        >
+          {children}
           <NavBar />
           <InfoBar />
           <PriceChart />
           <CoinGraphChart />
           <CoinMarketTable />
-          <body
-            className={`${inter.className} dark:bg-gray-950 bg-light-theme`}
-          >
-            {children}
-          </body>
-        </div>
+        </body>
       </Providers>
     </html>
   );
