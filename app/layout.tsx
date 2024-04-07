@@ -23,7 +23,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <Providers>
-        <div className="max-w-screen-2xl mx-auto">
+        <div className="max-w-screen-2xl m-auto">
           <NavBar />
           <InfoBar />
           <PriceChart />
