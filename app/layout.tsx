@@ -3,10 +3,7 @@ import { Inter } from "next/font/google";
 import Providers from "@/app/providers";
 import InfoBar from "@/components/InfoBar";
 import NavBar from "@/components/NavBar";
-import PriceChart from "@/components/PriceChart";
 import "./globals.css";
-import CoinMarketTable from "@/components/CoinMarketTable";
-import CoinGraphChart from "@/components/CoinGraphChart";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -26,12 +23,9 @@ export default function RootLayout({
         <body
           className={`${inter.className} dark:bg-gray-950 bg-light-theme max-w-screen-2xl m-auto`}
         >
-          {children}
           <NavBar />
           <InfoBar />
-          <PriceChart />
-          <CoinGraphChart />
-          <CoinMarketTable />
+          {children}
         </body>
       </Providers>
     </html>

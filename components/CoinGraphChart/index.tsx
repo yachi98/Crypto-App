@@ -2,6 +2,10 @@
 
 import { useAppSelector } from "@/redux/store";
 import { SelectedCoin } from "@/interfaces/selectedcoin.interface";
+import { getSelectedCoinData } from "@/redux/features/selectedCoins";
+import { AppDispatch } from "@/redux/store";
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
 import TimeSelectorBar from "../TimeSelector";
 
 import {
@@ -122,6 +126,9 @@ const CoinBarGraph = ({ coin }: { coin: SelectedCoin }) => {
 const CoinGraphChart = () => {
   const { selectedCoins } = useAppSelector((state) => state.selectedCoinData);
   const { symbol } = useAppSelector((state) => state.currencySlice);
+  const dispatch: AppDispatch = useDispatch();
+  const { coinId, timeDay } = useAppSelector((state) => state.selectedCoinData);
+  const { currency } = useAppSelector((state) => state.currencySlice);
 
   const selectedCoin = selectedCoins.length > 0 ? selectedCoins[0] : null;
   const { coinMarketData } = useAppSelector((state) => state.coinMarketData);
@@ -135,6 +142,16 @@ const CoinGraphChart = () => {
     month: "long",
     day: "numeric",
   });
+
+  useEffect(() => {
+    dispatch(
+      getSelectedCoinData({
+        coinId: coinId,
+        timeDay: timeDay,
+        currency: currency,
+      })
+    );
+  }, [coinId, timeDay, currency]);
 
   return (
     <div className="flex mt-2">

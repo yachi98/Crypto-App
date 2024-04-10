@@ -2,15 +2,16 @@
 
 import { getGlobalData } from "@/redux/features/globalSlice";
 import { getCoinData } from "@/redux/features/coinMarketSlice";
-import { getSelectedCoinData } from "@/redux/features/selectedCoins";
 import { useAppSelector } from "@/redux/store";
 import { AppDispatch } from "@/redux/store";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
+import PriceChart from "@/components/PriceChart";
+import CoinGraphChart from "@/components/CoinGraphChart";
+import CoinMarketTable from "@/components/CoinMarketTable";
 
 const Home = () => {
   const dispatch: AppDispatch = useDispatch();
-  const { coinId, timeDay } = useAppSelector((state) => state.selectedCoinData);
   const { currency } = useAppSelector((state) => state.currencySlice);
 
   useEffect(() => {
@@ -21,17 +22,13 @@ const Home = () => {
     dispatch(getCoinData({ currency: currency }));
   }, [currency]);
 
-  useEffect(() => {
-    dispatch(
-      getSelectedCoinData({
-        coinId: coinId,
-        timeDay: timeDay,
-        currency: currency,
-      })
-    );
-  }, [coinId, timeDay, currency]);
-
-  return <main className="flex flex-col items-center justify-between"></main>;
+  return (
+    <main>
+      <PriceChart />
+      <CoinGraphChart />
+      <CoinMarketTable />
+    </main>
+  );
 };
 
 export default Home;
