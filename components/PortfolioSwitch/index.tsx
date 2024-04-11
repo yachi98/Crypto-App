@@ -9,14 +9,14 @@ import Link from "next/link";
 const PortfolioSwitch = () => {
   const [isClicked, setIsClicked] = useState(false);
 
-  const handleToggle = () => {
-    setIsClicked(!isClicked);
+  const handleToggle = (Value: boolean) => {
+    setIsClicked(Value);
   };
   return (
     <div className="w-[180px] items-center backdrop-filter dark:bg-gradient-to-r from-black to-gray-900 bg-white rounded-xl text-white text-xs font-light flex justify-center">
       <Link href="/">
         <motion.button
-          onClick={handleToggle}
+          onClick={() => handleToggle(false)}
           className={`${
             isClicked
               ? "dark:text-white text-black"
@@ -31,6 +31,7 @@ const PortfolioSwitch = () => {
       </Link>
       <Link href="/portfolio">
         <motion.button
+          onClick={() => handleToggle(true)}
           className={`${
             isClicked
               ? "bg-gradient-to-r from-purple-400 to-orange-300"
