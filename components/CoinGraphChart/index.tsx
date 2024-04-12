@@ -7,6 +7,7 @@ import { AppDispatch } from "@/redux/store";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import TimeSelectorBar from "../TimeSelector";
+import { labelFormatter } from "@/redux/features/dateFormatter";
 
 import {
   Chart as ChartJS,
@@ -40,8 +41,9 @@ const options = {
         display: false,
       },
       ticks: {
-        display: false,
+        display: true,
         color: "#ffffff",
+        maxTicksLimit: 7,
       },
       border: {
         display: true,
@@ -85,9 +87,15 @@ const getBackgroundColor = (
   return gradientFill;
 };
 
-const CoinLineGraph = ({ coin }: { coin: SelectedCoin }) => {
+const CoinLineGraph = ({
+  coin,
+  days,
+}: {
+  coin: SelectedCoin;
+  days: string;
+}) => {
   const data = {
-    labels: getNumArray(coin.prices.length),
+    labels: labelFormatter(coin.priceLabels, days),
     datasets: [
       {
         data: coin.prices,
@@ -104,9 +112,9 @@ const CoinLineGraph = ({ coin }: { coin: SelectedCoin }) => {
   return <Line options={options} data={data} />;
 };
 
-const CoinBarGraph = ({ coin }: { coin: SelectedCoin }) => {
+const CoinBarGraph = ({ coin, days }: { coin: SelectedCoin; days: string }) => {
   const data = {
-    labels: getNumArray(coin.total_volumes.length),
+    labels: labelFormatter(coin.total_volumes, days),
     datasets: [
       {
         data: coin.total_volumes,
@@ -174,7 +182,7 @@ const CoinGraphChart = () => {
         )}
         {selectedCoin && (
           <div className="w-[100%] h-[100%]">
-            <CoinLineGraph coin={selectedCoin} />
+            <CoinLineGraph days={timeDay} coin={selectedCoin} />
           </div>
         )}
       </div>
@@ -202,7 +210,7 @@ const CoinGraphChart = () => {
         )}
         {selectedCoin && (
           <div className="w-[100%] h-[100%]">
-            <CoinBarGraph coin={selectedCoin} />
+            <CoinBarGraph days={timeDay} coin={selectedCoin} />
           </div>
         )}
       </div>
