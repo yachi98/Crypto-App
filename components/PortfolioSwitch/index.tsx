@@ -9,8 +9,8 @@ import Link from "next/link";
 const PortfolioSwitch = () => {
   const [isClicked, setIsClicked] = useState(false);
 
-  const handleToggle = (Value: boolean) => {
-    setIsClicked(Value);
+  const handleToggle = (value: boolean) => {
+    setIsClicked(value);
   };
   return (
     <div className="w-[180px] items-center backdrop-filter dark:bg-gradient-to-r from-black to-gray-900 bg-white rounded-xl text-white text-xs font-light flex justify-center">
