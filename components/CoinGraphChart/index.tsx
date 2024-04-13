@@ -8,6 +8,8 @@ import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import TimeSelectorBar from "../TimeSelector";
 import { labelFormatter } from "@/redux/features/dateFormatter";
+import formatNumber from "@/utils/formatNumber";
+import { Line, Bar } from "react-chartjs-2";
 
 import {
   Chart as ChartJS,
@@ -19,8 +21,6 @@ import {
   BarElement,
   ScriptableContext,
 } from "chart.js";
-import { Line, Bar } from "react-chartjs-2";
-import formatNumber from "@/utils/formatNumber";
 
 ChartJS.register(
   CategoryScale,
@@ -41,7 +41,7 @@ const options = {
       },
       ticks: {
         display: true,
-        color: "#ffffff",
+        color: "grey",
         maxTicksLimit: 7,
       },
       border: {
