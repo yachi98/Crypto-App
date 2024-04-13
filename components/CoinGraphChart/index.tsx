@@ -20,7 +20,6 @@ import {
   ScriptableContext,
 } from "chart.js";
 import { Line, Bar } from "react-chartjs-2";
-import getNumArray from "@/utils/getGraphArray";
 import formatNumber from "@/utils/formatNumber";
 
 ChartJS.register(
@@ -114,7 +113,7 @@ const CoinLineGraph = ({
 
 const CoinBarGraph = ({ coin, days }: { coin: SelectedCoin; days: string }) => {
   const data = {
-    labels: labelFormatter(coin.total_volumes, days),
+    labels: labelFormatter(coin.volumeLabels, days),
     datasets: [
       {
         data: coin.total_volumes,
