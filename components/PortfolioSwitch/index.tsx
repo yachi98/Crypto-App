@@ -1,9 +1,9 @@
 "use client";
 
-import HomeIcon from "@/public/HomeIcon.svg";
-import PortfolioIcon from "@/public/PortfolioIcon.svg";
 import { motion } from "framer-motion";
 import { useState } from "react";
+import HomeIcon from "@/public/HomeIcon.svg";
+import PortfolioIcon from "@/public/PortfolioIcon.svg";
 import Link from "next/link";
 
 const PortfolioSwitch = () => {
