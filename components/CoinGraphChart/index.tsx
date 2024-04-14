@@ -3,7 +3,7 @@
 import { useAppSelector } from "@/redux/store";
 import { AppDispatch } from "@/redux/store";
 import { useDispatch } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import TimeSelectorBar from "../TimeSelector";
 import { SelectedCoin } from "@/interfaces/selectedcoin.interface";
 import { getSelectedCoinData } from "@/redux/features/selectedCoins";
@@ -47,7 +47,7 @@ const options = {
       border: {
         display: true,
       },
-      stacked: true,
+      // stacked: true,
     },
     y: {
       display: false,
@@ -93,6 +93,7 @@ const CoinLineGraph = ({
   coin: SelectedCoin;
   days: string;
 }) => {
+  const [shouldRender, setShouldRender] = useState(false);
   const data = {
     labels: labelFormatter(coin.priceLabels, days),
     datasets: [
@@ -107,8 +108,17 @@ const CoinLineGraph = ({
       },
     ],
   };
+  useEffect(() => {
+    setTimeout(() => {
+      setShouldRender(true);
+    }, 1000);
+  }, []);
 
-  return <Line options={options} data={data} />;
+  return (
+    <div className="h-full w-full">
+      {shouldRender && <Line options={options} data={data} />}
+    </div>
+  );
 };
 
 const CoinBarGraph = ({ coin, days }: { coin: SelectedCoin; days: string }) => {
