@@ -1,10 +1,10 @@
 "use client";
 
-import TimeSelectorBar from "../TimeSelector";
 import { useAppSelector } from "@/redux/store";
 import { AppDispatch } from "@/redux/store";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
+import TimeSelectorBar from "../TimeSelector";
 import { SelectedCoin } from "@/interfaces/selectedcoin.interface";
 import { getSelectedCoinData } from "@/redux/features/selectedCoins";
 import { labelFormatter } from "@/redux/features/dateFormatter";
