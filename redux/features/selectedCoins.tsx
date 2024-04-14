@@ -18,8 +18,14 @@ const initialState: SelectedCoinState = {
   hasError: false,
 };
 
-const formatChartData = (data: [number, number][]): number[] => {
-  return data.map((item) => item[1]);
+const formatChartData = ({
+  data,
+  index,
+}: {
+  data: [number, number][];
+  index: number;
+}): number[] => {
+  return data.map((item) => item[index]);
 };
 
 export const getSelectedCoinData = createAsyncThunk(
@@ -38,17 +44,27 @@ export const getSelectedCoinData = createAsyncThunk(
       );
       const { prices, total_volumes } = data;
 
-      const timeFormattedPrices = formatChartData(prices);
-      const timeFormattedVolumes = formatChartData(total_volumes);
+      const timeFormattedPrices = formatChartData({ data: prices, index: 1 });
+      const timeFormattedVolumes = formatChartData({
+        data: total_volumes,
+        index: 1,
+      });
+
+      const priceLabels = formatChartData({ data: prices, index: 0 });
+      const volumeLabels = formatChartData({ data: total_volumes, index: 0 });
 
       const coinData: {
         id: string;
         prices: number[];
         total_volumes: number[];
+        priceLabels: number[];
+        volumeLabels: number[];
       } = {
         id: coinId,
         prices: timeFormattedPrices,
         total_volumes: timeFormattedVolumes,
+        priceLabels: priceLabels,
+        volumeLabels: volumeLabels,
       };
       return coinData;
     } catch (error) {

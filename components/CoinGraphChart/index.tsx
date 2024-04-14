@@ -1,8 +1,15 @@
 "use client";
 
 import { useAppSelector } from "@/redux/store";
-import { SelectedCoin } from "@/interfaces/selectedcoin.interface";
+import { AppDispatch } from "@/redux/store";
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
 import TimeSelectorBar from "../TimeSelector";
+import { SelectedCoin } from "@/interfaces/selectedcoin.interface";
+import { getSelectedCoinData } from "@/redux/features/selectedCoins";
+import { labelFormatter } from "@/redux/features/dateFormatter";
+import formatNumber from "@/utils/formatNumber";
+import { Line, Bar } from "react-chartjs-2";
 
 import {
   Chart as ChartJS,
@@ -14,9 +21,6 @@ import {
   BarElement,
   ScriptableContext,
 } from "chart.js";
-import { Line, Bar } from "react-chartjs-2";
-import getNumArray from "@/utils/getGraphArray";
-import formatNumber from "@/utils/formatNumber";
 
 ChartJS.register(
   CategoryScale,
@@ -36,8 +40,9 @@ const options = {
         display: false,
       },
       ticks: {
-        display: false,
-        color: "#ffffff",
+        display: true,
+        color: "grey",
+        maxTicksLimit: 7,
       },
       border: {
         display: true,
@@ -81,9 +86,15 @@ const getBackgroundColor = (
   return gradientFill;
 };
 
-const CoinLineGraph = ({ coin }: { coin: SelectedCoin }) => {
+const CoinLineGraph = ({
+  coin,
+  days,
+}: {
+  coin: SelectedCoin;
+  days: string;
+}) => {
   const data = {
-    labels: getNumArray(coin.prices.length),
+    labels: labelFormatter(coin.priceLabels, days),
     datasets: [
       {
         data: coin.prices,
@@ -100,9 +111,9 @@ const CoinLineGraph = ({ coin }: { coin: SelectedCoin }) => {
   return <Line options={options} data={data} />;
 };
 
-const CoinBarGraph = ({ coin }: { coin: SelectedCoin }) => {
+const CoinBarGraph = ({ coin, days }: { coin: SelectedCoin; days: string }) => {
   const data = {
-    labels: getNumArray(coin.total_volumes.length),
+    labels: labelFormatter(coin.volumeLabels, days),
     datasets: [
       {
         data: coin.total_volumes,
@@ -122,6 +133,9 @@ const CoinBarGraph = ({ coin }: { coin: SelectedCoin }) => {
 const CoinGraphChart = () => {
   const { selectedCoins } = useAppSelector((state) => state.selectedCoinData);
   const { symbol } = useAppSelector((state) => state.currencySlice);
+  const dispatch: AppDispatch = useDispatch();
+  const { coinId, timeDay } = useAppSelector((state) => state.selectedCoinData);
+  const { currency } = useAppSelector((state) => state.currencySlice);
 
   const selectedCoin = selectedCoins.length > 0 ? selectedCoins[0] : null;
   const { coinMarketData } = useAppSelector((state) => state.coinMarketData);
@@ -135,6 +149,16 @@ const CoinGraphChart = () => {
     month: "long",
     day: "numeric",
   });
+
+  useEffect(() => {
+    dispatch(
+      getSelectedCoinData({
+        coinId: coinId,
+        timeDay: timeDay,
+        currency: currency,
+      })
+    );
+  }, [coinId, timeDay, currency]);
 
   return (
     <div className="flex mt-2">
@@ -157,7 +181,7 @@ const CoinGraphChart = () => {
         )}
         {selectedCoin && (
           <div className="w-[100%] h-[100%]">
-            <CoinLineGraph coin={selectedCoin} />
+            <CoinLineGraph days={timeDay} coin={selectedCoin} />
           </div>
         )}
       </div>
@@ -185,7 +209,7 @@ const CoinGraphChart = () => {
         )}
         {selectedCoin && (
           <div className="w-[100%] h-[100%]">
-            <CoinBarGraph coin={selectedCoin} />
+            <CoinBarGraph days={timeDay} coin={selectedCoin} />
           </div>
         )}
       </div>
