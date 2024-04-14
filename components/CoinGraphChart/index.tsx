@@ -1,12 +1,12 @@
 "use client";
 
+import TimeSelectorBar from "../TimeSelector";
 import { useAppSelector } from "@/redux/store";
-import { SelectedCoin } from "@/interfaces/selectedcoin.interface";
-import { getSelectedCoinData } from "@/redux/features/selectedCoins";
 import { AppDispatch } from "@/redux/store";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
-import TimeSelectorBar from "../TimeSelector";
+import { SelectedCoin } from "@/interfaces/selectedcoin.interface";
+import { getSelectedCoinData } from "@/redux/features/selectedCoins";
 import { labelFormatter } from "@/redux/features/dateFormatter";
 import formatNumber from "@/utils/formatNumber";
 import { Line, Bar } from "react-chartjs-2";
