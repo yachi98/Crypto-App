@@ -20,6 +20,7 @@ import {
   Filler,
   BarElement,
   ScriptableContext,
+  Tooltip,
 } from "chart.js";
 
 ChartJS.register(
@@ -28,33 +29,37 @@ ChartJS.register(
   PointElement,
   LineElement,
   Filler,
-  BarElement
+  BarElement,
+  Tooltip
 );
-
-// const [hoverPrice, setHoverPrice] = useState(0);
 
 const options = {
   responsive: true,
+  tooltip: { enabled: true },
   maintainAspectRatio: false,
-  // plugins: {
-  //   tooltip: {
-  //     enabled: true,
-  //     mode: "index",
-  //     intersect: false,
-  //     callbacks: {
-  //       label: function (tooltipItem: any) {
-  //         let value = tooltipItem.dataset.data[tooltipItem.dataIndex];
-  //         value =
-  //           value < 10
-  //             ? value.toPrecision(7)
-  //             : value.toFixed(2).toLocaleString();
-
-  //           setHoverPrice(tooltipItem.dataset.data[tooltipItem.dataIndex]);
-  //         return value;
-  //       },
-  //     },
-  //   },
-
+  plugins: {
+    tooltip: {
+      enabled: true,
+      mode: "index",
+      intersect: false,
+      callbacks: {
+        label: function (tooltipItem: any) {
+          let value = tooltipItem.dataset.data[tooltipItem.dataIndex];
+          value =
+            value < 10
+              ? value.toPrecision(7)
+              : value.toFixed(2).toLocaleString();
+          return value;
+        },
+        labelColor: function () {
+          return {
+            borderRadius: 2,
+            backgroundColor: "rgba(159, 122, 234)",
+          };
+        },
+      },
+    },
+  },
   scales: {
     x: {
       grid: {
@@ -68,7 +73,7 @@ const options = {
       border: {
         display: true,
       },
-      // stacked: true,
+      stacked: true,
     },
     y: {
       display: false,
@@ -137,7 +142,7 @@ const CoinLineGraph = ({
 
   return (
     <div className="h-full w-full">
-      {shouldRender && <Line options={options} data={data} />}
+      {shouldRender && <Line options={options as any} data={data} />}
     </div>
   );
 };
@@ -158,7 +163,7 @@ const CoinBarGraph = ({ coin, days }: { coin: SelectedCoin; days: string }) => {
     ],
   };
 
-  return <Bar options={options} data={data as any} />;
+  return <Bar options={options as any} data={data as any} />;
 };
 
 const CoinGraphChart = () => {
