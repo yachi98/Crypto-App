@@ -31,9 +31,30 @@ ChartJS.register(
   BarElement
 );
 
+// const [hoverPrice, setHoverPrice] = useState(0);
+
 const options = {
   responsive: true,
   maintainAspectRatio: false,
+  // plugins: {
+  //   tooltip: {
+  //     enabled: true,
+  //     mode: "index",
+  //     intersect: false,
+  //     callbacks: {
+  //       label: function (tooltipItem: any) {
+  //         let value = tooltipItem.dataset.data[tooltipItem.dataIndex];
+  //         value =
+  //           value < 10
+  //             ? value.toPrecision(7)
+  //             : value.toFixed(2).toLocaleString();
+
+  //           setHoverPrice(tooltipItem.dataset.data[tooltipItem.dataIndex]);
+  //         return value;
+  //       },
+  //     },
+  //   },
+
   scales: {
     x: {
       grid: {
@@ -42,7 +63,7 @@ const options = {
       ticks: {
         display: true,
         color: "grey",
-        maxTicksLimit: 7,
+        maxTicksLimit: 10,
       },
       border: {
         display: true,
