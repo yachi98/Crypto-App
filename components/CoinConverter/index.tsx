@@ -10,7 +10,7 @@ const CoinConverter = () => {
   };
 
   return (
-    <div className="w-[100px] items-center backdrop-filter dark:bg-gradient-to-r from-black to-gray-900 bg-white rounded-xl dark:text-white text-black text-xs font-light flex justify-center">
+    <div className="w-[100px] items-center backdrop-filter dark:bg-gray-900 bg-white rounded-xl dark:text-white text-black text-xs font-light flex justify-center">
       <motion.button
         className={`${
           isClicked ? "bg-gradient-to-r from-purple-400 to-orange-300" : ""
