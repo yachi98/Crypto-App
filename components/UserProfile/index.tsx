@@ -30,7 +30,7 @@ const UserProfile = () => {
     <div className="relative" ref={containerRef}>
       <button
         onClick={() => setShowDropDown(!showDropDown)}
-        className={`w-[120px] dark:bg-gradient-to-r from-black to-gray-900 bg-white p-2 rounded-xl text-xs dark:text-white text-black font-light flex items-center gap-2 justify-left ${
+        className={`w-[120px] dark:bg-gray-900 bg-white p-2 rounded-xl text-xs dark:text-white text-black font-light flex items-center gap-2 justify-left ${
           showDropDown ? "rounded-bl-none rounded-br-none" : ""
         }`}
       >
@@ -42,7 +42,7 @@ const UserProfile = () => {
           initial={{ y: 10 }}
           animate={{ y: 0 }}
           transition={{ duration: 0.2 }}
-          className="absolute left-0 backdrop-filter dark:bg-gradient-to-r from-black to-gray-900 bg-white backdrop-blur overflow-hidden z-30 gap-3 w-full flex flex-col justify-left rounded-b-xl p-3 text-[#c7c7c7] text-xs font-light"
+          className="absolute left-0 backdrop-filter dark:bg-gray-900 bg-white backdrop-blur overflow-hidden z-30 gap-3 w-full flex flex-col justify-left rounded-b-xl p-3 text-[#c7c7c7] text-xs font-light"
         >
           <button className="flex items-center gap-2 dark:text-white text-black">
             <ProfileIcon />

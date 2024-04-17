@@ -8,8 +8,6 @@ import formatNumber from "@/utils/formatNumber";
 import CoinIcon from "@/public/CoinIcon.svg";
 import ConvertIcon from "@/public/ConvertIcon.svg";
 import CaretIcon from "@/public/CaretIcon.svg";
-import BitCoinIcon from "@/public/BitCoinIcon.svg";
-import EthereumIcon from "@/public/EthereumIcon.svg";
 import PercentageBar from "@/components/PercentageBar";
 
 const InfoBar = () => {
