@@ -107,7 +107,3 @@ export interface CoinPage {
   status_updates: string[];
   last_updated: string;
 }
-
-// export interface Description {
-//   en: string;
-// }
