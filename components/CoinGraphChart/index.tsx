@@ -153,12 +153,12 @@ const CoinBarGraph = ({ coin, days }: { coin: SelectedCoin; days: string }) => {
     datasets: [
       {
         data: coin.total_volumes,
-        borderColor: "rgba(159, 122, 234, 0.9)",
-        borderWidth: 1,
+        borderColor: "#111827",
+        backgroundColor: "#111827",
+        borderWidth: 8,
         pointRadius: 0,
         fill: true,
         tension: 0.8,
-        backgroundColor: getBackgroundColor,
       },
     ],
   };
@@ -221,16 +221,16 @@ const CoinGraphChart = () => {
           </div>
         )}
       </div>
-      <div className="dark:bg-gradient-to-r from-black to-gray-900 bg-white rounded-2xl w-1/2 h-[450px] m-2 flex flex-col p-6">
+      <div className="bg-gradient-to-r from-purple-400 to-orange-300 rounded-2xl w-1/2 h-[450px] m-2 flex flex-col p-6">
         {selectedCoin && (
           <div className="flex flex-col gap-8">
             <div className="flex items-center justify-between">
-              <span className="dark:text-[#DEDEDE] text-black flex text-base">
+              <span className="dark:text-black text-white flex text-base">
                 Volume 24h
               </span>
               <TimeSelectorBar />
             </div>
-            <span className="dark:text-[#DEDEDE] text-black text-3xl">
+            <span className="dark:text-black text-white text-3xl">
               {symbol}
               {formatNumber(
                 selectedCoin.total_volumes[
@@ -238,7 +238,7 @@ const CoinGraphChart = () => {
                 ]
               )}
             </span>
-            <span className="dark:text-[#DEDEDE] text-black text-base">
+            <span className="dark:text-black text-white text-base">
               {todayDate}
             </span>
           </div>
