@@ -11,7 +11,6 @@ export interface CoinPage {
   };
   block_time_in_minutes: number;
   hashing_algorithm: string;
-  categories: string[];
   preview_listing: boolean;
   public_notice: string | null;
   additional_notices: string[];
@@ -25,7 +24,6 @@ export interface CoinPage {
     facebook_username: string;
     bitcointalk_thread_identifier: number | null;
     telegram_channel_identifier: string;
-    subreddit_url: string;
     repos_url: { github: string[]; bitbucket: string[] };
   };
   image: {
