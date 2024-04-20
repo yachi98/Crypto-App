@@ -20,6 +20,9 @@ const SearchBar = () => {
     coin.name.toLowerCase().includes(coinSearch)
   );
 
+  const removeDropDown = () => {
+    setShowDropDown(false);
+  };
   return (
     <div className="w-full relative">
       <input
@@ -43,6 +46,7 @@ const SearchBar = () => {
             <Link key={coin.id} href={`/coin/${coin.id}`}>
               <div
                 className="dark:text-[#CECECE] text-black cursor-pointer"
+                onClick={removeDropDown}
                 key={coin.id}
               >
                 {coin.name}
