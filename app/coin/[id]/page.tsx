@@ -7,6 +7,9 @@ import { useAppSelector } from "@/redux/store";
 import CaretIcon from "@/public/CaretIcon.svg";
 import { useEffect, useState } from "react";
 import formatDate from "@/utils/formatDate";
+import formatNumber from "@/utils/formatNumber";
+import extractUrl from "@/utils/extractUrl";
+import PriceChart from "@/components/PriceChart";
 
 const CoinPage = ({ params }: { params: { id: string } }) => {
   const [hasError, setHasError] = useState(false);
@@ -39,7 +42,7 @@ const CoinPage = ({ params }: { params: { id: string } }) => {
 
   return (
     <div className="dark:bg-gray-950 bg-light-theme max-w-screen-2xl m-auto h-screen p-2">
-      <div className="dark:bg-[#0B101A] bg-white w-full h-[400px] rounded-3xl mt-5 p-8 flex justify-between">
+      <div className="dark:bg-[#0b111b] bg-white w-full h-[380px] rounded-3xl mt-5 p-8 flex justify-between">
         {isLoading ? (
           <div>Fetching data...</div>
         ) : (
@@ -47,53 +50,92 @@ const CoinPage = ({ params }: { params: { id: string } }) => {
             {coin && (
               <>
                 <div>
-                  <div className="flex items-center gap-6">
-                    <Image
-                      src={coin.image.large}
-                      alt={coin.name}
-                      width={50}
-                      height={50}
-                    />
-                    <span className="text-xl">
-                      {coin.name.charAt(0).toUpperCase() +
-                        coin.name.slice(1).toLowerCase()}{" "}
-                      ({coin.symbol.toUpperCase()})
-                    </span>
-                    {/* {coin.links.homepage.map((website: string) => (
-                        <li key={website}> */}
-                    <a href={coin.links.homepage[0]} target="_blank">
-                      {coin.links.homepage[0]}
-                    </a>
-                    {/* </li>
-                      ))} */}
-                  </div>
-                  <span className="text-3xl mt-7">
-                    {coin.market_data.current_price[currency]}
-                  </span>
-                  <div className="flex flex-col gap-6 mt-11">
-                    <div className="flex items-center gap-5 mt-5">
-                      <CaretIcon className="w-[30px] h-[20px]" />
-                      <h3 className="text-xl">All Time High</h3>
+                  <div className="flex flex-col gap-1">
+                    <div className="flex items-center gap-6">
+                      <Image
+                        src={coin.image.large}
+                        alt={coin.name}
+                        width={50}
+                        height={50}
+                      />
+                      <span className="text-xl">
+                        {coin.name.charAt(0).toUpperCase() +
+                          coin.name.slice(1).toLowerCase()}{" "}
+                        ({coin.symbol.toUpperCase()})
+                      </span>
                     </div>
-
+                    <span className="text-3xl mt-7">
+                      {formatNumber(coin.market_data.current_price[currency])}
+                    </span>
+                  </div>
+                  <div>
+                    <div className="flex gap-5">
+                      <h2 className="text-[#00B1A7]">High 24h</h2>
+                      <span>
+                        {formatNumber(coin.market_data.high_24h[currency])}
+                      </span>
+                    </div>
+                    <div className="flex items-center justify-around mt-8">
+                      <div className="flex gap-3 items-center">
+                        <CaretIcon className="w-[30px] h-[20px]" />
+                        <h3 className="text-xl">All Time High:</h3>
+                      </div>
+                      <div>
+                        <span className="text-2xl">
+                          {formatNumber(coin.market_data.ath[currency])}
+                        </span>
+                      </div>
+                    </div>
                     <span>
                       {formatDate(coin.market_data.ath_date[currency])}
                     </span>
-                    <div className="flex items-center gap-5 mt-5">
-                      <CaretIcon className="w-[30px] h-[20px] fill-[#FE2264] rotate-180" />
-                      <h3 className="text-xl">All Time Low</h3>
+                    <div className="flex items-center justify-around mt-10">
+                      <div className="flex gap-3 items-center">
+                        <CaretIcon className="w-[30px] h-[20px] fill-[#FE2264] rotate-180" />
+                        <h3 className="text-xl">All Time Low:</h3>
+                      </div>
+                      <div>
+                        <span className="text-2xl">
+                          {formatNumber(coin.market_data.atl[currency])}
+                        </span>
+                      </div>
                     </div>
                     <span>
                       {formatDate(coin.market_data.atl_date[currency])}
                     </span>
                   </div>
                 </div>
-                <div className="dark:text-white text-black text-sm w-2/5 text-left overflow-ellipsis overflow-hidden max-h-[15rem] hover:scrollbar  scrollbar-track-transparent scrollbar-h-24 overflow-y-hidden  hover:overflow-y-auto pl-7">
-                  <div
-                    dangerouslySetInnerHTML={{
-                      __html: `${coin.description.en}`,
-                    }}
-                  />
+                <div className="dark:text-white text-black text-sm w-3/5 text-left relative mt-3">
+                  <h3 className="text-xl">Description</h3>
+                  <div>
+                    <p
+                      className="mt-5 overflow-y-hidden max-h-[11rem] scrollbar-track-transparent scrollbar-h-24 hover:overflow-y-auto  hover:scrollbar "
+                      dangerouslySetInnerHTML={{
+                        __html: `${coin.description.en}`,
+                      }}
+                    />
+                  </div>
+
+                  <div className="flex gap-3 mt-5 absolute bottom-0">
+                    <button className="p-3 dark:bg-gray-900 bg-[#efefef] rounded-2xl">
+                      <a href={coin.links.homepage[0]} target="_blank">
+                        {extractUrl(coin.links.homepage[0])}
+                      </a>
+                    </button>
+                    <button className="p-3 dark:bg-gray-900 bg-[#efefef] rounded-2xl">
+                      <a href={coin.links.blockchain_site[0]} target="_blank">
+                        {extractUrl(coin.links.blockchain_site[0])}
+                      </a>
+                    </button>
+                    <button className="p-3 dark:bg-gray-900 bg-[#efefef] rounded-2xl">
+                      <a
+                        href={coin.links.official_forum_url[0]}
+                        target="_blank"
+                      >
+                        {extractUrl(coin.links.official_forum_url[0])}
+                      </a>
+                    </button>
+                  </div>
                 </div>
               </>
             )}
