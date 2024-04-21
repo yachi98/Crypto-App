@@ -47,7 +47,6 @@ const SearchBar = () => {
               <div
                 className="dark:text-[#CECECE] text-black cursor-pointer"
                 onClick={removeDropDown}
-                key={coin.id}
               >
                 {coin.name}
               </div>
