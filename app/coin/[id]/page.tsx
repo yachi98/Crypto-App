@@ -9,7 +9,6 @@ import { useEffect, useState } from "react";
 import formatDate from "@/utils/formatDate";
 import formatNumber from "@/utils/formatNumber";
 import extractUrl from "@/utils/extractUrl";
-import PriceChart from "@/components/PriceChart";
 
 const CoinPage = ({ params }: { params: { id: string } }) => {
   const [hasError, setHasError] = useState(false);
@@ -25,7 +24,6 @@ const CoinPage = ({ params }: { params: { id: string } }) => {
       const { data } = await axios(
         `https://api.coingecko.com/api/v3/coins/${params.id}?localization=false&tickers=false&market_data=true&community_data=true&developer_data=false&sparkline=true`
       );
-      console.log(data);
       setCoin(data);
       setIsLoading(false);
     } catch (err) {
