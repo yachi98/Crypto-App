@@ -11,6 +11,7 @@ import Link from "next/link";
 
 const RowCoinItem = ({ coin }: { coin: Coin }) => {
   const { symbol } = useAppSelector((state) => state.currencySlice);
+
   const priceChange1h: number = getFormattedPrice(
     coin.price_change_percentage_1h_in_currency
   );
@@ -22,70 +23,83 @@ const RowCoinItem = ({ coin }: { coin: Coin }) => {
   );
 
   return (
-    <div className="dark:bg-gradient-to-r from-black to-gray-900 bg-white w-full dark:text-[#DEDEDE] text-black text-sm font-light rounded-3xl p-5 mb-2 flex gap-3 items-center">
-      <span>{coin.market_cap_rank}</span>
-      <Image src={coin.image} alt={coin.name} width={30} height={30} />
-      <span className="w-[14%] px-1">
-        {coin.name.charAt(0).toUpperCase() + coin.name.slice(1).toLowerCase()} (
-        {coin.symbol.toUpperCase()})
-      </span>
-      <span className="w-[6%] px-1">
-        {symbol}
-        {formatNumber(coin.current_price)}
-      </span>
-      <span className="w-[6%] px-1">
-        <PriceChange price={priceChange1h} />
-      </span>
-      <span className="w-[6%] px-1">
-        <PriceChange price={priceChange24h} />
-      </span>
-      <span className="w-[6%] px-1">
-        <PriceChange price={priceChange7d} />
-      </span>
-      <span className="w-full max-w-[20%] px-1">
-        <div className="flex justify-between text-xs">
-          <span
-            className={priceChange24h > 0 ? "text-[#00B1A7]" : "text-[#FE2264]"}
-          >
-            {formatNumber(coin.total_volume)}
-          </span>
-          <span
-            className={priceChange24h > 0 ? "text-[#00B1A7]" : "text-[#FE2264]"}
-          >
-            {formatNumber(coin.market_cap)}
-          </span>
-        </div>
-        <CoinMarketBar
-          fill={priceChange24h > 0 ? "bg-[#00B1A7]" : "bg-[#FE2264]"}
-          percentage={getPercentage(coin.total_volume, coin.market_cap)}
-        />
-      </span>
-      <span className="w-full max-w-[20%] px-1">
-        <div className="flex justify-between text-xs">
-          <span
-            className={priceChange24h > 0 ? "text-[#00B1A7]" : "text-[#FE2264]"}
-          >
-            {formatNumber(coin.total_volume)}
-          </span>
-          <span
-            className={priceChange24h > 0 ? "text-[#00B1A7]" : "text-[#FE2264]"}
-          >
-            {formatNumber(coin.market_cap)}
-          </span>
-        </div>
-        <CoinMarketBar
-          fill={priceChange24h > 0 ? "bg-[#00B1A7]" : "bg-[#FE2264]"}
-          percentage={getPercentage(coin.circulating_supply, coin.total_supply)}
-        />
-      </span>
-      <span className="w-[14%] pl-3 h-[50px]">
-        <PriceCoinGraph
-          prices={coin.sparkline_in_7d.price}
-          priceChange={priceChange7d}
-          reduceBy={6}
-        />
-      </span>
-    </div>
+    <Link href={`/coin/${coin.id}`}>
+      <div className="dark:bg-gradient-to-r from-black to-gray-900 bg-white w-full dark:text-[#DEDEDE] text-black text-sm font-light rounded-3xl p-5 mb-2 flex gap-3 items-center">
+        <span>{coin.market_cap_rank}</span>
+        <Image src={coin.image} alt={coin.name} width={30} height={30} />
+        <span className="w-[14%] px-1">
+          {coin.name.charAt(0).toUpperCase() + coin.name.slice(1).toLowerCase()}{" "}
+          ({coin.symbol.toUpperCase()})
+        </span>
+        <span className="w-[6%] px-1">
+          {symbol}
+          {formatNumber(coin.current_price)}
+        </span>
+        <span className="w-[6%] px-1">
+          <PriceChange price={priceChange1h} />
+        </span>
+        <span className="w-[6%] px-1">
+          <PriceChange price={priceChange24h} />
+        </span>
+        <span className="w-[6%] px-1">
+          <PriceChange price={priceChange7d} />
+        </span>
+        <span className="w-full max-w-[20%] px-1">
+          <div className="flex justify-between text-xs">
+            <span
+              className={
+                priceChange24h > 0 ? "text-[#00B1A7]" : "text-[#FE2264]"
+              }
+            >
+              {formatNumber(coin.total_volume)}
+            </span>
+            <span
+              className={
+                priceChange24h > 0 ? "text-[#00B1A7]" : "text-[#FE2264]"
+              }
+            >
+              {formatNumber(coin.market_cap)}
+            </span>
+          </div>
+          <CoinMarketBar
+            fill={priceChange24h > 0 ? "bg-[#00B1A7]" : "bg-[#FE2264]"}
+            percentage={getPercentage(coin.total_volume, coin.market_cap)}
+          />
+        </span>
+        <span className="w-full max-w-[20%] px-1">
+          <div className="flex justify-between text-xs">
+            <span
+              className={
+                priceChange24h > 0 ? "text-[#00B1A7]" : "text-[#FE2264]"
+              }
+            >
+              {formatNumber(coin.total_volume)}
+            </span>
+            <span
+              className={
+                priceChange24h > 0 ? "text-[#00B1A7]" : "text-[#FE2264]"
+              }
+            >
+              {formatNumber(coin.market_cap)}
+            </span>
+          </div>
+          <CoinMarketBar
+            fill={priceChange24h > 0 ? "bg-[#00B1A7]" : "bg-[#FE2264]"}
+            percentage={getPercentage(
+              coin.circulating_supply,
+              coin.total_supply
+            )}
+          />
+        </span>
+        <span className="w-[14%] pl-3 h-[50px]">
+          <PriceCoinGraph
+            prices={coin.sparkline_in_7d.price}
+            priceChange={priceChange7d}
+            reduceBy={6}
+          />
+        </span>
+      </div>
+    </Link>
   );
 };
 

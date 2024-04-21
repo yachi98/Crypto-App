@@ -153,12 +153,12 @@ const CoinBarGraph = ({ coin, days }: { coin: SelectedCoin; days: string }) => {
     datasets: [
       {
         data: coin.total_volumes,
-        borderColor: "rgba(159, 122, 234, 0.9)",
-        borderWidth: 1,
+        borderColor: "rgba(159, 122, 234)",
+        backgroundColor: "rgba(159, 122, 234)",
+        borderWidth: 8,
         pointRadius: 0,
         fill: true,
         tension: 0.8,
-        backgroundColor: getBackgroundColor,
       },
     ],
   };
@@ -198,7 +198,7 @@ const CoinGraphChart = () => {
 
   return (
     <div className="flex mt-2">
-      <div className="dark:bg-gradient-to-r from-black to-gray-900 bg-white rounded-2xl w-1/2 h-[450px] m-2 flex flex-col p-6">
+      <div className="dark:bg-gradient-to-r from-black to-gray-900 bg-white rounded-2xl w-1/2 h-[420px] m-2 flex flex-col p-6">
         {coinInfo && (
           <div className="flex flex-col gap-8">
             <span className="dark:text-[#DEDEDE] flex text-base">
@@ -221,7 +221,7 @@ const CoinGraphChart = () => {
           </div>
         )}
       </div>
-      <div className="dark:bg-gradient-to-r from-black to-gray-900 bg-white rounded-2xl w-1/2 h-[450px] m-2 flex flex-col p-6">
+      <div className="dark:bg-gradient-to-r from-black to-gray-900 bg-white rounded-2xl w-1/2 h-[420px] m-2 flex flex-col p-6">
         {selectedCoin && (
           <div className="flex flex-col gap-8">
             <div className="flex items-center justify-between">
