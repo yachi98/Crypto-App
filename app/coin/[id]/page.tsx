@@ -47,7 +47,7 @@ const CoinPage = ({ params }: { params: { id: string } }) => {
           <>
             {coin && (
               <>
-                <div>
+                <div className="w-2/5 pr-7">
                   <div className="flex flex-col gap-1">
                     <div className="flex items-center gap-6">
                       <Image
@@ -68,15 +68,15 @@ const CoinPage = ({ params }: { params: { id: string } }) => {
                     </span>
                   </div>
                   <div>
-                    <div className="flex mt-5 items-center">
+                    <div className="flex mt-5 items-center justify-between">
                       <h2 className="text-[#01F1E3]">High 24h</h2>
                       <span className="text-xl">
                         {symbol}
                         {formatNumber(coin.market_data.high_24h[currency])}
                       </span>
                     </div>
-                    <div className="">
-                      <div className="flex gap-3 items-center mt-6">
+                    <div>
+                      <div className="flex gap-3 items-center mt-6 justify-between">
                         <div className="flex items-center gap-2">
                           <CaretIcon className="w-[30px]" />
                           <h3 className="text-xl">All Time High:</h3>
@@ -93,7 +93,7 @@ const CoinPage = ({ params }: { params: { id: string } }) => {
                       {formatDate(coin.market_data.ath_date[currency])}
                     </span>
                     <div className="">
-                      <div className="flex gap-3 items-center mt-6">
+                      <div className="flex gap-3 items-center mt-6 justify-between">
                         <div className="flex items-center gap-2">
                           <CaretIcon className="w-[30px] fill-[#FE2264] rotate-180" />
                           <h3 className="text-xl">All Time Low:</h3>
