@@ -42,7 +42,7 @@ const CoinPage = ({ params }: { params: { id: string } }) => {
 
   return (
     <div className="dark:bg-gray-950 bg-light-theme max-w-screen-2xl m-auto h-screen p-2">
-      <div className="dark:bg-[#0b111b] bg-white w-full h-[380px] rounded-3xl mt-5 p-8 flex justify-between">
+      <div className="dark:bg-[#0b111b] bg-white w-full h-[390px] rounded-3xl mt-5 p-8 flex justify-between">
         {isLoading ? (
           <div>Fetching data...</div>
         ) : (
@@ -65,42 +65,50 @@ const CoinPage = ({ params }: { params: { id: string } }) => {
                       </span>
                     </div>
                     <span className="text-3xl mt-7">
+                      {symbol}
                       {formatNumber(coin.market_data.current_price[currency])}
                     </span>
                   </div>
                   <div>
-                    <div className="flex gap-5">
-                      <h2 className="text-[#00B1A7]">High 24h</h2>
-                      <span>
+                    <div className="flex mt-5 items-center">
+                      <h2 className="text-[#01F1E3]">High 24h</h2>
+                      <span className="text-xl">
+                        {symbol}
                         {formatNumber(coin.market_data.high_24h[currency])}
                       </span>
                     </div>
-                    <div className="flex items-center justify-around mt-8">
-                      <div className="flex gap-3 items-center">
-                        <CaretIcon className="w-[30px] h-[20px]" />
-                        <h3 className="text-xl">All Time High:</h3>
-                      </div>
-                      <div>
-                        <span className="text-2xl">
-                          {formatNumber(coin.market_data.ath[currency])}
-                        </span>
+                    <div className="">
+                      <div className="flex gap-3 items-center mt-6">
+                        <div className="flex items-center gap-2">
+                          <CaretIcon className="w-[30px]" />
+                          <h3 className="text-xl">All Time High:</h3>
+                        </div>
+                        <div>
+                          <span className="text-2xl">
+                            {symbol}
+                            {formatNumber(coin.market_data.ath[currency])}
+                          </span>
+                        </div>
                       </div>
                     </div>
-                    <span>
+                    <span className="dark:text-[#dedede]">
                       {formatDate(coin.market_data.ath_date[currency])}
                     </span>
-                    <div className="flex items-center justify-around mt-10">
-                      <div className="flex gap-3 items-center">
-                        <CaretIcon className="w-[30px] h-[20px] fill-[#FE2264] rotate-180" />
-                        <h3 className="text-xl">All Time Low:</h3>
-                      </div>
-                      <div>
-                        <span className="text-2xl">
-                          {formatNumber(coin.market_data.atl[currency])}
-                        </span>
+                    <div className="">
+                      <div className="flex gap-3 items-center mt-6">
+                        <div className="flex items-center gap-2">
+                          <CaretIcon className="w-[30px] fill-[#FE2264] rotate-180" />
+                          <h3 className="text-xl">All Time Low:</h3>
+                        </div>
+                        <div>
+                          <span className="text-2xl">
+                            {symbol}
+                            {formatNumber(coin.market_data.atl[currency])}
+                          </span>
+                        </div>
                       </div>
                     </div>
-                    <span>
+                    <span className="dark:text-[#dedede]">
                       {formatDate(coin.market_data.atl_date[currency])}
                     </span>
                   </div>
