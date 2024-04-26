@@ -21,8 +21,10 @@ const SearchBar = () => {
   );
 
   const removeDropDown = () => {
+    setCoinSearch("");
     setShowDropDown(false);
   };
+
   return (
     <div className="w-full relative">
       <input
@@ -34,6 +36,7 @@ const SearchBar = () => {
             : ""
         }`}
         placeholder="Search..."
+        value={coinSearch}
       />
       {showDropDown && hasCoins && (
         <motion.div

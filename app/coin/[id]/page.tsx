@@ -40,7 +40,7 @@ const CoinPage = ({ params }: { params: { id: string } }) => {
 
   return (
     <div className="dark:bg-gray-950 bg-light-theme max-w-screen-2xl m-auto h-screen p-2">
-      <div className="dark:bg-[#0b111b] bg-white w-full h-[390px] rounded-3xl mt-5 p-8 flex justify-between relative overflow-hidden z-0">
+      <div className="dark:bg-[#0b111b] bg-white w-full h-[400px] rounded-3xl mt-5 p-8 flex justify-between relative overflow-hidden z-0">
         {isLoading ? (
           <div>Fetching data...</div>
         ) : (
@@ -85,7 +85,7 @@ const CoinPage = ({ params }: { params: { id: string } }) => {
                       </span>
                     </div>
                     <div>
-                      <div className="flex gap-3 items-center mt-6 justify-between">
+                      <div className="flex gap-3 items-center mt-8 justify-between">
                         <div className="flex items-center gap-2 z-10">
                           <CaretIcon className="w-[30px]" />
                           <h3 className="text-xl">All Time High:</h3>
@@ -102,7 +102,7 @@ const CoinPage = ({ params }: { params: { id: string } }) => {
                       {formatDate(coin.market_data.ath_date[currency])}
                     </span>
                     <div className="">
-                      <div className="flex gap-3 items-center mt-6 justify-between z-10">
+                      <div className="flex gap-3 items-center mt-8 justify-between z-10">
                         <div className="flex items-center gap-2">
                           <CaretIcon className="w-[30px] fill-[#FE2264] rotate-180" />
                           <h3 className="text-xl z-10">All Time Low:</h3>
