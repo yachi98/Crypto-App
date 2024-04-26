@@ -7,7 +7,6 @@ import { AppDispatch } from "@/redux/store";
 import { useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import PriceChart from "@/components/PriceChart";
-import CoinConverter from "@/components/CoinConverter";
 import CoinConverterPage from "@/components/CoinConverterPage";
 import CoinGraphChart from "@/components/CoinGraphChart";
 import CoinMarketTable from "@/components/CoinMarketTable";

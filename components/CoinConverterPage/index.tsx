@@ -9,10 +9,6 @@ const CoinConverterPage = () => {
     day: "numeric",
   });
 
-  //   useEffect(() => {
-  //     dispatch(getCoinData({ currency: currency }));
-  //   }, [currency]);
-
   return (
     <div className="mt-5">
       <h2>Online Currency Converter</h2>
