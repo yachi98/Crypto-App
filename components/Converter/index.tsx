@@ -1,8 +1,10 @@
+"use client";
+
 import { useState, useEffect, ChangeEvent } from "react";
-import SwitchIcon from "@/public/ConvertIcon.svg";
 import { Coin } from "@/interfaces/coin.interface";
 import { useAppSelector } from "@/redux/store";
 import CoinRow from "../ConverterRow";
+import SwitchIcon from "@/public/ConvertIcon.svg";
 
 const Converter = () => {
   const { currency } = useAppSelector((state) => state.currencySlice);
@@ -34,11 +36,11 @@ const Converter = () => {
 
   const handleAmountChange = (
     e: ChangeEvent<HTMLInputElement>,
-    flag: boolean
+    change: boolean
   ) => {
     const inputValue = parseFloat(e.target.value) || 0;
     setAmount(inputValue);
-    setAmountInFromCoin(flag);
+    setAmountInFromCoin(change);
   };
 
   const handleCoinSwitch = () => {
@@ -80,7 +82,7 @@ const Converter = () => {
         className="dark:bg-gray-800 bg-[#f5f5f5] dark:text-white text-black p-2 rounded-2xl absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 z-10 flex items-center justify-center"
         onClick={handleCoinSwitch}
       >
-        <SwitchIcon width={40} height={40} />
+        <SwitchIcon width={40} height={40} className="rotate-90" />
       </button>
       <CoinRow
         currency={currency}
