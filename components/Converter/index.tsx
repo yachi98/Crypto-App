@@ -49,15 +49,15 @@ const Converter = () => {
     setAmountInFromCoin(!amountInFromCoin);
   };
 
-  let value;
+  let fromAmount, toAmount;
 
   if (amountInFromCoin) {
-    value = [amount * conversionRate, amount];
+    fromAmount = amount;
+    toAmount = amount * conversionRate;
   } else {
-    value = [amount, conversionRate / amount];
+    toAmount = amount;
+    fromAmount = amount / conversionRate;
   }
-
-  const [fromAmount, toAmount] = value;
 
   return (
     <div className="flex gap-5 mt-5 relative">
