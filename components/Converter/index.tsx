@@ -44,29 +44,20 @@ const Converter = () => {
   };
 
   const handleCoinSwitch = () => {
-    const firstCoin = fromCoin;
-    const secondCoin = toCoin;
-    setToCoin(firstCoin);
-    setFromCoin(secondCoin);
+    setToCoin(fromCoin);
+    setFromCoin(toCoin);
     setAmountInFromCoin(!amountInFromCoin);
   };
-  function calculateAmounts(
-    amount: number,
-    amountInFromCoin: boolean,
-    conversionRate: number
-  ) {
-    if (amountInFromCoin) {
-      return [amount * conversionRate, amount];
-    } else {
-      return [amount, amount / conversionRate];
-    }
+
+  let value;
+
+  if (amountInFromCoin) {
+    value = [amount * conversionRate, amount];
+  } else {
+    value = [amount, conversionRate / amount];
   }
 
-  const [toAmount, fromAmount] = calculateAmounts(
-    amount,
-    amountInFromCoin,
-    conversionRate
-  );
+  const [fromAmount, toAmount] = value;
 
   return (
     <div className="flex gap-5 mt-5 relative">
