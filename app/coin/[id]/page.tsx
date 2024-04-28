@@ -40,16 +40,25 @@ const CoinPage = ({ params }: { params: { id: string } }) => {
 
   return (
     <div className="dark:bg-gray-950 bg-light-theme max-w-screen-2xl m-auto h-screen p-2">
-      <div className="dark:bg-[#0b111b] bg-white w-full h-[390px] rounded-3xl mt-5 p-8 flex justify-between">
+      <div className="dark:bg-[#0b111b] bg-white w-full h-[400px] rounded-3xl mt-5 p-8 flex justify-between relative overflow-hidden z-0">
         {isLoading ? (
           <div>Fetching data...</div>
         ) : (
           <>
             {coin && (
               <>
+                <div className="z-0 absolute w-full pointer-events-none h-[390px] bottom-50 left-40">
+                  <Image
+                    src={coin.image.large}
+                    alt={coin.name}
+                    width={280}
+                    height={280}
+                    className="w-full h-full object-cover blur-3xl opacity-30"
+                  />
+                </div>
                 <div className="w-2/5 pr-7">
                   <div className="flex flex-col gap-1">
-                    <div className="flex items-center gap-6">
+                    <div className="flex items-center gap-4 z-0">
                       <Image
                         src={coin.image.large}
                         alt={coin.name}
@@ -62,22 +71,22 @@ const CoinPage = ({ params }: { params: { id: string } }) => {
                         ({coin.symbol.toUpperCase()})
                       </span>
                     </div>
-                    <span className="text-3xl mt-7">
+                    <span className="text-3xl mt-7 z-10">
                       {symbol}
                       {formatNumber(coin.market_data.current_price[currency])}
                     </span>
                   </div>
                   <div>
-                    <div className="flex mt-5 items-center justify-between">
-                      <h2 className="text-[#01F1E3]">High 24h</h2>
-                      <span className="text-xl">
+                    <div className="flex mt-5 items-center justify-between z-10">
+                      <h2 className="text-[#01F1E3] z-10">High 24h</h2>
+                      <span className="text-xl z-10">
                         {symbol}
                         {formatNumber(coin.market_data.high_24h[currency])}
                       </span>
                     </div>
                     <div>
-                      <div className="flex gap-3 items-center mt-6 justify-between">
-                        <div className="flex items-center gap-2">
+                      <div className="flex gap-3 items-center mt-8 justify-between">
+                        <div className="flex items-center gap-2 z-10">
                           <CaretIcon className="w-[30px]" />
                           <h3 className="text-xl">All Time High:</h3>
                         </div>
@@ -89,28 +98,29 @@ const CoinPage = ({ params }: { params: { id: string } }) => {
                         </div>
                       </div>
                     </div>
-                    <span className="dark:text-[#dedede]">
+                    <span className="dark:text-[#dedede] z-10">
                       {formatDate(coin.market_data.ath_date[currency])}
                     </span>
                     <div className="">
-                      <div className="flex gap-3 items-center mt-6 justify-between">
+                      <div className="flex gap-3 items-center mt-8 justify-between z-10">
                         <div className="flex items-center gap-2">
                           <CaretIcon className="w-[30px] fill-[#FE2264] rotate-180" />
-                          <h3 className="text-xl">All Time Low:</h3>
+                          <h3 className="text-xl z-10">All Time Low:</h3>
                         </div>
                         <div>
-                          <span className="text-2xl">
+                          <span className="text-2xl z-10">
                             {symbol}
                             {formatNumber(coin.market_data.atl[currency])}
                           </span>
                         </div>
                       </div>
                     </div>
-                    <span className="dark:text-[#dedede]">
+                    <span className="dark:text-[#dedede] z-10">
                       {formatDate(coin.market_data.atl_date[currency])}
                     </span>
                   </div>
                 </div>
+
                 <div className="dark:text-white text-black text-sm w-3/5 text-left relative mt-3">
                   <h3 className="text-xl">Description</h3>
                   <div>
