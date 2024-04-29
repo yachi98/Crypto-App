@@ -5,6 +5,7 @@ import { Coin } from "@/interfaces/coin.interface";
 import { useAppSelector } from "@/redux/store";
 import CoinRow from "../ConverterRow";
 import SwitchIcon from "@/public/ConvertIcon.svg";
+import ConverterChart from "../ConverterChart";
 
 const Converter = () => {
   const { currency } = useAppSelector((state) => state.currencySlice);
@@ -60,29 +61,32 @@ const Converter = () => {
   }
 
   return (
-    <div className="flex gap-5 mt-5 relative">
-      <CoinRow
-        currency={currency}
-        data={coinMarketData}
-        currentCoin={fromCoin}
-        amount={fromAmount}
-        handleCoinSelect={(coin: Coin) => setFromCoin(coin)}
-        handleAmountChange={(e) => handleAmountChange(e, true)}
-      />
-      <button
-        className="dark:bg-gray-800 bg-[#f5f5f5] dark:text-white text-black p-2 rounded-2xl absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 z-10 flex items-center justify-center"
-        onClick={handleCoinSwitch}
-      >
-        <SwitchIcon width={40} height={40} className="rotate-90" />
-      </button>
-      <CoinRow
-        currency={currency}
-        data={coinMarketData}
-        currentCoin={toCoin}
-        amount={toAmount}
-        handleCoinSelect={(coin: Coin) => setToCoin(coin)}
-        handleAmountChange={(e) => handleAmountChange(e, false)}
-      />
+    <div>
+      <div className="flex gap-5 mt-5 relative">
+        <CoinRow
+          currency={currency}
+          data={coinMarketData}
+          currentCoin={fromCoin}
+          amount={fromAmount}
+          handleCoinSelect={(coin: Coin) => setFromCoin(coin)}
+          handleAmountChange={(e) => handleAmountChange(e, true)}
+        />
+        <button
+          className="dark:bg-gray-800 bg-[#f5f5f5] dark:text-white text-black p-2 rounded-2xl absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 z-10 flex items-center justify-center"
+          onClick={handleCoinSwitch}
+        >
+          <SwitchIcon width={40} height={40} className="rotate-90" />
+        </button>
+        <CoinRow
+          currency={currency}
+          data={coinMarketData}
+          currentCoin={toCoin}
+          amount={toAmount}
+          handleCoinSelect={(coin: Coin) => setToCoin(coin)}
+          handleAmountChange={(e) => handleAmountChange(e, false)}
+        />
+      </div>
+      <ConverterChart />
     </div>
   );
 };
