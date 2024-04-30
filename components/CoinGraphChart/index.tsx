@@ -186,6 +186,8 @@ const CoinGraphChart = () => {
     day: "numeric",
   });
 
+  const coinBG: string[] = ["bg-[#F5AC37]", "bg-[#7878FA]", "bg-[#D878FA]"];
+
   useEffect(() => {
     dispatch(
       getSelectedCoinData({
@@ -201,11 +203,29 @@ const CoinGraphChart = () => {
       <div className="dark:bg-gradient-to-r from-black to-gray-900 bg-white rounded-2xl w-1/2 h-[420px] m-2 flex flex-col p-6">
         {coinInfo && (
           <div className="flex flex-col gap-8">
-            <span className="dark:text-[#DEDEDE] flex text-base">
-              {coinInfo.name.charAt(0).toUpperCase() +
-                coinInfo.name.slice(1).toLowerCase()}{" "}
-              ({coinInfo.symbol.toUpperCase()})
-            </span>
+            <div className="flex gap-8">
+              <span className="dark:text-[#DEDEDE] flex text-base">
+                {coinInfo.name.charAt(0).toUpperCase() +
+                  coinInfo.name.slice(1).toLowerCase()}{" "}
+                ({coinInfo.symbol.toUpperCase()})
+              </span>
+              {selectedCoins.map((coin, index) => (
+                <div key={coin.id} className="flex gap-2 items-center">
+                  <span
+                    className={`${coinBG[index]} w-[15px] h-[15px] flex items-center justify-center rounded`}
+                  ></span>
+                  <span className="text-xs">
+                    {coinInfo.name.charAt(0).toUpperCase() +
+                      coinInfo.name.slice(1).toLowerCase()}
+                  </span>
+                  <span className="text-xs">
+                    {symbol}
+                    {formatNumber(coinInfo.current_price)}
+                  </span>
+                </div>
+              ))}
+            </div>
+
             <span className="dark:text-[#DEDEDE] text-black text-3xl">
               {symbol}
               {formatNumber(coinInfo.current_price)}
