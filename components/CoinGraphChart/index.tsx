@@ -49,7 +49,7 @@ const options = {
             value < 10
               ? value.toPrecision(7)
               : value.toFixed(2).toLocaleString();
-          return `${value}`;
+          return value;
         },
         labelColor: function () {
           return {
