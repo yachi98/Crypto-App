@@ -1,14 +1,4 @@
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Filler,
-  BarElement,
-  ScriptableContext,
-  Tooltip,
-} from "chart.js";
+import { Chart as ChartJS, ScriptableContext } from "chart.js";
 
 const getBackgroundColor = (
   context: ScriptableContext<"line">

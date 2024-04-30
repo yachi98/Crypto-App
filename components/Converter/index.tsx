@@ -75,7 +75,7 @@ const Converter = () => {
           className="dark:bg-gray-800 bg-[#f5f5f5] dark:text-white text-black p-2 rounded-2xl absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 z-10 flex items-center justify-center"
           onClick={handleCoinSwitch}
         >
-          <SwitchIcon width={40} height={40} className="rotate-90" />
+          <SwitchIcon width={30} height={30} className="rotate-90" />
         </button>
         <CoinRow
           currency={currency}
@@ -86,7 +86,9 @@ const Converter = () => {
           handleAmountChange={(e) => handleAmountChange(e, false)}
         />
       </div>
-      <ConverterChart />
+      {fromCoin !== null && toCoin !== null && (
+        <ConverterChart fromCoin={fromCoin} toCoin={toCoin} />
+      )}
     </div>
   );
 };
