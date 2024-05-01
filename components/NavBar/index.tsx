@@ -8,6 +8,7 @@ import PortfolioSwitch from "../PortfolioSwitch";
 import LogoIcon from "@/public/Logo.svg";
 import SearchBar from "@/components/SearchBar";
 import UserProfile from "../UserProfile";
+import Link from "next/link";
 
 const NavBar = () => {
   return (
@@ -15,9 +16,9 @@ const NavBar = () => {
       <div className="w-full dark:bg-gray-950 bg-light-theme flex items-center justify-between p-3 mt-2">
         <div className="flex gap-6 items-center dark:text-white text-black mr-8">
           <div className="flex items-center justify-end relative w-[105px]">
-            <div className="absolute -left-4">
+            <Link href="/" className="absolute -left-4">
               <LogoIcon />
-            </div>
+            </Link>
             <h1>CoinWave</h1>
           </div>
           <div>
