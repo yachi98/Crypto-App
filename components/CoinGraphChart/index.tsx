@@ -198,26 +198,26 @@ const CoinGraphChart = () => {
     );
   }, [coinId, timeDay, currency]);
 
+  function renderInfo(name: string) {
+    return (
+      <span>{name.charAt(0).toUpperCase() + name.slice(1).toLowerCase()}</span>
+    );
+  }
   return (
     <div className="flex mt-2">
       <div className="dark:bg-gradient-to-r from-black to-gray-900 bg-white rounded-2xl w-1/2 h-[420px] m-2 flex flex-col p-6">
         {coinInfo && (
           <div className="flex flex-col gap-8">
             <div className="flex gap-8">
-              <span className="dark:text-[#DEDEDE] flex text-base">
-                {coinInfo.name.charAt(0).toUpperCase() +
-                  coinInfo.name.slice(1).toLowerCase()}{" "}
-                ({coinInfo.symbol.toUpperCase()})
+              <span className="dark:text-[#DEDEDE] flex text-base gap-1 items-center">
+                {renderInfo(coinInfo.name)} ({coinInfo.symbol.toUpperCase()})
               </span>
               {selectedCoins.map((coin, index) => (
                 <div key={coin.id} className="flex gap-2 items-center">
                   <span
                     className={`${coinBG[index]} w-[15px] h-[15px] flex items-center justify-center rounded`}
                   ></span>
-                  <span className="text-xs">
-                    {coinInfo.name.charAt(0).toUpperCase() +
-                      coinInfo.name.slice(1).toLowerCase()}
-                  </span>
+                  <span className="text-xs">{renderInfo(coinInfo.name)}</span>
                   <span className="text-xs">
                     {symbol}
                     {formatNumber(coinInfo.current_price)}
