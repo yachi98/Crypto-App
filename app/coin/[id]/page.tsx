@@ -8,6 +8,7 @@ import CaretIcon from "@/public/CaretIcon.svg";
 import { useEffect, useState } from "react";
 import formatDate from "@/utils/formatDate";
 import formatNumber from "@/utils/formatNumber";
+import PriceChange from "@/components/PriceChange";
 import extractUrl from "@/utils/extractUrl";
 
 const CoinPage = ({ params }: { params: { id: string } }) => {
@@ -71,10 +72,15 @@ const CoinPage = ({ params }: { params: { id: string } }) => {
                         ({coin.symbol.toUpperCase()})
                       </span>
                     </div>
-                    <span className="text-3xl mt-7 z-10">
-                      {symbol}
-                      {formatNumber(coin.market_data.current_price[currency])}
-                    </span>
+                    <div className="flex items-center justify-between z-10">
+                      <span className="text-3xl mt-7 z-10">
+                        {symbol}
+                        {formatNumber(coin.market_data.current_price[currency])}
+                      </span>
+                      <PriceChange
+                        price={coin.market_data.price_change_percentage_24h}
+                      />
+                    </div>
                   </div>
                   <div>
                     <div className="flex mt-5 items-center justify-between z-10">

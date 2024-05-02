@@ -5,13 +5,13 @@ import { AppDispatch } from "@/redux/store";
 import { useDispatch } from "react-redux";
 import { ChangeEvent, useEffect, useRef, useState } from "react";
 import MarketTableHeading from "../MarketTableHeading";
-import CoinsTableSpinner from "../Spinner";
+// import CoinsTableSpinner from "../Spinner";
 import RowCoinItem from "@/components/RowCoinItem/";
 import { getCoinData } from "@/redux/features/coinMarketSlice";
 import { Coin } from "@/interfaces/coin.interface";
 import SearchIcon from "@/public/SearchIcon.svg";
-import SpinnerIcon from "@/public/SpinnerIcon.svg";
-import { useInView } from "react-intersection-observer";
+// import SpinnerIcon from "@/public/SpinnerIcon.svg";
+// import { useInView } from "react-intersection-observer";
 
 const CoinMarketTable = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -21,11 +21,11 @@ const CoinMarketTable = () => {
     useAppSelector((state) => state.coinMarketData);
   const hasCoins: boolean = coinMarketData.length > 0;
   const inputRef = useRef<HTMLInputElement>(null);
-  const [spinnerRef, inView] = useInView();
+  // const [spinnerRef, inView] = useInView();
 
-  useEffect(() => {
-    dispatch(getCoinData({ currency: currency, page: currentPage }));
-  }, []);
+  // useEffect(() => {
+  //   dispatch(getCoinData({ currency: currency, page: currentPage }));
+  // }, []);
 
   // useEffect(() => {
   //   dispatch(getCoinData({ currency, page: currentPage }));
@@ -60,8 +60,8 @@ const CoinMarketTable = () => {
     coin.name.toLowerCase().includes(coinSearch)
   );
 
-  const showSpinner: boolean =
-    coinMarketData.length === 0 && isLoading === true && !hasError;
+  // const showSpinner: boolean =
+  //   coinMarketData.length === 0 && isLoading === true && !hasError;
 
   return (
     <div>
@@ -98,15 +98,15 @@ const CoinMarketTable = () => {
         filteredCoins.map((coin: Coin, index: number) => (
           <div key={coin.id}>
             <RowCoinItem coin={coin} />
-            {index === 19 && (
+            {/* {index === 19 && (
               <div
                 ref={spinnerRef}
                 className="col-span-1 mt-16 flex items-center justify-center sm:col-span-2 md:col-span-3 lg:col-span-4"
               >
                 <SpinnerIcon className="h-10 w-10 animate-spin fill-white text-gray-200 dark:text-gray-600" />
               </div>
-            )}
-            {showSpinner && <CoinsTableSpinner />}
+            )} */}
+            {/* {showSpinner && <CoinsTableSpinner />} */}
           </div>
         ))}
     </div>
