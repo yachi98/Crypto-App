@@ -48,21 +48,21 @@ const RowCoinItem = ({ coin }: { coin: Coin }) => {
           <div className="flex justify-between text-xs">
             <span
               className={
-                priceChange24h > 0 ? "text-[#00B1A7]" : "text-[#FE2264]"
+                priceChange24h > 0 ? "text-[#01F1E3]" : "text-[#FE2264]"
               }
             >
               {formatNumber(coin.total_volume)}
             </span>
             <span
               className={
-                priceChange24h > 0 ? "text-[#00B1A7]" : "text-[#FE2264]"
+                priceChange24h > 0 ? "text-[#01F1E3]" : "text-[#FE2264]"
               }
             >
               {formatNumber(coin.market_cap)}
             </span>
           </div>
           <CoinMarketBar
-            fill={priceChange24h > 0 ? "bg-[#00B1A7]" : "bg-[#FE2264]"}
+            fill={priceChange24h > 0 ? "bg-[#01F1E3]" : "bg-[#FE2264]"}
             percentage={getPercentage(coin.total_volume, coin.market_cap)}
           />
         </span>
@@ -70,21 +70,21 @@ const RowCoinItem = ({ coin }: { coin: Coin }) => {
           <div className="flex justify-between text-xs">
             <span
               className={
-                priceChange24h > 0 ? "text-[#00B1A7]" : "text-[#FE2264]"
+                priceChange24h > 0 ? "text-[#01F1E3]" : "text-[#FE2264]"
               }
             >
               {formatNumber(coin.total_volume)}
             </span>
             <span
               className={
-                priceChange24h > 0 ? "text-[#00B1A7]" : "text-[#FE2264]"
+                priceChange24h > 0 ? "text-[#01F1E3]" : "text-[#FE2264]"
               }
             >
               {formatNumber(coin.market_cap)}
             </span>
           </div>
           <CoinMarketBar
-            fill={priceChange24h > 0 ? "bg-[#00B1A7]" : "bg-[#FE2264]"}
+            fill={priceChange24h > 0 ? "bg-[#01F1E3]" : "bg-[#FE2264]"}
             percentage={getPercentage(
               coin.circulating_supply,
               coin.total_supply

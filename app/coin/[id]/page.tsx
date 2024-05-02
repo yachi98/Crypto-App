@@ -73,7 +73,7 @@ const CoinPage = ({ params }: { params: { id: string } }) => {
                       </span>
                     </div>
                     <div className="flex items-center justify-between z-10">
-                      <span className="text-3xl mt-7 z-10">
+                      <span className="text-3xl mt-5 z-10">
                         {symbol}
                         {formatNumber(coin.market_data.current_price[currency])}
                       </span>

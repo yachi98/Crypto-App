@@ -7,12 +7,12 @@ const PriceChange = ({ price }: { price: number }) => {
     <div className="flex items-center">
       <CaretIcon
         className={`w-[8px] h-[8px] ${
-          isPositive ? "fill-[#00B1A7]" : "fill-[#FE2264] rotate-180"
+          isPositive ? "fill-[#01F1E3] " : "fill-[#FE2264] rotate-180"
         }`}
       />
       <span
         className={` text-sm ml-1 ${
-          isPositive ? "text-[#00B1A7]" : "text-[#FE2264]"
+          isPositive ? "text-[#01F1E3]" : "text-[#FE2264]"
         }`}
       >
         {price}%
