@@ -26,7 +26,7 @@ const InfoBar = () => {
   );
 
   return (
-    <div className="w-full dark:bg-gray-950 bg-light-theme flex items-center gap-x-16 p-4 h-[30px] justify-left mt-2">
+    <div className="w-full dark:bg-gray-950 flex items-center gap-x-16 p-4 justify-left z-10">
       <div className="flex items-center gap-1 dark:text-white text-black">
         <CoinIcon />
         <span className="dark:text-white text-black  text-light-typo text-xs font-light">
@@ -55,7 +55,7 @@ const InfoBar = () => {
         <span className="dark:text-white text-black  text-xs font-light">
           {Math.floor(btcPercentage)}%
         </span>
-        <div className="w-[50px] ml-4">
+        <div className="w-20 ml-4">
           <PercentageBar
             fill="bg-gradient-to-r from-purple-400 to-orange-300"
             percentage={btcPercentage}
@@ -67,7 +67,7 @@ const InfoBar = () => {
         <span className="dark:text-white text-xs font-light">
           {Math.floor(ethPercentage)}%
         </span>
-        <div className="w-[50px] ml-4">
+        <div className="w-20 ml-4">
           <PercentageBar
             fill="bg-gradient-to-r from-purple-400 to-orange-300"
             percentage={ethPercentage}

@@ -23,9 +23,13 @@ export default function RootLayout({
         <body
           className={`${inter.className} dark:bg-gray-950 bg-light-theme max-w-screen-2xl m-auto`}
         >
+          {/* <div className="fixed top-0 left-0 w-full z-50 "> */}
           <NavBar />
           <InfoBar />
+          {/* </div> */}
+          {/* <div className="mt-24 z-10"> */}
           {children}
+          {/* </div> */}
         </body>
       </Providers>
     </html>
