@@ -1,18 +1,33 @@
 "use client";
 
+import { useAppSelector } from "@/redux/store";
+import { AppDispatch } from "@/redux/store";
+import { useDispatch } from "react-redux";
 import { ChangeEvent, useEffect, useRef, useState } from "react";
 import MarketTableHeading from "../MarketTableHeading";
+import CoinsTableSpinner from "../Spinner";
 import RowCoinItem from "@/components/RowCoinItem/";
-import { useAppSelector } from "@/redux/store";
+import { getCoinData } from "@/redux/features/coinMarketSlice";
 import { Coin } from "@/interfaces/coin.interface";
 import SearchIcon from "@/public/SearchIcon.svg";
+import SpinnerIcon from "@/public/SpinnerIcon.svg";
+import { useInView } from "react-intersection-observer";
 
 const CoinMarketTable = () => {
+  const dispatch: AppDispatch = useDispatch();
   const [coinSearch, setCoinSearch] = useState("");
   const [showDropDown, setShowDropDown] = useState(false);
-  const { coinMarketData } = useAppSelector((state) => state.coinMarketData);
+  const { coinMarketData, isLoading, currentPage, currency, hasError } =
+    useAppSelector((state) => state.coinMarketData);
   const hasCoins: boolean = coinMarketData.length > 0;
   const inputRef = useRef<HTMLInputElement>(null);
+  const [spinnerRef, inView] = useInView();
+
+  useEffect(() => {
+    if (inView) {
+      dispatch(getCoinData({ currency, page: currentPage }));
+    }
+  }, [inView]);
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const searchValue = e.target.value.toLowerCase();
@@ -36,6 +51,9 @@ const CoinMarketTable = () => {
   const filteredCoins = coinMarketData.filter((coin: Coin) =>
     coin.name.toLowerCase().includes(coinSearch)
   );
+
+  const showSpinner: boolean =
+    coinMarketData.length === 0 && isLoading && !hasError;
 
   return (
     <div>
@@ -72,6 +90,15 @@ const CoinMarketTable = () => {
         filteredCoins.map((coin: Coin) => (
           <RowCoinItem key={coin.id} coin={coin} />
         ))}
+      <div
+        ref={spinnerRef}
+        className="col-span-1 mt-16 flex items-center justify-center sm:col-span-2 md:col-span-3 lg:col-span-4"
+      >
+        {isLoading && !hasError && (
+          <SpinnerIcon className="h-10 w-10 animate-spin fill-white text-gray-200 dark:text-gray-600" />
+        )}
+      </div>
+      {showSpinner && <CoinsTableSpinner />}
     </div>
   );
 };

@@ -20,16 +20,12 @@ const Home = () => {
 
   useEffect(() => {
     dispatch(getGlobalData());
-  }, []);
-
-  useEffect(() => {
-    dispatch(getCoinData({ currency: currency }));
+    dispatch(getCoinData({ currency: currency, page: 1 }));
   }, [currency]);
 
   return (
     <main>
       {!showConverter && <PriceChart />}
-
       <div className="dark:bg-gray-900 bg-white dark:text-white text-black p-1 rounded-xl w-[180px] flex mt-5 text-xs">
         <button
           onClick={() => setShowConverter(!showConverter)}
