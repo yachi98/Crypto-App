@@ -4,10 +4,10 @@ import { useState } from "react";
 import PortfolioModal from "@/components/PortfolioModal";
 
 const PortfolioPage = () => {
-  const [open, setOpen] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
   const handleClick = () => {
-    setOpen(!open);
+    setShowModal(!showModal);
   };
 
   return (
@@ -28,7 +28,7 @@ const PortfolioPage = () => {
         effortlessly. You can add your coins by simply clicking on the Add Asset
         button above.
       </p>
-      {open && <PortfolioModal />}
+      {showModal && <PortfolioModal />}
     </div>
   );
 };
