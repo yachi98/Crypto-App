@@ -2,14 +2,10 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { Coin } from "@/interfaces/coin.interface";
 
-interface GetCoinMarketDataArgs {
-  currency: string;
-  page: number;
-}
-
 interface CoinMarketData {
   coinMarketData: Coin[];
   allMarketData: Coin[];
+  page: number;
   currentPage: number;
   currency: string;
   isLoading: boolean;
@@ -19,6 +15,7 @@ interface CoinMarketData {
 const initialState: CoinMarketData = {
   coinMarketData: [],
   allMarketData: [],
+  page: 1,
   currentPage: 1,
   currency: "usd",
   isLoading: true,
@@ -27,7 +24,10 @@ const initialState: CoinMarketData = {
 
 export const getCoinData = createAsyncThunk(
   "coinMarket/getCoinData",
-  async ({ currency, page }: GetCoinMarketDataArgs, { rejectWithValue }) => {
+  async (
+    { currency, page }: { currency: string; page: number },
+    { rejectWithValue }
+  ) => {
     try {
       const { data } = await axios.get(
         `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency}&order=market_cap_desc&per_page=20&page=${page}&sparkline=true&price_change_percentage=1h%2C24h%2C7d&x_cg_demo_api_key=${process.env.NEXT_PUBLIC_API_KEY}`
@@ -64,9 +64,9 @@ const coinMarketSlice = createSlice({
         state.hasError = false;
       })
       .addCase(getCoinData.fulfilled, (state, action) => {
+        state.coinMarketData = [...state.coinMarketData, ...action.payload];
         const { currency } = action.meta.arg;
         state.currency = currency;
-        state.coinMarketData = action.payload;
         state.currentPage += 1;
         state.isLoading = false;
       })
