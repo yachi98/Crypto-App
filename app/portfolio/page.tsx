@@ -1,11 +1,12 @@
 "use client";
+
 import { useState } from "react";
 import PortfolioModal from "@/components/PortfolioModal";
 
 const PortfolioPage = () => {
   const [showModal, setShowModal] = useState(false);
   const handleClick = () => {
-    setShowModal(!showModal);
+    setShowModal(true);
   };
   return (
     <div className="dark:bg-gray-950 bg-light-theme max-w-screen-2xl m-auto h-screen p-2">

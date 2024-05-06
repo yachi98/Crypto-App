@@ -95,7 +95,7 @@ const CoinMarketTable = () => {
         className="col-span-1 mt-16 flex items-center justify-center sm:col-span-2 md:col-span-3 lg:col-span-4"
       >
         {isLoading && !hasError && (
-          <SpinnerIcon className="h-10 w-10 animate-spin fill-white text-gray-200 dark:text-gray-600" />
+          <SpinnerIcon className="h-10 w-10 animate-spin dark:fill-white text-gray-200 dark:text-gray-600" />
         )}
       </div>
       {showSpinner && <CoinsTableSpinner />}
