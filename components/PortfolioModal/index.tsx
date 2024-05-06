@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, ChangeEvent } from "react";
+import { useState, useRef, ChangeEvent } from "react";
 import CloseIcon from "@/public/CloseIcon.svg";
 
 const PortfolioModal = () => {
@@ -21,10 +21,6 @@ const PortfolioModal = () => {
     }
   };
 
-  useEffect(() => {
-    console.log("After toggle:", closeModal);
-  }, [closeModal]);
-
   const handleClose = () => {
     setCloseModal(true);
   };
@@ -33,15 +29,19 @@ const PortfolioModal = () => {
     setDueDate(e.target.value);
   };
 
+  if (closeModal) {
+    return null;
+  }
+
   return (
-    <div className="w-[800px] h-[400px] dark:bg-gradient-to-r from-black to-gray-900 bg-white absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 rounded-3xl">
-      <div className="absolute right-0 p-3">
-        <button onClick={handleClose}>
+    <div className="w-[700px] h-[360px] dark:bg-gradient-to-r from-black to-gray-900 bg-white absolute top-1/4 -translate-y-1/2 left-1/2 -translate-x-1/2 rounded-3xl">
+      <div className="absolute right-0 p-5">
+        <button onClick={() => handleClose()}>
           <CloseIcon />
         </button>
       </div>
-      <h3 className="text-xl">Select coin</h3>
-      <div className="p-5 grid grid-cols-2 gap-2">
+      <h3 className="text-xl p-8">Select coin</h3>
+      <div className="p-8 grid grid-cols-2 gap-2 items-center">
         <h3>Select currency</h3>
         <input
           ref={currencyInputRef}
@@ -67,11 +67,12 @@ const PortfolioModal = () => {
           onBlur={() => handleInputBlur(dueDateInputRef)}
         />
       </div>
-      <div className="flex justify-center gap-5 mt-11">
+
+      <div className="flex justify-center gap-5">
         <button className="p-2 dark:bg-gray-900 bg-light-theme  rounded-xl  w-[100px]">
           Cancel
         </button>
-        <button className="p-2 dark:bg-gray-800 bg-light-theme rounded-xl w-[100px]">
+        <button className="p-2 dark:bg-gray-800 bg-gray-200 rounded-xl w-[100px]">
           Save
         </button>
       </div>
