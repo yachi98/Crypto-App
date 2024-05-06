@@ -7,7 +7,7 @@ const PortfolioPage = () => {
   const [showModal, setShowModal] = useState(false);
 
   const handleClick = () => {
-    setShowModal(!showModal);
+    setShowModal(true);
   };
 
   return (
@@ -30,7 +30,9 @@ const PortfolioPage = () => {
           the Add Asset button above.
         </p>
       </div>
-      {showModal && <PortfolioModal />}
+      {showModal && (
+        <PortfolioModal showModal={showModal} setShowModal={setShowModal} />
+      )}
     </div>
   );
 };

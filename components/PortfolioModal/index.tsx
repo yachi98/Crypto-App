@@ -1,11 +1,15 @@
-import { useState, useRef, ChangeEvent } from "react";
+import { useRef, useState, ChangeEvent } from "react";
 import CloseIcon from "@/public/CloseIcon.svg";
 
-const PortfolioModal = () => {
+interface PortfolioModalProps {
+  showModal: boolean;
+  setShowModal: (showModal: boolean) => void;
+}
+
+const PortfolioModal = ({ showModal, setShowModal }: PortfolioModalProps) => {
   const currencyInputRef = useRef<HTMLInputElement>(null);
   const amountInputRef = useRef<HTMLInputElement>(null);
   const dueDateInputRef = useRef<HTMLInputElement>(null);
-  const [closeModal, setCloseModal] = useState(false);
   const [value, setValue] = useState("");
   const [dueDate, setDueDate] = useState("");
 
@@ -22,21 +26,21 @@ const PortfolioModal = () => {
   };
 
   const handleClose = () => {
-    setCloseModal(true);
+    setShowModal(false);
   };
 
   const handleDueDateChange = (e: ChangeEvent<HTMLInputElement>) => {
     setDueDate(e.target.value);
   };
 
-  if (closeModal) {
+  if (!showModal) {
     return null;
   }
 
   return (
     <div className="w-[700px] h-[360px] dark:bg-gradient-to-r from-black to-gray-900 bg-white absolute top-1/4 -translate-y-1/2 left-1/2 -translate-x-1/2 rounded-3xl">
       <div className="absolute right-0 p-5">
-        <button onClick={() => handleClose()}>
+        <button onClick={handleClose}>
           <CloseIcon />
         </button>
       </div>
@@ -69,7 +73,7 @@ const PortfolioModal = () => {
       </div>
 
       <div className="flex justify-center gap-5">
-        <button className="p-2 dark:bg-gray-900 bg-light-theme  rounded-xl  w-[100px]">
+        <button className="p-2 dark:bg-gray-900 bg-light-theme rounded-xl w-[100px]">
           Cancel
         </button>
         <button className="p-2 dark:bg-gray-800 bg-gray-200 rounded-xl w-[100px]">
@@ -79,4 +83,5 @@ const PortfolioModal = () => {
     </div>
   );
 };
+
 export default PortfolioModal;
