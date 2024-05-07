@@ -37,7 +37,7 @@ const PriceCoinItem = ({ coin }: { coin: Coin }) => {
       onClick={() => coinSelector(coin)}
       className={`rounded-3xl pl-2 border-white  bg-white ${
         isSelected
-          ? "bg-gradient-to-r from-purple-400 to-cyan-300 text-white transition"
+          ? "bg-gradient-to-r from-blue-500 to-cyan-300 text-white transition"
           : "dark:bg-gray-900"
       } w-[250px] h-[75px] flex items-center flex-shrink-0`}
       whileTap={{ scale: 1.2 }}
