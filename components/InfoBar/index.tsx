@@ -57,7 +57,7 @@ const InfoBar = () => {
         </span>
         <div className="w-20 ml-4">
           <PercentageBar
-            fill="bg-gradient-to-r from-purple-400 to-orange-300"
+            fill="dark:bg-white bg-black"
             percentage={btcPercentage}
           />
         </div>
@@ -69,7 +69,7 @@ const InfoBar = () => {
         </span>
         <div className="w-20 ml-4">
           <PercentageBar
-            fill="bg-gradient-to-r from-purple-400 to-orange-300"
+            fill="dark:bg-white bg-black"
             percentage={ethPercentage}
           />
         </div>

@@ -186,7 +186,7 @@ const CoinGraphChart = () => {
     day: "numeric",
   });
 
-  const coinBG: string[] = ["bg-orange-300", "bg-[#7878FA]", "bg-[#D878FA]"];
+  const coinBG: string[] = ["bg-cyan-300", "bg-[#7878FA]", "bg-[#D878FA]"];
 
   useEffect(() => {
     dispatch(
