@@ -1,13 +1,13 @@
 const CoinsTableSpinner = () => {
+  const numberOfItems = 20;
+
   return (
     <>
-      {[...Array(20)].map(() => (
-        <div
-          key={Math.random()}
-          className="dark:bg-white px-5 py-8 rounded-lg animate-pulse"
-        ></div>
+      {[...Array(numberOfItems)].map((_, index) => (
+        <div key={index} className="px-5 py-8 rounded-lg animate-pulse"></div>
       ))}
     </>
   );
 };
+
 export default CoinsTableSpinner;

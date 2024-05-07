@@ -205,7 +205,7 @@ const CoinGraphChart = () => {
   }
   return (
     <div className="flex mt-2">
-      <div className="dark:bg-gradient-to-r from-black to-gray-900 bg-white rounded-2xl w-1/2 h-[420px] m-2 flex flex-col p-6">
+      <div className="dark:bg-gradient-to-r from-black to-gray-900 bg-white rounded-2xl w-1/2 h-[400px] m-2 flex flex-col p-6">
         {coinInfo && (
           <div className="flex flex-col gap-8">
             <div className="flex gap-8">
@@ -241,7 +241,7 @@ const CoinGraphChart = () => {
           </div>
         )}
       </div>
-      <div className="dark:bg-gradient-to-r from-black to-gray-900 bg-white rounded-2xl w-1/2 h-[420px] m-2 flex flex-col p-6">
+      <div className="dark:bg-gradient-to-r from-black to-gray-900 bg-white rounded-2xl w-1/2 h-[400px] m-2 flex flex-col p-6">
         {selectedCoin && (
           <div className="flex flex-col gap-8">
             <div className="flex items-center justify-between">
