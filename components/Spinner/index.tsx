@@ -1,5 +1,5 @@
 const CoinsTableSpinner = () => {
-  const numberOfItems = 20; // Define the number of items
+  const numberOfItems = 20;
 
   return (
     <>
