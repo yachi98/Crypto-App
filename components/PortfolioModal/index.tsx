@@ -1,4 +1,6 @@
-import { useRef, useState, ChangeEvent } from "react";
+import { useRef, useState, ChangeEvent, useEffect } from "react";
+import { Coin } from "@/interfaces/coin.interface";
+import { useAppSelector } from "@/redux/store";
 import CloseIcon from "@/public/CloseIcon.svg";
 
 interface PortfolioModalProps {
@@ -7,11 +9,28 @@ interface PortfolioModalProps {
 }
 
 const PortfolioModal = ({ showModal, setShowModal }: PortfolioModalProps) => {
+  const { coinMarketData } = useAppSelector((state) => state.coinMarketData);
   const currencyInputRef = useRef<HTMLInputElement>(null);
   const amountInputRef = useRef<HTMLInputElement>(null);
   const dueDateInputRef = useRef<HTMLInputElement>(null);
   const [value, setValue] = useState("");
+  const [coinSearch, setCoinSearch] = useState("");
   const [dueDate, setDueDate] = useState("");
+  const [amount, setAmount] = useState<number>(1);
+  const [date, setDate] = useState<string>("");
+  const [invalidCoin, setInvalidCoin] = useState<boolean>(false);
+  const [invalidAmount, setInvalidAmount] = useState<boolean>(false);
+  const [invalidDate, setInvalidDate] = useState<boolean>(false);
+
+  const coinResults = coinMarketData.filter((coin: Coin) =>
+    coin.name.toLowerCase().includes(coinSearch)
+  );
+
+  // const onCoinSelect = (coin: Coin) => {
+  //   handleCoinSelect(coin);
+  //   setShowDropdown(false);
+  //   setCoinSearch(coin.name);
+  // };
 
   const handleInputFocus = (inputRef: React.RefObject<HTMLInputElement>) => {
     if (inputRef.current) {
@@ -36,6 +55,12 @@ const PortfolioModal = ({ showModal, setShowModal }: PortfolioModalProps) => {
   if (!showModal) {
     return null;
   }
+
+  // useEffect(() => {
+  //   if (currentCoin) {
+  //     setCoinSearch(currentCoin.name);
+  //   }
+  // }, [currentCoin]);
 
   return (
     <div className="w-[700px] h-[360px] dark:bg-gradient-to-r from-black to-gray-900 bg-white absolute top-1/4 -translate-y-1/2 left-1/2 -translate-x-1/2 rounded-3xl">

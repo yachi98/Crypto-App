@@ -1,14 +1,24 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import PortfolioModal from "@/components/PortfolioModal";
+import { AppDispatch } from "@/redux/store";
+import { useDispatch } from "react-redux";
+import { getPortfolioData } from "@/redux/features/portfolioSlice";
 
 const PortfolioPage = () => {
   const [showModal, setShowModal] = useState(false);
+  const dispatch: AppDispatch = useDispatch();
 
   const handleClick = () => {
     setShowModal(true);
   };
+
+  const coinId = "bitcoin";
+
+  useEffect(() => {
+    dispatch(getPortfolioData(coinId));
+  }, [coinId]);
 
   return (
     <div className="dark:bg-gray-950 bg-light-theme max-w-screen-2xl m-auto h-screen p-2 relative">

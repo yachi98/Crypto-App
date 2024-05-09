@@ -4,6 +4,7 @@ import globalReducer from "@/redux/features/globalSlice";
 import coinMarketReducer from "@/redux/features/coinMarketSlice";
 import selectedCoinReducer from "@/redux/features/selectedCoins";
 import currencyReducer from "@/redux/features/currencySlice";
+import portfolioReducer from "@/redux/features/portfolioSlice";
 
 export const store = configureStore({
   reducer: {
@@ -11,6 +12,7 @@ export const store = configureStore({
     coinMarketData: coinMarketReducer,
     selectedCoinData: selectedCoinReducer,
     currencySlice: currencyReducer,
+    portfolioSlice: portfolioReducer,
   },
 });
 
