@@ -12,7 +12,7 @@ export const store = configureStore({
     coinMarketData: coinMarketReducer,
     selectedCoinData: selectedCoinReducer,
     currencySlice: currencyReducer,
-    portfolioSlice: portfolioReducer,
+    portfolioData: portfolioReducer,
   },
 });
 

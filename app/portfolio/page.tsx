@@ -3,7 +3,9 @@
 import { useState, useEffect } from "react";
 import PortfolioModal from "@/components/PortfolioModal";
 import { AppDispatch } from "@/redux/store";
+import { useAppSelector } from "@/redux/store";
 import { useDispatch } from "react-redux";
+import { Coin } from "@/interfaces/coin.interface";
 import { getPortfolioData } from "@/redux/features/portfolioSlice";
 
 const PortfolioPage = () => {
