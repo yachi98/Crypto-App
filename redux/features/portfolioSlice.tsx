@@ -21,7 +21,7 @@ export const getPortfolioData = createAsyncThunk(
   async (coinId: string, { rejectWithValue }) => {
     try {
       const { data } = await axios.get(
-        `https://api.coingecko.com/api/v3/coins/${coinId}/history?date=30-12-2023&localization=false`
+        `https://api.coingecko.com/api/v3/coins/${coinId}/history?date=30-12-2023`
       );
       return data;
     } catch (error) {
@@ -42,7 +42,6 @@ const portfolioSlice = createSlice({
       })
       .addCase(getPortfolioData.fulfilled, (state, action) => {
         state.portfolioData = [...state.portfolioData, action.payload];
-        console.log(action.payload);
         state.isLoading = false;
       })
       .addCase(getPortfolioData.rejected, (state, action) => {

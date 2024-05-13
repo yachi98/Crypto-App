@@ -172,7 +172,6 @@ const CoinGraphChart = () => {
   const dispatch: AppDispatch = useDispatch();
   const { coinId, timeDay } = useAppSelector((state) => state.selectedCoinData);
   const { currency } = useAppSelector((state) => state.currencySlice);
-
   const selectedCoin = selectedCoins.length > 0 ? selectedCoins[0] : null;
   const { coinMarketData } = useAppSelector((state) => state.coinMarketData);
 
