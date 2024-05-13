@@ -24,10 +24,12 @@ const CoinMarketTable = () => {
   const [spinnerRef, inView] = useInView();
 
   useEffect(() => {
-    if (inView) {
+    if (inView && !isLoading) {
       dispatch(getCoinData({ currency, page: currentPage }));
     }
   }, [inView]);
+
+  console.log(coinMarketData);
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const searchValue = e.target.value.toLowerCase();
