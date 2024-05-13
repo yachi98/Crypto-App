@@ -29,8 +29,6 @@ const CoinMarketTable = () => {
     }
   }, [inView]);
 
-  console.log(coinMarketData);
-
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const searchValue = e.target.value.toLowerCase();
     setCoinSearch(searchValue);
