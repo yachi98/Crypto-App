@@ -9,6 +9,8 @@ import { SelectedCoin } from "@/interfaces/selectedcoin.interface";
 import { getSelectedCoinData } from "@/redux/features/selectedCoins";
 import { labelFormatter } from "@/redux/features/dateFormatter";
 import formatNumber from "@/utils/formatNumber";
+import AnimationLoader from "@/components/AnimationLoader";
+import Spinner from "@/components/Spinner";
 import { Line, Bar } from "react-chartjs-2";
 
 import {
@@ -174,6 +176,7 @@ const CoinGraphChart = () => {
   const { currency } = useAppSelector((state) => state.currencySlice);
   const selectedCoin = selectedCoins.length > 0 ? selectedCoins[0] : null;
   const { coinMarketData } = useAppSelector((state) => state.coinMarketData);
+  const [isLoading, setLoading] = useState(false);
 
   const coinInfo = coinMarketData.find(
     (data) => selectedCoin && data.id === selectedCoin.id
@@ -197,14 +200,19 @@ const CoinGraphChart = () => {
     );
   }, [coinId, timeDay, currency]);
 
+  useEffect(() => {
+    setLoading(true);
+  }, []);
+
   function renderInfo(name: string) {
     return (
       <span>{name.charAt(0).toUpperCase() + name.slice(1).toLowerCase()}</span>
     );
   }
+
   return (
     <div className="flex mt-2">
-      <div className="dark:bg-gradient-to-r from-black to-gray-900 bg-white rounded-2xl w-1/2 h-[400px] m-2 flex flex-col p-6">
+      <div className="dark:bg-[#050507] bg-white rounded-2xl w-1/2 h-[400px] m-2 flex flex-col p-6">
         {coinInfo && (
           <div className="flex flex-col gap-8">
             <div className="flex gap-8">
@@ -240,7 +248,8 @@ const CoinGraphChart = () => {
           </div>
         )}
       </div>
-      <div className="dark:bg-gradient-to-r from-black to-gray-900 bg-white rounded-2xl w-1/2 h-[400px] m-2 flex flex-col p-6">
+
+      <div className="dark:bg-[#050507] bg-white rounded-2xl w-1/2 h-[400px] m-2 flex flex-col p-6">
         {selectedCoin && (
           <div className="flex flex-col gap-8">
             <div className="flex items-center justify-between">
