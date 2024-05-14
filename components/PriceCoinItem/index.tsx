@@ -38,7 +38,7 @@ const PriceCoinItem = ({ coin }: { coin: Coin }) => {
       className={`rounded-2xl pl-2 border-white  bg-white ${
         isSelected
           ? "bg-gradient-to-r from-purple-400 to-orange-300 text-white transition"
-          : "dark:bg-[#050507]"
+          : "dark:bg-black"
       } w-[190px] h-[55px] flex items-center flex-shrink-0`}
       whileTap={{ scale: 1.2 }}
       transition={{ type: "spring", stiffness: 100, damping: 10 }}
