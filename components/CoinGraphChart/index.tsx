@@ -9,8 +9,6 @@ import { SelectedCoin } from "@/interfaces/selectedcoin.interface";
 import { getSelectedCoinData } from "@/redux/features/selectedCoins";
 import { labelFormatter } from "@/redux/features/dateFormatter";
 import formatNumber from "@/utils/formatNumber";
-import AnimationLoader from "@/components/AnimationLoader";
-import Spinner from "@/components/Spinner";
 import { Line, Bar } from "react-chartjs-2";
 
 import {
@@ -21,7 +19,6 @@ import {
   LineElement,
   Filler,
   BarElement,
-  ScriptableContext,
   Tooltip,
 } from "chart.js";
 
@@ -97,23 +94,6 @@ const options = {
   borderWidth: 0,
 };
 
-const getBackgroundColor = (
-  context: ScriptableContext<"line">
-): CanvasGradient => {
-  const ctx: CanvasRenderingContext2D = context.chart.ctx;
-  const height: number = ctx.canvas.clientHeight;
-  const gradientFill: CanvasGradient = ctx.createLinearGradient(
-    0,
-    0,
-    0,
-    height
-  );
-  gradientFill.addColorStop(1, "rgba(159, 122, 234, 0.1)");
-  gradientFill.addColorStop(0.7, "rgba(159, 122, 234, 0.1)");
-  gradientFill.addColorStop(1, "transparent");
-  return gradientFill;
-};
-
 const CoinLineGraph = ({
   coin,
   days,
@@ -132,7 +112,6 @@ const CoinLineGraph = ({
         pointRadius: 0,
         fill: true,
         tension: 0.8,
-        backgroundColor: getBackgroundColor,
       },
     ],
   };
@@ -176,7 +155,6 @@ const CoinGraphChart = () => {
   const { currency } = useAppSelector((state) => state.currencySlice);
   const selectedCoin = selectedCoins.length > 0 ? selectedCoins[0] : null;
   const { coinMarketData } = useAppSelector((state) => state.coinMarketData);
-  const [isLoading, setLoading] = useState(false);
 
   const coinInfo = coinMarketData.find(
     (data) => selectedCoin && data.id === selectedCoin.id
@@ -199,10 +177,6 @@ const CoinGraphChart = () => {
       })
     );
   }, [coinId, timeDay, currency]);
-
-  useEffect(() => {
-    setLoading(true);
-  }, []);
 
   function renderInfo(name: string) {
     return (

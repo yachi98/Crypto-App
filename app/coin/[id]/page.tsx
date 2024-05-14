@@ -40,8 +40,8 @@ const CoinPage = ({ params }: { params: { id: string } }) => {
   }, [params.id]);
 
   return (
-    <div className="dark:bg-gray-950 bg-light-theme max-w-screen-2xl m-auto h-screen p-2">
-      <div className="dark:bg-[#0b111b] bg-white w-full h-[400px] rounded-3xl mt-5 p-8 flex justify-between relative overflow-hidden z-0">
+    <div className="dark:bg-[#09090c] bg-light-theme max-w-screen-2xl m-auto h-screen p-2">
+      <div className="dark:bg-[#050507] bg-white w-full h-[400px] rounded-3xl mt-5 p-8 flex justify-between relative overflow-hidden z-0">
         {isLoading ? (
           <div>Fetching data...</div>
         ) : (

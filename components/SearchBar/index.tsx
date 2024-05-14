@@ -32,7 +32,7 @@ const SearchBar = () => {
         type="text"
         className={`w-full dark:bg-[#050507] bg-white backdrop-blur  p-2 rounded-xl outline-none dark:placeholder-white placeholder-black text-xs pl-7 dark:text-white text-black font-light ${
           showDropDown
-            ? "rounded-bl-none rounded-br-none dark:bg-gray-900 dark:bg-opacity-90"
+            ? "rounded-bl-none rounded-br-none dark:bg-[#050507] dark:bg-opacity-90"
             : ""
         }`}
         placeholder="Search..."

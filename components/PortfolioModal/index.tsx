@@ -32,7 +32,6 @@ const PortfolioModal = ({ showModal, setShowModal }: PortfolioModalProps) => {
           `https://api.coingecko.com/api/v3/search?query=${coinSearch}&x_cg_demo_api_key=CG-duQsjCRoXZm1bJBTrL8sARut`
         );
         setHistoricalCoins(data.coins);
-        console.log(data.coins);
       } catch (error) {
         console.error("Error fetching historical data:", error);
       }
@@ -47,13 +46,11 @@ const PortfolioModal = ({ showModal, setShowModal }: PortfolioModalProps) => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("sent");
     const item = {
       value: coinSearch,
-      completed: false,
+      amount: amount,
       date: dueDate,
     };
-    console.log(item);
     setShowModal(false);
   };
 
@@ -133,7 +130,7 @@ const PortfolioModal = ({ showModal, setShowModal }: PortfolioModalProps) => {
                   onClick={() => handleCoinSelect(coin)}
                 >
                   <img
-                    // src={coin.image.thumb}
+                    src={coin.image.thumb}
                     alt={coin.name}
                     width={25}
                     height={25}
