@@ -43,21 +43,21 @@ const UserProfile = () => {
           animate={{ y: 0 }}
           transition={{ duration: 0.2 }}
           style={{ zIndex: 51 }}
-          className="absolute left-0 dark:bg-[#0f0f15] bg-white overflow-hidden z-50 gap-3 w-full flex flex-col justify-left rounded-b-xl p-3 text-[#c7c7c7] text-xs font-light"
+          className="absolute left-0 dark:bg-[#0f0f15] bg-white overflow-hidden z-50 gap-3 w-full flex flex-col justify-left rounded-b-xl p-3 text-xs font-light"
         >
-          <button className="flex items-center gap-2 dark:text-white text-black">
+          <button className="flex items-center gap-2 dark:text-[#a7a7a7] text-black dark:hover:text-white">
             <ProfileIcon />
             <span>Account</span>
           </button>
-          <button className="flex items-center gap-2 dark:text-white text-black">
+          <button className="flex items-center gap-2 dark:text-[#a7a7a7] text-black dark:hover:text-white">
             <SettingsIcon />
             <span>Settings</span>
           </button>
-          <button className="flex items-center gap-2 dark:text-white text-black">
+          <button className="flex items-center gap-2 dark:text-[#a7a7a7] text-black dark:hover:text-white">
             <HelpIcon />
             <span>Help</span>
           </button>
-          <button className="flex items-center gap-2 dark:text-white text-black">
+          <button className="flex items-center gap-2 dark:text-[#a7a7a7] text-black dark:hover:text-white">
             <LogOutIcon />
             <span>Log out</span>
           </button>

@@ -82,7 +82,7 @@ const SorterCurrency = () => {
           {currencySelector.map((currencyItem) => (
             <button
               onClick={() => handleCurrency(currencyItem.value)}
-              className="text-xs text-left dark:text-white text-black"
+              className="text-xs text-left dark:text-[#a7a7a7] text-black dark:hover:text-white"
               key={currencyItem.value}
             >
               {currencyItem.symbol} {currencyItem.value.toUpperCase()}
