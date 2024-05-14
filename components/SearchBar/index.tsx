@@ -43,7 +43,7 @@ const SearchBar = () => {
           initial={{ y: -10 }}
           animate={{ y: 0 }}
           transition={{ duration: 0.5 }}
-          className="absolute left-0 dark:bg-[#050507] dark:bg-opacity-90 bg-white backdrop-blur overflow-hidden z-30 flex flex-col gap-2 w-full text-left rounded-b-xl p-3 text-white text-xs font-light"
+          className="absolute left-0 dark:bg-[#0d0d11] dark:bg-opacity-90 bg-white backdrop-blur overflow-hidden z-30 flex flex-col gap-2 w-full text-left rounded-b-xl p-3 text-white text-xs font-light"
         >
           {filteredCoins.map((coin: Coin) => (
             <Link key={coin.id} href={`/coin/${coin.id}`}>
