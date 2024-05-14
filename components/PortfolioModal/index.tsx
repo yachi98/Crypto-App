@@ -51,6 +51,10 @@ const PortfolioModal = ({ showModal, setShowModal }: PortfolioModalProps) => {
       amount: amount,
       date: dueDate,
     };
+
+    setCoinSearch("");
+    setAmount("");
+    setDueDate("");
     setShowModal(false);
   };
 
