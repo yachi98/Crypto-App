@@ -108,6 +108,7 @@ const CoinLineGraph = ({
       {
         data: coin.prices,
         borderColor: "rgba(159, 122, 234)",
+        backgroundColor: "transparent",
         borderWidth: 2,
         pointRadius: 0,
         fill: true,
