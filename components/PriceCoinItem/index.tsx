@@ -35,17 +35,19 @@ const PriceCoinItem = ({ coin }: { coin: Coin }) => {
   return (
     <motion.button
       onClick={() => coinSelector(coin)}
-      className={`rounded-2xl pl-2 border-white  bg-white ${
+      className={`rounded-2xl pl-2 border-white bg-white ${
         isSelected
           ? "bg-gradient-to-r from-purple-400 to-orange-300 text-white transition border-none"
           : "dark:bg-black dark:border-2 dark:border-[#0f0f0f]"
-      } w-[190px] h-[55px] flex items-center flex-shrink-0`}
+      } w-[190px] h-[60px] flex items-center flex-shrink-0`}
       whileTap={{ scale: 1.2 }}
       transition={{ type: "spring", stiffness: 100, damping: 10 }}
     >
       <div className="flex gap-3 items-center">
         <div className="ml-2">
-          <Image src={coin.image} alt={coin.name} width={20} height={20} />
+          <div className="w-[30px] h-[30px] relative">
+            <Image src={coin.image} alt={coin.name} width={25} height={25} />
+          </div>
         </div>
         <div className="flex flex-col">
           <span className="px-1 dark:text-white text-grey flex text-xs">
