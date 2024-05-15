@@ -104,7 +104,7 @@ const PortfolioModal = ({ showModal, setShowModal }: PortfolioModalProps) => {
   }, [coinSearch]);
 
   return (
-    <div className="w-[700px] h-[360px] dark:bg-gradient-to-r from-black to-gray-900 bg-white absolute top-1/4 -translate-y-1/2 left-1/2 -translate-x-1/2 rounded-3xl">
+    <div className="w-[700px] h-[360px] dark:bg-black bg-white absolute top-1/4 -translate-y-1/2 left-1/2 -translate-x-1/2 rounded-3xl">
       <div className="absolute right-0 p-5">
         <button onClick={() => setShowModal(false)}>
           <CloseIcon />
@@ -123,10 +123,10 @@ const PortfolioModal = ({ showModal, setShowModal }: PortfolioModalProps) => {
             onChange={handleSearchChange}
             onFocus={() => handleInputFocus(currencyInputRef)}
             onBlur={() => handleInputBlur(currencyInputRef)}
-            className="dark:bg-gray-900 bg-light-theme outline-none rounded-xl p-2 w-full"
+            className="dark:bg-[#09090c] bg-light-theme outline-none rounded-xl p-2 w-full"
           />
           {showDropdown && (
-            <div className="col-span-2 h-[300px] w-full flex flex-col overflow-y-scroll dark:bg-gray-950 bg-white absolute z-10 rounded-2xl">
+            <div className="col-span-2 h-[300px] w-full flex flex-col overflow-y-scroll dark:bg-[#09090c] bg-white absolute z-10 rounded-2xl">
               {searchCoinResults.map((coin) => (
                 <button
                   key={coin.id}
@@ -134,7 +134,7 @@ const PortfolioModal = ({ showModal, setShowModal }: PortfolioModalProps) => {
                   onClick={() => handleCoinSelect(coin)}
                 >
                   <img
-                    src={coin.image.thumb}
+                    // src={coin.image.thumb}
                     alt={coin.name}
                     width={25}
                     height={25}
@@ -153,13 +153,13 @@ const PortfolioModal = ({ showModal, setShowModal }: PortfolioModalProps) => {
             onChange={handleAmount}
             onFocus={() => handleInputFocus(amountInputRef)}
             onBlur={() => handleInputBlur(amountInputRef)}
-            className="dark:bg-gray-900 bg-light-theme outline-none rounded-xl p-2 w-full"
+            className="dark:bg-[#09090c] bg-light-theme outline-none rounded-xl p-2 w-full"
           />
           <label>Select the date you purchased</label>
           <div className="flex flex-col">
             <input
               ref={dueDateInputRef}
-              className="dark:bg-gray-900 bg-light-theme outline-none rounded-xl p-2 w-full"
+              className="dark:bg-[#09090c] bg-light-theme outline-none rounded-xl p-2 w-full"
               type="date"
               value={dueDate}
               onChange={handleDueDateChange}
@@ -177,13 +177,13 @@ const PortfolioModal = ({ showModal, setShowModal }: PortfolioModalProps) => {
           <button
             type="button"
             onClick={() => setShowModal(false)}
-            className="p-2 dark:bg-gray-900 bg-light-theme rounded-xl w-[100px]"
+            className="p-2 dark:bg-transparent dark:border dark:border-white dark:hover:bg-white dark:hover:text-black transition bg-light-theme rounded-xl w-[100px]"
           >
             Cancel
           </button>
           <button
             type="submit"
-            className="p-2 dark:bg-gray-800 bg-gray-200 rounded-xl w-[100px]"
+            className="p-2 dark:bg-transparent dark:border dark:border-white dark:hover:bg-white dark:hover:text-black transition bg-gray-200 rounded-xl w-[100px]"
           >
             Save
           </button>

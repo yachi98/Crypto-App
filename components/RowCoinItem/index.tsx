@@ -24,7 +24,7 @@ const RowCoinItem = ({ coin }: { coin: Coin }) => {
 
   return (
     <Link href={`/coin/${coin.id}`}>
-      <div className="dark:bg-[#050507] bg-white dark:hover:bg-[#0d0d13] hover:bg-[#eaeaea] transition w-full dark:text-[#DEDEDE] text-black text-sm font-light rounded-3xl p-5 mb-2 flex gap-3 items-center">
+      <div className="dark:bg-[#050507] bg-white dark:hover:bg-[#0d0d13] hover:bg-[#eaeaea] w-full dark:text-[#DEDEDE] text-black text-sm font-light rounded-3xl p-5 mb-2 flex gap-3 items-center">
         <span>{coin.market_cap_rank}</span>
         <Image src={coin.image} alt={coin.name} width={30} height={30} />
         <span className="w-[14%] px-1">

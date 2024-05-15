@@ -45,7 +45,7 @@ const PriceCoinItem = ({ coin }: { coin: Coin }) => {
     >
       <div className="flex gap-3 items-center">
         <div className="ml-2">
-          <div className="w-[30px] h-[30px] relative">
+          <div className="w-[25px] h-[25px] relative">
             <Image src={coin.image} alt={coin.name} width={25} height={25} />
           </div>
         </div>

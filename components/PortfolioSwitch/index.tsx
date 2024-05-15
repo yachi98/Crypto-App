@@ -13,14 +13,14 @@ const PortfolioSwitch = () => {
     setIsClicked(value);
   };
   return (
-    <div className="w-[180px] items-center backdrop-filter dark:bg-gray-900 bg-white dark:text-white text-black rounded-xl text-xs font-light flex justify-center">
+    <div className="w-[180px] items-center backdrop-filter dark:bg-black bg-white dark:text-white text-black rounded-xl text-xs font-light flex justify-center">
       <Link href="/">
         <motion.button
           onClick={() => handleToggle(false)}
           className={`${
             isClicked
               ? "dark:text-white text-black"
-              : "dark:bg-slate-800 bg-gray-300 rounded-xl"
+              : "dark:bg-[#121218] bg-gray-300 rounded-xl"
           } p-2 rounded-xl w-[90px] flex gap-1`}
           whileTap={{ scale: 1.3 }}
           transition={{ type: "spring", stiffness: 100, damping: 10 }}
@@ -34,7 +34,7 @@ const PortfolioSwitch = () => {
           onClick={() => handleToggle(true)}
           className={`${
             isClicked
-              ? "dark:bg-slate-800 bg-gray-300 rounded-xl"
+              ? "dark:bg-[#121218] bg-gray-300 rounded-xl"
               : "dark:text-white text-black"
           } p-2 rounded-xl w-[90px] flex gap-1`}
           whileTap={{ scale: 1.3 }}
