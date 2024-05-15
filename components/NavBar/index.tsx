@@ -13,10 +13,10 @@ import Link from "next/link";
 const NavBar = () => {
   return (
     <div>
-      <div className="w-full dark:bg-gray-950 bg-light-theme flex items-center justify-between p-3 mt-2">
+      <div className="w-full dark:bg-[#09090c] bg-light-theme flex items-center justify-between p-3 mt-2">
         <div className="flex gap-6 items-center dark:text-white text-black mr-8">
-          <div className="flex items-center justify-end relative w-[105px]">
-            <Link href="/" className="absolute -left-4">
+          <div className="flex items-center justify-end relative w-[95px]">
+            <Link href="/" className="absolute -left-2">
               <LogoIcon />
             </Link>
             <h1>CoinWave</h1>

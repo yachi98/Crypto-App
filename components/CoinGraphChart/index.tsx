@@ -19,7 +19,6 @@ import {
   LineElement,
   Filler,
   BarElement,
-  ScriptableContext,
   Tooltip,
 } from "chart.js";
 
@@ -95,23 +94,6 @@ const options = {
   borderWidth: 0,
 };
 
-const getBackgroundColor = (
-  context: ScriptableContext<"line">
-): CanvasGradient => {
-  const ctx: CanvasRenderingContext2D = context.chart.ctx;
-  const height: number = ctx.canvas.clientHeight;
-  const gradientFill: CanvasGradient = ctx.createLinearGradient(
-    0,
-    0,
-    0,
-    height
-  );
-  gradientFill.addColorStop(1, "rgba(159, 122, 234, 0.1)");
-  gradientFill.addColorStop(0.7, "rgba(159, 122, 234, 0.1)");
-  gradientFill.addColorStop(1, "transparent");
-  return gradientFill;
-};
-
 const CoinLineGraph = ({
   coin,
   days,
@@ -126,11 +108,11 @@ const CoinLineGraph = ({
       {
         data: coin.prices,
         borderColor: "rgba(159, 122, 234)",
+        backgroundColor: "transparent",
         borderWidth: 2,
         pointRadius: 0,
         fill: true,
         tension: 0.8,
-        backgroundColor: getBackgroundColor,
       },
     ],
   };
@@ -202,9 +184,10 @@ const CoinGraphChart = () => {
       <span>{name.charAt(0).toUpperCase() + name.slice(1).toLowerCase()}</span>
     );
   }
+
   return (
     <div className="flex mt-2">
-      <div className="dark:bg-gradient-to-r from-black to-gray-900 bg-white rounded-2xl w-1/2 h-[400px] m-2 flex flex-col p-6">
+      <div className="dark:bg-[#050507] bg-white rounded-2xl w-1/2 h-[400px] m-2 flex flex-col p-6">
         {coinInfo && (
           <div className="flex flex-col gap-8">
             <div className="flex gap-8">
@@ -240,7 +223,8 @@ const CoinGraphChart = () => {
           </div>
         )}
       </div>
-      <div className="dark:bg-gradient-to-r from-black to-gray-900 bg-white rounded-2xl w-1/2 h-[400px] m-2 flex flex-col p-6">
+
+      <div className="dark:bg-[#050507] bg-white rounded-2xl w-1/2 h-[400px] m-2 flex flex-col p-6">
         {selectedCoin && (
           <div className="flex flex-col gap-8">
             <div className="flex items-center justify-between">

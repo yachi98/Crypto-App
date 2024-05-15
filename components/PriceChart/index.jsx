@@ -32,7 +32,7 @@ const PriceChart = () => {
     dots: false,
     infinite: false,
     speed: 500,
-    slidesToShow: 6,
+    slidesToShow: 8,
     slidesToScroll: 2,
     initialSlide: 0,
     prevArrow: <PrevArrow />,

@@ -17,7 +17,7 @@ const SearchBar = () => {
   };
 
   const filteredCoins = coinMarketData.filter((coin: Coin) =>
-    coin.name.toLowerCase().includes(coinSearch)
+    coin.name.toLowerCase().startsWith(coinSearch)
   );
 
   const removeDropDown = () => {
@@ -30,9 +30,9 @@ const SearchBar = () => {
       <input
         onChange={handleInputChange}
         type="text"
-        className={`w-full dark:bg-gray-900 bg-white backdrop-blur  p-2 rounded-xl outline-none dark:placeholder-white placeholder-black text-xs pl-7 dark:text-white text-black font-light ${
+        className={`w-full dark:bg-black bg-white backdrop-blur  p-2 rounded-xl outline-none dark:placeholder-white placeholder-black text-xs pl-7 dark:text-white text-black font-light ${
           showDropDown
-            ? "rounded-bl-none rounded-br-none dark:bg-gray-900 dark:bg-opacity-90"
+            ? "rounded-bl-none rounded-br-none dark:bg-[#050507] dark:bg-opacity-90"
             : ""
         }`}
         placeholder="Search..."
@@ -43,12 +43,12 @@ const SearchBar = () => {
           initial={{ y: -10 }}
           animate={{ y: 0 }}
           transition={{ duration: 0.5 }}
-          className="absolute left-0 dark:bg-gray-900 dark:bg-opacity-90 bg-white backdrop-blur overflow-hidden z-30 flex flex-col gap-2 w-full text-left rounded-b-xl p-3 text-white text-xs font-light"
+          className="absolute left-0 dark:bg-[#0d0d11] bg-white overflow-hidden z-30 flex flex-col gap-2 w-full text-left rounded-b-xl p-3 text-white text-xs font-light"
         >
           {filteredCoins.map((coin: Coin) => (
             <Link key={coin.id} href={`/coin/${coin.id}`}>
               <div
-                className="dark:text-[#CECECE] text-black cursor-pointer"
+                className="dark:text-[#a7a7a7] text-black dark:hover:text-white cursor-pointer"
                 onClick={removeDropDown}
               >
                 {coin.name}
