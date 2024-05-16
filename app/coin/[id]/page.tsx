@@ -8,11 +8,9 @@ import CaretIcon from "@/public/CaretIcon.svg";
 import { useEffect, useState } from "react";
 import formatDate from "@/utils/formatDate";
 import formatNumber from "@/utils/formatNumber";
-import getFormattedPrice from "@/utils/getFormattedDate";
 import PriceChange from "@/components/PriceChange";
 import extractUrl from "@/utils/extractUrl";
 import PriceCoinGraph from "@/components/PriceCoinGraph";
-import CoinMarketTable from "@/components/CoinMarketTable";
 
 const CoinPage = ({ params }: { params: { id: string } }) => {
   const [hasError, setHasError] = useState(false);
@@ -20,10 +18,6 @@ const CoinPage = ({ params }: { params: { id: string } }) => {
   const [coin, setCoin] = useState<CoinPage | null>(null);
   const { currency } = useAppSelector((state) => state.currencySlice);
   const { symbol } = useAppSelector((state) => state.currencySlice);
-
-  // const priceChange7d: number = getFormattedPrice(
-  //   coin.market_data.sparkline_7d.price
-  // );
 
   const getCoinData = async () => {
     try {
@@ -174,11 +168,11 @@ const CoinPage = ({ params }: { params: { id: string } }) => {
       </div>
       {coin && (
         <div className="w-full h-[330px] rounded-2xl flex gap-5 mt-5">
-          <div className="w-1/2 dark:bg-[#0f0f15] bg-white rounded-2xl p-5 flex flex-col">
-            <h1 className="text-3xl mt-2">Market</h1>
+          <div className="w-1/2 dark:bg-[#0f0f15] bg-white rounded-2xl p-7 flex flex-col">
+            <h1 className="text-3xl">Market</h1>
             <div className="flex justify-between items-center mb-2">
-              <h1 className="mt-3 text-[#afafaf]">MARKET CAP</h1>
-              <div className="bg-black p-2 rounded-xl">
+              <h1 className="text-[#afafaf]">MARKET CAP</h1>
+              <div className="dark:bg-black p-2 rounded-xl">
                 <span className="text-xl">
                   {symbol}
                   {formatNumber(coin.market_data.market_cap[currency])}
@@ -187,7 +181,7 @@ const CoinPage = ({ params }: { params: { id: string } }) => {
             </div>
             <div className="flex justify-between items-center mb-2">
               <h1 className="text-[#afafaf]">FULLY DILUTED VALUATION</h1>
-              <div className="bg-black p-2 rounded-xl">
+              <div className="dark:bg-black p-2 rounded-xl">
                 <span className="text-xl">
                   {symbol}
                   {formatNumber(
@@ -198,7 +192,7 @@ const CoinPage = ({ params }: { params: { id: string } }) => {
             </div>
             <div className="flex justify-between items-center mb-2">
               <h1 className="text-[#afafaf]">TOTAL VOLUME 24H</h1>
-              <div className="bg-black p-2 rounded-xl">
+              <div className="dark:bg-black p-2 rounded-xl">
                 <span className="text-xl">
                   {symbol}
                   {formatNumber(coin.market_data.total_volume[currency])}
@@ -207,7 +201,7 @@ const CoinPage = ({ params }: { params: { id: string } }) => {
             </div>
             <div className="flex justify-between items-center mb-2">
               <h1 className="text-[#afafaf]">CIRCULATING SUPPLY</h1>
-              <div className="bg-black p-2 rounded-xl">
+              <div className="dark:bg-black p-2 rounded-xl">
                 <span className="text-xl">
                   {symbol}
                   {formatNumber(coin.market_data.circulating_supply)}
@@ -216,7 +210,7 @@ const CoinPage = ({ params }: { params: { id: string } }) => {
             </div>
             <div className="flex justify-between items-center mb-2">
               <h1 className="text-[#afafaf]">VOLUME / MARKET</h1>
-              <div className="bg-black p-2 rounded-xl">
+              <div className="dark:bg-black p-2 rounded-xl">
                 <span className="text-xl">
                   {symbol}
                   {formatNumber(
@@ -227,16 +221,16 @@ const CoinPage = ({ params }: { params: { id: string } }) => {
               </div>
             </div>
           </div>
-          <div className="w-1/2 dark:bg-[#050507] bg-white rounded-2xl">
-            {/* <PriceCoinGraph
+          <div className="w-1/2 dark:bg-[#050507] bg-white rounded-2xl p-7">
+            <h1 className="text-xl">7D Sparkline</h1>
+            <PriceCoinGraph
               prices={coin.market_data.sparkline_7d.price}
-              priceChange={priceChange7d}
+              priceChange={1}
               reduceBy={6}
-            /> */}
+            />
           </div>
         </div>
       )}
-      <CoinMarketTable />
     </div>
   );
 };
