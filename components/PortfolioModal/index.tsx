@@ -15,12 +15,12 @@ interface PortfolioModalProps {
 
 const PortfolioModal = ({ showModal, setShowModal }: PortfolioModalProps) => {
   const [searchCoins, setSearchCoins] = useState<SearchCoin[]>([]);
+  const [selectedCoin, setSelectedCoin] = useState<SearchCoin | null>(null);
   const currencyInputRef = useRef<HTMLInputElement>(null);
   const amountInputRef = useRef<HTMLInputElement>(null);
   const dueDateInputRef = useRef<HTMLInputElement>(null);
   const [showDropdown, setShowDropdown] = useState(false);
   const [coinValue, setCoinValue] = useState("");
-  const [selectedCoin, setSelectedCoin] = useState("");
   const [amount, setAmount] = useState<number>();
   const [dueDate, setDueDate] = useState<string>("");
   const [invalidCoin, setInvalidCoin] = useState<boolean>(false);
@@ -72,6 +72,7 @@ const PortfolioModal = ({ showModal, setShowModal }: PortfolioModalProps) => {
       date: convertDate(dueDate),
     };
     dispatch(addPortfolio(portfolioCoin));
+    console.log(portfolioCoin);
     setCoinValue("");
     setAmount(0);
     setDueDate("");
@@ -116,14 +117,14 @@ const PortfolioModal = ({ showModal, setShowModal }: PortfolioModalProps) => {
 
   const handleCoinSelect = (coin: SearchCoin) => {
     setCoinValue(coin.name);
-    setSelectedCoin(coin.name);
+    setSelectedCoin(coin);
     setShowDropdown(false);
   };
 
   const handleCancel = () => {
     setShowModal(false);
     setCoinValue("");
-    setSelectedCoin("");
+    setSelectedCoin(null);
     setAmount(0);
     setDueDate("");
   };
@@ -139,9 +140,21 @@ const PortfolioModal = ({ showModal, setShowModal }: PortfolioModalProps) => {
           <CloseIcon />
         </button>
       </div>
-      <h3 className="text-xl p-8">
-        {selectedCoin ? `${selectedCoin}` : "Select currency"}
-      </h3>
+      <div className="p-8 flex items-center gap-4">
+        {selectedCoin ? (
+          <>
+            <img
+              src={selectedCoin.thumb}
+              alt={selectedCoin.name}
+              width={35}
+              height={35}
+            />
+            <span className="text-xl">{selectedCoin.name}</span>
+          </>
+        ) : (
+          "Select currency"
+        )}
+      </div>
       <form onSubmit={handleSubmit} className="px-8">
         <div className="grid grid-cols-2 gap-4 items-center">
           <label>Select currency</label>
@@ -216,7 +229,7 @@ const PortfolioModal = ({ showModal, setShowModal }: PortfolioModalProps) => {
             )}
           </div>
         </div>
-        <div className="flex justify-center gap-5 mt-5">
+        <div className="flex justify-center gap-5 mt-12">
           <button
             type="button"
             onClick={() => handleCancel()}
