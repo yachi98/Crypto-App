@@ -13,7 +13,7 @@ const PortfolioSwitch = () => {
     setIsClicked(value);
   };
   return (
-    <div className="w-[180px] items-center backdrop-filter dark:bg-black bg-white dark:text-white text-black rounded-xl text-xs font-light flex justify-center">
+    <div className="w-[180px] border dark:border-[#171717] items-center dark:bg-black bg-white dark:text-white text-black rounded-xl text-xs font-light flex justify-center">
       <Link href="/">
         <motion.button
           onClick={() => handleToggle(false)}

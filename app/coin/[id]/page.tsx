@@ -26,7 +26,6 @@ const CoinPage = ({ params }: { params: { id: string } }) => {
       const { data } = await axios(
         `https://api.coingecko.com/api/v3/coins/${params.id}?localization=false&tickers=false&market_data=true&community_data=true&developer_data=false&sparkline=true`
       );
-      console.log(data);
       setCoin(data);
       setIsLoading(false);
     } catch (err) {
@@ -48,7 +47,7 @@ const CoinPage = ({ params }: { params: { id: string } }) => {
           <div>Fetching data...</div>
         ) : (
           <>
-            {coin && (
+            {!hasError && coin && (
               <>
                 <div className="z-0 absolute w-full pointer-events-none h-[390px] bottom-50 left-40">
                   <Image

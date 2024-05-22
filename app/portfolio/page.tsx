@@ -1,10 +1,22 @@
 "use client";
 
 import { useState } from "react";
+import { HistoricalCoin } from "@/interfaces/portfolio.interface";
 import PortfolioModal from "@/components/PortfolioModal";
+import PortfolioItem from "@/components/PortfolioItem";
+
+interface PortfolioItem {
+  value: string;
+  amount: string;
+  date: string;
+}
 
 const PortfolioPage = () => {
   const [showModal, setShowModal] = useState(false);
+  const [historicalCoins, setHistoricalCoins] = useState<HistoricalCoin[]>([]);
+  const [portfolioCoins, setPortfolioCoins] = useState<PortfolioItem[]>([]);
+
+  const hasCoins = historicalCoins.length > 0;
 
   return (
     <div className="dark:bg-[#09090c] bg-light-theme max-w-screen-2xl m-auto h-screen p-2 relative">
@@ -13,7 +25,7 @@ const PortfolioPage = () => {
           <h2 className="text-3xl mt-5">Portfolio</h2>
           <button
             onClick={() => setShowModal(true)}
-            className="p-5 dark:bg-[#050507] bg-white rounded-2xl text-md mt-5 w-[200px]"
+            className="p-5 dark:bg-black bg-white dark:text-[#686868] dark:hover:text-white border dark:border-[#686868] dark:hover:border-white transition rounded-2xl text-md mt-5 w-[200px]"
           >
             Add Asset
           </button>
@@ -29,6 +41,11 @@ const PortfolioPage = () => {
       {showModal && (
         <PortfolioModal showModal={showModal} setShowModal={setShowModal} />
       )}
+      <PortfolioItem />
+      {/* {hasCoins &&
+        portfolioCoins.map((item, index) => (
+          <PortfolioItem key={index} item={item} />
+        ))} */}
     </div>
   );
 };

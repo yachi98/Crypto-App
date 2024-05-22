@@ -6,6 +6,7 @@ import formatNumber from "@/utils/formatNumber";
 import getFormattedPrice from "@/utils/getFormattedDate";
 import PriceChange from "@/components/PriceChange";
 import { changeCoin } from "@/redux/features/selectedCoins";
+import { removeCoin } from "@/redux/features/selectedCoins";
 import { useEffect } from "react";
 import { useAppSelector } from "@/redux/store";
 import { useDispatch } from "react-redux";
@@ -18,6 +19,10 @@ const PriceCoinItem = ({ coin }: { coin: Coin }) => {
   const { coinId } = useAppSelector((state) => state.selectedCoinData);
   const dispatch: AppDispatch = useDispatch();
   const { symbol } = useAppSelector((state) => state.currencySlice);
+  // const indexOfItem: number = selectedCoins.findIndex(
+  //   (item) => item.id === coin.id
+  // );
+  // const isSelected: boolean = indexOfItem !== -1;
 
   useEffect(() => {
     coin.id === coinId ? setSelected(true) : setSelected(false);
@@ -28,6 +33,16 @@ const PriceCoinItem = ({ coin }: { coin: Coin }) => {
       dispatch(changeCoin(coin.id));
     }
   };
+
+  // const;
+
+  // const coinSelector = (coin: Coin) => {
+  //   if (isSelected) {
+  //     dispatch(removeCoin(coin.id));
+  //   } else if (selectedCoins.length < 3) {
+  //     dispatch(getCoinData({ currency, timeStamp, coinId: coin.id }));
+  //   }
+  // };
 
   const priceChange1h: number = getFormattedPrice(
     coin.price_change_percentage_1h_in_currency
