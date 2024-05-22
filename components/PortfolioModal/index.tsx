@@ -1,10 +1,11 @@
 import { useRef, useState, ChangeEvent, useEffect } from "react";
-import { HistoricalCoin, Portfolio } from "@/interfaces/portfolio.interface";
+import { SearchCoin } from "@/interfaces/searchCoin.interface";
 import { AppDispatch } from "@/redux/store";
 import { useDispatch } from "react-redux";
 import CloseIcon from "@/public/CloseIcon.svg";
 import axios from "axios";
 import { getPortfolioData } from "@/redux/features/portfolioSlice";
+import convertDate from "@/utils/convertDate";
 import { addPortfolio } from "@/redux/features/portfolioSlice";
 
 interface PortfolioModalProps {
@@ -13,7 +14,7 @@ interface PortfolioModalProps {
 }
 
 const PortfolioModal = ({ showModal, setShowModal }: PortfolioModalProps) => {
-  const [historicalCoins, setHistoricalCoins] = useState<HistoricalCoin[]>([]);
+  const [searchCoins, setSearchCoins] = useState<SearchCoin[]>([]);
   const currencyInputRef = useRef<HTMLInputElement>(null);
   const amountInputRef = useRef<HTMLInputElement>(null);
   const dueDateInputRef = useRef<HTMLInputElement>(null);
@@ -35,7 +36,7 @@ const PortfolioModal = ({ showModal, setShowModal }: PortfolioModalProps) => {
         const { data } = await axios.get(
           `https://api.coingecko.com/api/v3/search?query=${coinValue}&x_cg_demo_api_key=CG-duQsjCRoXZm1bJBTrL8sARut`
         );
-        setHistoricalCoins(data.coins);
+        setSearchCoins(data.coins);
       } catch (error) {
         console.error("Error fetching historical data:", error);
       } finally {
@@ -46,7 +47,7 @@ const PortfolioModal = ({ showModal, setShowModal }: PortfolioModalProps) => {
     searchCoinData();
   }, [coinValue]);
 
-  const searchCoinResults = historicalCoins.filter((coin: HistoricalCoin) =>
+  const searchCoinResults = searchCoins.filter((coin: SearchCoin) =>
     coin.name.toLowerCase().startsWith(coinValue)
   );
 
@@ -64,12 +65,10 @@ const PortfolioModal = ({ showModal, setShowModal }: PortfolioModalProps) => {
       return;
     }
 
-    // setInvalidAmount(false);
-
     const portfolioCoin = {
       value: coinValue,
       amount: amount,
-      date: dueDate,
+      date: convertDate(dueDate),
     };
     dispatch(addPortfolio(portfolioCoin));
     console.log(portfolioCoin);
@@ -115,7 +114,7 @@ const PortfolioModal = ({ showModal, setShowModal }: PortfolioModalProps) => {
     }
   };
 
-  const handleCoinSelect = (coin: HistoricalCoin) => {
+  const handleCoinSelect = (coin: SearchCoin) => {
     setCoinValue(coin.name);
     setSelectedCoin(coin.name);
     setShowDropdown(false);
@@ -132,7 +131,6 @@ const PortfolioModal = ({ showModal, setShowModal }: PortfolioModalProps) => {
   useEffect(() => {
     dispatch(getPortfolioData(coinValue));
   }, [coinValue]);
-
   return (
     <div className="w-[720px] h-[380px] dark:bg-black bg-white border dark:border-[#171717] absolute top-1/4 -translate-y-1/2 left-1/2 -translate-x-1/2 rounded-3xl">
       <div className="absolute right-0 p-5">
@@ -157,26 +155,22 @@ const PortfolioModal = ({ showModal, setShowModal }: PortfolioModalProps) => {
               className="dark:bg-[#09090c] bg-light-theme outline-none rounded-xl p-2 w-full"
             />
             {showDropdown && (
-              <div className="col-span-2 h-[300px] w-[320px] flex flex-col overflow-y-scroll dark:bg-[#09090c] bg-white absolute z-10 rounded-2xl">
-                {loading ? (
-                  <div className="py-2 flex gap-2 justify-left">Loading...</div>
-                ) : (
-                  searchCoinResults.map((coin) => (
-                    <button
-                      key={coin.id}
-                      className="py-2 flex gap-2"
-                      onClick={() => handleCoinSelect(coin)}
-                    >
-                      <img
-                        // src={coin.image.thumb}
-                        alt={coin.name}
-                        width={25}
-                        height={25}
-                      />
-                      {coin.name}
-                    </button>
-                  ))
-                )}
+              <div className="col-span-2 h-full w-[320px] flex flex-col overflow-y-scroll dark:bg-[#09090c] bg-white absolute z-10 rounded-2xl mt-12">
+                {searchCoinResults.map((coin: SearchCoin) => (
+                  <button
+                    key={coin.id}
+                    className="p-2 flex gap-2"
+                    onClick={() => handleCoinSelect(coin)}
+                  >
+                    <img
+                      src={coin.thumb}
+                      alt={coin.name}
+                      width={25}
+                      height={25}
+                    />
+                    {coin.name}
+                  </button>
+                ))}
               </div>
             )}
             {invalidCoin && (
@@ -242,28 +236,3 @@ const PortfolioModal = ({ showModal, setShowModal }: PortfolioModalProps) => {
 };
 
 export default PortfolioModal;
-
-// {searchCoinResults.map((coin) => (
-//   <button
-//     key={coin.id}
-//     className="py-2 flex gap-2"
-//     onClick={() => handleCoinSelect(coin)}
-//   >
-//     <img
-//       // src={coin.image.thumb}
-//       alt={coin.name}
-//       width={25}
-//       height={25}
-//     />
-//     placeholder={loading ? "Loading..." : "Select coin..."}
-//     {coin.name}
-//   </button>
-// ))}
-// </div>
-// )}
-// {invalidCoin && (
-// <span className="text-[#a5a5a5] text-xs">
-// Need to choose coin
-// </span>
-// )}
-// </div>

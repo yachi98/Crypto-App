@@ -34,8 +34,6 @@ const PriceCoinItem = ({ coin }: { coin: Coin }) => {
     }
   };
 
-  // const;
-
   // const coinSelector = (coin: Coin) => {
   //   if (isSelected) {
   //     dispatch(removeCoin(coin.id));
