@@ -19,10 +19,9 @@ const PortfolioModal = ({ showModal, setShowModal }: PortfolioModalProps) => {
   const amountInputRef = useRef<HTMLInputElement>(null);
   const dueDateInputRef = useRef<HTMLInputElement>(null);
   const [showDropdown, setShowDropdown] = useState(false);
-  const [loading, setLoading] = useState(false);
   const [coinValue, setCoinValue] = useState("");
   const [selectedCoin, setSelectedCoin] = useState("");
-  const [amount, setAmount] = useState<string>("");
+  const [amount, setAmount] = useState<number>();
   const [dueDate, setDueDate] = useState<string>("");
   const [invalidCoin, setInvalidCoin] = useState<boolean>(false);
   const [invalidAmount, setInvalidAmount] = useState<boolean>(false);
@@ -32,7 +31,6 @@ const PortfolioModal = ({ showModal, setShowModal }: PortfolioModalProps) => {
   useEffect(() => {
     const searchCoinData = async () => {
       try {
-        setLoading(true);
         const { data } = await axios.get(
           `https://api.coingecko.com/api/v3/search?query=${coinValue}&x_cg_demo_api_key=CG-duQsjCRoXZm1bJBTrL8sARut`
         );
@@ -40,7 +38,6 @@ const PortfolioModal = ({ showModal, setShowModal }: PortfolioModalProps) => {
       } catch (error) {
         console.error("Error fetching historical data:", error);
       } finally {
-        setLoading(false);
       }
     };
 
@@ -56,12 +53,16 @@ const PortfolioModal = ({ showModal, setShowModal }: PortfolioModalProps) => {
 
     if (coinValue.trim() === "") {
       setInvalidCoin(true);
-      setShowDropdown(false);
+      return;
     }
 
-    if (amount.trim() === "") {
+    if (amount === undefined || amount === 0) {
       setInvalidAmount(true);
-      setShowDropdown(false);
+      return;
+    }
+
+    if (dueDate === undefined || dueDate === "") {
+      setInvalidAmount(true);
       return;
     }
 
@@ -71,9 +72,8 @@ const PortfolioModal = ({ showModal, setShowModal }: PortfolioModalProps) => {
       date: convertDate(dueDate),
     };
     dispatch(addPortfolio(portfolioCoin));
-    console.log(portfolioCoin);
     setCoinValue("");
-    setAmount("");
+    setAmount(0);
     setDueDate("");
     setShowModal(false);
   };
@@ -99,7 +99,7 @@ const PortfolioModal = ({ showModal, setShowModal }: PortfolioModalProps) => {
 
   const handleAmount = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
-    setAmount(value);
+    setAmount(value === "" ? 0 : parseInt(value, 10));
   };
 
   const handleInputFocus = (inputRef: React.RefObject<HTMLInputElement>) => {
@@ -124,13 +124,14 @@ const PortfolioModal = ({ showModal, setShowModal }: PortfolioModalProps) => {
     setShowModal(false);
     setCoinValue("");
     setSelectedCoin("");
-    setAmount("");
+    setAmount(0);
     setDueDate("");
   };
 
   useEffect(() => {
     dispatch(getPortfolioData(coinValue));
   }, [coinValue]);
+
   return (
     <div className="w-[720px] h-[380px] dark:bg-black bg-white border dark:border-[#171717] absolute top-1/4 -translate-y-1/2 left-1/2 -translate-x-1/2 rounded-3xl">
       <div className="absolute right-0 p-5">
