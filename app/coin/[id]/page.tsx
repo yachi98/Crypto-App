@@ -171,8 +171,8 @@ const CoinPage = ({ params }: { params: { id: string } }) => {
             <h1 className="text-3xl">Market</h1>
             <div className="flex justify-between items-center mb-2">
               <h1 className="text-[#afafaf]">MARKET CAP</h1>
-              <div className="dark:bg-black p-2 rounded-xl">
-                <span className="text-xl">
+              <div className="p-2 rounded-xl">
+                <span className="text-xl text-[#afafaf]">
                   {symbol}
                   {formatNumber(coin.market_data.market_cap[currency])}
                 </span>
@@ -180,8 +180,8 @@ const CoinPage = ({ params }: { params: { id: string } }) => {
             </div>
             <div className="flex justify-between items-center mb-2">
               <h1 className="text-[#afafaf]">FULLY DILUTED VALUATION</h1>
-              <div className="dark:bg-black p-2 rounded-xl">
-                <span className="text-xl">
+              <div className="p-2 rounded-xl">
+                <span className="text-xl text-[#afafaf]">
                   {symbol}
                   {formatNumber(
                     coin.market_data.fully_diluted_valuation[currency]
@@ -191,8 +191,8 @@ const CoinPage = ({ params }: { params: { id: string } }) => {
             </div>
             <div className="flex justify-between items-center mb-2">
               <h1 className="text-[#afafaf]">TOTAL VOLUME 24H</h1>
-              <div className="dark:bg-black p-2 rounded-xl">
-                <span className="text-xl">
+              <div className="p-2 rounded-xl">
+                <span className="text-xl text-[#afafaf]">
                   {symbol}
                   {formatNumber(coin.market_data.total_volume[currency])}
                 </span>
@@ -200,8 +200,8 @@ const CoinPage = ({ params }: { params: { id: string } }) => {
             </div>
             <div className="flex justify-between items-center mb-2">
               <h1 className="text-[#afafaf]">CIRCULATING SUPPLY</h1>
-              <div className="dark:bg-black p-2 rounded-xl">
-                <span className="text-xl">
+              <div className="p-2 rounded-xl">
+                <span className="text-xl text-[#afafaf]">
                   {symbol}
                   {formatNumber(coin.market_data.circulating_supply)}
                 </span>
@@ -209,8 +209,8 @@ const CoinPage = ({ params }: { params: { id: string } }) => {
             </div>
             <div className="flex justify-between items-center mb-2">
               <h1 className="text-[#afafaf]">VOLUME / MARKET</h1>
-              <div className="dark:bg-black p-2 rounded-xl">
-                <span className="text-xl">
+              <div className="p-2 rounded-xl">
+                <span className="text-xl text-[#afafaf]">
                   {symbol}
                   {formatNumber(
                     coin.market_data.total_volume[currency] /
