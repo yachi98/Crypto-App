@@ -188,7 +188,7 @@ const CoinGraphChart = () => {
 
   return (
     <div className="flex mt-2">
-      <div className="dark:bg-[#050507] bg-white rounded-2xl w-1/2 h-[400px] m-2 flex flex-col p-6">
+      <div className="dark:bg-[#050507] bg-white rounded-2xl w-1/2 h-[400px] m-2 flex flex-col p-6 relative">
         {coinInfo && (
           <div className="flex flex-col gap-8">
             <div className="flex gap-8">
@@ -207,14 +207,14 @@ const CoinGraphChart = () => {
                   </span>
                 </div>
               ))}
+              <span className="dark:text-[#DEDEDE] text-black text-base absolute right-4 top-5">
+                {todayDate}
+              </span>
             </div>
 
             <span className="dark:text-[#DEDEDE] text-black text-3xl">
               {symbol}
               {formatNumber(coinInfo.current_price)}
-            </span>
-            <span className="dark:text-[#DEDEDE] text-black text-base">
-              {todayDate}
             </span>
           </div>
         )}
@@ -241,9 +241,6 @@ const CoinGraphChart = () => {
                   selectedCoin.total_volumes.length - 1
                 ]
               )}
-            </span>
-            <span className="dark:text-[#DEDEDE] text-black text-base">
-              {todayDate}
             </span>
           </div>
         )}

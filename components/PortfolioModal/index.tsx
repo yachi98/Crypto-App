@@ -143,7 +143,7 @@ const PortfolioModal = ({ showModal, setShowModal }: PortfolioModalProps) => {
         {selectedCoin ? (
           <>
             <img
-              src={selectedCoin.thumb}
+              src={selectedCoin.large}
               alt={selectedCoin.name}
               width={35}
               height={35}
@@ -151,7 +151,7 @@ const PortfolioModal = ({ showModal, setShowModal }: PortfolioModalProps) => {
             <span className="text-xl">{selectedCoin.name}</span>
           </>
         ) : (
-          "Select currency"
+          "Select Coin"
         )}
       </div>
       <form onSubmit={handleSubmit} className="px-8">
