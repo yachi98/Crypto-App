@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { HistoricalCoin } from "@/interfaces/historicalCoin.interface";
 import PortfolioModal from "@/components/PortfolioModal";
 
 interface PortfolioItem {
@@ -12,8 +11,6 @@ interface PortfolioItem {
 
 const PortfolioPage = () => {
   const [showModal, setShowModal] = useState(false);
-  const [historicalCoins, setHistoricalCoins] = useState<HistoricalCoin[]>([]);
-  const [portfolioCoins, setPortfolioCoins] = useState<PortfolioItem[]>([]);
 
   return (
     <div className="dark:bg-[#09090c] bg-light-theme max-w-screen-2xl m-auto h-screen p-2 relative">
