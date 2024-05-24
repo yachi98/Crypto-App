@@ -84,7 +84,8 @@ const getSelectedCoinSlice = createSlice({
       const newCoinId = action.payload;
       state.coinId = newCoinId;
     },
-    removeCoin(state, action) {
+
+    removeCoin: (state, action) => {
       const coinIdToRemove = action.payload;
       const newList = state.selectedCoins.filter(
         (item) => item.id !== coinIdToRemove

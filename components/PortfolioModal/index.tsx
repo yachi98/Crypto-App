@@ -71,7 +71,6 @@ const PortfolioModal = ({ showModal, setShowModal }: PortfolioModalProps) => {
       date: convertDate(dueDate),
     };
     dispatch(addPortfolio(portfolioCoin));
-    console.log(portfolioCoin);
     setCoinValue("");
     setAmount(0);
     setDueDate("");

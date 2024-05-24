@@ -207,7 +207,7 @@ const CoinGraphChart = () => {
                   </span>
                 </div>
               ))}
-              <span className="dark:text-[#DEDEDE] text-black text-base absolute right-4 top-5">
+              <span className="dark:text-[#DEDEDE] text-sm text-black absolute right-4 top-5">
                 {todayDate}
               </span>
             </div>
@@ -225,7 +225,7 @@ const CoinGraphChart = () => {
         )}
       </div>
 
-      <div className="dark:bg-[#050507] bg-white rounded-2xl w-1/2 h-[400px] m-2 flex flex-col p-6">
+      <div className="dark:bg-[#050507] bg-white rounded-2xl w-1/2 h-[400px] m-2 flex flex-col p-4">
         {selectedCoin && (
           <div className="flex flex-col gap-8">
             <div className="flex items-center justify-between">
