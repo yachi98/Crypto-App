@@ -68,6 +68,7 @@ const options = {
         display: true,
         color: "grey",
         maxTicksLimit: 10,
+        align: "inner",
       },
       border: {
         display: true,
@@ -107,7 +108,7 @@ const CoinLineGraph = ({
     datasets: [
       {
         data: coin.prices,
-        borderColor: "rgba(159, 122, 234)",
+        borderColor: "rgba(174, 139, 245)",
         backgroundColor: "transparent",
         borderWidth: 2,
         pointRadius: 0,
@@ -135,8 +136,8 @@ const CoinBarGraph = ({ coin, days }: { coin: SelectedCoin; days: string }) => {
     datasets: [
       {
         data: coin.total_volumes,
-        borderColor: "rgba(159, 122, 234)",
-        backgroundColor: "rgba(159, 122, 234)",
+        borderColor: "rgba(174, 139, 245)",
+        backgroundColor: "rgba(174, 139, 245)",
         borderWidth: 8,
         pointRadius: 0,
         fill: true,
@@ -187,7 +188,7 @@ const CoinGraphChart = () => {
 
   return (
     <div className="flex mt-2">
-      <div className="dark:bg-[#050507] bg-white rounded-2xl w-1/2 h-[400px] m-2 flex flex-col p-6">
+      <div className="dark:bg-[#050507] bg-white rounded-2xl w-1/2 h-[400px] m-2 flex flex-col p-6 relative">
         {coinInfo && (
           <div className="flex flex-col gap-8">
             <div className="flex gap-8">
@@ -206,14 +207,14 @@ const CoinGraphChart = () => {
                   </span>
                 </div>
               ))}
+              <span className="dark:text-[#DEDEDE] text-sm text-black absolute right-4 top-5">
+                {todayDate}
+              </span>
             </div>
 
             <span className="dark:text-[#DEDEDE] text-black text-3xl">
               {symbol}
               {formatNumber(coinInfo.current_price)}
-            </span>
-            <span className="dark:text-[#DEDEDE] text-black text-base">
-              {todayDate}
             </span>
           </div>
         )}
@@ -224,7 +225,7 @@ const CoinGraphChart = () => {
         )}
       </div>
 
-      <div className="dark:bg-[#050507] bg-white rounded-2xl w-1/2 h-[400px] m-2 flex flex-col p-6">
+      <div className="dark:bg-[#050507] bg-white rounded-2xl w-1/2 h-[400px] m-2 flex flex-col p-4">
         {selectedCoin && (
           <div className="flex flex-col gap-8">
             <div className="flex items-center justify-between">
@@ -240,9 +241,6 @@ const CoinGraphChart = () => {
                   selectedCoin.total_volumes.length - 1
                 ]
               )}
-            </span>
-            <span className="dark:text-[#DEDEDE] text-black text-base">
-              {todayDate}
             </span>
           </div>
         )}

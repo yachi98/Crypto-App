@@ -10,6 +10,7 @@ import formatDate from "@/utils/formatDate";
 import formatNumber from "@/utils/formatNumber";
 import PriceChange from "@/components/PriceChange";
 import extractUrl from "@/utils/extractUrl";
+import PriceCoinGraph from "@/components/PriceCoinGraph";
 
 const CoinPage = ({ params }: { params: { id: string } }) => {
   const [hasError, setHasError] = useState(false);
@@ -46,7 +47,7 @@ const CoinPage = ({ params }: { params: { id: string } }) => {
           <div>Fetching data...</div>
         ) : (
           <>
-            {coin && (
+            {!hasError && coin && (
               <>
                 <div className="z-0 absolute w-full pointer-events-none h-[390px] bottom-50 left-40">
                   <Image
@@ -164,6 +165,71 @@ const CoinPage = ({ params }: { params: { id: string } }) => {
           </>
         )}
       </div>
+      {coin && (
+        <div className="w-full h-[330px] rounded-2xl flex gap-5 mt-5">
+          <div className="w-1/2 dark:bg-[#0f0f15] bg-white rounded-2xl p-7 flex flex-col">
+            <h1 className="text-3xl">Market</h1>
+            <div className="flex justify-between items-center mb-2">
+              <h1 className="text-[#afafaf]">MARKET CAP</h1>
+              <div className="p-2 rounded-xl">
+                <span className="text-xl text-[#afafaf]">
+                  {symbol}
+                  {formatNumber(coin.market_data.market_cap[currency])}
+                </span>
+              </div>
+            </div>
+            <div className="flex justify-between items-center mb-2">
+              <h1 className="text-[#afafaf]">FULLY DILUTED VALUATION</h1>
+              <div className="p-2 rounded-xl">
+                <span className="text-xl text-[#afafaf]">
+                  {symbol}
+                  {formatNumber(
+                    coin.market_data.fully_diluted_valuation[currency]
+                  )}
+                </span>
+              </div>
+            </div>
+            <div className="flex justify-between items-center mb-2">
+              <h1 className="text-[#afafaf]">TOTAL VOLUME 24H</h1>
+              <div className="p-2 rounded-xl">
+                <span className="text-xl text-[#afafaf]">
+                  {symbol}
+                  {formatNumber(coin.market_data.total_volume[currency])}
+                </span>
+              </div>
+            </div>
+            <div className="flex justify-between items-center mb-2">
+              <h1 className="text-[#afafaf]">CIRCULATING SUPPLY</h1>
+              <div className="p-2 rounded-xl">
+                <span className="text-xl text-[#afafaf]">
+                  {symbol}
+                  {formatNumber(coin.market_data.circulating_supply)}
+                </span>
+              </div>
+            </div>
+            <div className="flex justify-between items-center mb-2">
+              <h1 className="text-[#afafaf]">VOLUME / MARKET</h1>
+              <div className="p-2 rounded-xl">
+                <span className="text-xl text-[#afafaf]">
+                  {symbol}
+                  {formatNumber(
+                    coin.market_data.total_volume[currency] /
+                      coin.market_data.market_cap[currency]
+                  )}
+                </span>
+              </div>
+            </div>
+          </div>
+          <div className="w-1/2 dark:bg-[#050507] bg-white rounded-2xl p-7">
+            <h1 className="text-xl">7D Sparkline</h1>
+            <PriceCoinGraph
+              prices={coin.market_data.sparkline_7d.price}
+              priceChange={1}
+              reduceBy={6}
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 };

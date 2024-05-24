@@ -33,7 +33,11 @@ export const getPortfolioData = createAsyncThunk(
 const portfolioSlice = createSlice({
   name: "portfolio",
   initialState,
-  reducers: {},
+  reducers: {
+    addPortfolio(state, action) {
+      state.portfolioData = [...state.portfolioData, action.payload];
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getPortfolioData.pending, (state) => {
@@ -52,4 +56,5 @@ const portfolioSlice = createSlice({
   },
 });
 
+export const { addPortfolio } = portfolioSlice.actions;
 export default portfolioSlice.reducer;

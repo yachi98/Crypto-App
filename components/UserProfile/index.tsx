@@ -5,6 +5,7 @@ import SettingsIcon from "@/public/SettingsIcon.svg";
 import HelpIcon from "@/public/HelpIcon.svg";
 import LogOutIcon from "@/public/LogOutIcon.svg";
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 const UserProfile = () => {
   const [showDropDown, setShowDropDown] = useState(false);
@@ -57,10 +58,15 @@ const UserProfile = () => {
             <HelpIcon />
             <span>Help</span>
           </button>
-          <button className="flex items-center gap-2 dark:text-[#a7a7a7] text-black dark:hover:text-white">
-            <LogOutIcon />
-            <span>Log out</span>
-          </button>
+          <Link href="/logout">
+            <button
+              onClick={() => setShowDropDown(false)}
+              className="flex items-center gap-2 dark:text-[#a7a7a7] text-black dark:hover:text-white"
+            >
+              <LogOutIcon />
+              <span>Log out</span>
+            </button>
+          </Link>
         </motion.div>
       )}
     </div>

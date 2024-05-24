@@ -26,7 +26,7 @@ const Home = () => {
   return (
     <main>
       {!showConverter && <PriceChart />}
-      <div className="dark:bg-black bg-white dark:text-white text-black p-1 rounded-xl w-[180px] flex items-center mt-5 text-xs">
+      <div className="dark:bg-black bg-white dark:text-white border dark:border-[#171717] text-black p-1 rounded-xl w-[180px] flex items-center mt-5 text-xs">
         <button
           onClick={() => setShowConverter(!showConverter)}
           className={`${
