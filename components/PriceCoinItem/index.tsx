@@ -5,7 +5,11 @@ import Image from "next/image";
 import formatNumber from "@/utils/formatNumber";
 import getFormattedPrice from "@/utils/getFormattedDate";
 import PriceChange from "@/components/PriceChange";
-import { changeCoin } from "@/redux/features/selectedCoins";
+import {
+  addCoin,
+  changeCoin,
+  getSelectedCoinData,
+} from "@/redux/features/selectedCoins";
 import { useEffect } from "react";
 import { useAppSelector } from "@/redux/store";
 import { useDispatch } from "react-redux";
@@ -13,20 +17,37 @@ import { AppDispatch } from "@/redux/store";
 import { useState } from "react";
 
 const PriceCoinItem = ({ coin }: { coin: Coin }) => {
-  const [isSelected, setSelected] = useState(false);
-  const { coinId } = useAppSelector((state) => state.selectedCoinData);
+  // const [isSelected, setSelected] = useState(false);
+  const { coinId, selectedCoins, timeDay } = useAppSelector(
+    (state) => state.selectedCoinData
+  );
   const dispatch: AppDispatch = useDispatch();
   const { symbol } = useAppSelector((state) => state.currencySlice);
+  const isSelected = selectedCoins.some((item) => item.id === coin.id);
+
+  // const indexOfCoin: number = selectedCoins.some((item) => item.id === coin.id);
+  // const isSelected: boolean = indexOfCoin !== -1;
+
+  // const coinSelector = (coin: Coin) => {
+  //   if (coin.id !== coinId) {
+  //     dispatch(changeCoin(coin.id));
+  //   }
+  // };
 
   const coinSelector = (coin: Coin) => {
     if (coin.id !== coinId) {
+      // dispatch(addCoin(coin));
       dispatch(changeCoin(coin.id));
+    } else if (selectedCoins.length > 3) {
+      dispatch(
+        getSelectedCoinData({ currency: symbol, timeDay, coinId: coinId })
+      );
     }
   };
 
-  useEffect(() => {
-    coin.id === coinId ? setSelected(true) : setSelected(false);
-  }, [coinId]);
+  // useEffect(() => {
+  //   coin.id === coinId ? setSelected(true) : setSelected(false);
+  // }, [coinId]);
 
   const priceChange1h: number = getFormattedPrice(
     coin.price_change_percentage_1h_in_currency
@@ -36,8 +57,8 @@ const PriceCoinItem = ({ coin }: { coin: Coin }) => {
       onClick={() => coinSelector(coin)}
       className={`rounded-2xl pl-2 border-white bg-white ${
         isSelected
-          ? "bg-gradient-to-r from-purple-400 to-orange-300 border-none text-sm "
-          : "dark:bg-black dark:border-2 dark:border-[#0f0f0f] dark:hover:bg-[#0d0d13] hover:bg-[#eaeaea]"
+          ? "bg-gradient-to-r from-purple-400 to-orange-300 border-none text-sm"
+          : "dark:bg-black dark:border-2 dark:border-[#0f0f15] dark:hover:bg-[#0f0f15] hover:bg-[#eaeaea]"
       } w-[190px] h-[60px] flex items-center flex-shrink-0`}
     >
       <div className="flex gap-3 items-center">

@@ -20,6 +20,7 @@ import {
   Filler,
   BarElement,
   Tooltip,
+  ScriptableContext,
 } from "chart.js";
 
 ChartJS.register(
@@ -95,6 +96,25 @@ const options = {
   borderWidth: 0,
 };
 
+const getBackgroundColor = (
+  context: ScriptableContext<"line">
+): CanvasGradient => {
+  const ctx: CanvasRenderingContext2D = context.chart.ctx;
+  const height: number = ctx.canvas.clientHeight;
+  const gradientFill: CanvasGradient = ctx.createLinearGradient(
+    0,
+    0,
+    0,
+    height
+  );
+
+  gradientFill.addColorStop(0, "rgba(116, 116, 250, 0.5)");
+  gradientFill.addColorStop(0.7, "rgba(116, 116, 250, 0.1)");
+  gradientFill.addColorStop(1, "transparent");
+
+  return gradientFill;
+};
+
 const CoinLineGraph = ({
   coin,
   days,
@@ -109,7 +129,7 @@ const CoinLineGraph = ({
       {
         data: coin.prices,
         borderColor: "rgba(174, 139, 245)",
-        backgroundColor: "transparent",
+        backgroundColor: getBackgroundColor,
         borderWidth: 2,
         pointRadius: 0,
         fill: true,

@@ -24,6 +24,12 @@ export const currencySlice = createSlice({
         case "jpy":
           state.symbol = "¥";
           break;
+        case "chf":
+          state.symbol = "₣";
+          break;
+        case "rub":
+          state.symbol = "₽";
+          break;
         default:
           state.symbol = "$";
       }

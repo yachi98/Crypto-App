@@ -84,7 +84,9 @@ const getSelectedCoinSlice = createSlice({
       const newCoinId = action.payload;
       state.coinId = newCoinId;
     },
-
+    addCoin: (state, action) => {
+      state.selectedCoins = [...state.selectedCoins, action.payload];
+    },
     removeCoin: (state, action) => {
       const coinIdToRemove = action.payload;
       const newList = state.selectedCoins.filter(
@@ -101,6 +103,7 @@ const getSelectedCoinSlice = createSlice({
       })
       .addCase(getSelectedCoinData.fulfilled, (state, action) => {
         state.selectedCoins = [action.payload];
+        // state.selectedCoins = [...state.selectedCoins, action.payload];
         state.isLoading = false;
       })
       .addCase(getSelectedCoinData.rejected, (state, action) => {
@@ -110,6 +113,6 @@ const getSelectedCoinSlice = createSlice({
       });
   },
 });
-export const { changeTime, changeCoin, removeCoin } =
+export const { changeTime, changeCoin, removeCoin, addCoin } =
   getSelectedCoinSlice.actions;
 export default getSelectedCoinSlice.reducer;

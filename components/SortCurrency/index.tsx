@@ -28,6 +28,14 @@ const currencySelector: CurrencySelectorItem[] = [
     value: "jpy",
     symbol: "¥",
   },
+  {
+    value: "chf",
+    symbol: "₣",
+  },
+  {
+    value: "rub",
+    symbol: "₽",
+  },
 ];
 
 const SorterCurrency = () => {
