@@ -144,8 +144,8 @@ const PortfolioModal = ({ showModal, setShowModal }: PortfolioModalProps) => {
             <img
               src={selectedCoin.large}
               alt={selectedCoin.name}
-              width={35}
-              height={35}
+              width={40}
+              height={40}
             />
             <span className="text-xl">{selectedCoin.name}</span>
           </>
