@@ -1,7 +1,6 @@
 export interface Coin {
   id: string;
   symbol: string;
-  color: string;
   currency: string;
   name: string;
   image: string;

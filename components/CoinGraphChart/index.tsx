@@ -170,10 +170,11 @@ const CoinBarGraph = ({ coin, days }: { coin: SelectedCoin; days: string }) => {
 };
 
 const CoinGraphChart = () => {
-  const { selectedCoins } = useAppSelector((state) => state.selectedCoinData);
   const { symbol } = useAppSelector((state) => state.currencySlice);
   const dispatch: AppDispatch = useDispatch();
-  const { coinId, timeDay } = useAppSelector((state) => state.selectedCoinData);
+  const { coinId, selectedCoins, timeDay } = useAppSelector(
+    (state) => state.selectedCoinData
+  );
   const { currency } = useAppSelector((state) => state.currencySlice);
   const selectedCoin = selectedCoins.length > 0 ? selectedCoins[0] : null;
   const { coinMarketData } = useAppSelector((state) => state.coinMarketData);
@@ -181,6 +182,7 @@ const CoinGraphChart = () => {
   const coinInfo = coinMarketData.find(
     (data) => selectedCoin && data.id === selectedCoin.id
   );
+  console.log(coinInfo);
 
   const todayDate: string = new Date().toLocaleDateString("en-US", {
     year: "numeric",

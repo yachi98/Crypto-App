@@ -1,13 +1,17 @@
 import { ChangeEvent, useState } from "react";
+import { SearchCoin } from "@/interfaces/searchCoin.interface";
 import { motion } from "framer-motion";
-import { Coin } from "@/interfaces/coin.interface";
+import axios from "axios";
 import { useAppSelector } from "@/redux/store";
+import { useEffect } from "react";
 import Link from "next/link";
 
 const SearchBar = () => {
   const [coinSearch, setCoinSearch] = useState("");
+  const [searchCoins, setSearchCoins] = useState<SearchCoin[]>([]);
   const [showDropDown, setShowDropDown] = useState(false);
   const { coinMarketData } = useAppSelector((state) => state.coinMarketData);
+
   const hasCoins: boolean = coinMarketData.length > 0;
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -16,7 +20,22 @@ const SearchBar = () => {
     setShowDropDown(searchValue.trim().length > 0);
   };
 
-  const filteredCoins = coinMarketData.filter((coin: Coin) =>
+  useEffect(() => {
+    const searchCoinData = async () => {
+      try {
+        const { data } = await axios.get(
+          `https://api.coingecko.com/api/v3/search?query=${coinSearch}&x_cg_demo_api_key=CG-duQsjCRoXZm1bJBTrL8sARut`
+        );
+        setSearchCoins(data.coins);
+      } catch (error) {
+        console.error("Error fetching historical data:", error);
+      }
+    };
+
+    searchCoinData();
+  }, [coinSearch]);
+
+  const searchCoinResults = searchCoins.filter((coin: SearchCoin) =>
     coin.name.toLowerCase().startsWith(coinSearch)
   );
 
@@ -45,7 +64,7 @@ const SearchBar = () => {
           transition={{ duration: 0.5 }}
           className="absolute left-0 dark:bg-[#0d0d11] bg-white overflow-hidden z-30 flex flex-col gap-2 w-full text-left rounded-b-xl p-3 text-white text-xs font-light"
         >
-          {filteredCoins.map((coin: Coin) => (
+          {searchCoinResults.map((coin: SearchCoin) => (
             <Link key={coin.id} href={`/coin/${coin.id}`}>
               <div
                 className="dark:text-[#a7a7a7] text-black dark:hover:text-white cursor-pointer"

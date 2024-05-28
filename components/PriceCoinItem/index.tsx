@@ -6,48 +6,35 @@ import formatNumber from "@/utils/formatNumber";
 import getFormattedPrice from "@/utils/getFormattedDate";
 import PriceChange from "@/components/PriceChange";
 import {
-  addCoin,
+  removeCoin,
   changeCoin,
   getSelectedCoinData,
 } from "@/redux/features/selectedCoins";
-import { useEffect } from "react";
 import { useAppSelector } from "@/redux/store";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/redux/store";
-import { useState } from "react";
 
 const PriceCoinItem = ({ coin }: { coin: Coin }) => {
-  // const [isSelected, setSelected] = useState(false);
-  const { coinId, selectedCoins, timeDay } = useAppSelector(
+  const { selectedCoins, timeDay, currency } = useAppSelector(
     (state) => state.selectedCoinData
   );
   const dispatch: AppDispatch = useDispatch();
   const { symbol } = useAppSelector((state) => state.currencySlice);
   const isSelected = selectedCoins.some((item) => item.id === coin.id);
 
-  // const indexOfCoin: number = selectedCoins.some((item) => item.id === coin.id);
-  // const isSelected: boolean = indexOfCoin !== -1;
-
-  // const coinSelector = (coin: Coin) => {
-  //   if (coin.id !== coinId) {
-  //     dispatch(changeCoin(coin.id));
-  //   }
-  // };
-
   const coinSelector = (coin: Coin) => {
-    if (coin.id !== coinId) {
-      // dispatch(addCoin(coin));
-      dispatch(changeCoin(coin.id));
-    } else if (selectedCoins.length > 3) {
+    if (isSelected) {
+      dispatch(removeCoin(coin.id));
+    } else if (selectedCoins.length < 3) {
       dispatch(
-        getSelectedCoinData({ currency: symbol, timeDay, coinId: coinId })
+        getSelectedCoinData({
+          currency: currency,
+          timeDay: timeDay,
+          coinId: coin.id,
+        })
       );
     }
   };
-
-  // useEffect(() => {
-  //   coin.id === coinId ? setSelected(true) : setSelected(false);
-  // }, [coinId]);
 
   const priceChange1h: number = getFormattedPrice(
     coin.price_change_percentage_1h_in_currency
