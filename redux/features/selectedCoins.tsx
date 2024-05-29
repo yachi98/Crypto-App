@@ -45,8 +45,6 @@ export const getSelectedCoinData = createAsyncThunk(
         `https://api.coingecko.com/api/v3/coins/${coinId}/market_chart?vs_currency=${currency}&days=${timeDay}&x_cg_demo_api_key=${process.env.NEXT_PUBLIC_API_KEY}`
       );
 
-      // console.log({ coinId, timeDay, currency });
-
       const { prices, total_volumes } = data;
 
       const timeFormattedPrices = formatChartData({ data: prices, index: 1 });

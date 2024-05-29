@@ -221,7 +221,7 @@ const CoinGraphChart = () => {
                   <span
                     className={`${coinBG[index]} w-[15px] h-[15px] flex items-center justify-center rounded`}
                   ></span>
-                  <span className="text-xs">{renderInfo(coinInfo.name)}</span>
+                  <span className="text-xs">{renderInfo(coin.id)}</span>
                   <span className="text-xs">
                     {symbol}
                     {formatNumber(coinInfo.current_price)}
