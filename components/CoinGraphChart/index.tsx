@@ -20,6 +20,7 @@ import {
   Filler,
   BarElement,
   Tooltip,
+  ScriptableContext,
 } from "chart.js";
 
 ChartJS.register(
@@ -95,6 +96,25 @@ const options = {
   borderWidth: 0,
 };
 
+const getBackgroundColor = (
+  context: ScriptableContext<"line">
+): CanvasGradient => {
+  const ctx: CanvasRenderingContext2D = context.chart.ctx;
+  const height: number = ctx.canvas.clientHeight;
+  const gradientFill: CanvasGradient = ctx.createLinearGradient(
+    0,
+    0,
+    0,
+    height
+  );
+
+  gradientFill.addColorStop(0, "rgba(116, 116, 250, 0.5)");
+  gradientFill.addColorStop(0.7, "rgba(116, 116, 250, 0.1)");
+  gradientFill.addColorStop(1, "transparent");
+
+  return gradientFill;
+};
+
 const CoinLineGraph = ({
   coin,
   days,
@@ -109,7 +129,7 @@ const CoinLineGraph = ({
       {
         data: coin.prices,
         borderColor: "rgba(174, 139, 245)",
-        backgroundColor: "transparent",
+        backgroundColor: getBackgroundColor,
         borderWidth: 2,
         pointRadius: 0,
         fill: true,
@@ -150,10 +170,11 @@ const CoinBarGraph = ({ coin, days }: { coin: SelectedCoin; days: string }) => {
 };
 
 const CoinGraphChart = () => {
-  const { selectedCoins } = useAppSelector((state) => state.selectedCoinData);
   const { symbol } = useAppSelector((state) => state.currencySlice);
   const dispatch: AppDispatch = useDispatch();
-  const { coinId, timeDay } = useAppSelector((state) => state.selectedCoinData);
+  const { coinId, selectedCoins, timeDay } = useAppSelector(
+    (state) => state.selectedCoinData
+  );
   const { currency } = useAppSelector((state) => state.currencySlice);
   const selectedCoin = selectedCoins.length > 0 ? selectedCoins[0] : null;
   const { coinMarketData } = useAppSelector((state) => state.coinMarketData);
@@ -200,7 +221,7 @@ const CoinGraphChart = () => {
                   <span
                     className={`${coinBG[index]} w-[15px] h-[15px] flex items-center justify-center rounded`}
                   ></span>
-                  <span className="text-xs">{renderInfo(coinInfo.name)}</span>
+                  <span className="text-xs">{renderInfo(coin.id)}</span>
                   <span className="text-xs">
                     {symbol}
                     {formatNumber(coinInfo.current_price)}

@@ -48,9 +48,11 @@ const ConverterChart = ({
       0,
       height
     );
-    gradientFill.addColorStop(1, "rgba(159, 122, 234, 0.1)");
-    gradientFill.addColorStop(0.7, "rgba(159, 122, 234, 0.1)");
+
+    gradientFill.addColorStop(0, "rgba(116, 116, 250, 0.5)");
+    gradientFill.addColorStop(0.7, "rgba(116, 116, 250, 0.1)");
     gradientFill.addColorStop(1, "transparent");
+
     return gradientFill;
   };
 

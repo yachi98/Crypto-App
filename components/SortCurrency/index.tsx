@@ -13,12 +13,12 @@ interface CurrencySelectorItem {
 
 const currencySelector: CurrencySelectorItem[] = [
   {
-    value: "usd",
-    symbol: "$",
-  },
-  {
     value: "gbp",
     symbol: "£",
+  },
+  {
+    value: "usd",
+    symbol: "$",
   },
   {
     value: "eur",
@@ -28,11 +28,19 @@ const currencySelector: CurrencySelectorItem[] = [
     value: "jpy",
     symbol: "¥",
   },
+  {
+    value: "chf",
+    symbol: "₣",
+  },
+  {
+    value: "rub",
+    symbol: "₽",
+  },
 ];
 
 const SorterCurrency = () => {
   const [showDropdown, setShowDropDown] = useState(false);
-  const [currency, setCurrency] = useState("usd");
+  const [currency, setCurrency] = useState("gbp");
   const dispatch: AppDispatch = useDispatch();
   const containerRef = useRef<HTMLDivElement>(null);
 

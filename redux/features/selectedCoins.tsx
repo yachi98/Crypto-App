@@ -4,6 +4,7 @@ import axios from "axios";
 
 interface SelectedCoinState {
   selectedCoins: SelectedCoin[];
+  currency: string;
   coinId: string;
   timeDay: string;
   isLoading: boolean;
@@ -12,6 +13,7 @@ interface SelectedCoinState {
 
 const initialState: SelectedCoinState = {
   selectedCoins: [],
+  currency: "gbp",
   coinId: "bitcoin",
   timeDay: "1",
   isLoading: true,
@@ -40,8 +42,9 @@ export const getSelectedCoinData = createAsyncThunk(
   ) => {
     try {
       const { data } = await axios.get(
-        `https://api.coingecko.com/api/v3/coins/${coinId}/market_chart?vs_currency=${currency}&days=${timeDay}&precision=full&x_cg_demo_api_key=${process.env.NEXT_PUBLIC_API_KEY}`
+        `https://api.coingecko.com/api/v3/coins/${coinId}/market_chart?vs_currency=${currency}&days=${timeDay}&x_cg_demo_api_key=${process.env.NEXT_PUBLIC_API_KEY}`
       );
+
       const { prices, total_volumes } = data;
 
       const timeFormattedPrices = formatChartData({ data: prices, index: 1 });
@@ -84,7 +87,6 @@ const getSelectedCoinSlice = createSlice({
       const newCoinId = action.payload;
       state.coinId = newCoinId;
     },
-
     removeCoin: (state, action) => {
       const coinIdToRemove = action.payload;
       const newList = state.selectedCoins.filter(
@@ -100,7 +102,7 @@ const getSelectedCoinSlice = createSlice({
         state.hasError = false;
       })
       .addCase(getSelectedCoinData.fulfilled, (state, action) => {
-        state.selectedCoins = [action.payload];
+        state.selectedCoins = [...state.selectedCoins, action.payload];
         state.isLoading = false;
       })
       .addCase(getSelectedCoinData.rejected, (state, action) => {

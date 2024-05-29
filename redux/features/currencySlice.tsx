@@ -1,8 +1,8 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 const initialState = {
-  currency: "usd",
-  symbol: "$",
+  currency: "gbp",
+  symbol: "£",
 };
 
 export const currencySlice = createSlice({
@@ -24,8 +24,14 @@ export const currencySlice = createSlice({
         case "jpy":
           state.symbol = "¥";
           break;
+        case "chf":
+          state.symbol = "₣";
+          break;
+        case "rub":
+          state.symbol = "₽";
+          break;
         default:
-          state.symbol = "$";
+          state.symbol = "£";
       }
     },
   },

@@ -17,7 +17,7 @@ const initialState: CoinMarketData = {
   allMarketData: [],
   page: 1,
   currentPage: 1,
-  currency: "usd",
+  currency: "gbp",
   isLoading: true,
   hasError: false,
 };
