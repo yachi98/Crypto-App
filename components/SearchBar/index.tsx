@@ -2,7 +2,6 @@ import { ChangeEvent, useState } from "react";
 import { SearchCoin } from "@/interfaces/searchCoin.interface";
 import { motion } from "framer-motion";
 import axios from "axios";
-import { useAppSelector } from "@/redux/store";
 import { useEffect } from "react";
 import Link from "next/link";
 
@@ -10,9 +9,6 @@ const SearchBar = () => {
   const [coinSearch, setCoinSearch] = useState("");
   const [searchCoins, setSearchCoins] = useState<SearchCoin[]>([]);
   const [showDropDown, setShowDropDown] = useState(false);
-  const { coinMarketData } = useAppSelector((state) => state.coinMarketData);
-
-  const hasCoins: boolean = coinMarketData.length > 0;
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const searchValue = e.target.value.toLowerCase();
@@ -57,7 +53,7 @@ const SearchBar = () => {
         placeholder="Search..."
         value={coinSearch}
       />
-      {showDropDown && hasCoins && (
+      {showDropDown && (
         <motion.div
           initial={{ y: -10 }}
           animate={{ y: 0 }}
