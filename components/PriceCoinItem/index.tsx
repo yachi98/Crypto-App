@@ -7,7 +7,6 @@ import getFormattedPrice from "@/utils/getFormattedDate";
 import PriceChange from "@/components/PriceChange";
 import {
   removeCoin,
-  changeCoin,
   getSelectedCoinData,
 } from "@/redux/features/selectedCoins";
 import { useAppSelector } from "@/redux/store";
