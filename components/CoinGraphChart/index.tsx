@@ -108,7 +108,7 @@ const getBackgroundColor = (
     height
   );
 
-  gradientFill.addColorStop(0, "rgba(116, 116, 250, 0.5)");
+  gradientFill.addColorStop(0, "rgba(116, 116, 250, 0.4)");
   gradientFill.addColorStop(0.7, "rgba(116, 116, 250, 0.1)");
   gradientFill.addColorStop(1, "transparent");
 
@@ -130,7 +130,7 @@ const CoinLineGraph = ({
         data: coin.prices,
         borderColor: "rgba(174, 139, 245)",
         backgroundColor: getBackgroundColor,
-        borderWidth: 2,
+        borderWidth: 1,
         pointRadius: 0,
         fill: true,
         tension: 0.8,
@@ -219,7 +219,7 @@ const CoinGraphChart = () => {
               {selectedCoins.map((coin, index) => (
                 <div key={coin.id} className="flex gap-2 items-center">
                   <span
-                    className={`${coinBG[index]} w-[15px] h-[15px] flex items-center justify-center rounded`}
+                    className={`${coinBG[index]} w-[12px] h-[12px] flex items-center justify-center rounded`}
                   ></span>
                   <span className="text-xs">{renderInfo(coin.id)}</span>
                   <span className="text-xs">

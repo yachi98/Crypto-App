@@ -107,6 +107,7 @@ const ConverterChart = ({
           display: true,
           color: "grey",
           maxTicksLimit: 10,
+          align: "inner",
         },
         border: {
           display: true,

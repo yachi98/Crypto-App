@@ -86,7 +86,7 @@ const CoinPage = ({ params }: { params: { id: string } }) => {
                   <div>
                     <div className="flex mt-5 items-center justify-between z-10">
                       <h2 className="text-[#01F1E3] z-10">High 24h</h2>
-                      <span className="text-xl z-10">
+                      <span className="text-2xl z-10">
                         {symbol}
                         {formatNumber(coin.market_data.high_24h[currency])}
                       </span>
@@ -168,9 +168,9 @@ const CoinPage = ({ params }: { params: { id: string } }) => {
       {coin && (
         <div className="w-full h-[330px] rounded-2xl flex gap-5 mt-5">
           <div className="w-1/2 dark:bg-[#0f0f15] bg-white rounded-2xl p-7 flex flex-col">
-            <h1 className="text-3xl">Market</h1>
+            <h1 className="text-2xl">Market</h1>
             <div className="flex justify-between items-center mb-2">
-              <h1 className="text-[#afafaf]">MARKET CAP</h1>
+              <h1 className="text-[#afafaf] text-sm">MARKET CAP</h1>
               <div className="p-2 rounded-xl">
                 <span className="text-xl text-[#afafaf]">
                   {symbol}
@@ -179,7 +179,9 @@ const CoinPage = ({ params }: { params: { id: string } }) => {
               </div>
             </div>
             <div className="flex justify-between items-center mb-2">
-              <h1 className="text-[#afafaf]">FULLY DILUTED VALUATION</h1>
+              <h1 className="text-[#afafaf] text-sm">
+                FULLY DILUTED VALUATION
+              </h1>
               <div className="p-2 rounded-xl">
                 <span className="text-xl text-[#afafaf]">
                   {symbol}
@@ -190,7 +192,7 @@ const CoinPage = ({ params }: { params: { id: string } }) => {
               </div>
             </div>
             <div className="flex justify-between items-center mb-2">
-              <h1 className="text-[#afafaf]">TOTAL VOLUME 24H</h1>
+              <h1 className="text-[#afafaf] text-sm">TOTAL VOLUME 24H</h1>
               <div className="p-2 rounded-xl">
                 <span className="text-xl text-[#afafaf]">
                   {symbol}
@@ -199,7 +201,7 @@ const CoinPage = ({ params }: { params: { id: string } }) => {
               </div>
             </div>
             <div className="flex justify-between items-center mb-2">
-              <h1 className="text-[#afafaf]">CIRCULATING SUPPLY</h1>
+              <h1 className="text-[#afafaf] text-sm">CIRCULATING SUPPLY</h1>
               <div className="p-2 rounded-xl">
                 <span className="text-xl text-[#afafaf]">
                   {symbol}
@@ -208,7 +210,7 @@ const CoinPage = ({ params }: { params: { id: string } }) => {
               </div>
             </div>
             <div className="flex justify-between items-center mb-2">
-              <h1 className="text-[#afafaf]">VOLUME / MARKET</h1>
+              <h1 className="text-[#afafaf] text-sm">VOLUME / MARKET</h1>
               <div className="p-2 rounded-xl">
                 <span className="text-xl text-[#afafaf]">
                   {symbol}

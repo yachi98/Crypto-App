@@ -48,7 +48,7 @@ export const getGlobalData = createAsyncThunk(
 const globalSlice = createSlice({
   name: "global",
   initialState,
-  reducers: {}, // Define different types of logic and update data
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(getGlobalData.pending, (state) => {

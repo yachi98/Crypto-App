@@ -43,8 +43,8 @@ const PriceCoinItem = ({ coin }: { coin: Coin }) => {
       onClick={() => coinSelector(coin)}
       className={`rounded-2xl pl-2 border-white bg-white ${
         isSelected
-          ? "bg-gradient-to-r from-purple-400 to-orange-300 border-none text-sm"
-          : "dark:bg-black dark:border-2 dark:border-[#0f0f15] dark:hover:bg-[#0f0f15] hover:bg-[#eaeaea]"
+          ? "bg-gradient-to-r from-purple-400 to-orange-300 text-sm"
+          : "dark:bg-black dark:hover:bg-[#0f0f15] hover:bg-[#eaeaea]"
       } w-[190px] h-[60px] flex items-center flex-shrink-0`}
     >
       <div className="flex gap-3 items-center">
