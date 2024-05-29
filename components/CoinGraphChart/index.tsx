@@ -182,7 +182,6 @@ const CoinGraphChart = () => {
   const coinInfo = coinMarketData.find(
     (data) => selectedCoin && data.id === selectedCoin.id
   );
-  console.log(coinInfo);
 
   const todayDate: string = new Date().toLocaleDateString("en-US", {
     year: "numeric",
