@@ -41,8 +41,8 @@ const CoinPage = ({ params }: { params: { id: string } }) => {
   }, [params.id]);
 
   return (
-    <div className="dark:bg-[#09090c] bg-light-theme max-w-screen-2xl m-auto h-screen p-2">
-      <div className="dark:bg-[#050507] bg-white w-full h-[400px] rounded-3xl mt-5 p-8 flex justify-between relative overflow-hidden z-0">
+    <div className="dark:bg-gray-950 bg-light-theme max-w-screen-2xl m-auto h-screen p-2">
+      <div className="dark:bg-[#070b15] bg-white w-full h-[400px] rounded-3xl mt-5 p-8 flex justify-between relative overflow-hidden z-0">
         {isLoading ? (
           <div>Fetching data...</div>
         ) : (
@@ -167,7 +167,7 @@ const CoinPage = ({ params }: { params: { id: string } }) => {
       </div>
       {coin && (
         <div className="w-full h-[330px] rounded-2xl flex gap-5 mt-5">
-          <div className="w-1/2 dark:bg-[#0f0f15] bg-white rounded-2xl p-7 flex flex-col">
+          <div className="w-1/2 dark:bg-gray-900 bg-white rounded-2xl p-7 flex flex-col">
             <h1 className="text-2xl">Market</h1>
             <div className="flex justify-between items-center mb-2">
               <h1 className="text-[#afafaf] text-sm">MARKET CAP</h1>
@@ -222,7 +222,7 @@ const CoinPage = ({ params }: { params: { id: string } }) => {
               </div>
             </div>
           </div>
-          <div className="w-1/2 dark:bg-[#050507] bg-white rounded-2xl p-7">
+          <div className="w-1/2 dark:bg-[#0c101c] bg-white rounded-2xl p-7">
             <h1 className="text-xl">7D Sparkline</h1>
             <PriceCoinGraph
               prices={coin.market_data.sparkline_7d.price}

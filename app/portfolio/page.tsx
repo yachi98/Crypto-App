@@ -13,13 +13,13 @@ const PortfolioPage = () => {
   const [showModal, setShowModal] = useState(false);
 
   return (
-    <div className="dark:bg-[#09090c] bg-light-theme max-w-screen-2xl m-auto h-screen p-2 relative">
+    <div className="dark:bg-gray-950 bg-light-theme max-w-screen-2xl m-auto h-screen p-2 relative">
       <div className={` w-full h-full ${showModal ? "blur-2xl" : ""}`}>
         <div className="flex justify-between items-center">
           <h2 className="text-3xl mt-5">Portfolio</h2>
           <button
             onClick={() => setShowModal(true)}
-            className="p-5 dark:bg-black bg-white dark:text-[#686868] dark:hover:text-white border dark:border-[#686868] dark:hover:border-white transition rounded-2xl text-md mt-5 w-[200px]"
+            className="p-5 dark:bg-[#0d121d] bg-white dark:hover:bg-[#121929] dark:text-[#686868] dark:hover:text-white dark:hover:border-white transition rounded-2xl text-md mt-5 w-[200px]"
           >
             Add Asset
           </button>

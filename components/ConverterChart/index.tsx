@@ -135,7 +135,7 @@ const ConverterChart = ({
   };
 
   return (
-    <div className="dark:bg-black bg-white h-[370px] w-full mt-5 rounded-2xl">
+    <div className="dark:bg-gradient-to-r from-black to-gray-900 bg-white h-[370px] w-full mt-5 rounded-2xl">
       <div className="w-full h-full p-10">
         <div className="flex justify-between">
           <h3 className="text-xl mb-2">

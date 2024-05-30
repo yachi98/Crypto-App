@@ -21,7 +21,7 @@ export default function RootLayout({
     <html lang="en">
       <Providers>
         <body
-          className={`${inter.className} dark:bg-[#09090c] bg-light-theme max-w-screen-2xl m-auto`}
+          className={`${inter.className} dark:bg-gray-950 bg-light-theme max-w-screen-2xl m-auto`}
         >
           <NavBar />
           <InfoBar />

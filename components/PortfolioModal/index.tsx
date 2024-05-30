@@ -132,7 +132,7 @@ const PortfolioModal = ({ showModal, setShowModal }: PortfolioModalProps) => {
   }, [coinValue]);
 
   return (
-    <div className="w-[720px] h-[380px] dark:bg-black bg-white border dark:border-[#171717] absolute top-1/4 -translate-y-1/2 left-1/2 -translate-x-1/2 rounded-3xl">
+    <div className="w-[720px] h-[380px] dark:bg-[#0a0f1c] bg-white absolute top-1/4 -translate-y-1/2 left-1/2 -translate-x-1/2 rounded-3xl">
       <div className="absolute right-0 p-5">
         <button onClick={() => handleCancel()}>
           <CloseIcon />
@@ -164,10 +164,10 @@ const PortfolioModal = ({ showModal, setShowModal }: PortfolioModalProps) => {
               onChange={handleSearchChange}
               onFocus={() => handleInputFocus(currencyInputRef)}
               onBlur={() => handleInputBlur(currencyInputRef)}
-              className="dark:bg-[#09090c] bg-light-theme outline-none rounded-xl p-2 w-full"
+              className="dark:bg-gray-900 bg-light-theme outline-none rounded-xl p-2 w-full"
             />
             {showDropdown && (
-              <div className="col-span-2 h-full w-[320px] flex flex-col overflow-y-scroll dark:bg-[#09090c] bg-white absolute z-10 rounded-2xl mt-12">
+              <div className="col-span-2 h-full w-[320px] flex flex-col overflow-y-scroll dark:bg-gray-900 bg-white absolute z-10 rounded-2xl mt-12">
                 {searchCoinResults.map((coin: SearchCoin) => (
                   <button
                     key={coin.id}
@@ -201,7 +201,7 @@ const PortfolioModal = ({ showModal, setShowModal }: PortfolioModalProps) => {
               onChange={handleAmount}
               onFocus={() => handleInputFocus(amountInputRef)}
               onBlur={() => handleInputBlur(amountInputRef)}
-              className="dark:bg-[#09090c] bg-light-theme outline-none rounded-xl p-2 w-full"
+              className="dark:bg-gray-900 bg-light-theme outline-none rounded-xl p-2 w-full"
             />
             {invalidAmount && (
               <span className="text-[#a5a5a5] text-xs">
@@ -213,7 +213,7 @@ const PortfolioModal = ({ showModal, setShowModal }: PortfolioModalProps) => {
           <div className="flex flex-col">
             <input
               ref={dueDateInputRef}
-              className="dark:bg-[#09090c] bg-light-theme outline-none rounded-xl p-2 w-full"
+              className="dark:bg-gray-900 bg-light-theme outline-none rounded-xl p-2 w-full"
               type="date"
               value={dueDate}
               onChange={handleDueDateChange}
@@ -231,13 +231,13 @@ const PortfolioModal = ({ showModal, setShowModal }: PortfolioModalProps) => {
           <button
             type="button"
             onClick={() => handleCancel()}
-            className="p-2 dark:bg-black bg-white dark:text-[#686868] dark:hover:text-white dark:border dark:border-[#686868] dark:hover:border-white transition rounded-xl w-[100px]"
+            className="p-2  bg-white dark:bg-gray-900 dark:hover:text-white  rounded-xl w-[100px]"
           >
             Cancel
           </button>
           <button
             type="submit"
-            className="p-2 dark:bg-black bg-white dark:text-[#686868] dark:hover:text-white dark:border dark:border-[#686868] dark:hover:border-white  transition rounded-xl w-[100px]"
+            className="p-2  bg-white dark:bg-gray-900 dark:hover:text-white  rounded-xl w-[100px]"
           >
             Save
           </button>
