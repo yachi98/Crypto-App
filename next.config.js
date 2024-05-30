@@ -12,6 +12,7 @@ const nextConfig = {
       "assets.coingecko.com",
       "images.cointelegraph.com",
       "www.coindesk.com",
+      "coin-images.coingecko.com",
     ],
   },
   reactStrictMode: false,
