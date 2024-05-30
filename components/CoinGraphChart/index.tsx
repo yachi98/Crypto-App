@@ -108,7 +108,7 @@ const getBackgroundColor = (
     height
   );
 
-  gradientFill.addColorStop(0, "rgba(116, 116, 250, 0.5)");
+  gradientFill.addColorStop(0, "rgba(116, 116, 250, 0.4)");
   gradientFill.addColorStop(0.7, "rgba(116, 116, 250, 0.1)");
   gradientFill.addColorStop(1, "transparent");
 
@@ -130,7 +130,7 @@ const CoinLineGraph = ({
         data: coin.prices,
         borderColor: "rgba(174, 139, 245)",
         backgroundColor: getBackgroundColor,
-        borderWidth: 2,
+        borderWidth: 1,
         pointRadius: 0,
         fill: true,
         tension: 0.8,
@@ -209,7 +209,7 @@ const CoinGraphChart = () => {
 
   return (
     <div className="flex mt-2">
-      <div className="dark:bg-[#050507] bg-white rounded-2xl w-1/2 h-[400px] m-2 flex flex-col p-6 relative">
+      <div className="dark:bg-gradient-to-r from-black to-gray-900 bg-white rounded-2xl w-1/2 h-[400px] m-2 flex flex-col p-6 relative">
         {coinInfo && (
           <div className="flex flex-col gap-8">
             <div className="flex gap-8">
@@ -219,7 +219,7 @@ const CoinGraphChart = () => {
               {selectedCoins.map((coin, index) => (
                 <div key={coin.id} className="flex gap-2 items-center">
                   <span
-                    className={`${coinBG[index]} w-[15px] h-[15px] flex items-center justify-center rounded`}
+                    className={`${coinBG[index]} w-[12px] h-[12px] flex items-center justify-center rounded`}
                   ></span>
                   <span className="text-xs">{renderInfo(coin.id)}</span>
                   <span className="text-xs">
@@ -246,7 +246,7 @@ const CoinGraphChart = () => {
         )}
       </div>
 
-      <div className="dark:bg-[#050507] bg-white rounded-2xl w-1/2 h-[400px] m-2 flex flex-col p-4">
+      <div className="dark:bg-gradient-to-r from-black to-gray-900 bg-white rounded-2xl w-1/2 h-[400px] m-2 flex flex-col p-4">
         {selectedCoin && (
           <div className="flex flex-col gap-8">
             <div className="flex items-center justify-between">

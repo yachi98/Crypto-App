@@ -48,7 +48,7 @@ const CoinRow = ({
   }, [currentCoin]);
 
   return (
-    <div className="w-full dark:bg-black bg-white border dark:border-[#171717] px-6 pt-6 pb-5 rounded-3xl h-[150px]">
+    <div className="w-full dark:bg-gradient-to-r from-black to-gray-900 bg-white px-6 pt-6 pb-5 rounded-3xl h-[150px]">
       <div className="flex items-center">
         <div className="relative flex items-center flex-grow">
           {currentCoin && (

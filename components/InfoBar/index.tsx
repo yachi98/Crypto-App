@@ -26,17 +26,17 @@ const InfoBar = () => {
   );
 
   return (
-    <div className="w-full dark:bg-[#09090c] flex items-center gap-x-16 p-4 justify-left z-10">
+    <div className="w-full dark:bg-gray-950 flex items-center gap-x-10 p-4 justify-left z-10">
       <div className="flex items-center gap-1 dark:text-white text-black">
         <CoinIcon />
         <span className="dark:text-white text-black  text-light-typo text-xs font-light">
-          Coins: {globalData.active_cryptocurrencies}
+          Active currencies: {globalData.active_cryptocurrencies}
         </span>
       </div>
       <div className="flex items-center gap-1 dark:text-white text-black">
         <ConvertIcon />
         <span className="dark:text-white text-black  text-xs font-light">
-          Exchange: {globalData.markets}
+          Markets: {globalData.markets}
         </span>
       </div>
       <div className="flex items-center gap-1">
