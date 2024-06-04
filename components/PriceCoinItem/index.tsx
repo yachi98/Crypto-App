@@ -44,7 +44,7 @@ const PriceCoinItem = ({ coin }: { coin: Coin }) => {
       className={`rounded-2xl pl-2 border-white bg-white ${
         isSelected
           ? "bg-gradient-to-r from-purple-400 to-orange-300 text-sm"
-          : "dark:bg-gray-900 dark:hover:bg-[#161f32] hover:bg-[#eaeaea]"
+          : "dark:bg-[#0d121d] dark:hover:bg-[#161f32] hover:bg-[#efefef]"
       } w-[190px] h-[60px] flex items-center flex-shrink-0`}
     >
       <div className="flex gap-3 items-center">
@@ -56,7 +56,7 @@ const PriceCoinItem = ({ coin }: { coin: Coin }) => {
         <div className="flex flex-col">
           <span
             className={`px-1 text-xs ${
-              isSelected ? "text-white" : "dark:text-[#c2c2c2] text-grey"
+              isSelected ? "text-white" : "dark:text-[#c2c2c2] text-grey "
             } flex`}
           >
             {coin.name.charAt(0).toUpperCase() +

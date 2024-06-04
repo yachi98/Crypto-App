@@ -51,18 +51,19 @@ const options = {
             value < 10
               ? value.toPrecision(7)
               : value.toFixed(2).toLocaleString();
-          return formatNumber(value);
+          const coinName = tooltipItem.dataset.label;
+          return `${coinName}: ${formatNumber(value)}`;
         },
         labelColor: function (tooltipItem: any) {
           const colors = [
-            "rgba(174, 139, 245, 1)", // Color for the first coin
-            "rgba(255, 139, 245, 1)", // Color for the second coin
-            "rgba(253, 186, 116, 1)", // Color for the third coin
+            "rgba(174, 139, 245, 1)",
+            "rgba(255, 139, 245, 1)",
+            "rgba(253, 186, 116, 1)",
           ];
           return {
             borderRadius: 2,
             backgroundColor:
-              colors[tooltipItem.datasetIndex] || "rgba(159, 122, 234)",
+              colors[tooltipItem.datasetIndex] || "rgba(174, 139, 245, 1)",
           };
         },
       },
@@ -117,6 +118,7 @@ const CoinLineGraph = ({
     labels: labelFormatter(coins[0].priceLabels, days),
     datasets: coins.map((coin, index) => ({
       data: coin.prices,
+      label: coin.id,
       borderColor: options.plugins.tooltip.callbacks.labelColor({
         datasetIndex: index,
       }).backgroundColor,
@@ -152,6 +154,7 @@ const CoinBarGraph = ({
     labels: labelFormatter(coins[0].volumeLabels, days),
     datasets: coins.map((coin, index) => ({
       data: coin.total_volumes,
+      label: coin.id,
       borderColor: options.plugins.tooltip.callbacks.labelColor({
         datasetIndex: index,
       }).backgroundColor,
