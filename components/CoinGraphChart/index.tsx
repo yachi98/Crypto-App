@@ -51,12 +51,18 @@ const options = {
             value < 10
               ? value.toPrecision(7)
               : value.toFixed(2).toLocaleString();
-          return value;
+          return formatNumber(value);
         },
-        labelColor: function () {
+        labelColor: function (tooltipItem: any) {
+          const colors = [
+            "rgba(174, 139, 245, 1)", // Color for the first coin
+            "rgba(255, 139, 245, 1)", // Color for the second coin
+            "rgba(253, 186, 116, 1)", // Color for the third coin
+          ];
           return {
             borderRadius: 2,
-            backgroundColor: "rgba(159, 122, 234)",
+            backgroundColor:
+              colors[tooltipItem.datasetIndex] || "rgba(159, 122, 234)",
           };
         },
       },
@@ -64,35 +70,17 @@ const options = {
   },
   scales: {
     x: {
-      grid: {
-        display: false,
-      },
+      grid: { display: false },
       ticks: {
         display: true,
         color: "grey",
         maxTicksLimit: 10,
         align: "inner",
       },
-      border: {
-        display: true,
-      },
+      border: { display: true },
       stacked: true,
     },
-    y: {
-      display: false,
-    },
-    "y-axis-1": {
-      display: false,
-      beginAtZero: false,
-    },
-    "y-axis-2": {
-      display: false,
-      beginAtZero: false,
-    },
-    "y-axis-3": {
-      display: false,
-      beginAtZero: false,
-    },
+    y: { display: false },
   },
   pointRadius: 0,
   borderWidth: 0,
@@ -127,36 +115,19 @@ const CoinLineGraph = ({
   const [shouldRender, setShouldRender] = useState(false);
   const data = {
     labels: labelFormatter(coins[0].priceLabels, days),
-    datasets: [
-      {
-        data: coins[0].prices,
-        borderColor: "rgba(174, 139, 245)",
-        backgroundColor: getBackgroundColor,
-        borderWidth: 1,
-        pointRadius: 0,
-        fill: true,
-        tension: 0.8,
-      },
-      {
-        data: coins[1]?.prices || [],
-        borderColor: "rgba(255, 139, 245)",
-        backgroundColor: getBackgroundColor,
-        borderWidth: 1,
-        pointRadius: 0,
-        fill: true,
-        tension: 0.8,
-      },
-      {
-        data: coins[2]?.prices || [],
-        borderColor: "rgba(255, 255, 245)",
-        backgroundColor: getBackgroundColor,
-        borderWidth: 1,
-        pointRadius: 0,
-        fill: true,
-        tension: 0.8,
-      },
-    ],
+    datasets: coins.map((coin, index) => ({
+      data: coin.prices,
+      borderColor: options.plugins.tooltip.callbacks.labelColor({
+        datasetIndex: index,
+      }).backgroundColor,
+      backgroundColor: getBackgroundColor,
+      borderWidth: 1,
+      pointRadius: 0,
+      fill: true,
+      tension: 0.8,
+    })),
   };
+
   useEffect(() => {
     setTimeout(() => {
       setShouldRender(true);
@@ -179,35 +150,19 @@ const CoinBarGraph = ({
 }) => {
   const data = {
     labels: labelFormatter(coins[0].volumeLabels, days),
-    datasets: [
-      {
-        data: coins[0].total_volumes,
-        borderColor: "rgba(174, 139, 245)",
-        backgroundColor: "rgba(174, 139, 245)",
-        borderWidth: 8,
-        pointRadius: 0,
-        fill: true,
-        tension: 0.8,
-      },
-      {
-        data: coins[1]?.total_volumes,
-        borderColor: "rgba(255, 139, 245)",
-        backgroundColor: "rgba(255, 139, 245)",
-        borderWidth: 8,
-        pointRadius: 0,
-        fill: true,
-        tension: 0.8,
-      },
-      {
-        data: coins[2]?.total_volumes,
-        borderColor: "rgba(255, 255, 245)",
-        backgroundColor: "rgba(255, 255, 245)",
-        borderWidth: 8,
-        pointRadius: 0,
-        fill: true,
-        tension: 0.8,
-      },
-    ],
+    datasets: coins.map((coin, index) => ({
+      data: coin.total_volumes,
+      borderColor: options.plugins.tooltip.callbacks.labelColor({
+        datasetIndex: index,
+      }).backgroundColor,
+      backgroundColor: options.plugins.tooltip.callbacks.labelColor({
+        datasetIndex: index,
+      }).backgroundColor,
+      borderWidth: 8,
+      pointRadius: 0,
+      fill: true,
+      tension: 0.8,
+    })),
   };
 
   return <Bar options={options as any} data={data as any} />;
@@ -219,8 +174,6 @@ const CoinGraphChart = () => {
     (state) => state.selectedCoinData
   );
   const { currency, symbol } = useAppSelector((state) => state.currencySlice);
-  // const selectedCoin = selectedCoins.length > 0 ? selectedCoins[0] : null;
-
   const { coinMarketData } = useAppSelector((state) => state.coinMarketData);
 
   const selectedCoinsInfo: Coin[] = selectedCoins.reduce(
@@ -231,19 +184,15 @@ const CoinGraphChart = () => {
     []
   );
 
-  // console.log("selectedCoins:", selectedCoins);
-
-  const coinBG: string[] = ["bg-orange-300", "bg-[#7878FA]", "bg-[#D878FA]"];
+  const coinBG: string[] = ["bg-[#7878FA]", "bg-[#D878FA]", "bg-[#FDBA74]"];
 
   useEffect(() => {
-    if (selectedCoinsInfo.length > 0) {
-      return;
-    }
+    if (selectedCoinsInfo.length > 0) return;
     dispatch(
       getSelectedCoinData({
-        coinId: coinId,
-        timeDay: timeDay,
-        currency: currency,
+        coinId,
+        timeDay,
+        currency,
       })
     );
   }, [coinId, timeDay, currency]);
