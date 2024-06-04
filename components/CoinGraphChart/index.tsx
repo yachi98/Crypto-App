@@ -52,7 +52,9 @@ const options = {
               ? value.toPrecision(7)
               : value.toFixed(2).toLocaleString();
           const coinName = tooltipItem.dataset.label;
-          return `${coinName}: ${formatNumber(value)}`;
+          return `${
+            coinName.charAt(0).toUpperCase() + coinName.slice(1).toLowerCase()
+          }: ${formatNumber(value)}`;
         },
         labelColor: function (tooltipItem: any) {
           const colors = [
