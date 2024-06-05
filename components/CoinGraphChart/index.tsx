@@ -78,6 +78,9 @@ const options = {
         display: true,
         color: "grey",
         maxTicksLimit: 10,
+        font: {
+          size: 10,
+        },
         align: "inner",
       },
       border: { display: true },
