@@ -10,6 +10,7 @@ import { SelectedCoin } from "@/interfaces/selectedcoin.interface";
 import { getSelectedCoinData } from "@/redux/features/selectedCoins";
 import { labelFormatter } from "@/redux/features/dateFormatter";
 import formatDateGraph from "@/utils/formatDateGraph";
+import backgroundColor from "@/utils/backgroundColour";
 import formatNumber from "@/utils/formatNumber";
 import { Line, Bar } from "react-chartjs-2";
 
@@ -22,7 +23,6 @@ import {
   Filler,
   BarElement,
   Tooltip,
-  ScriptableContext,
 } from "chart.js";
 
 ChartJS.register(
@@ -92,25 +92,6 @@ const options = {
   borderWidth: 0,
 };
 
-const getBackgroundColor = (
-  context: ScriptableContext<"line">
-): CanvasGradient => {
-  const ctx: CanvasRenderingContext2D = context.chart.ctx;
-  const height: number = ctx.canvas.clientHeight;
-  const gradientFill: CanvasGradient = ctx.createLinearGradient(
-    0,
-    0,
-    0,
-    height
-  );
-
-  gradientFill.addColorStop(0, "rgba(116, 116, 250, 0.4)");
-  gradientFill.addColorStop(0.7, "rgba(116, 116, 250, 0.1)");
-  gradientFill.addColorStop(1, "transparent");
-
-  return gradientFill;
-};
-
 const CoinLineGraph = ({
   coins,
   days,
@@ -127,7 +108,7 @@ const CoinLineGraph = ({
       borderColor: options.plugins.tooltip.callbacks.labelColor({
         datasetIndex: index,
       }).backgroundColor,
-      backgroundColor: getBackgroundColor,
+      backgroundColor: backgroundColor,
       borderWidth: 1,
       pointRadius: 0,
       fill: true,
