@@ -167,7 +167,7 @@ const CoinPage = ({ params }: { params: { id: string } }) => {
       </div>
       {coin && (
         <div className="w-full h-[330px] rounded-2xl flex gap-5 mt-5">
-          <div className="w-1/2 dark:bg-gray-900 bg-white rounded-2xl p-7 flex flex-col">
+          <div className="w-1/2 dark:bg-[#0c101c] bg-white rounded-2xl p-7 flex flex-col">
             <h1 className="text-2xl">Market</h1>
             <div className="flex justify-between items-center mb-2">
               <h1 className="text-[#afafaf] text-sm">MARKET CAP</h1>

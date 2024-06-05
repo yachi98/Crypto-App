@@ -1,6 +1,6 @@
-import { Chart as ChartJS, ScriptableContext } from "chart.js";
+import { ScriptableContext } from "chart.js";
 
-const getBackgroundColor = (
+const backgroundColor = (
   context: ScriptableContext<"line">
 ): CanvasGradient => {
   const ctx: CanvasRenderingContext2D = context.chart.ctx;
@@ -16,3 +16,5 @@ const getBackgroundColor = (
   gradientFill.addColorStop(1, "transparent");
   return gradientFill;
 };
+
+export default backgroundColor;

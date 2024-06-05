@@ -37,7 +37,11 @@ export const getSelectedCoinData = createAsyncThunk(
       coinId,
       timeDay,
       currency,
-    }: { coinId: string; timeDay: string; currency: string },
+    }: {
+      coinId: string;
+      timeDay: string;
+      currency: string;
+    },
     { rejectWithValue }
   ) => {
     try {

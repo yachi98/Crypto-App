@@ -1,5 +1,6 @@
 "use client";
 
+import { Coin } from "@/interfaces/coin.interface";
 import { useAppSelector } from "@/redux/store";
 import { AppDispatch } from "@/redux/store";
 import { useDispatch } from "react-redux";
@@ -8,6 +9,8 @@ import TimeSelectorBar from "../TimeSelector";
 import { SelectedCoin } from "@/interfaces/selectedcoin.interface";
 import { getSelectedCoinData } from "@/redux/features/selectedCoins";
 import { labelFormatter } from "@/redux/features/dateFormatter";
+import formatDateGraph from "@/utils/formatDateGraph";
+import backgroundColor from "@/utils/backgroundColour";
 import formatNumber from "@/utils/formatNumber";
 import { Line, Bar } from "react-chartjs-2";
 
@@ -20,7 +23,6 @@ import {
   Filler,
   BarElement,
   Tooltip,
-  ScriptableContext,
 } from "chart.js";
 
 ChartJS.register(
@@ -49,12 +51,21 @@ const options = {
             value < 10
               ? value.toPrecision(7)
               : value.toFixed(2).toLocaleString();
-          return value;
+          const coinName = tooltipItem.dataset.label;
+          return `${
+            coinName.charAt(0).toUpperCase() + coinName.slice(1).toLowerCase()
+          }: ${formatNumber(value)}`;
         },
-        labelColor: function () {
+        labelColor: function (tooltipItem: any) {
+          const colors = [
+            "rgba(174, 139, 245, 1)",
+            "rgba(255, 139, 245, 1)",
+            "rgba(253, 186, 116, 1)",
+          ];
           return {
             borderRadius: 2,
-            backgroundColor: "rgba(159, 122, 234)",
+            backgroundColor:
+              colors[tooltipItem.datasetIndex] || "rgba(174, 139, 245, 1)",
           };
         },
       },
@@ -62,81 +73,49 @@ const options = {
   },
   scales: {
     x: {
-      grid: {
-        display: false,
-      },
+      grid: { display: false },
       ticks: {
         display: true,
         color: "grey",
         maxTicksLimit: 10,
+        font: {
+          size: 10,
+        },
         align: "inner",
       },
-      border: {
-        display: true,
-      },
+      border: { display: true },
       stacked: true,
     },
-    y: {
-      display: false,
-    },
-    "y-axis-1": {
-      display: false,
-      beginAtZero: false,
-    },
-    "y-axis-2": {
-      display: false,
-      beginAtZero: false,
-    },
-    "y-axis-3": {
-      display: false,
-      beginAtZero: false,
-    },
+    y: { display: false },
   },
   pointRadius: 0,
   borderWidth: 0,
 };
 
-const getBackgroundColor = (
-  context: ScriptableContext<"line">
-): CanvasGradient => {
-  const ctx: CanvasRenderingContext2D = context.chart.ctx;
-  const height: number = ctx.canvas.clientHeight;
-  const gradientFill: CanvasGradient = ctx.createLinearGradient(
-    0,
-    0,
-    0,
-    height
-  );
-
-  gradientFill.addColorStop(0, "rgba(116, 116, 250, 0.4)");
-  gradientFill.addColorStop(0.7, "rgba(116, 116, 250, 0.1)");
-  gradientFill.addColorStop(1, "transparent");
-
-  return gradientFill;
-};
-
 const CoinLineGraph = ({
-  coin,
+  coins,
   days,
 }: {
-  coin: SelectedCoin;
+  coins: SelectedCoin[];
   days: string;
 }) => {
   const [shouldRender, setShouldRender] = useState(false);
   const data = {
-    labels: labelFormatter(coin.priceLabels, days),
-    datasets: [
-      {
-        data: coin.prices,
-        borderColor: "rgba(174, 139, 245)",
-        backgroundColor: getBackgroundColor,
-        borderWidth: 1,
-        pointRadius: 0,
-        fill: true,
-        tension: 0.8,
-      },
-    ],
+    labels: labelFormatter(coins[0].priceLabels, days),
+    datasets: coins.map((coin, index) => ({
+      data: coin.prices,
+      label: coin.id,
+      borderColor: options.plugins.tooltip.callbacks.labelColor({
+        datasetIndex: index,
+      }).backgroundColor,
+      backgroundColor: backgroundColor,
+      borderWidth: 1,
+      pointRadius: 0,
+      fill: true,
+      tension: 0.8,
+    })),
   };
+
   useEffect(() => {
     setTimeout(() => {
       setShouldRender(true);
@@ -150,53 +129,59 @@ const CoinLineGraph = ({
   );
 };
 
-const CoinBarGraph = ({ coin, days }: { coin: SelectedCoin; days: string }) => {
+const CoinBarGraph = ({
+  coins,
+  days,
+}: {
+  coins: SelectedCoin[];
+  days: string;
+}) => {
   const data = {
-    labels: labelFormatter(coin.volumeLabels, days),
-    datasets: [
-      {
-        data: coin.total_volumes,
-        borderColor: "rgba(174, 139, 245)",
-        backgroundColor: "rgba(174, 139, 245)",
-        borderWidth: 8,
-        pointRadius: 0,
-        fill: true,
-        tension: 0.8,
-      },
-    ],
+    labels: labelFormatter(coins[0].volumeLabels, days),
+    datasets: coins.map((coin, index) => ({
+      data: coin.total_volumes,
+      label: coin.id,
+      borderColor: options.plugins.tooltip.callbacks.labelColor({
+        datasetIndex: index,
+      }).backgroundColor,
+      backgroundColor: options.plugins.tooltip.callbacks.labelColor({
+        datasetIndex: index,
+      }).backgroundColor,
+      borderWidth: 8,
+      pointRadius: 0,
+      fill: true,
+      tension: 0.8,
+    })),
   };
 
   return <Bar options={options as any} data={data as any} />;
 };
 
 const CoinGraphChart = () => {
-  const { symbol } = useAppSelector((state) => state.currencySlice);
   const dispatch: AppDispatch = useDispatch();
   const { coinId, selectedCoins, timeDay } = useAppSelector(
     (state) => state.selectedCoinData
   );
-  const { currency } = useAppSelector((state) => state.currencySlice);
-  const selectedCoin = selectedCoins.length > 0 ? selectedCoins[0] : null;
+  const { currency, symbol } = useAppSelector((state) => state.currencySlice);
   const { coinMarketData } = useAppSelector((state) => state.coinMarketData);
 
-  const coinInfo = coinMarketData.find(
-    (data) => selectedCoin && data.id === selectedCoin.id
+  const selectedCoinsInfo: Coin[] = selectedCoins.reduce(
+    (acc: Coin[], curr: SelectedCoin) => {
+      const coinInfo = coinMarketData.find((coin: Coin) => coin.id === curr.id);
+      return coinInfo ? [...acc, coinInfo] : acc;
+    },
+    []
   );
 
-  const todayDate: string = new Date().toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
-
-  const coinBG: string[] = ["bg-orange-300", "bg-[#7878FA]", "bg-[#D878FA]"];
+  const coinBG: string[] = ["bg-[#7878FA]", "bg-[#D878FA]", "bg-[#FDBA74]"];
 
   useEffect(() => {
+    if (selectedCoinsInfo.length > 0) return;
     dispatch(
       getSelectedCoinData({
-        coinId: coinId,
-        timeDay: timeDay,
-        currency: currency,
+        coinId,
+        timeDay,
+        currency,
       })
     );
   }, [coinId, timeDay, currency]);
@@ -210,44 +195,45 @@ const CoinGraphChart = () => {
   return (
     <div className="flex mt-2">
       <div className="dark:bg-gradient-to-r from-black to-gray-900 bg-white rounded-2xl w-1/2 h-[400px] m-2 flex flex-col p-6 relative">
-        {coinInfo && (
+        {selectedCoinsInfo.length > 0 && (
           <div className="flex flex-col gap-8">
             <div className="flex gap-8">
               <span className="dark:text-[#DEDEDE] flex text-base gap-1 items-center">
-                {renderInfo(coinInfo.name)} ({coinInfo.symbol.toUpperCase()})
+                {renderInfo(selectedCoinsInfo[0].name)} (
+                {selectedCoinsInfo[0].symbol.toUpperCase()})
               </span>
-              {selectedCoins.map((coin, index) => (
-                <div key={coin.id} className="flex gap-2 items-center">
+              {selectedCoinsInfo.map((selectedCoin, index) => (
+                <div key={selectedCoin.id} className="flex gap-2 items-center">
                   <span
                     className={`${coinBG[index]} w-[12px] h-[12px] flex items-center justify-center rounded`}
                   ></span>
-                  <span className="text-xs">{renderInfo(coin.id)}</span>
+                  <span className="text-xs">{renderInfo(selectedCoin.id)}</span>
                   <span className="text-xs">
                     {symbol}
-                    {formatNumber(coinInfo.current_price)}
+                    {formatNumber(selectedCoin.current_price)}
                   </span>
                 </div>
               ))}
-              <span className="dark:text-[#DEDEDE] text-sm text-black absolute right-4 top-5">
-                {todayDate}
+              <span className="dark:text-[#DEDEDE] text-sm text-black absolute right-4">
+                {formatDateGraph}
               </span>
             </div>
 
             <span className="dark:text-[#DEDEDE] text-black text-3xl">
               {symbol}
-              {formatNumber(coinInfo.current_price)}
+              {formatNumber(selectedCoinsInfo[0].current_price)}
             </span>
           </div>
         )}
-        {selectedCoin && (
+        {selectedCoinsInfo[0] && (
           <div className="w-[100%] h-[100%]">
-            <CoinLineGraph days={timeDay} coin={selectedCoin} />
+            <CoinLineGraph days={timeDay} coins={selectedCoins} />
           </div>
         )}
       </div>
 
       <div className="dark:bg-gradient-to-r from-black to-gray-900 bg-white rounded-2xl w-1/2 h-[400px] m-2 flex flex-col p-4">
-        {selectedCoin && (
+        {selectedCoins[0] && (
           <div className="flex flex-col gap-8">
             <div className="flex items-center justify-between">
               <span className="dark:text-[#DEDEDE] text-black flex text-base">
@@ -258,16 +244,16 @@ const CoinGraphChart = () => {
             <span className="dark:text-[#DEDEDE] text-black text-3xl">
               {symbol}
               {formatNumber(
-                selectedCoin.total_volumes[
-                  selectedCoin.total_volumes.length - 1
+                selectedCoins[0].total_volumes[
+                  selectedCoins[0].total_volumes.length - 1
                 ]
               )}
             </span>
           </div>
         )}
-        {selectedCoin && (
+        {selectedCoinsInfo[0] && (
           <div className="w-[100%] h-[100%]">
-            <CoinBarGraph days={timeDay} coin={selectedCoin} />
+            <CoinBarGraph days={timeDay} coins={selectedCoins} />
           </div>
         )}
       </div>
