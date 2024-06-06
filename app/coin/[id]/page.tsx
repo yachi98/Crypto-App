@@ -16,8 +16,7 @@ const CoinPage = ({ params }: { params: { id: string } }) => {
   const [hasError, setHasError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [coin, setCoin] = useState<CoinPage | null>(null);
-  const { currency } = useAppSelector((state) => state.currencySlice);
-  const { symbol } = useAppSelector((state) => state.currencySlice);
+  const { currency, symbol } = useAppSelector((state) => state.currencySlice);
 
   const getCoinData = async () => {
     try {

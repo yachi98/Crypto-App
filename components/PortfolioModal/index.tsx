@@ -34,6 +34,7 @@ const PortfolioModal = ({ showModal, setShowModal }: PortfolioModalProps) => {
         const { data } = await axios.get(
           `https://api.coingecko.com/api/v3/search?query=${coinValue}&x_cg_demo_api_key=CG-duQsjCRoXZm1bJBTrL8sARut`
         );
+        console.log(data);
         setSearchCoins(data.coins);
       } catch (error) {
         console.error("Error fetching historical data:", error);
@@ -132,7 +133,7 @@ const PortfolioModal = ({ showModal, setShowModal }: PortfolioModalProps) => {
   }, [coinValue]);
 
   return (
-    <div className="w-[720px] h-[380px] dark:bg-[#0a0f1c] bg-white absolute top-1/4 -translate-y-1/2 left-1/2 -translate-x-1/2 rounded-3xl">
+    <div className="w-[720px] h-[350px] dark:bg-[#0a0f1c] bg-white absolute top-1/4 -translate-y-1/2 left-1/2 -translate-x-1/2 rounded-3xl">
       <div className="absolute right-0 p-5">
         <button onClick={() => handleCancel()}>
           <CloseIcon />
@@ -227,7 +228,7 @@ const PortfolioModal = ({ showModal, setShowModal }: PortfolioModalProps) => {
             )}
           </div>
         </div>
-        <div className="flex justify-center gap-5 mt-12">
+        <div className="flex justify-center gap-5 mt-8">
           <button
             type="button"
             onClick={() => handleCancel()}

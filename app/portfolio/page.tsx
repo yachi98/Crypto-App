@@ -1,20 +1,16 @@
 "use client";
 
 import { useState } from "react";
+import { Portfolio } from "@/interfaces/portfolio.interface";
 import PortfolioModal from "@/components/PortfolioModal";
-
-interface PortfolioItem {
-  value: string;
-  amount: string;
-  date: string;
-}
+import PortfolioTable from "@/components/PortfolioTable";
 
 const PortfolioPage = () => {
   const [showModal, setShowModal] = useState(false);
 
   return (
     <div className="dark:bg-gray-950 bg-light-theme max-w-screen-2xl m-auto h-screen p-2 relative">
-      <div className={` w-full h-full ${showModal ? "blur-2xl" : ""}`}>
+      <div className={`w-full h-full ${showModal ? "blur-2xl" : ""}`}>
         <div className="flex justify-between items-center">
           <h2 className="text-3xl mt-5">Portfolio</h2>
           <button
@@ -31,6 +27,7 @@ const PortfolioPage = () => {
           investments effortlessly. You can add your coins by simply clicking on
           the Add Asset button above.
         </p>
+        <PortfolioTable />
       </div>
       {showModal && (
         <PortfolioModal showModal={showModal} setShowModal={setShowModal} />

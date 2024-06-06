@@ -23,6 +23,7 @@ export const getPortfolioData = createAsyncThunk(
       const { data } = await axios.get(
         `https://api.coingecko.com/api/v3/coins/${coinId}/history?date=30-12-2023`
       );
+      console.log(data);
       return data;
     } catch (error) {
       return rejectWithValue(error);
@@ -36,6 +37,7 @@ const portfolioSlice = createSlice({
   reducers: {
     addPortfolio(state, action) {
       state.portfolioData = [...state.portfolioData, action.payload];
+      console.log("2", action.payload);
     },
   },
   extraReducers: (builder) => {
