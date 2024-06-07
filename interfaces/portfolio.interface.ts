@@ -1,6 +1,6 @@
 export interface Portfolio {
   id: number;
-  name: string;
+  value: string;
   coinId: string;
   date: string;
   amount: number;

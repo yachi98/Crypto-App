@@ -4,7 +4,6 @@ import { AppDispatch } from "@/redux/store";
 import { useDispatch } from "react-redux";
 import CloseIcon from "@/public/CloseIcon.svg";
 import axios from "axios";
-import { getPortfolioData } from "@/redux/features/portfolioSlice";
 import convertDate from "@/utils/convertDate";
 import { addPortfolio } from "@/redux/features/portfolioSlice";
 
@@ -34,7 +33,6 @@ const PortfolioModal = ({ showModal, setShowModal }: PortfolioModalProps) => {
         const { data } = await axios.get(
           `https://api.coingecko.com/api/v3/search?query=${coinValue}&x_cg_demo_api_key=CG-duQsjCRoXZm1bJBTrL8sARut`
         );
-        console.log(data);
         setSearchCoins(data.coins);
       } catch (error) {
         console.error("Error fetching historical data:", error);
@@ -128,12 +126,8 @@ const PortfolioModal = ({ showModal, setShowModal }: PortfolioModalProps) => {
     setDueDate("");
   };
 
-  useEffect(() => {
-    dispatch(getPortfolioData(coinValue));
-  }, [coinValue]);
-
   return (
-    <div className="w-[720px] h-[350px] dark:bg-[#0a0f1c] bg-white absolute top-1/4 -translate-y-1/2 left-1/2 -translate-x-1/2 rounded-3xl">
+    <div className="w-[720px] h-[350px] dark:bg-[#0a0f1c] bg-[#fafafa] absolute top-1/4 -translate-y-1/2 left-1/2 -translate-x-1/2 rounded-3xl">
       <div className="absolute right-0 p-5">
         <button onClick={() => handleCancel()}>
           <CloseIcon />
