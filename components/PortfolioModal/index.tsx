@@ -18,11 +18,11 @@ const PortfolioModal = ({ showModal, setShowModal }: PortfolioModalProps) => {
   const currencyInputRef = useRef<HTMLInputElement>(null);
   const amountInputRef = useRef<HTMLInputElement>(null);
   const dueDateInputRef = useRef<HTMLInputElement>(null);
-  const [showDropdown, setShowDropdown] = useState(false);
-  const [coinValue, setCoinValue] = useState("");
+  const [showDropdown, setShowDropdown] = useState<boolean>(false);
+  const [coinValue, setCoinValue] = useState<string>("");
   const [amount, setAmount] = useState<number>();
   const [dueDate, setDueDate] = useState<string>("");
-  const [image, setImage] = useState("");
+  const [image, setImage] = useState<string>("");
   const [invalidCoin, setInvalidCoin] = useState<boolean>(false);
   const [invalidAmount, setInvalidAmount] = useState<boolean>(false);
   const [invalidDate, setInvalidDate] = useState<boolean>(false);
