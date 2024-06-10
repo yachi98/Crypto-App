@@ -228,7 +228,7 @@ const PortfolioModal = ({ showModal, setShowModal }: PortfolioModalProps) => {
         <div className="flex justify-center gap-5 mt-8">
           <button
             type="button"
-            onClick={() => handleCancel()}
+            onClick={handleCancel}
             className="p-2  bg-white dark:bg-gray-900 dark:hover:text-white  rounded-xl w-[100px]"
           >
             Cancel
