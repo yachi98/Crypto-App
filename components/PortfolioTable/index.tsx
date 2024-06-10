@@ -14,40 +14,52 @@ interface PortfolioModalProps {
 const PortfolioTable = ({ showModal, setShowModal }: PortfolioModalProps) => {
   const { portfolioData } = useAppSelector((state) => state.portfolioData);
   //   const { coinId } = useAppSelector((state) => state.portfolioData);
-  const [histValue, setHistValue] = useState("");
+  const [coinValue, setCoinValue] = useState("");
   const [historicalCoins, setHistoricalCoins] = useState<HistoricalCoin[]>([]);
 
-  //   useEffect(() => {
-  //     const fetchHistoricalData = async () => {
-  //       try {
-  //         const historicalCoins = await axios.get(
-  //           `https://api.coingecko.com/api/v3/coins/${histValue}/history?date=30-12-2023`
-  //         );
-  //         // setHistoricalCoins(historicalCoins);
-  //       } catch (error) {
-  //         console.log(error);
-  //       }
-  //     };
-  //     fetchHistoricalData();
-  //   }, [portfolioData]);
+  const coinIds: string[] = portfolioData.map((coin) => coin.coinId);
+  //   This creates an array of coin IDs from portfolioData.
+  const individualCoins: string[] = coinIds.filter(
+    (coin, index) => coinIds.indexOf(coin) === index
+  );
+  //   This filters coinIds to get an array of unique coin IDs, removing duplicates.
 
-  // export const getPortfolioData = createAsyncThunk(
-  //   "portfolioData/getPortfolioData",
-  //   async (coinId: string, { rejectWithValue }) => {
-  //     try {
-  //       const { data } = await axios.get(
-  //         `https://api.coingecko.com/api/v3/coins/${coinId}/history?date=30-12-2023`
-  //       );
-  //       console.log("hello", data);
-  //       return data;
-  //     } catch (error) {
-  //       return rejectWithValue(error);
-  //     }
-  //   }
-  // );
+  useEffect(() => {
+    const fetchHistoricalData = async () => {
+      try {
+        const results = await Promise.all(
+          portfolioData.map(
+            (coin) =>
+              axios.get(
+                `https://api.coingecko.com/api/v3/coins/bitcoin/history?date=30-12-2023`
+              )
+            // axios.get(
+            //   `https://api.coingecko.com/api/v3/coins/${coin.coinId}/history?date=${coin.date}`
+            // )
+          )
+        );
+        const historicalData = results.map((response) => response.data);
+        console.log(historicalData);
+        setHistoricalCoins(historicalData);
+      } catch (error) {
+        console.error("Failed to fetch historical data:", error);
+      }
+    };
+
+    if (portfolioData.length) {
+      fetchHistoricalData();
+    }
+  }, [portfolioData]);
+
+  const hasCoinData = historicalCoins.length > 0;
+
+  //   creates a new array of promises by mapping over portfolioData. For each coin, it makes an HTTP GET request to the CoinGecko API using axios.get.
+  //   Promise.all is used to run all these requests concurrently. It takes an array of promises and returns a single promise that resolves when all of the promises in the array have resolved. If any promise is rejected, it is caught by the catch block.
+  //   his line creates a new array historicalData by mapping over results. Each result is an Axios response object, and response.data extracts the data part of each response.
 
   return (
     <div className="mt-5">
+      {/* {hasCoinData && */}
       {portfolioData.map((item: Portfolio) => (
         <PortfolioItem key={item.id} item={item} />
       ))}
@@ -56,25 +68,3 @@ const PortfolioTable = ({ showModal, setShowModal }: PortfolioModalProps) => {
 };
 
 export default PortfolioTable;
-
-//   useEffect(() => {
-//     const fetchHistoricalData = async () => {
-//       try {
-//         const results = await Promise.all(
-//           portfolioData.map((coin) =>
-//             axios.get(
-//               `https://api.coingecko.com/api/v3/coins/${coin.coinId}/history?date=${coin.date}`
-//             )
-//           )
-//         );
-//         const historicalData = results.map((response) => response.data);
-//         setHistoricalCoins(historicalData);
-//       } catch (error) {
-//         console.error("Failed to fetch historical data:", error);
-//       }
-//     };
-
-//     if (portfolioData.length) {
-//       fetchHistoricalData();
-//     }
-//   }, [portfolioData]);

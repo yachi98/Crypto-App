@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 interface PortfolioItemModalProps {
   showModal: boolean;
   setShowModal: (show: boolean) => void;

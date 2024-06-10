@@ -6,6 +6,7 @@ import CloseIcon from "@/public/CloseIcon.svg";
 import axios from "axios";
 import convertDate from "@/utils/convertDate";
 import { addPortfolio } from "@/redux/features/portfolioSlice";
+import { Portfolio } from "@/interfaces/portfolio.interface";
 
 interface PortfolioModalProps {
   showModal: boolean;
@@ -22,6 +23,7 @@ const PortfolioModal = ({ showModal, setShowModal }: PortfolioModalProps) => {
   const [coinValue, setCoinValue] = useState("");
   const [amount, setAmount] = useState<number>();
   const [dueDate, setDueDate] = useState<string>("");
+  const [image, setImage] = useState("");
   const [invalidCoin, setInvalidCoin] = useState<boolean>(false);
   const [invalidAmount, setInvalidAmount] = useState<boolean>(false);
   const [invalidDate, setInvalidDate] = useState<boolean>(false);
@@ -67,6 +69,7 @@ const PortfolioModal = ({ showModal, setShowModal }: PortfolioModalProps) => {
     const portfolioCoin = {
       value: coinValue,
       amount: amount,
+      large: image,
       date: convertDate(dueDate),
     };
     dispatch(addPortfolio(portfolioCoin));
@@ -114,6 +117,7 @@ const PortfolioModal = ({ showModal, setShowModal }: PortfolioModalProps) => {
 
   const handleCoinSelect = (coin: SearchCoin) => {
     setCoinValue(coin.name);
+    setImage(coin.large);
     setSelectedCoin(coin);
     setShowDropdown(false);
   };
