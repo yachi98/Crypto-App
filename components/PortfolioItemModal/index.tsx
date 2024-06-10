@@ -22,7 +22,7 @@ const PortfolioItemModal = ({
           Cancel
         </button>
         <button
-          onClick={() => handleRemove()}
+          onClick={handleRemove}
           className="text-lg p-2 w-[120px] bg-red-500 rounded-2xl"
         >
           Delete
