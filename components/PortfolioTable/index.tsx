@@ -60,8 +60,8 @@ const PortfolioTable = ({ showModal, setShowModal }: PortfolioModalProps) => {
   return (
     <div className="mt-5">
       {/* {hasCoinData && */}
-      {portfolioData.map((item: Portfolio) => (
-        <PortfolioItem key={item.id} item={item} />
+      {portfolioData.map((coin: Portfolio) => (
+        <PortfolioItem key={coin.id} coin={coin} />
       ))}
     </div>
   );

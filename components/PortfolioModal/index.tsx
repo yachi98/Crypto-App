@@ -6,7 +6,6 @@ import CloseIcon from "@/public/CloseIcon.svg";
 import axios from "axios";
 import convertDate from "@/utils/convertDate";
 import { addPortfolio } from "@/redux/features/portfolioSlice";
-import { Portfolio } from "@/interfaces/portfolio.interface";
 
 interface PortfolioModalProps {
   showModal: boolean;
