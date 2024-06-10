@@ -4,7 +4,6 @@ import { AppDispatch } from "@/redux/store";
 import { useDispatch } from "react-redux";
 import CloseIcon from "@/public/CloseIcon.svg";
 import axios from "axios";
-import { getPortfolioData } from "@/redux/features/portfolioSlice";
 import convertDate from "@/utils/convertDate";
 import { addPortfolio } from "@/redux/features/portfolioSlice";
 
@@ -19,10 +18,11 @@ const PortfolioModal = ({ showModal, setShowModal }: PortfolioModalProps) => {
   const currencyInputRef = useRef<HTMLInputElement>(null);
   const amountInputRef = useRef<HTMLInputElement>(null);
   const dueDateInputRef = useRef<HTMLInputElement>(null);
-  const [showDropdown, setShowDropdown] = useState(false);
-  const [coinValue, setCoinValue] = useState("");
+  const [showDropdown, setShowDropdown] = useState<boolean>(false);
+  const [coinValue, setCoinValue] = useState<string>("");
   const [amount, setAmount] = useState<number>();
   const [dueDate, setDueDate] = useState<string>("");
+  const [image, setImage] = useState<string>("");
   const [invalidCoin, setInvalidCoin] = useState<boolean>(false);
   const [invalidAmount, setInvalidAmount] = useState<boolean>(false);
   const [invalidDate, setInvalidDate] = useState<boolean>(false);
@@ -68,6 +68,7 @@ const PortfolioModal = ({ showModal, setShowModal }: PortfolioModalProps) => {
     const portfolioCoin = {
       value: coinValue,
       amount: amount,
+      large: image,
       date: convertDate(dueDate),
     };
     dispatch(addPortfolio(portfolioCoin));
@@ -115,6 +116,7 @@ const PortfolioModal = ({ showModal, setShowModal }: PortfolioModalProps) => {
 
   const handleCoinSelect = (coin: SearchCoin) => {
     setCoinValue(coin.name);
+    setImage(coin.large);
     setSelectedCoin(coin);
     setShowDropdown(false);
   };
@@ -127,12 +129,8 @@ const PortfolioModal = ({ showModal, setShowModal }: PortfolioModalProps) => {
     setDueDate("");
   };
 
-  useEffect(() => {
-    dispatch(getPortfolioData(coinValue));
-  }, [coinValue]);
-
   return (
-    <div className="w-[720px] h-[380px] dark:bg-[#0a0f1c] bg-white absolute top-1/4 -translate-y-1/2 left-1/2 -translate-x-1/2 rounded-3xl">
+    <div className="w-[720px] h-[350px] dark:bg-[#0a0f1c] bg-[#fafafa] absolute top-1/4 -translate-y-1/2 left-1/2 -translate-x-1/2 rounded-3xl">
       <div className="absolute right-0 p-5">
         <button onClick={() => handleCancel()}>
           <CloseIcon />
@@ -227,10 +225,10 @@ const PortfolioModal = ({ showModal, setShowModal }: PortfolioModalProps) => {
             )}
           </div>
         </div>
-        <div className="flex justify-center gap-5 mt-12">
+        <div className="flex justify-center gap-5 mt-8">
           <button
             type="button"
-            onClick={() => handleCancel()}
+            onClick={handleCancel}
             className="p-2  bg-white dark:bg-gray-900 dark:hover:text-white  rounded-xl w-[100px]"
           >
             Cancel
