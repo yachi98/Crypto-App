@@ -12,11 +12,12 @@ const PortfolioItem = ({ coin }: { coin: Portfolio }) => {
 
   const handleRemove = () => {
     dispatch(removePortfolio(coin.id));
+    console.log("Removing coin with id:", coin.id);
     setShowModal(false);
   };
 
   return (
-    <div className="p-5 dark:bg-[#070b15] bg-white h-[180px] rounded-3xl mb-3 relative">
+    <div className="p-5 dark:bg-[#070b15] bg-white h-[160px] rounded-3xl mb-3 relative">
       <div className="absolute inset-0 overflow-hidden rounded-3xl pointer-events-none">
         <img
           src={coin.large}
