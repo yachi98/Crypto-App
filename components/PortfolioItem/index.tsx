@@ -12,7 +12,6 @@ const PortfolioItem = ({ coin }: { coin: Portfolio }) => {
 
   const handleRemove = () => {
     dispatch(removePortfolio(coin.id));
-    console.log("Removing coin with id:", coin.id);
     setShowModal(false);
   };
 
@@ -27,7 +26,7 @@ const PortfolioItem = ({ coin }: { coin: Portfolio }) => {
       </div>
       <div className="flex items-center gap-3">
         <img src={coin.large} alt={coin.name} width={40} height={40} />
-        <h3 className="text-lg">{coin.value}</h3>
+        <h3 className="text-lg">{coin.name}</h3>
       </div>
       <h3 className="text-lg">Current Price: </h3>
       <h3 className="text-lg">Amount: {coin.amount}</h3>
@@ -40,6 +39,7 @@ const PortfolioItem = ({ coin }: { coin: Portfolio }) => {
       </button>
       {showModal && (
         <PortfolioItemModal
+          coin={coin}
           showModal={showModal}
           setShowModal={setShowModal}
           handleRemove={handleRemove}
