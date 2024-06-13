@@ -1,7 +1,6 @@
 export interface Portfolio {
-  id: number;
+  id: string;
   value: string;
-  image: string;
   name: string;
   large: string;
   date: string;

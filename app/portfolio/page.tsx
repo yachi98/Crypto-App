@@ -16,7 +16,7 @@ const PortfolioPage = () => {
           <h2 className="text-3xl mt-5">Portfolio</h2>
           <button
             onClick={() => setShowModal(true)}
-            className="p-5 dark:bg-[#0d121d] bg-white dark:hover:bg-[#121929] dark:text-[#686868] dark:hover:text-white dark:hover:border-white rounded-2xl text-md mt-5 w-[200px]"
+            className="p-3 dark:bg-[#0d121d] bg-white dark:hover:bg-[#121929] dark:text-[#686868] dark:hover:text-white dark:hover:border-white rounded-2xl text-md mt-5 w-[160px]"
           >
             Add Asset
           </button>

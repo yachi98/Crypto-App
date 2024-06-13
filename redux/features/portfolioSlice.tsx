@@ -13,26 +13,6 @@ const initialState: PortfolioState = {
   isLoading: true,
 };
 
-const portfolioSlice = createSlice({
-  name: "portfolio",
-  initialState,
-  reducers: {
-    addPortfolio(state, action) {
-      state.portfolioData = [...state.portfolioData, action.payload];
-    },
-
-    removePortfolio(state, action) {
-      console.log(state.portfolioData);
-      state.portfolioData = state.portfolioData.filter(
-        (coin) => coin.id !== action.payload
-      );
-    },
-  },
-});
-
-export const { addPortfolio, removePortfolio } = portfolioSlice.actions;
-export default portfolioSlice.reducer;
-
 // export const getHistoricalData = createAsyncThunk(
 //   "historicalData/getHistoricalData",
 //   async (_, { getState, rejectWithValue }) => {
@@ -58,38 +38,38 @@ export default portfolioSlice.reducer;
 //   }
 // );
 
-// const portfolioSlice = createSlice({
-//   name: "portfolio",
-//   initialState,
-//   reducers: {
-//     addPortfolio(state, action) {
-//       state.portfolioData = [...state.portfolioData, action.payload];
-//     },
-//     removePortfolio(state, action) {
-//       state.portfolioData = state.portfolioData.filter(
-//         (coin) => coin.id !== action.payload
-//       );
-//     },
-//   },
-//   extraReducers: (builder) => {
-//     builder
-//       .addCase(getHistoricalData.pending, (state) => {
-//         state.isLoading = true;
-//         state.hasError = false;
-//       })
-//       .addCase(getHistoricalData.fulfilled, (state, action) => {
-//         state.portfolioData = state.portfolioData.map((coin, index) => ({
-//           ...coin,
-//           historicalData: action.payload[index],
-//         }));
-//         state.isLoading = false;
-//       })
-//       .addCase(getHistoricalData.rejected, (state) => {
-//         state.isLoading = false;
-//         state.hasError = true;
-//       });
-//   },
-// });
+const portfolioSlice = createSlice({
+  name: "portfolio",
+  initialState,
+  reducers: {
+    addPortfolio(state, action) {
+      state.portfolioData = [...state.portfolioData, action.payload];
+    },
+    removePortfolio(state, action) {
+      state.portfolioData = state.portfolioData.filter(
+        (coin) => coin.id !== action.payload
+      );
+    },
+  },
+  // extraReducers: (builder) => {
+  //   builder
+  //     .addCase(getHistoricalData.pending, (state) => {
+  //       state.isLoading = true;
+  //       state.hasError = false;
+  //     })
+  //     .addCase(getHistoricalData.fulfilled, (state, action) => {
+  //       state.portfolioData = state.portfolioData.map((coin, index) => ({
+  //         ...coin,
+  //         historicalData: action.payload[index],
+  //       }));
+  //       state.isLoading = false;
+  //     })
+  //     .addCase(getHistoricalData.rejected, (state) => {
+  //       state.isLoading = false;
+  //       state.hasError = true;
+  //     });
+  // },
+});
 
-// export const { addPortfolio, removePortfolio } = portfolioSlice.actions;
-// export default portfolioSlice.reducer;
+export const { addPortfolio, removePortfolio } = portfolioSlice.actions;
+export default portfolioSlice.reducer;

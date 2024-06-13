@@ -14,32 +14,37 @@ const PortfolioTable = ({ showModal, setShowModal }: PortfolioModalProps) => {
   const { portfolioData } = useAppSelector((state) => state.portfolioData);
   const [historicalCoins, setHistoricalCoins] = useState<HistoricalCoin[]>([]);
 
-  // useEffect(() => {
-  //   const fetchHistoricalData = async () => {
-  //     try {
-  //       const results = await Promise.all(
-  //         portfolioData.map((coin) =>
-  //           axios.get(
-  //             `https://api.coingecko.com/api/v3/coins/bitcoin/history?date=30-12-2023`
-  //           )
-  //         )
-  //       );
-  //       const historicalData = results.map((response) => response.data);
-  //       console.log(historicalData);
-  //       setHistoricalCoins(historicalData);
-  //     } catch (error) {
-  //       console.error("Failed to fetch historical data:", error);
-  //     }
-  //   };
+  useEffect(() => {
+    const fetchHistoricalData = async () => {
+      try {
+        const results = await Promise.all(
+          portfolioData.map(
+            (coin) =>
+              axios.get(
+                `https://api.coingecko.com/api/v3/coins/bitcoin/history?date=30-12-2023`
+              )
 
-  //   if (portfolioData.length) {
-  //     fetchHistoricalData();
-  //   }
-  // }, [portfolioData]);
+            // axios.get(
+            //   `https://api.coingecko.com/api/v3/coins/${coin.id}/history?date=${coin.date}`
+            // )
+          )
+        );
+        const historicalData = results.map((response) => response.data);
+        console.log(historicalData);
+        setHistoricalCoins(historicalData);
+      } catch (error) {
+        console.error("Failed to fetch historical data:", error);
+      }
+    };
+
+    if (portfolioData.length) {
+      fetchHistoricalData();
+    }
+  }, [portfolioData]);
 
   return (
     <div className="mt-5">
-      {portfolioData.map((coin: Portfolio) => (
+      {portfolioData.map((coin: Portfolio, index: number) => (
         <PortfolioItem key={coin.id} coin={coin} />
       ))}
     </div>

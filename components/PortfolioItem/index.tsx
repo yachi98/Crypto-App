@@ -1,4 +1,5 @@
 import { Portfolio } from "@/interfaces/portfolio.interface";
+import { HistoricalCoin } from "@/interfaces/historicalCoin.interface";
 import { removePortfolio } from "@/redux/features/portfolioSlice";
 import { useState } from "react";
 import PortfolioItemModal from "../PortfolioItemModal";
@@ -26,11 +27,14 @@ const PortfolioItem = ({ coin }: { coin: Portfolio }) => {
       </div>
       <div className="flex items-center gap-3">
         <img src={coin.large} alt={coin.name} width={40} height={40} />
-        <h3 className="text-lg">{coin.name}</h3>
+        <h3 className="text-lg">{coin.value}</h3>
       </div>
-      <h3 className="text-lg">Current Price: </h3>
-      <h3 className="text-lg">Amount: {coin.amount}</h3>
-      <h3 className="text-lg">Date Purchased: {coin.date}</h3>
+      <h3 className="text-sm">
+        Current Price:
+        {/* {coin.market_data.current_price.gbp} */}
+      </h3>
+      <h3 className="text-sm">Amount: {coin.amount}</h3>
+      <h3 className="text-sm">Date Purchased: {coin.date}</h3>
       <button
         onClick={() => setShowModal(true)}
         className="p-2 dark:hover:bg-[#121929] hover:bg-slate-100  rounded-xl absolute right-3 top-3"
