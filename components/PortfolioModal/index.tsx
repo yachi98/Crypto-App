@@ -21,6 +21,7 @@ const PortfolioModal = ({ showModal, setShowModal }: PortfolioModalProps) => {
   const dueDateInputRef = useRef<HTMLInputElement>(null);
   const [showDropdown, setShowDropdown] = useState<boolean>(false);
   const [coinValue, setCoinValue] = useState<string>("");
+  const [coinApiId, setCoinApiId] = useState<string>("");
   const [amount, setAmount] = useState<number>();
   const [dueDate, setDueDate] = useState<string>("");
   const [image, setImage] = useState<string>("");
@@ -35,6 +36,7 @@ const PortfolioModal = ({ showModal, setShowModal }: PortfolioModalProps) => {
         const { data } = await axios.get(
           `https://api.coingecko.com/api/v3/search?query=${coinValue}&x_cg_demo_api_key=CG-duQsjCRoXZm1bJBTrL8sARut`
         );
+        // console.log(setSearchCoins(data.coins));
         setSearchCoins(data.coins);
       } catch (error) {
         console.error("Error fetching historical data:", error);
@@ -69,6 +71,7 @@ const PortfolioModal = ({ showModal, setShowModal }: PortfolioModalProps) => {
     const portfolioCoin = {
       id: uid(),
       value: coinValue,
+      coinApiId: coinApiId,
       amount: amount,
       large: image,
       date: convertDate(dueDate),
@@ -117,6 +120,7 @@ const PortfolioModal = ({ showModal, setShowModal }: PortfolioModalProps) => {
   };
 
   const handleCoinSelect = (coin: SearchCoin) => {
+    setCoinApiId(coin.id);
     setCoinValue(coin.name);
     setImage(coin.large);
     setSelectedCoin(coin);
@@ -171,7 +175,7 @@ const PortfolioModal = ({ showModal, setShowModal }: PortfolioModalProps) => {
                 {searchCoinResults.map((coin: SearchCoin) => (
                   <button
                     key={coin.id}
-                    className="p-2 flex gap-2"
+                    className="p-2 flex gap-2 dark:hover:bg-gray-800 hover:bg-slate-100"
                     onClick={() => handleCoinSelect(coin)}
                   >
                     <img
