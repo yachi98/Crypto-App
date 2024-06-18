@@ -19,7 +19,7 @@ const PortfolioSwitch = () => {
           className={`${
             isClicked
               ? "dark:text-white text-black"
-              : "dark:bg-gray-900 bg-gray-300 rounded-xl"
+              : "dark:bg-gray-900 bg-[#efefef] rounded-xl"
           } p-2 rounded-xl w-[90px] flex gap-1`}
         >
           <HomeIcon />
@@ -31,7 +31,7 @@ const PortfolioSwitch = () => {
           onClick={() => handleToggle(true)}
           className={`${
             isClicked
-              ? "dark:bg-gray-900 bg-gray-300 rounded-xl"
+              ? "dark:bg-gray-900 bg-[#efefef] rounded-xl"
               : "dark:text-white text-black"
           } p-2 rounded-xl w-[90px] flex gap-1`}
         >

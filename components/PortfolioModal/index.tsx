@@ -179,10 +179,10 @@ const PortfolioModal = ({ showModal, setShowModal }: PortfolioModalProps) => {
                     onClick={() => handleCoinSelect(coin)}
                   >
                     <img
-                      src={coin.thumb}
+                      src={coin.large}
                       alt={coin.name}
-                      width={25}
-                      height={25}
+                      width={22}
+                      height={22}
                     />
                     {coin.name}
                   </button>

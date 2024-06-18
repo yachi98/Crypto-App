@@ -41,10 +41,10 @@ export const getCoinData = createAsyncThunk(
 
 export const getAllCoinsMarketData = createAsyncThunk(
   "coinMarket/getAllCoinsMarketData",
-  async (_, { rejectWithValue }) => {
+  async ({ currency }: { currency: string }, { rejectWithValue }) => {
     try {
       const { data } = await axios.get(
-        "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250&page=1&sparkline=false&locale=en"
+        `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency}&order=market_cap_desc&per_page=250&page=1&sparkline=false&locale=en`
       );
       return data;
     } catch (error) {
@@ -56,7 +56,13 @@ export const getAllCoinsMarketData = createAsyncThunk(
 const coinMarketSlice = createSlice({
   name: "coinMarket",
   initialState,
-  reducers: {},
+  reducers: {
+    clearCoinData(state) {
+      state.coinMarketData = [];
+      // state.allMarketData = [];
+      state.currentPage = 1;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getCoinData.pending, (state) => {
@@ -91,4 +97,5 @@ const coinMarketSlice = createSlice({
   },
 });
 
+export const { clearCoinData } = coinMarketSlice.actions;
 export default coinMarketSlice.reducer;

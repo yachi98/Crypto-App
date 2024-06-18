@@ -7,7 +7,7 @@ import { ChangeEvent, useEffect, useRef, useState } from "react";
 import MarketTableHeading from "../MarketTableHeading";
 import CoinsTableSpinner from "../Spinner";
 import RowCoinItem from "@/components/RowCoinItem/";
-import { getCoinData } from "@/redux/features/coinMarketSlice";
+import { clearCoinData, getCoinData } from "@/redux/features/coinMarketSlice";
 import { Coin } from "@/interfaces/coin.interface";
 import SearchIcon from "@/public/SearchIcon.svg";
 import SpinnerIcon from "@/public/SpinnerIcon.svg";
@@ -27,7 +27,13 @@ const CoinMarketTable = () => {
     if (inView && !isLoading) {
       dispatch(getCoinData({ currency, page: currentPage }));
     }
-  }, [inView]);
+  }, [inView, currency, isLoading, currentPage]);
+
+  useEffect(() => {
+    return () => {
+      dispatch(clearCoinData());
+    };
+  }, [currency]);
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const searchValue = e.target.value.toLowerCase();

@@ -24,7 +24,6 @@ export const getHistoricalData = createAsyncThunk(
       const state: any = getState();
       const portfolioData: Portfolio[] = state.portfolio.portfolioData;
 
-      // Fetch historical data for each coin
       const historicalData = portfolioData.map(async (coin) => {
         const response = await axios.get(
           `https://api.coingecko.com/api/v3/coins/${coin.coinApiId}/history?date=${coin.date}`
@@ -36,7 +35,6 @@ export const getHistoricalData = createAsyncThunk(
 
       const results = await Promise.all(historicalData);
       return results;
-      // console.log(results);
 
       // Map the results to get the data
       // const resultsData = results.map((response) => response.data);

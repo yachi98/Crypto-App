@@ -18,6 +18,7 @@ import {
   Chart as ChartJS,
   CategoryScale,
   LinearScale,
+  LogarithmicScale,
   PointElement,
   LineElement,
   Filler,
@@ -28,6 +29,7 @@ import {
 ChartJS.register(
   CategoryScale,
   LinearScale,
+  LogarithmicScale,
   PointElement,
   LineElement,
   Filler,
@@ -86,7 +88,15 @@ const options = {
       border: { display: true },
       stacked: true,
     },
-    y: { display: false },
+    y: {
+      type: "logarithmic",
+      display: false,
+      beginAtZero: true,
+      grid: {
+        display: false,
+        drawBorder: false,
+      },
+    },
   },
   pointRadius: 0,
   borderWidth: 0,
