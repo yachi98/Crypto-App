@@ -19,22 +19,6 @@ const PortfolioTable = ({ showModal, setShowModal }: PortfolioModalProps) => {
 
   // console.log(portfolioData);
 
-  // useEffect(() => {
-  //   dispatch(getHistoricalData())
-  // })
-
-  // const coinData: Coin = portfolioData.find((coin) => coin.id === coin.id);
-  // const coinData: Portfolio = portfolioData.find(
-  //   (coin) => coin.id === item.coinId
-  // );
-
-  // const coinIds: string[] = portfolioData.map((coin) => coin.coin.id);
-  // //   This creates an array of coin IDs from portfolioData.
-  // const individualCoins: string[] = coinIds.filter(
-  //   (coin, index) => coinIds.indexOf(coin) === index
-  // );
-  //   This filters coinIds to get an array of unique coin IDs, removing duplicates.
-
   useEffect(() => {
     const fetchHistoricalData = async () => {
       try {
@@ -85,7 +69,7 @@ const PortfolioTable = ({ showModal, setShowModal }: PortfolioModalProps) => {
 
   return (
     <div className="mt-5">
-      {portfolioData.map((coin: Portfolio, index: number) => (
+      {portfolioData.map((coin: Portfolio) => (
         <PortfolioItem key={coin.id} coin={coin} />
       ))}
     </div>
