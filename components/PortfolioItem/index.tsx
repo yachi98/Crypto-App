@@ -29,10 +29,7 @@ const PortfolioItem = ({ coin }: { coin: Portfolio }) => {
         <img src={coin.large} alt={coin.name} width={40} height={40} />
         <h3 className="text-lg">{coin.value}</h3>
       </div>
-      <h3 className="text-sm">
-        Current Price:
-        {/* {coin.market_data.current_price.gbp} */}
-      </h3>
+      <h3 className="text-sm">Current Price:</h3>
       <h3 className="text-sm">Amount: {coin.amount}</h3>
       <h3 className="text-sm">Date Purchased: {coin.date}</h3>
       <button
