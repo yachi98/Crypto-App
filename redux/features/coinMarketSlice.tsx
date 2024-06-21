@@ -59,7 +59,6 @@ const coinMarketSlice = createSlice({
   reducers: {
     clearCoinData(state) {
       state.coinMarketData = [];
-      // state.allMarketData = [];
       state.currentPage = 1;
     },
   },

@@ -30,9 +30,7 @@ const CoinMarketTable = () => {
   }, [inView, currency, isLoading, currentPage]);
 
   useEffect(() => {
-    return () => {
-      dispatch(clearCoinData());
-    };
+    dispatch(clearCoinData());
   }, [currency]);
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {

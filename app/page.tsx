@@ -2,6 +2,7 @@
 
 import { getGlobalData } from "@/redux/features/globalSlice";
 import { getCoinData } from "@/redux/features/coinMarketSlice";
+import { clearCoinData } from "@/redux/features/coinMarketSlice";
 import { useAppSelector } from "@/redux/store";
 import { AppDispatch } from "@/redux/store";
 import { useDispatch } from "react-redux";
@@ -22,6 +23,12 @@ const Home = () => {
     dispatch(getGlobalData());
     dispatch(getCoinData({ currency: currency, page: 1 }));
   }, [currency]);
+
+  useEffect(() => {
+    return () => {
+      dispatch(clearCoinData());
+    };
+  }, []);
 
   return (
     <main>
