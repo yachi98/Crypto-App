@@ -65,7 +65,6 @@ const PortfolioModal = ({ showModal, setShowModal }: PortfolioModalProps) => {
       setInvalidAmount(true);
       return;
     }
-    // console.log("id to check", uid());
 
     const portfolioCoin = {
       value: coinValue,
