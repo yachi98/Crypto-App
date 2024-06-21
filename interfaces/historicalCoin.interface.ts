@@ -2,6 +2,7 @@ export interface HistoricalCoin {
   id: string;
   symbol: string;
   name: string;
+  date: string;
   localization: { [key: string]: string };
   image: {
     thumb: string;

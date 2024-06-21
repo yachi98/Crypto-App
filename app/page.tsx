@@ -2,6 +2,7 @@
 
 import { getGlobalData } from "@/redux/features/globalSlice";
 import { getCoinData } from "@/redux/features/coinMarketSlice";
+import { clearCoinData } from "@/redux/features/coinMarketSlice";
 import { useAppSelector } from "@/redux/store";
 import { AppDispatch } from "@/redux/store";
 import { useDispatch } from "react-redux";
@@ -23,6 +24,12 @@ const Home = () => {
     dispatch(getCoinData({ currency: currency, page: 1 }));
   }, [currency]);
 
+  useEffect(() => {
+    return () => {
+      dispatch(clearCoinData());
+    };
+  }, []);
+
   return (
     <main>
       {!showConverter && <PriceChart />}
@@ -30,7 +37,7 @@ const Home = () => {
         <button
           onClick={() => setShowConverter(!showConverter)}
           className={`${
-            !showConverter && "dark:bg-gray-900 bg-gray-300 rounded-xl"
+            !showConverter && "dark:bg-gray-900 bg-[#efefef] rounded-xl"
           } opacity-70 p-2 mr-2 rounded-2xl w-[90px] flex gap-1`}
         >
           <CoinIcon />
@@ -39,7 +46,7 @@ const Home = () => {
         <button
           onClick={() => setShowConverter(!showConverter)}
           className={`${
-            showConverter && "dark:bg-gray-900 bg-gray-300 rounded-xl"
+            showConverter && "dark:bg-gray-900 bg-[#efefef] rounded-xl"
           } opacity-70 p-2 rounded-2xl w-[90px] flex gap-1`}
         >
           <GraphIcon />

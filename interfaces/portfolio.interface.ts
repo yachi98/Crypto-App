@@ -1,10 +1,9 @@
 export interface Portfolio {
-  id: number;
+  id: string;
+  coinApiId: string;
   value: string;
-  image: string;
   name: string;
   large: string;
-  coinId: string;
   date: string;
   amount: number;
 }

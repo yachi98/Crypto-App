@@ -6,6 +6,7 @@ import CloseIcon from "@/public/CloseIcon.svg";
 import axios from "axios";
 import convertDate from "@/utils/convertDate";
 import { addPortfolio } from "@/redux/features/portfolioSlice";
+import { uid } from "uid";
 
 interface PortfolioModalProps {
   showModal: boolean;
@@ -20,6 +21,7 @@ const PortfolioModal = ({ showModal, setShowModal }: PortfolioModalProps) => {
   const dueDateInputRef = useRef<HTMLInputElement>(null);
   const [showDropdown, setShowDropdown] = useState<boolean>(false);
   const [coinValue, setCoinValue] = useState<string>("");
+  const [coinApiId, setCoinApiId] = useState<string>("");
   const [amount, setAmount] = useState<number>();
   const [dueDate, setDueDate] = useState<string>("");
   const [image, setImage] = useState<string>("");
@@ -66,7 +68,9 @@ const PortfolioModal = ({ showModal, setShowModal }: PortfolioModalProps) => {
     }
 
     const portfolioCoin = {
+      id: uid(),
       value: coinValue,
+      coinApiId: coinApiId,
       amount: amount,
       large: image,
       date: convertDate(dueDate),
@@ -115,6 +119,7 @@ const PortfolioModal = ({ showModal, setShowModal }: PortfolioModalProps) => {
   };
 
   const handleCoinSelect = (coin: SearchCoin) => {
+    setCoinApiId(coin.id);
     setCoinValue(coin.name);
     setImage(coin.large);
     setSelectedCoin(coin);
@@ -130,7 +135,7 @@ const PortfolioModal = ({ showModal, setShowModal }: PortfolioModalProps) => {
   };
 
   return (
-    <div className="w-[720px] h-[350px] dark:bg-[#0a0f1c] bg-[#fafafa] absolute top-1/4 -translate-y-1/2 left-1/2 -translate-x-1/2 rounded-3xl">
+    <div className="w-[700px] h-[350px] dark:bg-[#0a0f1c] bg-[#fafafa] absolute top-1/4 -translate-y-1/2 left-1/2 -translate-x-1/2 rounded-2xl">
       <div className="absolute right-0 p-5">
         <button onClick={() => handleCancel()}>
           <CloseIcon />
@@ -169,14 +174,14 @@ const PortfolioModal = ({ showModal, setShowModal }: PortfolioModalProps) => {
                 {searchCoinResults.map((coin: SearchCoin) => (
                   <button
                     key={coin.id}
-                    className="p-2 flex gap-2"
+                    className="p-2 flex gap-2 dark:hover:bg-gray-800 hover:bg-slate-100"
                     onClick={() => handleCoinSelect(coin)}
                   >
                     <img
-                      src={coin.thumb}
+                      src={coin.large}
                       alt={coin.name}
-                      width={25}
-                      height={25}
+                      width={22}
+                      height={22}
                     />
                     {coin.name}
                   </button>

@@ -1,4 +1,5 @@
 import { Portfolio } from "@/interfaces/portfolio.interface";
+import { HistoricalCoin } from "@/interfaces/historicalCoin.interface";
 import { removePortfolio } from "@/redux/features/portfolioSlice";
 import { useState } from "react";
 import PortfolioItemModal from "../PortfolioItemModal";
@@ -16,7 +17,7 @@ const PortfolioItem = ({ coin }: { coin: Portfolio }) => {
   };
 
   return (
-    <div className="p-5 dark:bg-[#070b15] bg-white h-[180px] rounded-3xl mb-3 relative">
+    <div className="p-5 dark:bg-[#070b15] bg-white h-[160px] rounded-3xl mb-3 relative">
       <div className="absolute inset-0 overflow-hidden rounded-3xl pointer-events-none">
         <img
           src={coin.large}
@@ -28,9 +29,9 @@ const PortfolioItem = ({ coin }: { coin: Portfolio }) => {
         <img src={coin.large} alt={coin.name} width={40} height={40} />
         <h3 className="text-lg">{coin.value}</h3>
       </div>
-      <h3 className="text-lg">Current Price: </h3>
-      <h3 className="text-lg">Amount: {coin.amount}</h3>
-      <h3 className="text-lg">Date Purchased: {coin.date}</h3>
+      <h3 className="text-sm">Current Price:</h3>
+      <h3 className="text-sm">Amount: {coin.amount}</h3>
+      <h3 className="text-sm">Date Purchased: {coin.date}</h3>
       <button
         onClick={() => setShowModal(true)}
         className="p-2 dark:hover:bg-[#121929] hover:bg-slate-100  rounded-xl absolute right-3 top-3"
@@ -39,6 +40,7 @@ const PortfolioItem = ({ coin }: { coin: Portfolio }) => {
       </button>
       {showModal && (
         <PortfolioItemModal
+          coin={coin}
           showModal={showModal}
           setShowModal={setShowModal}
           handleRemove={handleRemove}

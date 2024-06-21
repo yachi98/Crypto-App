@@ -1,12 +1,20 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { Portfolio } from "@/interfaces/portfolio.interface";
+import { HistoricalCoin } from "@/interfaces/historicalCoin.interface";
+import axios from "axios";
 
 interface PortfolioState {
   portfolioData: Portfolio[];
+  historicalData: HistoricalCoin[];
+  hasError: boolean;
+  isLoading: boolean;
 }
 
 const initialState: PortfolioState = {
   portfolioData: [],
+  historicalData: [],
+  hasError: false,
+  isLoading: true,
 };
 
 const portfolioSlice = createSlice({
@@ -15,7 +23,6 @@ const portfolioSlice = createSlice({
   reducers: {
     addPortfolio(state, action) {
       state.portfolioData = [...state.portfolioData, action.payload];
-      console.log(action.payload);
     },
     removePortfolio(state, action) {
       state.portfolioData = state.portfolioData.filter(
