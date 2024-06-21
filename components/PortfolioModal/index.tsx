@@ -36,7 +36,6 @@ const PortfolioModal = ({ showModal, setShowModal }: PortfolioModalProps) => {
         const { data } = await axios.get(
           `https://api.coingecko.com/api/v3/search?query=${coinValue}&x_cg_demo_api_key=CG-duQsjCRoXZm1bJBTrL8sARut`
         );
-        // console.log(setSearchCoins(data.coins));
         setSearchCoins(data.coins);
       } catch (error) {
         console.error("Error fetching historical data:", error);
@@ -67,9 +66,10 @@ const PortfolioModal = ({ showModal, setShowModal }: PortfolioModalProps) => {
       setInvalidAmount(true);
       return;
     }
+    // console.log("id to check", uid());
 
     const portfolioCoin = {
-      id: uid(),
+      // id: uid(),
       value: coinValue,
       coinApiId: coinApiId,
       amount: amount,
