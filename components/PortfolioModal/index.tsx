@@ -6,7 +6,6 @@ import CloseIcon from "@/public/CloseIcon.svg";
 import axios from "axios";
 import convertDate from "@/utils/convertDate";
 import { addPortfolio } from "@/redux/features/portfolioSlice";
-import { uid } from "uid";
 
 interface PortfolioModalProps {
   showModal: boolean;
@@ -69,7 +68,6 @@ const PortfolioModal = ({ showModal, setShowModal }: PortfolioModalProps) => {
     // console.log("id to check", uid());
 
     const portfolioCoin = {
-      // id: uid(),
       value: coinValue,
       coinApiId: coinApiId,
       amount: amount,
