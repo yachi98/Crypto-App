@@ -1,21 +1,24 @@
 import { Portfolio } from "@/interfaces/portfolio.interface";
 import { HistoricalCoin } from "@/interfaces/historicalCoin.interface";
+import { useAppSelector } from "@/redux/store";
 import { removePortfolio } from "@/redux/features/portfolioSlice";
 import { useState } from "react";
 import PortfolioItemModal from "../PortfolioItemModal";
+import formatNumber from "@/utils/formatNumber";
 import DeleteIcon from "@/public/DeleteIcon.svg";
 import { AppDispatch } from "@/redux/store";
 import { useDispatch } from "react-redux";
 
 const PortfolioItem = ({ coin }: { coin: Portfolio }) => {
   const [showModal, setShowModal] = useState(false);
+  const { symbol, currency } = useAppSelector((state) => state.currencySlice);
   const dispatch: AppDispatch = useDispatch();
 
   const handleRemove = () => {
     dispatch(removePortfolio(coin.id));
     setShowModal(false);
   };
-
+  console.log("This is a coin", coin);
   return (
     <div className="p-5 dark:bg-[#070b15] bg-white h-[160px] rounded-3xl mb-3 relative">
       <div className="absolute inset-0 overflow-hidden rounded-3xl pointer-events-none">
@@ -29,7 +32,10 @@ const PortfolioItem = ({ coin }: { coin: Portfolio }) => {
         <img src={coin.large} alt={coin.name} width={40} height={40} />
         <h3 className="text-lg">{coin.value}</h3>
       </div>
-      <h3 className="text-sm">Current Price:</h3>
+      <h3 className="text-sm">
+        Current Price: {symbol}
+        {formatNumber(coin.market_data.current_price[currency])}
+      </h3>
       <h3 className="text-sm">Amount: {coin.amount}</h3>
       <h3 className="text-sm">Date Purchased: {coin.date}</h3>
       <button

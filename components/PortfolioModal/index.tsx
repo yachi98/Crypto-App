@@ -1,3 +1,5 @@
+"use client";
+
 import { useRef, useState, ChangeEvent, useEffect } from "react";
 import { SearchCoin } from "@/interfaces/searchCoin.interface";
 import { AppDispatch } from "@/redux/store";
@@ -5,7 +7,7 @@ import { useDispatch } from "react-redux";
 import CloseIcon from "@/public/CloseIcon.svg";
 import axios from "axios";
 import convertDate from "@/utils/convertDate";
-import { addPortfolio } from "@/redux/features/portfolioSlice";
+import { addPortfolioData } from "@/redux/features/portfolioSlice";
 import { uid } from "uid";
 
 interface PortfolioModalProps {
@@ -69,13 +71,20 @@ const PortfolioModal = ({ showModal, setShowModal }: PortfolioModalProps) => {
 
     const portfolioCoin = {
       id: uid(),
+      name: coinValue,
       value: coinValue,
       coinApiId: coinApiId,
       amount: amount,
       large: image,
       date: convertDate(dueDate),
+      market_data: {
+        current_price: { usd: 0 },
+        market_cap: { usd: 0 },
+        total_volume: { usd: 0 },
+      },
     };
-    dispatch(addPortfolio(portfolioCoin));
+
+    dispatch(addPortfolioData(portfolioCoin));
     setCoinValue("");
     setAmount(0);
     setDueDate("");

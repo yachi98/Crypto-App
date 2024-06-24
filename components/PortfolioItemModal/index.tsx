@@ -21,13 +21,13 @@ const PortfolioItemModal = ({
       <div className="flex gap-3 justify-center">
         <button
           onClick={() => setShowModal(!showModal)}
-          className="text-sm p-1 w-[120px] dark:bg-[#121929] bg-slate-200 rounded-xl"
+          className="text-sm p-1 w-[120px] dark:bg-[#121929] bg-slate-200 rounded"
         >
           Cancel
         </button>
         <button
           onClick={handleRemove}
-          className="text-sm p-1 w-[120px] bg-red-500 rounded-xl"
+          className="text-sm p-1 w-[120px] bg-red-500 rounded"
         >
           Delete
         </button>
