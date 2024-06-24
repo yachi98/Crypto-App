@@ -1,18 +1,15 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { Portfolio } from "@/interfaces/portfolio.interface";
-import { HistoricalCoin } from "@/interfaces/historicalCoin.interface";
 import axios from "axios";
 
 interface PortfolioState {
   portfolioData: Portfolio[];
-  historicalData: HistoricalCoin[];
   hasError: boolean;
   isLoading: boolean;
 }
 
 const initialState: PortfolioState = {
   portfolioData: [],
-  historicalData: [],
   hasError: false,
   isLoading: false,
 };
@@ -20,31 +17,18 @@ const initialState: PortfolioState = {
 export const addPortfolioData = createAsyncThunk(
   "historicalData/addPortfolioData",
   async (coin: Portfolio, { rejectWithValue }) => {
-    // console.log(coin);
     try {
       const { data } = await axios.get(
-        `https://api.coingecko.com/api/v3/coins/${coin.coinApiId}/history?date=${coin.date}`
+        `https://api.coingecko.com/api/v3/coins/${coin.coinApiId}/history?date=${coin.purchaseDate}`
       );
 
-      // const newCoin = {
-      //   id: coin.id,
-      //   coinApiId: coin.coinApiId,
-      //   value: coin.value,
-      //   name: coin.name,
-      //   large: coin.large,
-      //   date: coin.date,
-      //   amount: coin.amount,
-      //   currentPrices: coin.market_data.current_price,
-      // };
-
-      const newCoin: Portfolio = {
+      const portfolioEntry: Portfolio = {
         id: coin.id,
         coinApiId: coin.coinApiId,
         value: coin.value,
-        name: coin.name,
-        large: coin.large,
-        date: coin.date,
-        amount: coin.amount,
+        image: coin.image,
+        purchaseDate: coin.purchaseDate,
+        purchaseAmount: coin.purchaseAmount,
         market_data: {
           current_price: data.market_data.current_price || {},
           market_cap: data.market_data.market_cap || {},
@@ -52,36 +36,14 @@ export const addPortfolioData = createAsyncThunk(
         },
       };
 
-      console.log(newCoin);
+      console.log(portfolioEntry);
 
-      return newCoin;
-    } catch (error) {
-      rejectWithValue(error);
-      console.log("deleted");
+      return portfolioEntry;
+    } catch (err) {
+      return rejectWithValue(err);
     }
   }
 );
-
-//   try {
-
-//     const portfolioData: Portfolio[] = state.portfolio.portfolioData;
-//     console.log("1", coin);
-
-//     const historicalData = portfolioData.map(async (coin) => {
-//       const response = await axios.get(
-//         `https://api.coingecko.com/api/v3/coins/${coin.coinApiId}/history?date=${coin.date}`
-//       );
-//       console.log("2", coin);
-//       const data = await response.data;
-//       return data;
-//     });
-
-//     const results = await Promise.all(historicalData);
-//     return results;
-//   } catch (error) {
-//     return rejectWithValue(error);
-//   }
-// }
 
 const portfolioSlice = createSlice({
   name: "portfolio",
@@ -100,9 +62,7 @@ const portfolioSlice = createSlice({
         state.hasError = false;
       })
       .addCase(addPortfolioData.fulfilled, (state, action) => {
-        console.log("action", action);
         state.portfolioData = [...state.portfolioData, action.payload];
-        // state.historicalData = action.payload;
         state.isLoading = false;
       })
       .addCase(addPortfolioData.rejected, (state) => {
@@ -114,3 +74,18 @@ const portfolioSlice = createSlice({
 
 export const { removePortfolio } = portfolioSlice.actions;
 export default portfolioSlice.reducer;
+
+//     const portfolioData: Portfolio[] = state.portfolio.portfolioData;
+//     console.log("1", coin);
+
+//     const historicalData = portfolioData.map(async (coin) => {
+//       const response = await axios.get(
+//         `https://api.coingecko.com/api/v3/coins/${coin.coinApiId}/history?date=${coin.date}`
+//       );
+//       console.log("2", coin);
+//       const data = await response.data;
+//       return data;
+//     });
+
+//     const results = await Promise.all(historicalData);
+//     return results;

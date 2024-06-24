@@ -19,25 +19,27 @@ const PortfolioItem = ({ coin }: { coin: Portfolio }) => {
     setShowModal(false);
   };
   console.log("This is a coin", coin);
+
   return (
     <div className="p-5 dark:bg-[#070b15] bg-white h-[160px] rounded-3xl mb-3 relative">
       <div className="absolute inset-0 overflow-hidden rounded-3xl pointer-events-none">
         <img
-          src={coin.large}
-          alt={coin.name}
+          src={coin.image}
+          alt={coin.value}
           className="w-full h-full object-cover blur-3xl opacity-20 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
         />
       </div>
       <div className="flex items-center gap-3">
-        <img src={coin.large} alt={coin.name} width={40} height={40} />
+        <img src={coin.image} alt={coin.value} width={40} height={40} />
         <h3 className="text-lg">{coin.value}</h3>
       </div>
       <h3 className="text-sm">
-        Current Price: {symbol}
+        Purchase Price: {symbol}
         {formatNumber(coin.market_data.current_price[currency])}
       </h3>
-      <h3 className="text-sm">Amount: {coin.amount}</h3>
-      <h3 className="text-sm">Date Purchased: {coin.date}</h3>
+      <h3 className="text-sm">Amount: {coin.purchaseAmount}</h3>
+      <h3 className="text-sm">Date Purchased: {coin.purchaseDate}</h3>
+      <h3 className="text-sm">Market Cap vs Volume</h3>
       <button
         onClick={() => setShowModal(true)}
         className="p-2 dark:hover:bg-[#121929] hover:bg-slate-100  rounded-xl absolute right-3 top-3"

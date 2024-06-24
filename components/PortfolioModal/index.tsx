@@ -71,16 +71,15 @@ const PortfolioModal = ({ showModal, setShowModal }: PortfolioModalProps) => {
 
     const portfolioCoin = {
       id: uid(),
-      name: coinValue,
       value: coinValue,
       coinApiId: coinApiId,
-      amount: amount,
-      large: image,
-      date: convertDate(dueDate),
+      purchaseAmount: amount,
+      image: image,
+      purchaseDate: convertDate(dueDate),
       market_data: {
-        current_price: { usd: 0 },
-        market_cap: { usd: 0 },
-        total_volume: { usd: 0 },
+        current_price: { gbp: 0 },
+        market_cap: { gbp: 0 },
+        total_volume: { gbp: 0 },
       },
     };
 
