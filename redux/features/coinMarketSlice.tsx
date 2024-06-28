@@ -4,7 +4,6 @@ import { Coin } from "@/interfaces/coin.interface";
 
 interface CoinMarketData {
   coinMarketData: Coin[];
-  allMarketData: Coin[];
   page: number;
   currentPage: number;
   currency: string;
@@ -14,7 +13,6 @@ interface CoinMarketData {
 
 const initialState: CoinMarketData = {
   coinMarketData: [],
-  allMarketData: [],
   page: 1,
   currentPage: 1,
   currency: "gbp",
@@ -85,7 +83,7 @@ const coinMarketSlice = createSlice({
         state.hasError = false;
       })
       .addCase(getAllCoinsMarketData.fulfilled, (state, action) => {
-        state.allMarketData = [...action.payload];
+        state.coinMarketData = [...action.payload];
         state.isLoading = false;
       })
       .addCase(getAllCoinsMarketData.rejected, (state, action) => {

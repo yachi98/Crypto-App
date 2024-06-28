@@ -36,8 +36,6 @@ export const addPortfolioData = createAsyncThunk(
         },
       };
 
-      console.log(portfolioEntry);
-
       return portfolioEntry;
     } catch (err) {
       return rejectWithValue(err);

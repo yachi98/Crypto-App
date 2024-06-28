@@ -87,10 +87,10 @@ const getSelectedCoinSlice = createSlice({
     changeTime: (state, action) => {
       state.timeDay = action.payload;
     },
-    changeCoin: (state, action) => {
-      const newCoinId = action.payload;
-      state.coinId = newCoinId;
-    },
+    // changeCoin: (state, action) => {
+    //   const newCoinId = action.payload;
+    //   state.coinId = newCoinId;
+    // },
     removeCoin: (state, action) => {
       const coinIdToRemove = action.payload;
       const newList = state.selectedCoins.filter(
@@ -116,6 +116,5 @@ const getSelectedCoinSlice = createSlice({
       });
   },
 });
-export const { changeTime, changeCoin, removeCoin } =
-  getSelectedCoinSlice.actions;
+export const { changeTime, removeCoin } = getSelectedCoinSlice.actions;
 export default getSelectedCoinSlice.reducer;

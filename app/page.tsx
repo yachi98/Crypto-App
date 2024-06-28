@@ -18,6 +18,7 @@ const Home = () => {
   const [showConverter, setShowConverter] = useState(false);
   const dispatch: AppDispatch = useDispatch();
   const { currency } = useAppSelector((state) => state.currencySlice);
+  const { page } = useAppSelector((state) => state.coinMarketData);
 
   useEffect(() => {
     dispatch(getGlobalData());

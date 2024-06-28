@@ -13,6 +13,7 @@ import formatDateGraph from "@/utils/formatDateGraph";
 import backgroundColor from "@/utils/backgroundColour";
 import formatNumber from "@/utils/formatNumber";
 import { Line, Bar } from "react-chartjs-2";
+import { clearCoinData, getCoinData } from "@/redux/features/coinMarketSlice";
 
 import {
   Chart as ChartJS,
@@ -185,16 +186,20 @@ const CoinGraphChart = () => {
 
   const coinBG: string[] = ["bg-[#7878FA]", "bg-[#D878FA]", "bg-[#FDBA74]"];
 
-  useEffect(() => {
-    if (selectedCoinsInfo.length > 0) return;
-    dispatch(
-      getSelectedCoinData({
-        coinId,
-        timeDay,
-        currency,
-      })
-    );
-  }, [coinId, timeDay, currency]);
+  // useEffect(() => {
+  //   if (selectedCoinsInfo.length > 0) return;
+  //   dispatch(
+  //     getSelectedCoinData({
+  //       coinId,
+  //       timeDay,
+  //       currency,
+  //     })
+  //   );
+  // }, [coinId, timeDay, currency]);
+
+  // useEffect(() => {
+  //   dispatch(getSelectedCoinData({ coinId, timeDay, currency }));
+  // }, [coinId, timeDay, currency]);
 
   function renderInfo(name: string) {
     return (
