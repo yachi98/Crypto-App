@@ -14,11 +14,13 @@ interface SelectedCoinState {
 const initialState: SelectedCoinState = {
   selectedCoins: [],
   currency: "gbp",
-  coinId: "bitcoin",
+  coinId: "",
   timeDay: "1",
   isLoading: true,
   hasError: false,
 };
+
+// if selectee coins are empty, get the first coin of the list of coins, set a defeault with the prooperty bitcoin
 
 const formatChartData = ({
   data,
@@ -59,14 +61,7 @@ export const getSelectedCoinData = createAsyncThunk(
 
       const priceLabels = formatChartData({ data: prices, index: 0 });
       const volumeLabels = formatChartData({ data: total_volumes, index: 0 });
-
-      const coinData: {
-        id: string;
-        prices: number[];
-        total_volumes: number[];
-        priceLabels: number[];
-        volumeLabels: number[];
-      } = {
+      const coinData: SelectedCoin = {
         id: coinId,
         prices: timeFormattedPrices,
         total_volumes: timeFormattedVolumes,
@@ -74,6 +69,21 @@ export const getSelectedCoinData = createAsyncThunk(
         volumeLabels: volumeLabels,
       };
       return coinData;
+
+      // const coinData: {
+      //   id: string;
+      //   prices: number[];
+      //   total_volumes: number[];
+      //   priceLabels: number[];
+      //   volumeLabels: number[];
+      // } = {
+      //   id: coinId,
+      //   prices: timeFormattedPrices,
+      //   total_volumes: timeFormattedVolumes,
+      //   priceLabels: priceLabels,
+      //   volumeLabels: volumeLabels,
+      // };
+      // return coinData;
     } catch (error) {
       return rejectWithValue(error);
     }
@@ -87,10 +97,14 @@ const getSelectedCoinSlice = createSlice({
     changeTime: (state, action) => {
       state.timeDay = action.payload;
     },
-    // changeCoin: (state, action) => {
-    //   const newCoinId = action.payload;
-    //   state.coinId = newCoinId;
-    // },
+
+    removeCoins: (state) => {
+      state.selectedCoins = [];
+    },
+    changeCoin: (state, action) => {
+      const newCoinId = action.payload;
+      state.coinId = newCoinId;
+    },
     removeCoin: (state, action) => {
       const coinIdToRemove = action.payload;
       const newList = state.selectedCoins.filter(
@@ -116,5 +130,6 @@ const getSelectedCoinSlice = createSlice({
       });
   },
 });
-export const { changeTime, removeCoin } = getSelectedCoinSlice.actions;
+export const { changeTime, removeCoin, removeCoins } =
+  getSelectedCoinSlice.actions;
 export default getSelectedCoinSlice.reducer;

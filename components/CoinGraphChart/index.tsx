@@ -12,6 +12,7 @@ import { labelFormatter } from "@/redux/features/dateFormatter";
 import formatDateGraph from "@/utils/formatDateGraph";
 import backgroundColor from "@/utils/backgroundColour";
 import formatNumber from "@/utils/formatNumber";
+import { removeCoins } from "@/redux/features/selectedCoins";
 import { Line, Bar } from "react-chartjs-2";
 import { clearCoinData, getCoinData } from "@/redux/features/coinMarketSlice";
 
@@ -186,19 +187,34 @@ const CoinGraphChart = () => {
 
   const coinBG: string[] = ["bg-[#7878FA]", "bg-[#D878FA]", "bg-[#FDBA74]"];
 
+  useEffect(() => {
+    // if (selectedCoinsInfo.length > 0) return;
+
+    dispatch(
+      getSelectedCoinData({
+        coinId,
+        timeDay,
+        currency,
+      })
+    );
+    console.log("coinId", coinId);
+    console.log("timeDay", timeDay);
+    // return () => {
+    //   dispatch(removeCoins());
+    // };
+  }, [coinId, timeDay, currency]);
+
   // useEffect(() => {
-  //   if (selectedCoinsInfo.length > 0) return;
-  //   dispatch(
-  //     getSelectedCoinData({
-  //       coinId,
-  //       timeDay,
-  //       currency,
-  //     })
-  //   );
+  //   if (coinId) {
+  //     console.log("coinId", coinId);
+  //     console.log("timeDay", timeDay);
+  //     dispatch(getSelectedCoinData({ coinId, timeDay, currency }));
+  //   }
   // }, [coinId, timeDay, currency]);
 
   // useEffect(() => {
-  //   dispatch(getSelectedCoinData({ coinId, timeDay, currency }));
+  //   console.log("timeDay", timeDay);
+  //   dispatch(getSelectedCoinData({ coinId, timeDay, currency })); // time period
   // }, [coinId, timeDay, currency]);
 
   function renderInfo(name: string) {

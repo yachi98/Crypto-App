@@ -11,6 +11,7 @@ import PriceChart from "@/components/PriceChart";
 import CoinConverterPage from "@/components/CoinConverterPage";
 import CoinGraphChart from "@/components/CoinGraphChart";
 import CoinMarketTable from "@/components/CoinMarketTable";
+import { getSelectedCoinData } from "@/redux/features/selectedCoins";
 import CoinIcon from "@/public/CoinIcon.svg";
 import GraphIcon from "@/public/GraphIcon.svg";
 
@@ -18,7 +19,7 @@ const Home = () => {
   const [showConverter, setShowConverter] = useState(false);
   const dispatch: AppDispatch = useDispatch();
   const { currency } = useAppSelector((state) => state.currencySlice);
-  const { page } = useAppSelector((state) => state.coinMarketData);
+  const { selectedCoins } = useAppSelector((state) => state.selectedCoinData);
 
   useEffect(() => {
     dispatch(getGlobalData());
@@ -30,6 +31,19 @@ const Home = () => {
       dispatch(clearCoinData());
     };
   }, []);
+
+  useEffect(() => {
+    if (selectedCoins.length === 0) {
+      const defaultCoin = "bitcoin";
+      dispatch(
+        getSelectedCoinData({
+          coinId: defaultCoin,
+          timeDay: "1",
+          currency: "gbp",
+        })
+      );
+    }
+  }, [selectedCoins]);
 
   return (
     <main>

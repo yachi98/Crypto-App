@@ -1,5 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { AppDispatch, RootState } from "@/redux/store";
+import { getSelectedCoinData } from "./selectedCoins";
 import { Coin } from "@/interfaces/coin.interface";
 
 interface CoinMarketData {
@@ -96,3 +98,32 @@ const coinMarketSlice = createSlice({
 
 export const { clearCoinData } = coinMarketSlice.actions;
 export default coinMarketSlice.reducer;
+
+// export const getCoinData = createAsyncThunk(
+//   "coinMarket/getCoinData",
+//   async ({ currency, page }: { currency: string; page: number }, thunkAPI) => {
+//     const { rejectWithValue, getState, dispatch } = thunkAPI;
+//     try {
+//       // Get the state to log selected coins data
+//       const selectedCoinsData = getState() as RootState;
+//       console.log("Selected Coins Data:", selectedCoinsData);
+
+//       // Dispatch another thunk if needed
+//       const selectedCoinParams: GetSelectedCoinDataParams = {
+//         coinId: "bitcoin",
+//         timeDay: "1", // Example value, replace with the actual value if necessary
+//         currency: currency,
+//       };
+//       dispatch(getSelectedCoinData(selectedCoinParams));
+
+//       // Make the API call
+//       const { data } = await axios.get(
+//         `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency}&order=market_cap_desc&per_page=20&page=${page}&sparkline=true&price_change_percentage=1h%2C24h%2C7d&x_cg_demo_api_key=${process.env.NEXT_PUBLIC_API_KEY}`
+//       );
+
+//       return data;
+//     } catch (error) {
+//       return rejectWithValue(error);
+//     }
+//   }
+// );

@@ -8,6 +8,7 @@ import CoinMarketBar from "../CoinMarketBar";
 import PriceChange from "../PriceChange";
 import formatNumber from "@/utils/formatNumber";
 import getFormattedPrice from "@/utils/getFormattedDate";
+import convertDate from "@/utils/convertDate";
 import getPercentage from "@/utils/getPercentage";
 import DeleteIcon from "@/public/DeleteIcon.svg";
 import { AppDispatch } from "@/redux/store";
@@ -38,7 +39,7 @@ const PortfolioItem = ({ coin }: { coin: Portfolio }) => {
   );
 
   return (
-    <div className="p-5 dark:bg-[#070b15] bg-white h-[200px] rounded-3xl mb-3 relative">
+    <div className="p-5 dark:bg-[#070b15] bg-white h-[240px] rounded-3xl mb-5 relative">
       <div className="absolute inset-0 overflow-hidden rounded-3xl pointer-events-none">
         <img
           src={coin.image}
@@ -50,41 +51,65 @@ const PortfolioItem = ({ coin }: { coin: Portfolio }) => {
         <img src={coin.image} alt={coin.value} width={40} height={40} />
         <h3 className="text-lg">{coin.value}</h3>
       </div>
-      <h3 className="text-sm">
-        Purchase Price: {symbol}
-        {formatNumber(coin.market_data.current_price[currency])}
-      </h3>
-      <h3 className="text-sm">Amount: {coin.purchaseAmount}</h3>
-      <h3 className="text-sm">Date Purchased: {coin.purchaseDate}</h3>
-      <h3 className="text-sm">Market Cap vs Volume</h3>
-      <span className="text-sm text-grape">
-        {formatNumber(marketToVolume)}%
-      </span>
+      <div className="grid grid-cols-4 gap-12 mt-3 items-center">
+        <div>
+          <h3 className="text-sm">Purchase Price:</h3>
+          <span className="text-[#01F1E3]">
+            {symbol}
+            {formatNumber(coin.market_data.current_price[currency])}
+          </span>
+        </div>
+        <div>
+          <h3 className="text-sm">Current Price:</h3>
+          <span className="text-[#01F1E3]">
+            {symbol}
+            {formatNumber(coin.market_data.current_price[currency])}
+          </span>
+        </div>
+        <div>
+          <h3 className="text-sm">Total:</h3>
+          <span className="text-[#01F1E3]">
+            {symbol}
+            {formatNumber(coin.purchaseAmount)}
+          </span>
+        </div>
+        <div>
+          <h3 className="text-sm">Date Purchased:</h3>
+          <span className="text-[#01F1E3]">{coin.purchaseDate}</span>
+        </div>
+        <div>
+          <h3 className="text-sm">Market Cap vs Volume</h3>
+          <span className="text-sm text-[#01F1E3]">
+            {formatNumber(marketToVolume)}%
+          </span>
 
-      <CoinMarketBar
-        fill="dark:bg-white bg-gray-800"
-        // percentage={marketToVolume}
-        percentage={getPercentage(
-          coin.market_data.market_cap[currency],
-          coin.market_data.total_volume[currency]
+          <CoinMarketBar
+            fill="bg-[#01F1E3] bg-gray-800"
+            // percentage={marketToVolume}
+            percentage={getPercentage(
+              coin.market_data.market_cap[currency],
+              coin.market_data.total_volume[currency]
+            )}
+          />
+        </div>
+        <h3 className="text-sm">Circ Supply vs Max Supply</h3>
+        <h3 className="text-sm">Price change 24h</h3>
+        {/* <PriceChange price={priceChange24h} /> */}
+        <button
+          onClick={() => setShowModal(true)}
+          className="p-2 dark:hover:bg-[#121929] hover:bg-slate-100  rounded-xl absolute right-3 top-3"
+        >
+          <DeleteIcon />
+        </button>
+        {showModal && (
+          <PortfolioItemModal
+            coin={coin}
+            showModal={showModal}
+            setShowModal={setShowModal}
+            handleRemove={handleRemove}
+          />
         )}
-      />
-      {/* <h3 className="text-sm">Circ Supply vs Max Supply</h3> */}
-      {/* <PriceChange price={priceChange24h} /> */}
-      <button
-        onClick={() => setShowModal(true)}
-        className="p-2 dark:hover:bg-[#121929] hover:bg-slate-100  rounded-xl absolute right-3 top-3"
-      >
-        <DeleteIcon />
-      </button>
-      {showModal && (
-        <PortfolioItemModal
-          coin={coin}
-          showModal={showModal}
-          setShowModal={setShowModal}
-          handleRemove={handleRemove}
-        />
-      )}
+      </div>
     </div>
   );
 };

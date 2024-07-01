@@ -14,9 +14,15 @@ const PortfolioItemModal = ({
   coin,
 }: PortfolioItemModalProps) => {
   return (
-    <div className="fixed inset-0 flex items-center justify-center z-50">
-      <div className="w-[360px] h-[180px] dark:bg-[#0a0f1c] opacity-80 bg-[#fafafa] rounded-3xl p-4 flex flex-col justify-between">
-        <h3 className="text-md flex justify-center w-full text-center mt-8">
+    <div
+      style={{ marginTop: "-250px" }}
+      className="fixed inset-0 flex items-center justify-center z-50"
+    >
+      <div className="w-[360px] h-[200px] dark:bg-[#0a0f1c] opacity-80 bg-[#fafafa] rounded-2xl p-5 flex flex-col justify-between">
+        <div className="flex justify-center">
+          <img width={45} height={45} src={coin.image} />
+        </div>
+        <h3 className="text-md flex justify-center w-full text-center">
           Are you sure you want to delete this {coin.value}?
         </h3>
         <div className="flex gap-3 justify-center">
