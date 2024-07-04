@@ -1,11 +1,11 @@
 "use client";
 
-import React, { useState, useRef } from "react";
-import { motion } from "framer-motion";
-import { useDispatch } from "react-redux";
-import { AppDispatch } from "@/redux/store";
-import { changeTime } from "@/redux/features/selectedCoins";
 import TimeIcon from "@/public/TimeIcon.svg";
+import { changeTime } from "@/redux/features/selectedCoins";
+import { AppDispatch } from "@/redux/store";
+import { motion } from "framer-motion";
+import { useRef, useState } from "react";
+import { useDispatch } from "react-redux";
 
 interface TimeSelectorItem {
   value: string;
@@ -36,11 +36,11 @@ const TimeSelectorBar = () => {
     <div className="relative" ref={containerRef}>
       <button
         onClick={() => setShowDropdown(!showDropdown)}
-        className={`w-[80px] dark:bg-[#0d121d] bg-white p-2 rounded-xl text-xs dark:text-white text-black font-light flex gap-2 items-center justify-center ${
+        className={`w-[90px] dark:bg-[#0d121d] bg-white p-2 rounded-xl text-xs dark:text-white text-black font-light flex gap-2 items-center justify-center ${
           showDropdown ? "rounded-bl-none rounded-br-none" : ""
         }`}
       >
-        <TimeIcon width={15} height={15} />
+        <TimeIcon width={17} height={17} />
         {timeSelector.find((item) => item.days === selectedTime)?.value}
         <span className="ml-2">&#9662;</span>
       </button>
