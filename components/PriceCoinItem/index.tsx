@@ -1,17 +1,16 @@
 "use client";
 
+import PriceChange from "@/components/PriceChange";
 import { Coin } from "@/interfaces/coin.interface";
-import Image from "next/image";
+import {
+  getSelectedCoinData,
+  removeCoin,
+} from "@/redux/features/selectedCoins";
+import { AppDispatch, useAppSelector } from "@/redux/store";
 import formatNumber from "@/utils/formatNumber";
 import getFormattedPrice from "@/utils/getFormattedDate";
-import PriceChange from "@/components/PriceChange";
-import {
-  removeCoin,
-  getSelectedCoinData,
-} from "@/redux/features/selectedCoins";
-import { useAppSelector } from "@/redux/store";
+import Image from "next/image";
 import { useDispatch } from "react-redux";
-import { AppDispatch } from "@/redux/store";
 
 const PriceCoinItem = ({ coin }: { coin: Coin }) => {
   const { selectedCoins, timeDay, currency } = useAppSelector(
@@ -19,7 +18,7 @@ const PriceCoinItem = ({ coin }: { coin: Coin }) => {
   );
   const dispatch: AppDispatch = useDispatch();
   const { symbol } = useAppSelector((state) => state.currencySlice);
-  const isSelected = selectedCoins.some((item) => item.id === coin.id);
+  const isSelected = selectedCoins.find((item) => item.id === coin.id);
 
   const coinSelector = (coin: Coin) => {
     if (isSelected) {
@@ -41,7 +40,7 @@ const PriceCoinItem = ({ coin }: { coin: Coin }) => {
   return (
     <button
       onClick={() => coinSelector(coin)}
-      className={`rounded-2xl pl-2 border-white bg-white ${
+      className={`rounded-xl pl-2 border-white bg-white ${
         isSelected
           ? "bg-gradient-to-r from-purple-400 to-orange-300 text-sm"
           : "dark:bg-[#0d121d] dark:hover:bg-[#161f32] hover:bg-[#efefef]"
@@ -55,12 +54,20 @@ const PriceCoinItem = ({ coin }: { coin: Coin }) => {
         </div>
         <div className="flex flex-col">
           <span
-            className={`px-1 text-xs ${
+            className={`px-1 text-xs  flex gap-1 ${
               isSelected ? "text-white" : "dark:text-[#c2c2c2] text-grey "
             } flex`}
           >
-            {coin.name.charAt(0).toUpperCase() +
-              coin.name.slice(1).toLowerCase()}{" "}
+            <span className="truncate max-w-[4rem]">
+              {coin.name
+                .split(" ")
+                .map(
+                  (word) =>
+                    word[0].toUpperCase() +
+                    word.slice(1, word.length).toLowerCase()
+                )
+                .join(" ")}{" "}
+            </span>
             ({coin.symbol.toUpperCase()})
           </span>
           <div className="flex gap-14">

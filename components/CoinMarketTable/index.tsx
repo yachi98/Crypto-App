@@ -29,9 +29,9 @@ const CoinMarketTable = () => {
     }
   }, [inView, currency, isLoading, currentPage]);
 
-  useEffect(() => {
-    dispatch(clearCoinData());
-  }, [currency]);
+  // useEffect(() => {
+  //   dispatch(clearCoinData());
+  // }, [currency]);
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const searchValue = e.target.value.toLowerCase();

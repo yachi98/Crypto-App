@@ -1,18 +1,14 @@
 import { Portfolio } from "@/interfaces/portfolio.interface";
-import { Coin } from "@/interfaces/coin.interface";
-import { useAppSelector } from "@/redux/store";
+import DeleteIcon from "@/public/DeleteIcon.svg";
 import { removePortfolio } from "@/redux/features/portfolioSlice";
-import { useState } from "react";
-import PortfolioItemModal from "../PortfolioItemModal";
-import CoinMarketBar from "../CoinMarketBar";
-import PriceChange from "../PriceChange";
+import { AppDispatch, useAppSelector } from "@/redux/store";
 import formatNumber from "@/utils/formatNumber";
 import getFormattedPrice from "@/utils/getFormattedDate";
-import convertDate from "@/utils/convertDate";
 import getPercentage from "@/utils/getPercentage";
-import DeleteIcon from "@/public/DeleteIcon.svg";
-import { AppDispatch } from "@/redux/store";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
+import CoinMarketBar from "../CoinMarketBar";
+import PortfolioItemModal from "../PortfolioItemModal";
 
 const PortfolioItem = ({ coin }: { coin: Portfolio }) => {
   const [showModal, setShowModal] = useState(false);

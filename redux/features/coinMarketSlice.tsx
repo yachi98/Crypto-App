@@ -1,12 +1,9 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { AppDispatch, RootState } from "@/redux/store";
-import { getSelectedCoinData } from "./selectedCoins";
 import { Coin } from "@/interfaces/coin.interface";
 
 interface CoinMarketData {
   coinMarketData: Coin[];
-  page: number;
   currentPage: number;
   currency: string;
   isLoading: boolean;
@@ -15,7 +12,6 @@ interface CoinMarketData {
 
 const initialState: CoinMarketData = {
   coinMarketData: [],
-  page: 1,
   currentPage: 1,
   currency: "gbp",
   isLoading: true,
@@ -30,7 +26,7 @@ export const getCoinData = createAsyncThunk(
   ) => {
     try {
       const { data } = await axios.get(
-        `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency}&order=market_cap_desc&per_page=20&page=${page}&sparkline=true&price_change_percentage=1h%2C24h%2C7d&x_cg_demo_api_key=${process.env.NEXT_PUBLIC_API_KEY}`
+        `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency}&order=market_cap_desc&per_page=20&page=${page}&sparkline=true&market_data=true&price_change_percentage=1h%2C24h%2C7d&x_cg_demo_api_key=${process.env.NEXT_PUBLIC_API_KEY}`
       );
       return data;
     } catch (error) {
@@ -41,10 +37,13 @@ export const getCoinData = createAsyncThunk(
 
 export const getAllCoinsMarketData = createAsyncThunk(
   "coinMarket/getAllCoinsMarketData",
-  async ({ currency }: { currency: string }, { rejectWithValue }) => {
+  async (
+    { currency, page }: { currency: string; page: number },
+    { rejectWithValue }
+  ) => {
     try {
       const { data } = await axios.get(
-        `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency}&order=market_cap_desc&per_page=250&page=1&sparkline=false&locale=en`
+        `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency}&order=market_cap_desc&per_page=250&page=${page}&sparkline=false&market_data=true&locale=en`
       );
       return data;
     } catch (error) {
@@ -58,7 +57,7 @@ const coinMarketSlice = createSlice({
   initialState,
   reducers: {
     clearCoinData(state) {
-      state.coinMarketData = [];
+      // state.coinMarketData = [];
       state.currentPage = 1;
     },
   },
@@ -69,7 +68,12 @@ const coinMarketSlice = createSlice({
         state.hasError = false;
       })
       .addCase(getCoinData.fulfilled, (state, action) => {
-        state.coinMarketData = [...state.coinMarketData, ...action.payload];
+        state.coinMarketData = [
+          ...state.coinMarketData.filter(
+            (coin) => coin.id !== action.payload.id
+          ),
+          ...action.payload,
+        ];
         const { currency } = action.meta.arg;
         state.currency = currency;
         state.currentPage += 1;
@@ -98,32 +102,3 @@ const coinMarketSlice = createSlice({
 
 export const { clearCoinData } = coinMarketSlice.actions;
 export default coinMarketSlice.reducer;
-
-// export const getCoinData = createAsyncThunk(
-//   "coinMarket/getCoinData",
-//   async ({ currency, page }: { currency: string; page: number }, thunkAPI) => {
-//     const { rejectWithValue, getState, dispatch } = thunkAPI;
-//     try {
-//       // Get the state to log selected coins data
-//       const selectedCoinsData = getState() as RootState;
-//       console.log("Selected Coins Data:", selectedCoinsData);
-
-//       // Dispatch another thunk if needed
-//       const selectedCoinParams: GetSelectedCoinDataParams = {
-//         coinId: "bitcoin",
-//         timeDay: "1", // Example value, replace with the actual value if necessary
-//         currency: currency,
-//       };
-//       dispatch(getSelectedCoinData(selectedCoinParams));
-
-//       // Make the API call
-//       const { data } = await axios.get(
-//         `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency}&order=market_cap_desc&per_page=20&page=${page}&sparkline=true&price_change_percentage=1h%2C24h%2C7d&x_cg_demo_api_key=${process.env.NEXT_PUBLIC_API_KEY}`
-//       );
-
-//       return data;
-//     } catch (error) {
-//       return rejectWithValue(error);
-//     }
-//   }
-// );

@@ -1,49 +1,34 @@
 "use client";
 
-import { getGlobalData } from "@/redux/features/globalSlice";
-import { getCoinData } from "@/redux/features/coinMarketSlice";
-import { clearCoinData } from "@/redux/features/coinMarketSlice";
-import { useAppSelector } from "@/redux/store";
-import { AppDispatch } from "@/redux/store";
-import { useDispatch } from "react-redux";
-import { useEffect, useState } from "react";
-import PriceChart from "@/components/PriceChart";
 import CoinConverterPage from "@/components/CoinConverterPage";
 import CoinGraphChart from "@/components/CoinGraphChart";
 import CoinMarketTable from "@/components/CoinMarketTable";
-import { getSelectedCoinData } from "@/redux/features/selectedCoins";
+import PriceChart from "@/components/PriceChart";
 import CoinIcon from "@/public/CoinIcon.svg";
 import GraphIcon from "@/public/GraphIcon.svg";
+import { clearCoinData, getCoinData } from "@/redux/features/coinMarketSlice";
+import { getGlobalData } from "@/redux/features/globalSlice";
+import { AppDispatch, useAppSelector } from "@/redux/store";
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 
 const Home = () => {
   const [showConverter, setShowConverter] = useState(false);
   const dispatch: AppDispatch = useDispatch();
   const { currency } = useAppSelector((state) => state.currencySlice);
-  const { selectedCoins } = useAppSelector((state) => state.selectedCoinData);
+  const { currentPage } = useAppSelector((state) => state.coinMarketData);
 
   useEffect(() => {
+    dispatch(clearCoinData());
     dispatch(getGlobalData());
-    dispatch(getCoinData({ currency: currency, page: 1 }));
+    dispatch(getCoinData({ currency: currency, page: currentPage }));
   }, [currency]);
 
-  useEffect(() => {
-    return () => {
-      dispatch(clearCoinData());
-    };
-  }, []);
-
-  useEffect(() => {
-    if (selectedCoins.length === 0) {
-      const defaultCoin = "bitcoin";
-      dispatch(
-        getSelectedCoinData({
-          coinId: defaultCoin,
-          timeDay: "1",
-          currency: "gbp",
-        })
-      );
-    }
-  }, [selectedCoins]);
+  // useEffect(() => {
+  //   return () => {
+  //     dispatch(clearCoinData());
+  //   };
+  // }, [currency]);
 
   return (
     <main>

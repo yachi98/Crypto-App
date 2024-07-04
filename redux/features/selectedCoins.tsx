@@ -5,7 +5,7 @@ import axios from "axios";
 interface SelectedCoinState {
   selectedCoins: SelectedCoin[];
   currency: string;
-  coinId: string;
+  activeCoinId: string | null;
   timeDay: string;
   isLoading: boolean;
   hasError: boolean;
@@ -14,13 +14,11 @@ interface SelectedCoinState {
 const initialState: SelectedCoinState = {
   selectedCoins: [],
   currency: "gbp",
-  coinId: "",
+  activeCoinId: "bitcoin",
   timeDay: "1",
   isLoading: true,
   hasError: false,
 };
-
-// if selectee coins are empty, get the first coin of the list of coins, set a defeault with the prooperty bitcoin
 
 const formatChartData = ({
   data,
@@ -68,22 +66,8 @@ export const getSelectedCoinData = createAsyncThunk(
         priceLabels: priceLabels,
         volumeLabels: volumeLabels,
       };
+      console.log("fetching coin data");
       return coinData;
-
-      // const coinData: {
-      //   id: string;
-      //   prices: number[];
-      //   total_volumes: number[];
-      //   priceLabels: number[];
-      //   volumeLabels: number[];
-      // } = {
-      //   id: coinId,
-      //   prices: timeFormattedPrices,
-      //   total_volumes: timeFormattedVolumes,
-      //   priceLabels: priceLabels,
-      //   volumeLabels: volumeLabels,
-      // };
-      // return coinData;
     } catch (error) {
       return rejectWithValue(error);
     }
@@ -97,13 +81,12 @@ const getSelectedCoinSlice = createSlice({
     changeTime: (state, action) => {
       state.timeDay = action.payload;
     },
-
     removeCoins: (state) => {
       state.selectedCoins = [];
     },
     changeCoin: (state, action) => {
       const newCoinId = action.payload;
-      state.coinId = newCoinId;
+      state.activeCoinId = newCoinId;
     },
     removeCoin: (state, action) => {
       const coinIdToRemove = action.payload;
@@ -120,7 +103,20 @@ const getSelectedCoinSlice = createSlice({
         state.hasError = false;
       })
       .addCase(getSelectedCoinData.fulfilled, (state, action) => {
-        state.selectedCoins = [...state.selectedCoins, action.payload];
+        const transformedCoins = state.selectedCoins.map((coin) => {
+          if (coin.id === action.payload.id) {
+            return action.payload;
+          } else {
+            return coin;
+          }
+        });
+        const foundCoins = transformedCoins.find(
+          (coin) => coin.id === action.payload.id
+        );
+        if (!foundCoins) {
+          transformedCoins.push(action.payload);
+        }
+        state.selectedCoins = transformedCoins;
         state.isLoading = false;
       })
       .addCase(getSelectedCoinData.rejected, (state, action) => {
