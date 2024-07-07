@@ -35,7 +35,7 @@ const PortfolioItem = ({ coin }: { coin: Portfolio }) => {
   );
 
   return (
-    <div className="p-5 dark:bg-[#070b15] bg-white h-[240px] rounded-3xl mb-5 relative">
+    <div className="p-5 dark:bg-[#070b15] bg-white h-[230px] rounded-3xl mb-5 relative">
       <div className="absolute inset-0 overflow-hidden rounded-3xl pointer-events-none">
         <img
           src={coin.image}

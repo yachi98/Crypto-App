@@ -1,16 +1,16 @@
+import PriceChange from "@/components/PriceChange";
 import { Coin } from "@/interfaces/coin.interface";
 import { useAppSelector } from "@/redux/store";
 import formatNumber from "@/utils/formatNumber";
-import PriceChange from "@/components/PriceChange";
 import getFormattedPrice from "@/utils/getFormattedDate";
-import CoinMarketBar from "../CoinMarketBar";
 import getPercentage from "@/utils/getPercentage";
-import PriceCoinGraph from "../PriceCoinGraph";
 import Image from "next/image";
 import Link from "next/link";
+import CoinMarketBar from "../CoinMarketBar";
+import PriceCoinGraph from "../PriceCoinGraph";
 
 const RowCoinItem = ({ coin }: { coin: Coin }) => {
-  const { symbol, currency } = useAppSelector((state) => state.currencySlice);
+  const { symbol } = useAppSelector((state) => state.currencySlice);
 
   const priceChange1h: number = getFormattedPrice(
     coin.price_change_percentage_1h_in_currency

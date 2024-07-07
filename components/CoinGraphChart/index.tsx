@@ -6,6 +6,7 @@ import { AppDispatch } from "@/redux/store";
 import { useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import TimeSelectorBar from "../TimeSelector";
+import { clearCoinData, getCoinData } from "@/redux/features/coinMarketSlice";
 import { SelectedCoin } from "@/interfaces/selectedcoin.interface";
 import { getSelectedCoinData } from "@/redux/features/selectedCoins";
 import { labelFormatter } from "@/redux/features/dateFormatter";
@@ -169,7 +170,7 @@ const CoinBarGraph = ({
 
 const CoinGraphChart = () => {
   const dispatch: AppDispatch = useDispatch();
-  const { activeCoinId, selectedCoins, timeDay } = useAppSelector(
+  const { coinId, selectedCoins, timeDay } = useAppSelector(
     (state) => state.selectedCoinData
   );
   const { currency, symbol } = useAppSelector((state) => state.currencySlice);
@@ -183,18 +184,20 @@ const CoinGraphChart = () => {
     []
   );
 
+  console.log(coinMarketData);
+
   const coinBG: string[] = ["bg-[#7878FA]", "bg-[#D878FA]", "bg-[#FDBA74]"];
 
   useEffect(() => {
-    if (!activeCoinId) return;
+    if (!coinId) return;
     dispatch(
       getSelectedCoinData({
-        coinId: activeCoinId,
+        coinId,
         timeDay,
         currency,
       })
     );
-  }, [activeCoinId, timeDay, currency]);
+  }, [coinId, timeDay, currency]);
 
   function renderInfo(name: string) {
     return (

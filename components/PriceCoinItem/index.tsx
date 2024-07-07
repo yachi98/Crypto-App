@@ -13,11 +13,12 @@ import Image from "next/image";
 import { useDispatch } from "react-redux";
 
 const PriceCoinItem = ({ coin }: { coin: Coin }) => {
-  const { selectedCoins, timeDay, currency } = useAppSelector(
+  const { selectedCoins, timeDay } = useAppSelector(
     (state) => state.selectedCoinData
   );
+
   const dispatch: AppDispatch = useDispatch();
-  const { symbol } = useAppSelector((state) => state.currencySlice);
+  const { symbol, currency } = useAppSelector((state) => state.currencySlice);
   const isSelected = selectedCoins.find((item) => item.id === coin.id);
 
   const coinSelector = (coin: Coin) => {

@@ -5,7 +5,7 @@ import axios from "axios";
 interface SelectedCoinState {
   selectedCoins: SelectedCoin[];
   currency: string;
-  activeCoinId: string | null;
+  coinId: string | null;
   timeDay: string;
   isLoading: boolean;
   hasError: boolean;
@@ -14,11 +14,16 @@ interface SelectedCoinState {
 const initialState: SelectedCoinState = {
   selectedCoins: [],
   currency: "gbp",
-  activeCoinId: "bitcoin",
+  coinId: "bitcoin",
   timeDay: "1",
   isLoading: true,
   hasError: false,
 };
+
+// The state management is handled using Redux
+// Toolkit. The currency state in SelectedCoinState
+// is updated when the user selects a new currency.
+// This triggers the getSelectedCoinData thunk to refetch data using the new currency.
 
 const formatChartData = ({
   data,
@@ -66,7 +71,7 @@ export const getSelectedCoinData = createAsyncThunk(
         priceLabels: priceLabels,
         volumeLabels: volumeLabels,
       };
-      console.log("fetching coin data");
+      // console.log(timeFormattedVolumes); // this works
       return coinData;
     } catch (error) {
       return rejectWithValue(error);
@@ -86,7 +91,7 @@ const getSelectedCoinSlice = createSlice({
     },
     changeCoin: (state, action) => {
       const newCoinId = action.payload;
-      state.activeCoinId = newCoinId;
+      state.coinId = newCoinId;
     },
     removeCoin: (state, action) => {
       const coinIdToRemove = action.payload;
@@ -129,3 +134,14 @@ const getSelectedCoinSlice = createSlice({
 export const { changeTime, removeCoin, removeCoins } =
   getSelectedCoinSlice.actions;
 export default getSelectedCoinSlice.reducer;
+
+// const coinDataPromises = coinId.map((coinId) =>
+//   getSelectedCoinData(coinId)
+// );
+// const coinDataArray = await Promise.all(coinDataPromises);
+// Promise.all([p1, p2, p3]).then((values) => {
+//   console.log(values); // [3, 1337, "foo"]
+// });
+
+//     const results = await Promise.all(coinData);
+//     return results;

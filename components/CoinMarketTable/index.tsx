@@ -1,36 +1,37 @@
 "use client";
 
-import { useAppSelector } from "@/redux/store";
-import { AppDispatch } from "@/redux/store";
-import { useDispatch } from "react-redux";
-import { ChangeEvent, useEffect, useRef, useState } from "react";
-import MarketTableHeading from "../MarketTableHeading";
-import CoinsTableSpinner from "../Spinner";
 import RowCoinItem from "@/components/RowCoinItem/";
-import { clearCoinData, getCoinData } from "@/redux/features/coinMarketSlice";
 import { Coin } from "@/interfaces/coin.interface";
 import SearchIcon from "@/public/SearchIcon.svg";
 import SpinnerIcon from "@/public/SpinnerIcon.svg";
+import { getCoinData } from "@/redux/features/coinMarketSlice";
+import { AppDispatch, useAppSelector } from "@/redux/store";
+import { ChangeEvent, useEffect, useRef, useState } from "react";
 import { useInView } from "react-intersection-observer";
+import { useDispatch } from "react-redux";
+import MarketTableHeading from "../MarketTableHeading";
+import CoinsTableSpinner from "../Spinner";
 
 const CoinMarketTable = () => {
   const dispatch: AppDispatch = useDispatch();
   const [coinSearch, setCoinSearch] = useState("");
   const [showDropDown, setShowDropDown] = useState(false);
-  const { coinMarketData, isLoading, currentPage, currency, hasError } =
-    useAppSelector((state) => state.coinMarketData);
+  const { coinMarketData, isLoading, currentPage, hasError } = useAppSelector(
+    (state) => state.coinMarketData
+  );
+  const { currency } = useAppSelector((state) => state.currencySlice);
   const hasCoins: boolean = coinMarketData.length > 0;
   const inputRef = useRef<HTMLInputElement>(null);
   const [spinnerRef, inView] = useInView();
 
   useEffect(() => {
     if (inView && !isLoading) {
-      dispatch(getCoinData({ currency, page: currentPage }));
+      dispatch(getCoinData({ currency: currency, page: currentPage }));
     }
   }, [inView, currency, isLoading, currentPage]);
 
   // useEffect(() => {
-  //   dispatch(clearCoinData());
+  //   dispatch(getCoinData({ currency, page: 1 }));
   // }, [currency]);
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
