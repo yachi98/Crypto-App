@@ -6,7 +6,6 @@ import { AppDispatch } from "@/redux/store";
 import { useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import TimeSelectorBar from "../TimeSelector";
-import { clearCoinData, getCoinData } from "@/redux/features/coinMarketSlice";
 import { SelectedCoin } from "@/interfaces/selectedcoin.interface";
 import { getSelectedCoinData } from "@/redux/features/selectedCoins";
 import { labelFormatter } from "@/redux/features/dateFormatter";
@@ -183,8 +182,6 @@ const CoinGraphChart = () => {
     },
     []
   );
-
-  console.log(coinMarketData);
 
   const coinBG: string[] = ["bg-[#7878FA]", "bg-[#D878FA]", "bg-[#FDBA74]"];
 

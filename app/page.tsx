@@ -7,6 +7,7 @@ import PriceChart from "@/components/PriceChart";
 import CoinIcon from "@/public/CoinIcon.svg";
 import GraphIcon from "@/public/GraphIcon.svg";
 import { clearCoinData, getCoinData } from "@/redux/features/coinMarketSlice";
+import { getSelectedCoinData } from "@/redux/features/selectedCoins";
 import { getGlobalData } from "@/redux/features/globalSlice";
 import { AppDispatch, useAppSelector } from "@/redux/store";
 import { useEffect, useState } from "react";
@@ -14,21 +15,33 @@ import { useDispatch } from "react-redux";
 
 const Home = () => {
   const [showConverter, setShowConverter] = useState(false);
+  const [page, setPage] = useState(1);
   const dispatch: AppDispatch = useDispatch();
   const { currency } = useAppSelector((state) => state.currencySlice);
   const { currentPage } = useAppSelector((state) => state.coinMarketData);
-
-  useEffect(() => {
-    dispatch(clearCoinData());
-    dispatch(getGlobalData());
-    dispatch(getCoinData({ currency: currency, page: currentPage }));
-  }, [currency]);
+  const { timeDay, selectedCoins } = useAppSelector(
+    (state) => state.selectedCoinData
+  );
 
   // useEffect(() => {
-  //   return () => {
-  //     dispatch(clearCoinData());
-  //   };
+  //   dispatch(clearCoinData());
+  //   dispatch(getGlobalData());
+  //   dispatch(getCoinData({ currency: currency, page: currentPage }));
   // }, [currency]);
+
+  useEffect(() => {
+    // dispatch(clearCoinData());
+    dispatch(getGlobalData());
+    dispatch(getCoinData({ currency: currency, page }));
+  }, [currency, page]);
+
+  useEffect(() => {
+    return () => {
+      dispatch(clearCoinData());
+      dispatch(getCoinData({ currency: currency, page }));
+      setPage(1);
+    };
+  }, [currency]);
 
   return (
     <main>

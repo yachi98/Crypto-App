@@ -30,10 +30,6 @@ const CoinMarketTable = () => {
     }
   }, [inView, currency, isLoading, currentPage]);
 
-  // useEffect(() => {
-  //   dispatch(getCoinData({ currency, page: 1 }));
-  // }, [currency]);
-
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const searchValue = e.target.value.toLowerCase();
     setCoinSearch(searchValue);
@@ -90,6 +86,7 @@ const CoinMarketTable = () => {
           )}
         </div>
       </div>
+
       <MarketTableHeading />
       {hasCoins &&
         filteredCoins.map((coin: Coin) => (

@@ -4,7 +4,6 @@ import axios from "axios";
 
 interface SelectedCoinState {
   selectedCoins: SelectedCoin[];
-  currency: string;
   coinId: string | null;
   timeDay: string;
   isLoading: boolean;
@@ -13,7 +12,6 @@ interface SelectedCoinState {
 
 const initialState: SelectedCoinState = {
   selectedCoins: [],
-  currency: "gbp",
   coinId: "bitcoin",
   timeDay: "1",
   isLoading: true,
@@ -135,9 +133,6 @@ export const { changeTime, removeCoin, removeCoins } =
   getSelectedCoinSlice.actions;
 export default getSelectedCoinSlice.reducer;
 
-// const coinDataPromises = coinId.map((coinId) =>
-//   getSelectedCoinData(coinId)
-// );
 // const coinDataArray = await Promise.all(coinDataPromises);
 // Promise.all([p1, p2, p3]).then((values) => {
 //   console.log(values); // [3, 1337, "foo"]

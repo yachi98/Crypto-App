@@ -5,7 +5,6 @@ import axios from "axios";
 interface CoinMarketData {
   coinMarketData: Coin[];
   currentPage: number;
-  // currency: string;
   isLoading: boolean;
   hasError: boolean;
 }
@@ -13,7 +12,6 @@ interface CoinMarketData {
 const initialState: CoinMarketData = {
   coinMarketData: [],
   currentPage: 1,
-  // currency: "gbp",
   isLoading: true,
   hasError: false,
 };
@@ -57,7 +55,7 @@ const coinMarketSlice = createSlice({
   initialState,
   reducers: {
     clearCoinData(state) {
-      // state.coinMarketData = [];
+      state.coinMarketData = [];
       state.currentPage = 1;
     },
   },
@@ -69,8 +67,12 @@ const coinMarketSlice = createSlice({
       })
       .addCase(getCoinData.fulfilled, (state, action) => {
         state.coinMarketData = [...state.coinMarketData, ...action.payload];
-        // const { currency } = action.meta.arg;
-        // state.currency = currency;
+        // state.coinMarketData = [
+        //   ...state.coinMarketData.filter(
+        //     (coin) => coin.id !== action.payload.id
+        //   ),
+        //   ...action.payload,
+        // ];
         state.currentPage += 1;
         state.isLoading = false;
       })
@@ -98,9 +100,5 @@ const coinMarketSlice = createSlice({
 export const { clearCoinData } = coinMarketSlice.actions;
 export default coinMarketSlice.reducer;
 
-// state.coinMarketData = [
-//   ...state.coinMarketData.filter(
-//     (coin) => coin.id !== action.payload.id
-//   ),
-//   ...action.payload,
-// ];
+// const { currency } = action.meta.arg;
+// state.currency = currency;

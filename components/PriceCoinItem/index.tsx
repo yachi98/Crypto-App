@@ -16,7 +16,6 @@ const PriceCoinItem = ({ coin }: { coin: Coin }) => {
   const { selectedCoins, timeDay } = useAppSelector(
     (state) => state.selectedCoinData
   );
-
   const dispatch: AppDispatch = useDispatch();
   const { symbol, currency } = useAppSelector((state) => state.currencySlice);
   const isSelected = selectedCoins.find((item) => item.id === coin.id);
