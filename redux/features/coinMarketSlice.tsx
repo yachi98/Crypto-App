@@ -67,12 +67,6 @@ const coinMarketSlice = createSlice({
       })
       .addCase(getCoinData.fulfilled, (state, action) => {
         state.coinMarketData = [...state.coinMarketData, ...action.payload];
-        // state.coinMarketData = [
-        //   ...state.coinMarketData.filter(
-        //     (coin) => coin.id !== action.payload.id
-        //   ),
-        //   ...action.payload,
-        // ];
         state.currentPage += 1;
         state.isLoading = false;
       })
