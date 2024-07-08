@@ -69,7 +69,6 @@ export const getSelectedCoinData = createAsyncThunk(
         priceLabels: priceLabels,
         volumeLabels: volumeLabels,
       };
-      // console.log(timeFormattedVolumes); // this works
       return coinData;
     } catch (error) {
       return rejectWithValue(error);
@@ -83,9 +82,6 @@ const getSelectedCoinSlice = createSlice({
   reducers: {
     changeTime: (state, action) => {
       state.timeDay = action.payload;
-    },
-    removeCoins: (state) => {
-      state.selectedCoins = [];
     },
     changeCoin: (state, action) => {
       const newCoinId = action.payload;
@@ -129,14 +125,5 @@ const getSelectedCoinSlice = createSlice({
       });
   },
 });
-export const { changeTime, removeCoin, removeCoins } =
-  getSelectedCoinSlice.actions;
+export const { changeTime, removeCoin } = getSelectedCoinSlice.actions;
 export default getSelectedCoinSlice.reducer;
-
-// const coinDataArray = await Promise.all(coinDataPromises);
-// Promise.all([p1, p2, p3]).then((values) => {
-//   console.log(values); // [3, 1337, "foo"]
-// });
-
-//     const results = await Promise.all(coinData);
-//     return results;

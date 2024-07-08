@@ -7,7 +7,6 @@ import PriceChart from "@/components/PriceChart";
 import CoinIcon from "@/public/CoinIcon.svg";
 import GraphIcon from "@/public/GraphIcon.svg";
 import { clearCoinData, getCoinData } from "@/redux/features/coinMarketSlice";
-import { getSelectedCoinData } from "@/redux/features/selectedCoins";
 import { getGlobalData } from "@/redux/features/globalSlice";
 import { AppDispatch, useAppSelector } from "@/redux/store";
 import { useEffect, useState } from "react";
@@ -15,37 +14,27 @@ import { useDispatch } from "react-redux";
 
 const Home = () => {
   const [showConverter, setShowConverter] = useState(false);
-  const [page, setPage] = useState(1);
   const dispatch: AppDispatch = useDispatch();
   const { currency } = useAppSelector((state) => state.currencySlice);
-  const { currentPage } = useAppSelector((state) => state.coinMarketData);
-  const { timeDay, selectedCoins } = useAppSelector(
-    (state) => state.selectedCoinData
+  const { currentPage, coinMarketData } = useAppSelector(
+    (state) => state.coinMarketData
   );
 
-  // useEffect(() => {
-  //   dispatch(clearCoinData());
-  //   dispatch(getGlobalData());
-  //   dispatch(getCoinData({ currency: currency, page: currentPage }));
-  // }, [currency]);
-
   useEffect(() => {
-    // dispatch(clearCoinData());
     dispatch(getGlobalData());
-    dispatch(getCoinData({ currency: currency, page }));
-  }, [currency, page]);
+    dispatch(getCoinData({ currency: currency, page: 1 }));
+  }, [currency]);
 
   useEffect(() => {
     return () => {
       dispatch(clearCoinData());
-      dispatch(getCoinData({ currency: currency, page }));
-      setPage(1);
+      dispatch(getCoinData({ currency: currency, page: 1 }));
     };
   }, [currency]);
 
   return (
     <main>
-      {!showConverter && <PriceChart />}
+      {!showConverter && coinMarketData.length > 0 && <PriceChart />}
       <div className="dark:bg-[#0d121d] bg-white dark:text-white text-black p-1 rounded-xl w-[180px] flex items-center mt-5 text-xs">
         <button
           onClick={() => setShowConverter(!showConverter)}

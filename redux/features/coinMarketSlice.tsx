@@ -99,6 +99,3 @@ const coinMarketSlice = createSlice({
 
 export const { clearCoinData } = coinMarketSlice.actions;
 export default coinMarketSlice.reducer;
-
-// const { currency } = action.meta.arg;
-// state.currency = currency;
