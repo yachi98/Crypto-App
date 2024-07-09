@@ -26,7 +26,6 @@ const Home = () => {
   useEffect(() => {
     return () => {
       dispatch(clearCoinData());
-      dispatch(getCoinData({ currency: currency, page: 1 }));
     };
   }, [currency]);
 
