@@ -18,11 +18,6 @@ const initialState: SelectedCoinState = {
   hasError: false,
 };
 
-// The state management is handled using Redux
-// Toolkit. The currency state in SelectedCoinState
-// is updated when the user selects a new currency.
-// This triggers the getSelectedCoinData thunk to refetch data using the new currency.
-
 const formatChartData = ({
   data,
   index,
@@ -102,20 +97,15 @@ const getSelectedCoinSlice = createSlice({
         state.hasError = false;
       })
       .addCase(getSelectedCoinData.fulfilled, (state, action) => {
-        const transformedCoins = state.selectedCoins.map((coin) => {
-          if (coin.id === action.payload.id) {
-            return action.payload;
-          } else {
-            return coin;
-          }
-        });
-        const foundCoins = transformedCoins.find(
+        const coinIndex = state.selectedCoins.findIndex(
           (coin) => coin.id === action.payload.id
         );
-        if (!foundCoins) {
-          transformedCoins.push(action.payload);
+
+        if (coinIndex === -1) {
+          state.selectedCoins.push(action.payload);
+        } else {
+          state.selectedCoins[coinIndex] = action.payload;
         }
-        state.selectedCoins = transformedCoins;
         state.isLoading = false;
       })
       .addCase(getSelectedCoinData.rejected, (state, action) => {
