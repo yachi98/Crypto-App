@@ -20,14 +20,6 @@ const PortfolioItem = ({ coin }: { coin: Portfolio }) => {
     setShowModal(false);
   };
 
-  // const priceChange24h = getFormattedPrice(coin.price_change_percentage_24h);
-
-  // const priceChange24h = getFormattedPrice(
-  //   ((coin.market_data.current_price[currency] - coin.market_data.current_price[currency] * 0.01) /
-  //     coin.market_data.current_price[currency]) *
-  //   100
-  // );
-
   const marketToVolume = getFormattedPrice(
     (coin.market_data.market_cap[currency] /
       coin.market_data.total_volume[currency]) *
@@ -81,7 +73,6 @@ const PortfolioItem = ({ coin }: { coin: Portfolio }) => {
 
           <CoinMarketBar
             fill="bg-[#01F1E3] bg-gray-800"
-            // percentage={marketToVolume}
             percentage={getPercentage(
               coin.market_data.market_cap[currency],
               coin.market_data.total_volume[currency]
@@ -90,7 +81,6 @@ const PortfolioItem = ({ coin }: { coin: Portfolio }) => {
         </div>
         <h3 className="text-sm">Circ Supply vs Max Supply</h3>
         <h3 className="text-sm">Price change 24h</h3>
-        {/* <PriceChange price={priceChange24h} /> */}
         <button
           onClick={() => setShowModal(true)}
           className="p-2 dark:hover:bg-[#121929] hover:bg-slate-100  rounded-xl absolute right-3 top-3"

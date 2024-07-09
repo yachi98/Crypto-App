@@ -1,6 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { Portfolio } from "@/interfaces/portfolio.interface";
-import formatNumber from "@/utils/formatNumber";
 import axios from "axios";
 
 interface PortfolioState {
@@ -22,7 +21,6 @@ export const addPortfolioData = createAsyncThunk(
       const { data } = await axios.get(
         `https://api.coingecko.com/api/v3/coins/${coin.coinApiId}/history?date=${coin.purchaseDate}`
       );
-      console.log(data);
 
       const currentPrice = data.market_data.current_price.gbp;
       const purchaseAmountValue = coin.purchaseAmount * currentPrice;
@@ -77,18 +75,3 @@ const portfolioSlice = createSlice({
 
 export const { removePortfolio } = portfolioSlice.actions;
 export default portfolioSlice.reducer;
-
-//     const portfolioData: Portfolio[] = state.portfolio.portfolioData;
-//     console.log("1", coin);
-
-//     const historicalData = portfolioData.map(async (coin) => {
-//       const response = await axios.get(
-//         `https://api.coingecko.com/api/v3/coins/${coin.coinApiId}/history?date=${coin.date}`
-//       );
-//       console.log("2", coin);
-//       const data = await response.data;
-//       return data;
-//     });
-
-//     const results = await Promise.all(historicalData);
-//     return results;

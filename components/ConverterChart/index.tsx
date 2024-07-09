@@ -17,21 +17,19 @@ const ConverterChart = ({
   toCoin: Coin;
 }) => {
   const dispatch: AppDispatch = useDispatch();
-  const { activeCoinId, timeDay } = useAppSelector(
-    (state) => state.selectedCoinData
-  );
+  const { coinId, timeDay } = useAppSelector((state) => state.selectedCoinData);
   const { currency } = useAppSelector((state) => state.currencySlice);
 
   useEffect(() => {
-    if (!activeCoinId) return;
+    if (!coinId) return;
     dispatch(
       getSelectedCoinData({
-        coinId: activeCoinId,
+        coinId,
         timeDay,
         currency,
       })
     );
-  }, [activeCoinId, currency]);
+  }, [coinId, currency]);
 
   const fromCoinPrices: number[] = fromCoin.sparkline_in_7d.price;
   const toCoinPrices: number[] = toCoin.sparkline_in_7d.price;

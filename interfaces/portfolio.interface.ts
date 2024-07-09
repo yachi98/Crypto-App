@@ -10,7 +10,4 @@ export interface Portfolio {
     market_cap: { [currency: string]: number };
     total_volume: { [currency: string]: number };
   };
-  // circulating_supply: number;
-  // total_supply: number;
-  // max_supply: number;
 }

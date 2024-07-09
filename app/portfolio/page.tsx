@@ -1,10 +1,10 @@
 "use client";
 
-import { useState, useEffect } from "react";
 import PortfolioModal from "@/components/PortfolioModal";
 import PortfolioTable from "@/components/PortfolioTable";
 import { useAppSelector } from "@/redux/store";
 import axios from "axios";
+import { useEffect, useState } from "react";
 
 const PortfolioPage = () => {
   const [showModal, setShowModal] = useState(false);
@@ -18,7 +18,6 @@ const PortfolioPage = () => {
         const { data } = await axios.get(
           `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency}&order=market_cap_desc&per_page=250&sparkline=true&price_change_percentage=1h%2C24h%2C7d&x_cg_demo_api_key=${process.env.NEXT_PUBLIC_API_KEY}`
         );
-        console.log(data);
         setLoadCoins(data);
       } catch (error) {
         console.error("Error fetching historical data:", error);
