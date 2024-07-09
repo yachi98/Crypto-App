@@ -1,9 +1,9 @@
 "use client";
 
-import { useState } from "react";
 import HomeIcon from "@/public/HomeIcon.svg";
 import PortfolioIcon from "@/public/PortfolioIcon.svg";
 import Link from "next/link";
+import { useState } from "react";
 
 const PortfolioSwitch = () => {
   const [isClicked, setIsClicked] = useState(false);

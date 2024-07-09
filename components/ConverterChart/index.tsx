@@ -1,13 +1,13 @@
 "use client";
-import { Chart as ChartJS, ScriptableContext } from "chart.js";
+
+import { Coin } from "@/interfaces/coin.interface";
+import { labelFormatter } from "@/redux/features/dateFormatter";
+import { getSelectedCoinData } from "@/redux/features/selectedCoins";
+import { AppDispatch, useAppSelector } from "@/redux/store";
+import { ScriptableContext } from "chart.js";
 import { useEffect } from "react";
 import { Line } from "react-chartjs-2";
-import { Coin } from "@/interfaces/coin.interface";
-import { useAppSelector } from "@/redux/store";
-import { AppDispatch } from "@/redux/store";
 import { useDispatch } from "react-redux";
-import { getSelectedCoinData } from "@/redux/features/selectedCoins";
-import { labelFormatter } from "@/redux/features/dateFormatter";
 
 const ConverterChart = ({
   fromCoin,
@@ -21,14 +21,15 @@ const ConverterChart = ({
   const { currency } = useAppSelector((state) => state.currencySlice);
 
   useEffect(() => {
+    if (!coinId) return;
     dispatch(
       getSelectedCoinData({
-        coinId: coinId,
-        timeDay: timeDay,
-        currency: currency,
+        coinId,
+        timeDay,
+        currency,
       })
     );
-  }, [coinId, timeDay, currency]);
+  }, [coinId, currency]);
 
   const fromCoinPrices: number[] = fromCoin.sparkline_in_7d.price;
   const toCoinPrices: number[] = toCoin.sparkline_in_7d.price;

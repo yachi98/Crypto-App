@@ -1,10 +1,10 @@
-import { useState, useEffect, useRef } from "react";
-import { motion } from "framer-motion";
-import { useDispatch } from "react-redux";
-import { AppDispatch } from "@/redux/store";
 import ArrowIcon from "@/public/ArrowIcon.svg";
 import SwitchIcon from "@/public/SwitchIcon.svg";
 import { changeCurr } from "@/redux/features/currencySlice";
+import { AppDispatch } from "@/redux/store";
+import { motion } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+import { useDispatch } from "react-redux";
 
 interface CurrencySelectorItem {
   value: string;

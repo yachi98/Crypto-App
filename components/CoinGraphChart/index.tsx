@@ -186,7 +186,7 @@ const CoinGraphChart = () => {
   const coinBG: string[] = ["bg-[#7878FA]", "bg-[#D878FA]", "bg-[#FDBA74]"];
 
   useEffect(() => {
-    if (selectedCoinsInfo.length > 0) return;
+    if (!coinId) return;
     dispatch(
       getSelectedCoinData({
         coinId,

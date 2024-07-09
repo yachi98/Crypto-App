@@ -4,8 +4,7 @@ import axios from "axios";
 
 interface SelectedCoinState {
   selectedCoins: SelectedCoin[];
-  currency: string;
-  coinId: string;
+  coinId: string | null;
   timeDay: string;
   isLoading: boolean;
   hasError: boolean;
@@ -13,7 +12,6 @@ interface SelectedCoinState {
 
 const initialState: SelectedCoinState = {
   selectedCoins: [],
-  currency: "gbp",
   coinId: "bitcoin",
   timeDay: "1",
   isLoading: true,
@@ -59,14 +57,7 @@ export const getSelectedCoinData = createAsyncThunk(
 
       const priceLabels = formatChartData({ data: prices, index: 0 });
       const volumeLabels = formatChartData({ data: total_volumes, index: 0 });
-
-      const coinData: {
-        id: string;
-        prices: number[];
-        total_volumes: number[];
-        priceLabels: number[];
-        volumeLabels: number[];
-      } = {
+      const coinData: SelectedCoin = {
         id: coinId,
         prices: timeFormattedPrices,
         total_volumes: timeFormattedVolumes,
@@ -106,7 +97,15 @@ const getSelectedCoinSlice = createSlice({
         state.hasError = false;
       })
       .addCase(getSelectedCoinData.fulfilled, (state, action) => {
-        state.selectedCoins = [...state.selectedCoins, action.payload];
+        const coinIndex = state.selectedCoins.findIndex(
+          (coin) => coin.id === action.payload.id
+        );
+
+        if (coinIndex === -1) {
+          state.selectedCoins.push(action.payload);
+        } else {
+          state.selectedCoins[coinIndex] = action.payload;
+        }
         state.isLoading = false;
       })
       .addCase(getSelectedCoinData.rejected, (state, action) => {
@@ -116,6 +115,5 @@ const getSelectedCoinSlice = createSlice({
       });
   },
 });
-export const { changeTime, changeCoin, removeCoin } =
-  getSelectedCoinSlice.actions;
+export const { changeTime, removeCoin } = getSelectedCoinSlice.actions;
 export default getSelectedCoinSlice.reducer;

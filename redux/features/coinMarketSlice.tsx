@@ -1,23 +1,17 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
 import { Coin } from "@/interfaces/coin.interface";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
 
 interface CoinMarketData {
   coinMarketData: Coin[];
-  allMarketData: Coin[];
-  page: number;
   currentPage: number;
-  currency: string;
   isLoading: boolean;
   hasError: boolean;
 }
 
 const initialState: CoinMarketData = {
   coinMarketData: [],
-  allMarketData: [],
-  page: 1,
   currentPage: 1,
-  currency: "gbp",
   isLoading: true,
   hasError: false,
 };
@@ -30,7 +24,7 @@ export const getCoinData = createAsyncThunk(
   ) => {
     try {
       const { data } = await axios.get(
-        `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency}&order=market_cap_desc&per_page=20&page=${page}&sparkline=true&price_change_percentage=1h%2C24h%2C7d&x_cg_demo_api_key=${process.env.NEXT_PUBLIC_API_KEY}`
+        `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency}&order=market_cap_desc&per_page=20&page=${page}&sparkline=true&market_data=true&price_change_percentage=1h%2C24h%2C7d&x_cg_demo_api_key=${process.env.NEXT_PUBLIC_API_KEY}`
       );
       return data;
     } catch (error) {
@@ -41,10 +35,13 @@ export const getCoinData = createAsyncThunk(
 
 export const getAllCoinsMarketData = createAsyncThunk(
   "coinMarket/getAllCoinsMarketData",
-  async ({ currency }: { currency: string }, { rejectWithValue }) => {
+  async (
+    { currency, page }: { currency: string; page: number },
+    { rejectWithValue }
+  ) => {
     try {
       const { data } = await axios.get(
-        `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency}&order=market_cap_desc&per_page=250&page=1&sparkline=false&locale=en`
+        `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency}&order=market_cap_desc&per_page=250&page=${page}&sparkline=false&market_data=true&locale=en`
       );
       return data;
     } catch (error) {
@@ -70,8 +67,6 @@ const coinMarketSlice = createSlice({
       })
       .addCase(getCoinData.fulfilled, (state, action) => {
         state.coinMarketData = [...state.coinMarketData, ...action.payload];
-        const { currency } = action.meta.arg;
-        state.currency = currency;
         state.currentPage += 1;
         state.isLoading = false;
       })
@@ -85,7 +80,7 @@ const coinMarketSlice = createSlice({
         state.hasError = false;
       })
       .addCase(getAllCoinsMarketData.fulfilled, (state, action) => {
-        state.allMarketData = [...action.payload];
+        state.coinMarketData = [...action.payload];
         state.isLoading = false;
       })
       .addCase(getAllCoinsMarketData.rejected, (state, action) => {

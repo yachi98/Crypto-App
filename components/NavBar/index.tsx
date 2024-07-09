@@ -1,14 +1,13 @@
 "use client";
 
-import React from "react";
+import SearchBar from "@/components/SearchBar";
+import LogoIcon from "@/public/Logo.svg";
+import Link from "next/link";
 import SearchIcon from "../../public/SearchIcon.svg";
+import PortfolioSwitch from "../PortfolioSwitch";
 import SorterCurrency from "../SortCurrency";
 import ThemeToggle from "../ThemeToggle";
-import PortfolioSwitch from "../PortfolioSwitch";
-import LogoIcon from "@/public/Logo.svg";
-import SearchBar from "@/components/SearchBar";
 import UserProfile from "../UserProfile";
-import Link from "next/link";
 
 const NavBar = () => {
   return (
