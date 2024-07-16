@@ -36,7 +36,7 @@ const TimeSelectorBar = () => {
     <div className="relative" ref={containerRef}>
       <button
         onClick={() => setShowDropdown(!showDropdown)}
-        className={`w-[90px] dark:bg-[#0d121d] bg-white p-2 rounded-xl text-xs dark:text-white text-black font-light flex gap-2 items-center justify-center ${
+        className={`w-[90px] dark:bg-[#ffffff0f] bg-white p-2 rounded-xl text-xs dark:text-white text-black font-light flex gap-2 items-center justify-center ${
           showDropdown ? "rounded-bl-none rounded-br-none" : ""
         }`}
       >
@@ -50,7 +50,7 @@ const TimeSelectorBar = () => {
           initial={{ y: 10 }}
           animate={{ y: 0 }}
           transition={{ duration: 0.2 }}
-          className="absolute left-0 backdrop-filter dark:bg-[#0d121d] bg-white backdrop-blur overflow-hidden z-30 gap-3 w-full flex flex-col justify-left rounded-b-xl p-3 dark:text-white text-black text-xs font-light"
+          className="absolute left-0 backdrop-filter dark:bg-[#ffffff0f] bg-white backdrop-blur overflow-hidden z-30 gap-3 w-full flex flex-col justify-left rounded-b-xl p-3 dark:text-white text-black text-xs font-light"
         >
           {timeSelector.map((timeSelectorItem) => (
             <button

@@ -62,7 +62,7 @@ const options = {
           const colors = [
             "rgba(0, 122, 255, 1)",
             "rgba(88, 77, 255, 1)",
-            "rgba(253, 186, 116, 1)",
+            "rgba(239, 101, 255, 1)",
           ];
           return {
             borderRadius: 2,
@@ -183,7 +183,7 @@ const CoinGraphChart = () => {
     []
   );
 
-  const coinBG: string[] = ["bg-[#007aff]", "bg-[#584dff]", "bg-[#FDBA74]"];
+  const coinBG: string[] = ["bg-[#007aff]", "bg-[#584dff]", "bg-[#EF65FF]"];
 
   useEffect(() => {
     if (!coinId) return;
