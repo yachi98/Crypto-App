@@ -6,7 +6,7 @@ export interface Portfolio {
   purchaseDate: string;
   purchaseAmount: number;
   market_data: {
-    current_price: { [currency: string]: number };
+    purchasePrice: { [currency: string]: number };
     market_cap: { [currency: string]: number };
     total_volume: { [currency: string]: number };
   };

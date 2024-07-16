@@ -12,19 +12,25 @@ const PortfolioPage = () => {
   const { portfolioData } = useAppSelector((state) => state.portfolioData);
   const { currency } = useAppSelector((state) => state.currencySlice);
 
+  // CG-duQsjCRoXZm1bJBTrL8sARut
+
+  // const { data } = await axios.get(
+  //   `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency}&order=market_cap_desc&per_page=250&sparkline=true&price_change_percentage=1h%2C24h%2C7d&x_cg_demo_api_key=${process.env.NEXT_PUBLIC_API_KEY}`
+  // );
+
   useEffect(() => {
-    const searchCoinData = async () => {
+    const loadCoinData = async () => {
       try {
         const { data } = await axios.get(
-          `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency}&order=market_cap_desc&per_page=250&sparkline=true&price_change_percentage=1h%2C24h%2C7d&x_cg_demo_api_key=${process.env.NEXT_PUBLIC_API_KEY}`
+          `https://api.coingecko.com/api/v3/coins/bitcoin?localization=false&tickers=false&market_data=true&community_data=true&developer_data=false&sparkline=true`
         );
         setLoadCoins(data);
+        // console.log(data.market_data.current_price);
       } catch (error) {
         console.error("Error fetching historical data:", error);
       }
     };
-
-    searchCoinData();
+    loadCoinData();
   }, [currency]);
 
   return (
