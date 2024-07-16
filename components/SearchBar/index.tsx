@@ -45,7 +45,7 @@ const SearchBar = () => {
       <input
         onChange={handleInputChange}
         type="text"
-        className={`w-full dark:bg-gray-900 bg-white backdrop-blur  p-2 rounded-xl outline-none dark:placeholder-white placeholder-black text-xs pl-7 dark:text-white text-black font-light ${
+        className={`w-full dark:bg-[#ffffff0f] bg-white backdrop-blur  p-2 rounded-xl outline-none dark:placeholder-white placeholder-black text-xs pl-7 dark:text-white text-black font-light ${
           showDropDown
             ? "rounded-bl-none rounded-br-none dark:bg-[#050507] dark:bg-opacity-90"
             : ""
@@ -58,7 +58,7 @@ const SearchBar = () => {
           initial={{ y: -10 }}
           animate={{ y: 0 }}
           transition={{ duration: 0.5 }}
-          className="absolute left-0 dark:bg-[#0d121d] bg-white overflow-hidden z-30 flex flex-col gap-2 w-full text-left rounded-b-xl p-3 text-white text-xs font-light"
+          className="absolute left-0 dark:bg-black bg-white overflow-hidden z-30 flex flex-col gap-2 w-full text-left rounded-b-xl p-3 text-white text-xs font-light"
         >
           {searchCoinResults.map((coin: SearchCoin) => (
             <Link key={coin.id} href={`/coin/${coin.id}`}>
