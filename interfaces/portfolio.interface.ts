@@ -5,6 +5,8 @@ export interface Portfolio {
   image: string;
   purchaseDate: string;
   purchaseAmount: number;
+  hasProfit: boolean;
+  currentPrice: { [currency: string]: number };
   market_data: {
     purchasePrice: { [currency: string]: number };
     market_cap: { [currency: string]: number };

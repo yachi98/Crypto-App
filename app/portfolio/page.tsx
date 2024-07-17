@@ -3,35 +3,11 @@
 import PortfolioModal from "@/components/PortfolioModal";
 import PortfolioTable from "@/components/PortfolioTable";
 import { useAppSelector } from "@/redux/store";
-import axios from "axios";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const PortfolioPage = () => {
   const [showModal, setShowModal] = useState(false);
-  const [loadCoins, setLoadCoins] = useState([]);
   const { portfolioData } = useAppSelector((state) => state.portfolioData);
-  const { currency } = useAppSelector((state) => state.currencySlice);
-
-  // CG-duQsjCRoXZm1bJBTrL8sARut
-
-  // const { data } = await axios.get(
-  //   `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency}&order=market_cap_desc&per_page=250&sparkline=true&price_change_percentage=1h%2C24h%2C7d&x_cg_demo_api_key=${process.env.NEXT_PUBLIC_API_KEY}`
-  // );
-
-  useEffect(() => {
-    const loadCoinData = async () => {
-      try {
-        const { data } = await axios.get(
-          `https://api.coingecko.com/api/v3/coins/bitcoin?localization=false&tickers=false&market_data=true&community_data=true&developer_data=false&sparkline=true`
-        );
-        setLoadCoins(data);
-        // console.log(data.market_data.current_price);
-      } catch (error) {
-        console.error("Error fetching historical data:", error);
-      }
-    };
-    loadCoinData();
-  }, [currency]);
 
   return (
     <div className="dark:bg-gray-950 bg-light-theme max-w-screen-2xl m-auto h-screen p-2 relative">
