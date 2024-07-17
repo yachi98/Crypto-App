@@ -32,11 +32,11 @@ const Home = () => {
   return (
     <main>
       {!showConverter && coinMarketData.length > 0 && <PriceChart />}
-      <div className="dark:bg-[#0d121d] bg-white dark:text-white text-black p-1 rounded-xl w-[180px] flex items-center mt-5 text-xs">
+      <div className="dark:bg-black bg-white dark:text-white text-black p-1 rounded-xl w-[180px] flex items-center mt-5 text-xs">
         <button
           onClick={() => setShowConverter(!showConverter)}
           className={`${
-            !showConverter && "dark:bg-gray-900 bg-[#efefef] rounded-xl"
+            !showConverter && "dark:bg-[#ffffff0f] bg-[#efefef] rounded-xl"
           } opacity-70 p-2 mr-2 rounded-2xl w-[90px] flex gap-1`}
         >
           <CoinIcon />
@@ -45,7 +45,7 @@ const Home = () => {
         <button
           onClick={() => setShowConverter(!showConverter)}
           className={`${
-            showConverter && "dark:bg-gray-900 bg-[#efefef] rounded-xl"
+            showConverter && "dark:bg-[#ffffff0f] bg-[#efefef] rounded-xl"
           } opacity-70 p-2 rounded-2xl w-[90px] flex gap-1`}
         >
           <GraphIcon />

@@ -5,8 +5,10 @@ export interface Portfolio {
   image: string;
   purchaseDate: string;
   purchaseAmount: number;
+  hasProfit: boolean;
+  currentPrice: { [currency: string]: number };
   market_data: {
-    current_price: { [currency: string]: number };
+    purchasePrice: { [currency: string]: number };
     market_cap: { [currency: string]: number };
     total_volume: { [currency: string]: number };
   };

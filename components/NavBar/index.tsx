@@ -12,7 +12,7 @@ import UserProfile from "../UserProfile";
 const NavBar = () => {
   return (
     <div>
-      <div className="w-full dark:bg-gray-950 bg-light-theme flex items-center justify-between p-3 mt-2">
+      <div className="w-full flex items-center justify-between p-3 mt-2">
         <div className="flex gap-6 items-center dark:text-white text-black mr-8">
           <div className="flex items-center justify-end relative w-[95px]">
             <Link href="/" className="absolute -left-2">

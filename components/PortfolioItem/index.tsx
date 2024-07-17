@@ -44,14 +44,14 @@ const PortfolioItem = ({ coin }: { coin: Portfolio }) => {
           <h3 className="text-sm">Purchase Price:</h3>
           <span className="text-[#01F1E3]">
             {symbol}
-            {formatNumber(coin.market_data.current_price[currency])}
+            {formatNumber(coin.market_data.purchasePrice[currency])}
           </span>
         </div>
         <div>
           <h3 className="text-sm">Current Price:</h3>
           <span className="text-[#01F1E3]">
             {symbol}
-            {formatNumber(coin.market_data.current_price[currency])}
+            {formatNumber(coin.currentPrice[currency])}
           </span>
         </div>
         <div>

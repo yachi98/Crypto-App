@@ -14,17 +14,20 @@ const initialState: PortfolioState = {
   isLoading: false,
 };
 
+let portfolio: Portfolio[] = [];
+
 export const addPortfolioData = createAsyncThunk(
   "historicalData/addPortfolioData",
   async (coin: Portfolio, { rejectWithValue }) => {
     try {
-      const { data } = await axios.get(
+      const { data: historicalData } = await axios.get(
         `https://api.coingecko.com/api/v3/coins/${coin.coinApiId}/history?date=${coin.purchaseDate}`
       );
 
-      const currentPrice = data.market_data.current_price.gbp;
-      const purchaseAmountValue = coin.purchaseAmount * currentPrice;
+      const purchasePrice = historicalData.market_data.current_price.gbp;
+      const purchaseAmountValue = coin.purchaseAmount * purchasePrice;
 
+      // Create a new portfolio entry with historical purchase data
       const portfolioEntry: Portfolio = {
         id: coin.id,
         coinApiId: coin.coinApiId,
@@ -32,14 +35,51 @@ export const addPortfolioData = createAsyncThunk(
         image: coin.image,
         purchaseDate: coin.purchaseDate,
         purchaseAmount: purchaseAmountValue,
+        hasProfit: false,
+        currentPrice: { gbp: purchasePrice },
         market_data: {
-          current_price: data.market_data.current_price || {},
-          market_cap: data.market_data.market_cap || {},
-          total_volume: data.market_data.total_volume || {},
+          purchasePrice: { gbp: purchasePrice },
+          market_cap: historicalData.market_data.market_cap || {},
+          total_volume: historicalData.market_data.total_volume || {},
         },
       };
 
-      return portfolioEntry;
+      portfolio.push(portfolioEntry);
+
+      // Get unique coin IDs from the portfolio
+      const uniqueIds = [
+        ...new Set(portfolio.map((portfolioId) => portfolioId.coinApiId)),
+      ];
+
+      const currentPrices = await Promise.all(
+        uniqueIds.map(async (uniqueId) => {
+          const { data } = await axios.get(
+            `https://api.coingecko.com/api/v3/coins/${uniqueId}`
+          );
+          return {
+            value: uniqueId,
+            currentPrice: data.market_data.current_price.gbp,
+          };
+        })
+      );
+
+      // Update the portfolio with profit calculations and the new current prices
+      portfolio = portfolio.map((portfolioItem) => {
+        const currentCoinData = currentPrices.find(
+          (priceData) => priceData.value === portfolioItem.coinApiId
+        );
+        const currentPrice = currentCoinData ? currentCoinData.currentPrice : 0;
+
+        return {
+          ...portfolioItem,
+          hasProfit: portfolioItem.market_data.purchasePrice.gbp < currentPrice,
+          currentPrice: { gbp: currentPrice },
+        };
+      });
+
+      // Update the current entry in the portfolio
+      const updatedEntry = portfolio.find((entry) => entry.id === coin.id);
+      return updatedEntry ? { ...updatedEntry } : portfolioEntry;
     } catch (err) {
       return rejectWithValue(err);
     }

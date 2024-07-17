@@ -60,14 +60,14 @@ const options = {
         },
         labelColor: function (tooltipItem: any) {
           const colors = [
-            "rgba(174, 139, 245, 1)",
-            "rgba(255, 139, 245, 1)",
-            "rgba(253, 186, 116, 1)",
+            "rgba(0, 122, 255, 1)",
+            "rgba(88, 77, 255, 1)",
+            "rgba(239, 101, 255, 1)",
           ];
           return {
             borderRadius: 2,
             backgroundColor:
-              colors[tooltipItem.datasetIndex] || "rgba(174, 139, 245, 1)",
+              colors[tooltipItem.datasetIndex] || "rgba(0, 122, 255, 1)",
           };
         },
       },
@@ -183,7 +183,7 @@ const CoinGraphChart = () => {
     []
   );
 
-  const coinBG: string[] = ["bg-[#7878FA]", "bg-[#D878FA]", "bg-[#FDBA74]"];
+  const coinBG: string[] = ["bg-[#007aff]", "bg-[#584dff]", "bg-[#EF65FF]"];
 
   useEffect(() => {
     if (!coinId) return;
@@ -204,7 +204,7 @@ const CoinGraphChart = () => {
 
   return (
     <div className="flex mt-2">
-      <div className="dark:bg-gradient-to-r from-black to-gray-900 bg-white rounded-2xl w-1/2 h-[370px] m-2 flex flex-col p-6 relative">
+      <div className="dark:bg-black bg-white rounded-2xl w-1/2 h-[370px] m-2 flex flex-col p-6 relative">
         {selectedCoinsInfo.length > 0 && (
           <div className="flex flex-col gap-8">
             <div className="flex gap-8">
@@ -242,7 +242,7 @@ const CoinGraphChart = () => {
         )}
       </div>
 
-      <div className="dark:bg-gradient-to-r from-black to-gray-900 bg-white rounded-2xl w-1/2 h-[370px] m-2 flex flex-col p-4">
+      <div className="dark:bg-black bg-white rounded-2xl w-1/2 h-[370px] m-2 flex flex-col p-4">
         {selectedCoins[0] && (
           <div className="flex flex-col gap-8">
             <div className="flex items-center justify-between">
