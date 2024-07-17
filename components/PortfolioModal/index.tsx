@@ -76,8 +76,10 @@ const PortfolioModal = ({ showModal, setShowModal }: PortfolioModalProps) => {
       purchaseAmount: amount,
       image: image,
       purchaseDate: convertDate(dueDate),
+      hasProfit: false,
+      currentPrice: { gbp: 0 },
       market_data: {
-        current_price: { gbp: 0 },
+        purchasePrice: { gbp: 0 },
         market_cap: { gbp: 0 },
         total_volume: { gbp: 0 },
       },
