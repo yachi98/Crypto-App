@@ -51,7 +51,6 @@ export const addPortfolioData = createAsyncThunk(
         ...new Set(portfolio.map((portfolioId) => portfolioId.coinApiId)),
       ];
 
-      // Fetch current prices for all unique coins in the portfolio
       const currentPrices = await Promise.all(
         uniqueIds.map(async (uniqueId) => {
           const { data } = await axios.get(
@@ -69,7 +68,8 @@ export const addPortfolioData = createAsyncThunk(
         const currentCoinData = currentPrices.find(
           (priceData) => priceData.value === portfolioItem.coinApiId
         );
-        const currentPrice = currentCoinData?.currentPrice || 0;
+        const currentPrice = currentCoinData ? currentCoinData.currentPrice : 0;
+
         return {
           ...portfolioItem,
           hasProfit: portfolioItem.market_data.purchasePrice.gbp < currentPrice,
