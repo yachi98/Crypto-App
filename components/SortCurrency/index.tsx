@@ -70,14 +70,17 @@ const SorterCurrency = () => {
     <div className="relative" ref={containerRef}>
       <button
         onClick={() => setShowDropDown(!showDropdown)}
-        className={`w-[120px] dark:bg-black bg-white p-2 rounded-xl text-xs dark:text-white text-black font-light flex gap-3 items-center  justify-center ${
+        className={`dark:bg-black bg-white p-2 rounded-xl text-xs dark:text-white text-black font-light flex gap-2 items-center  justify-center ${
           showDropdown ? "rounded-bl-none rounded-br-none" : ""
         }`}
       >
-        <SwitchIcon />
         {currencySelector.find((item) => item.value === currency)?.symbol}{" "}
         {currency.toUpperCase()}
-        <ArrowIcon />
+        <ArrowIcon
+          className={`w-4 h-4 transition-transform duration-150 ${
+            showDropdown ? "rotate-180" : "rotate-0"
+          }`}
+        />
       </button>
 
       {showDropdown && (
@@ -85,7 +88,7 @@ const SorterCurrency = () => {
           initial={{ y: 10 }}
           animate={{ y: 0 }}
           transition={{ duration: 0.2 }}
-          className="absolute left-0 backdrop-filter dark:bg-black bg-white backdrop-blur overflow-hidden z-30 gap-3 w-full flex flex-col justify-left rounded-b-xl p-3 dark:text-white text-black text-xs font-light"
+          className="absolute left-0 w-full backdrop-filter dark:bg-black bg-white backdrop-blur overflow-hidden z-30 gap-2 flex flex-col justify-left rounded-b-xl p-2 dark:text-white text-black text-xs font-light"
         >
           {currencySelector.map((currencyItem) => (
             <button

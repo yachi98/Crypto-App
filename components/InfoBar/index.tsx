@@ -29,7 +29,7 @@ const InfoBar = () => {
     <div className="w-full flex items-center gap-x-10 p-4 justify-left z-10">
       <div className="flex items-center gap-1 dark:text-white text-black">
         <CoinIcon />
-        <span className="dark:text-white text-black  text-light-typo text-xs font-light">
+        <span className="dark:text-white text-black text-light-typo text-xs font-light">
           Active currencies: {globalData.active_cryptocurrencies}
         </span>
       </div>

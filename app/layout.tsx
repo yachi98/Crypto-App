@@ -21,7 +21,7 @@ export default function RootLayout({
     <html lang="en">
       <Providers>
         <body
-          className={`${inter.className} dark:bg-gradient-to-r from-black via-[#00070f] to-[#007aff]  max-w-screen-2xl m-auto`}
+          className={`${inter.className} dark:bg-gradient-to-r from-black via-[#00070f] to-[#007aff] bg-[#f5f5f5] max-w-screen-2xl  m-auto p-3`}
         >
           <NavBar />
           <InfoBar />

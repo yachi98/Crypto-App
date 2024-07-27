@@ -4,6 +4,7 @@ import ProfileIcon from "@/public/ProfileIcon.svg";
 import SettingsIcon from "@/public/SettingsIcon.svg";
 import HelpIcon from "@/public/HelpIcon.svg";
 import LogOutIcon from "@/public/LogOutIcon.svg";
+import ArrowIcon from "@/public/ArrowIcon.svg";
 import { motion } from "framer-motion";
 import Link from "next/link";
 
@@ -31,12 +32,17 @@ const UserProfile = () => {
     <div className="relative" ref={containerRef}>
       <button
         onClick={() => setShowDropDown(!showDropDown)}
-        className={`w-[120px] z-50 dark:bg-black bg-white p-2 rounded-xl text-xs dark:text-white text-black font-light flex items-center gap-2 justify-left ${
+        className={`dark:bg-black bg-white rounded-xl p-2 text-xs dark:text-white text-black font-light flex items-center gap-2 justify-left ${
           showDropDown ? "rounded-bl-none rounded-br-none" : ""
         }`}
       >
         <UserProfileIcon />
-        Daniel
+        Daniel Yachnikov Hughes
+        <ArrowIcon
+          className={`w-4 h-4 transition-transform duration-150 ${
+            showDropDown ? "rotate-180" : "rotate-0"
+          }`}
+        />
       </button>
       {showDropDown && (
         <motion.div
@@ -44,18 +50,18 @@ const UserProfile = () => {
           animate={{ y: 0 }}
           transition={{ duration: 0.2 }}
           style={{ zIndex: 51 }}
-          className="absolute left-0 dark:bg-black bg-white overflow-hidden z-50 gap-3 w-full flex flex-col justify-left rounded-b-xl p-3 text-xs font-light"
+          className="absolute left-0 dark:bg-black bg-white overflow-hidden z-50 gap-3 flex flex-col w-full rounded-b-xl px-2 pb-2 pt-1 text-xs font-light"
         >
           <button className="flex items-center gap-2 dark:text-[#a7a7a7] text-black dark:hover:text-white">
-            <ProfileIcon />
+            <ProfileIcon className="w-4 h-4" />
             <span>Account</span>
           </button>
           <button className="flex items-center gap-2 dark:text-[#a7a7a7] text-black dark:hover:text-white">
-            <SettingsIcon />
+            <SettingsIcon className="w-4 h-4" />
             <span>Settings</span>
           </button>
           <button className="flex items-center gap-2 dark:text-[#a7a7a7] text-black dark:hover:text-white">
-            <HelpIcon />
+            <HelpIcon className="w-4 h-4" />
             <span>Help</span>
           </button>
           <Link href="/logout">
@@ -63,7 +69,7 @@ const UserProfile = () => {
               onClick={() => setShowDropDown(false)}
               className="flex items-center gap-2 dark:text-[#a7a7a7] text-black dark:hover:text-white"
             >
-              <LogOutIcon />
+              <LogOutIcon className="w-4 h-4" />
               <span>Log out</span>
             </button>
           </Link>

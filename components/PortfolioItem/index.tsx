@@ -27,12 +27,12 @@ const PortfolioItem = ({ coin }: { coin: Portfolio }) => {
   );
 
   return (
-    <div className="p-5 dark:bg-[#070b15] bg-white h-[230px] rounded-3xl mb-5 relative">
+    <div className="p-5 dark:bg-[#9c9c9c0f] bg-white h-[230px] rounded-3xl mb-5 relative">
       <div className="absolute inset-0 overflow-hidden rounded-3xl pointer-events-none">
         <img
           src={coin.image}
           alt={coin.value}
-          className="w-full h-full object-cover blur-3xl opacity-20 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+          className="w-full h-full object-cover blur-3xl opacity-20 absolute top-1/2 left-1/2 transform -translate-x-1/4 -translate-y-1/4"
         />
       </div>
       <div className="flex items-center gap-3">

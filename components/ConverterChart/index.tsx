@@ -50,8 +50,8 @@ const ConverterChart = ({
       height
     );
 
-    gradientFill.addColorStop(0, "rgba(116, 116, 250, 0.5)");
-    gradientFill.addColorStop(0.7, "rgba(116, 116, 250, 0.1)");
+    gradientFill.addColorStop(0, "rgba(0, 122, 255, 0.7)");
+    gradientFill.addColorStop(0.7, "rgba(0, 122, 255, 0.1)");
     gradientFill.addColorStop(1, "transparent");
 
     return gradientFill;
@@ -62,7 +62,7 @@ const ConverterChart = ({
     datasets: [
       {
         data: dataSet,
-        borderColor: "rgba(159, 122, 234)",
+        borderColor: "#007aff",
         backgroundColor: getBackgroundColor,
         borderWidth: 2,
         pointRadius: 0,
@@ -93,7 +93,7 @@ const ConverterChart = ({
           labelColor: function () {
             return {
               borderRadius: 2,
-              backgroundColor: "rgba(159, 122, 234)",
+              backgroundColor: "#007aff",
             };
           },
         },
@@ -136,7 +136,7 @@ const ConverterChart = ({
   };
 
   return (
-    <div className="dark:bg-gradient-to-r from-black to-gray-900 bg-white h-[370px] w-full mt-5 rounded-2xl">
+    <div className="dark:bg-black bg-white h-[370px] w-full mt-5 rounded-2xl">
       <div className="w-full h-full p-10">
         <div className="flex justify-between">
           <h3 className="text-xl mb-2">

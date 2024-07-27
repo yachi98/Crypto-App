@@ -12,14 +12,14 @@ const PortfolioSwitch = () => {
     setIsClicked(value);
   };
   return (
-    <div className="w-[180px] items-center dark:bg-black bg-white dark:text-white text-black rounded-xl text-xs font-light flex justify-center">
+    <div className="p-2 items-center dark:bg-black bg-white dark:text-white text-black rounded-xl text-xs font-light flex justify-center">
       <Link href="/">
         <button
           onClick={() => handleToggle(false)}
           className={`${
             isClicked
               ? "dark:text-white text-black"
-              : "dark:bg-[#ffffff0f]  bg-[#efefef] rounded-xl"
+              : "dark:bg-[#ffffff0f] bg-[#efefef] rounded-xl"
           } p-2 rounded-xl w-[90px] flex gap-1`}
         >
           <HomeIcon />

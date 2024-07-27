@@ -14,17 +14,75 @@ const initialState: PortfolioState = {
   isLoading: false,
 };
 
+// export const updatePortfolioCurrency = createAsyncThunk(
+//   "portfolio/updatePortfolioCurrency",
+//   async (_, { getState, rejectWithValue }) => {
+//     try {
+//       const state = getState() as RootState;
+//       const { currency } = state.currencySlice;
+//       const { portfolioData } = state.portfolioSlice;
+
+//       const uniqueIds = [
+//         ...new Set(
+//           portfolioData.map(
+//             (portfolioItem: Portfolio) => portfolioItem.coinApiId
+//           )
+//         ),
+//       ];
+
+//       const currentPrices = await Promise.all(
+//         uniqueIds.map(async (uniqueId) => {
+//           const { data } = await axios.get(
+//             `https://api.coingecko.com/api/v3/coins/${uniqueId}`
+//           );
+//           return {
+//             coinApiId: uniqueId,
+//             currentPrice: data.market_data.current_price[currency],
+//           };
+//         })
+//       );
+
+//       const updatedPortfolioData = portfolioData.map(
+//         (portfolioItem: Portfolio) => {
+//           const currentCoinData = currentPrices.find(
+//             (priceData) => priceData.coinApiId === portfolioItem.coinApiId
+//           );
+//           const currentPrice = currentCoinData
+//             ? currentCoinData.currentPrice
+//             : 0;
+
+//           return {
+//             ...portfolioItem,
+//             currentPrice: { [currency]: currentPrice },
+//             hasProfit:
+//               portfolioItem.market_data.purchasePrice[currency] < currentPrice,
+//           };
+//         }
+//       );
+
+//       return updatedPortfolioData;
+//     } catch (err) {
+//       return rejectWithValue(err);
+//     }
+//   }
+// );
+
 let portfolio: Portfolio[] = [];
 
 export const addPortfolioData = createAsyncThunk(
   "historicalData/addPortfolioData",
-  async (coin: Portfolio, { rejectWithValue }) => {
+  async (coin: Portfolio, { getState, rejectWithValue }) => {
     try {
       const { data: historicalData } = await axios.get(
         `https://api.coingecko.com/api/v3/coins/${coin.coinApiId}/history?date=${coin.purchaseDate}`
       );
+      const state = getState() as RootState;
+      const { currency } = state.currencySlice;
+      // const { portfolioData } = state.portfolioSlice;
 
-      const purchasePrice = historicalData.market_data.current_price.gbp;
+      console.log(currency);
+
+      const purchasePrice = historicalData.market_data.current_price[currency];
       const purchaseAmountValue = coin.purchaseAmount * purchasePrice;
 
       // Create a new portfolio entry with historical purchase data
@@ -36,9 +94,9 @@ export const addPortfolioData = createAsyncThunk(
         purchaseDate: coin.purchaseDate,
         purchaseAmount: purchaseAmountValue,
         hasProfit: false,
-        currentPrice: { gbp: purchasePrice },
+        currentPrice: { [currency]: purchasePrice },
         market_data: {
-          purchasePrice: { gbp: purchasePrice },
+          purchasePrice: { [currency]: purchasePrice },
           market_cap: historicalData.market_data.market_cap || {},
           total_volume: historicalData.market_data.total_volume || {},
         },
@@ -58,7 +116,7 @@ export const addPortfolioData = createAsyncThunk(
           );
           return {
             value: uniqueId,
-            currentPrice: data.market_data.current_price.gbp,
+            currentPrice: data.market_data.current_price[currency],
           };
         })
       );
@@ -72,8 +130,9 @@ export const addPortfolioData = createAsyncThunk(
 
         return {
           ...portfolioItem,
-          hasProfit: portfolioItem.market_data.purchasePrice.gbp < currentPrice,
-          currentPrice: { gbp: currentPrice },
+          hasProfit:
+            portfolioItem.market_data.purchasePrice[currency] < currentPrice,
+          currentPrice: { [currency]: currentPrice },
         };
       });
 
@@ -110,6 +169,18 @@ const portfolioSlice = createSlice({
         state.isLoading = false;
         state.hasError = true;
       });
+    // .addCase(updatePortfolioCurrency.pending, (state) => {
+    //   state.isLoading = true;
+    //   state.hasError = false;
+    // })
+    // .addCase(updatePortfolioCurrency.fulfilled, (state, action) => {
+    //   state.portfolioData = action.payload;
+    //   state.isLoading = false;
+    // })
+    // .addCase(updatePortfolioCurrency.rejected, (state) => {
+    //   state.isLoading = false;
+    //   state.hasError = true;
+    // });
   },
 });
 

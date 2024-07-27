@@ -2,21 +2,29 @@
 
 import PortfolioModal from "@/components/PortfolioModal";
 import PortfolioTable from "@/components/PortfolioTable";
-import { useAppSelector } from "@/redux/store";
-import { useState } from "react";
+import { AppDispatch, useAppSelector } from "@/redux/store";
+import { useDispatch } from "react-redux";
+import { useState, useEffect } from "react";
+// import { updatePortfolioCurrency } from "@/redux/features/portfolioSlice";
 
 const PortfolioPage = () => {
   const [showModal, setShowModal] = useState(false);
   const { portfolioData } = useAppSelector((state) => state.portfolioData);
+  const { currency } = useAppSelector((state) => state.currencySlice);
+  const dispatch: AppDispatch = useDispatch();
+
+  // useEffect(() => {
+  //   dispatch(updatePortfolioCurrency());
+  // }, [currency]);
 
   return (
-    <div className="dark:bg-gray-950 bg-light-theme max-w-screen-2xl m-auto h-screen p-2 relative">
+    <div className="max-w-screen-2xl m-auto h-screen p-2 relative">
       <div className={`w-full h-full ${showModal ? "blur-2xl" : ""}`}>
         <div className="flex justify-between items-center">
           <h2 className="text-3xl mt-5">Portfolio</h2>
           <button
             onClick={() => setShowModal(true)}
-            className="p-3 dark:bg-[#0d121d] bg-white dark:hover:bg-[#121929] dark:text-[#686868] dark:hover:text-white dark:hover:border-white rounded-2xl text-md mt-5 w-[160px]"
+            className="p-3 dark:bg-black bg-white dark:hover:bg-[#000000ba] dark:text-[#686868] dark:hover:text-white dark:hover:border-white rounded-2xl text-md mt-5 w-[160px]"
           >
             Add Asset
           </button>
