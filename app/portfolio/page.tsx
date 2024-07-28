@@ -2,20 +2,12 @@
 
 import PortfolioModal from "@/components/PortfolioModal";
 import PortfolioTable from "@/components/PortfolioTable";
-import { AppDispatch, useAppSelector } from "@/redux/store";
-import { useDispatch } from "react-redux";
-import { useState, useEffect } from "react";
-// import { updatePortfolioCurrency } from "@/redux/features/portfolioSlice";
+import { useAppSelector } from "@/redux/store";
+import { useState } from "react";
 
 const PortfolioPage = () => {
   const [showModal, setShowModal] = useState(false);
   const { portfolioData } = useAppSelector((state) => state.portfolioData);
-  const { currency } = useAppSelector((state) => state.currencySlice);
-  const dispatch: AppDispatch = useDispatch();
-
-  // useEffect(() => {
-  //   dispatch(updatePortfolioCurrency());
-  // }, [currency]);
 
   return (
     <div className="max-w-screen-2xl m-auto h-screen p-2 relative">

@@ -24,10 +24,14 @@ const ThemeToggle = () => {
 
   return (
     <button
-      className="w-[55px] dark:bg-black bg-white rounded-xl dark:text-white text-xs flex items-center justify-center cursor-pointer p-2"
+      className="dark:bg-black bg-white rounded-xl dark:text-white flex items-center justify-center cursor-pointer p-2"
       onClick={handleThemeChange}
     >
-      {resolvedTheme === "dark" ? <SunIcon /> : <MoonIcon />}
+      {resolvedTheme === "dark" ? (
+        <SunIcon className="h-4" />
+      ) : (
+        <MoonIcon className="h-4" />
+      )}
     </button>
   );
 };

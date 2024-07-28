@@ -1,5 +1,4 @@
 import ArrowIcon from "@/public/ArrowIcon.svg";
-import SwitchIcon from "@/public/SwitchIcon.svg";
 import { changeCurr } from "@/redux/features/currencySlice";
 import { AppDispatch } from "@/redux/store";
 import { motion } from "framer-motion";
@@ -75,7 +74,7 @@ const SorterCurrency = () => {
         }`}
       >
         {currencySelector.find((item) => item.value === currency)?.symbol}{" "}
-        {currency.toUpperCase()}
+        <span className="hidden sm:block">{currency.toUpperCase()}</span>
         <ArrowIcon
           className={`w-4 h-4 transition-transform duration-150 ${
             showDropdown ? "rotate-180" : "rotate-0"
@@ -88,12 +87,12 @@ const SorterCurrency = () => {
           initial={{ y: 10 }}
           animate={{ y: 0 }}
           transition={{ duration: 0.2 }}
-          className="absolute left-0 w-full backdrop-filter dark:bg-black bg-white backdrop-blur overflow-hidden z-30 gap-2 flex flex-col justify-left rounded-b-xl p-2 dark:text-white text-black text-xs font-light"
+          className="absolute right-0 backdrop-filter dark:bg-black bg-white backdrop-blur sm:w-full overflow-hidden z-30 gap-2 flex flex-col text-left rounded-b-xl px-2 pb-2 pt-1 dark:text-white text-black text-xs font-light w-fit rounded-tl-xl sm:rounded-tl-none"
         >
           {currencySelector.map((currencyItem) => (
             <button
               onClick={() => handleCurrency(currencyItem.value)}
-              className="text-xs text-left dark:text-[#a7a7a7] text-black dark:hover:text-white"
+              className="dark:text-[#a7a7a7] text-black dark:hover:text-white text-left text-nowrap"
               key={currencyItem.value}
             >
               {currencyItem.symbol} {currencyItem.value.toUpperCase()}

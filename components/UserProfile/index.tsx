@@ -37,7 +37,7 @@ const UserProfile = () => {
         }`}
       >
         <UserProfileIcon />
-        Daniel Yachnikov Hughes
+        <span className="hidden sm:block">Daniel Yachnikov Hughes</span>
         <ArrowIcon
           className={`w-4 h-4 transition-transform duration-150 ${
             showDropDown ? "rotate-180" : "rotate-0"
@@ -50,7 +50,7 @@ const UserProfile = () => {
           animate={{ y: 0 }}
           transition={{ duration: 0.2 }}
           style={{ zIndex: 51 }}
-          className="absolute left-0 dark:bg-black bg-white overflow-hidden z-50 gap-3 flex flex-col w-full rounded-b-xl px-2 pb-2 pt-1 text-xs font-light"
+          className="absolute right-0 dark:bg-black bg-white overflow-hidden z-50 gap-2 sm:w-full rounded-tl-xl sm:rounded-tl-none flex flex-col rounded-b-xl px-2 pb-2 pt-1 text-xs font-light"
         >
           <button className="flex items-center gap-2 dark:text-[#a7a7a7] text-black dark:hover:text-white">
             <ProfileIcon className="w-4 h-4" />

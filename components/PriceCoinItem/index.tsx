@@ -40,25 +40,21 @@ const PriceCoinItem = ({ coin }: { coin: Coin }) => {
   return (
     <button
       onClick={() => coinSelector(coin)}
-      className={`rounded-xl pl-2 border-white bg-white  ${
+      className={`rounded-xl border-white bg-white ${
         isSelected
           ? "bg-gradient-to-r from-[#007aff] to-[#007aff]"
           : "dark:bg-black dark:hover:bg-[#ffffff0f] hover:bg-[#efefef]"
-      } w-[190px] h-[60px] flex items-center flex-shrink`}
+      } w-44 flex items-center p-2 flex-shrink`}
     >
       <div className="flex gap-3 items-center">
-        <div className="ml-2">
-          <div className="w-[25px] h-[25px] relative">
-            <Image src={coin.image} alt={coin.name} width={25} height={25} />
-          </div>
-        </div>
+        <Image src={coin.image} alt={coin.name} width={24} height={24} />
         <div className="flex flex-col">
           <span
-            className={`px-1 text-xs  flex gap-1 ${
-              isSelected ? "text-white" : "dark:text-[#c2c2c2] text-grey "
+            className={`px-1 text-xs flex gap-1 ${
+              isSelected ? "text-white" : "dark:text-[#c2c2c2]"
             } flex`}
           >
-            <span className="truncate max-w-[4rem]">
+            <span className="truncate max-w-16">
               {coin.name
                 .split(" ")
                 .map(
@@ -70,15 +66,15 @@ const PriceCoinItem = ({ coin }: { coin: Coin }) => {
             </span>
             ({coin.symbol.toUpperCase()})
           </span>
-          <div className="flex gap-14">
-            <span
-              className={` w-[6%] px-1 text-xs ${
-                isSelected ? "text-white" : "dark:text-[#c2c2c2] text-grey"
-              } flex`}
-            >
-              {symbol}
+          <div
+            className={`flex gap-4 text-xs pl-1 ${
+              isSelected ? "text-white" : "dark:text-[#c2c2c2]"
+            }`}
+          >
+            <div>
+              <span className="w-2 h-2">{symbol}</span>
               {formatNumber(coin.current_price)}
-            </span>
+            </div>
             <PriceChange price={priceChange1h} />
           </div>
         </div>
