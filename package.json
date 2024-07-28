@@ -14,7 +14,6 @@
     "@types/chart.js": "^2.9.41",
     "axios": "^1.6.5",
     "chart.js": "^4.4.1",
-    "clsx": "^2.1.1",
     "framer-motion": "^11.0.2",
     "next": "^14.1.1-canary.20",
     "next-link": "^2.0.0",
