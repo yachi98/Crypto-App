@@ -20,7 +20,7 @@ const PrevArrow = ({ onClick }) => (
 
 const NextArrow = ({ onClick }) => (
   <button
-    className="backdrop-filter dark:bg-white/20 bg-white/60 backdrop-blur dark:text-white text-black rounded-lg absolute right-1 top-1/2 transform -translate-y-1/2 z-50 p-2 hidden sm:block -mr-6"
+    className="backdrop-filter dark:bg-white/20 bg-white/60 backdrop-blur dark:text-white text-black rounded-lg absolute right-1 top-1/2 transform -translate-y-1/2 z-50 p-2 hidden md:block"
     onClick={onClick}
   >
     <ChevronRIcon />
@@ -41,7 +41,7 @@ const PriceChart = () => {
       {
         breakpoint: 1580,
         settings: {
-          slidesToShow: 8,
+          slidesToShow: 7,
           slidesToScroll: 2,
           infinite: true,
         },
