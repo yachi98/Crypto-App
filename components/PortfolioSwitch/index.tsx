@@ -12,18 +12,18 @@ const PortfolioSwitch = () => {
     setIsClicked(value);
   };
   return (
-    <div className="w-[180px] items-center dark:bg-black bg-white dark:text-white text-black rounded-xl text-xs font-light flex justify-center">
+    <div className="p-1 items-center dark:bg-black bg-white dark:text-white text-black font-light rounded-xl text-xs flex justify-center">
       <Link href="/">
         <button
           onClick={() => handleToggle(false)}
           className={`${
             isClicked
               ? "dark:text-white text-black"
-              : "dark:bg-[#ffffff0f]  bg-[#efefef] rounded-xl"
-          } p-2 rounded-xl w-[90px] flex gap-1`}
+              : "dark:bg-[#ffffff0f] bg-[#efefef]"
+          } px-2 py-1.5 rounded-lg flex gap-1 leading-4 text-center align-middle`}
         >
-          <HomeIcon />
-          Home
+          <HomeIcon className="w-4 h-4" />
+          <span className="hidden sm:block">Home</span>
         </button>
       </Link>
       <Link href="/portfolio">
@@ -31,12 +31,12 @@ const PortfolioSwitch = () => {
           onClick={() => handleToggle(true)}
           className={`${
             isClicked
-              ? "dark:bg-[#ffffff0f]  bg-[#efefef] rounded-xl"
+              ? "dark:bg-[#ffffff0f] bg-[#efefef]"
               : "dark:text-white text-black"
-          } p-2 rounded-xl w-[90px] flex gap-1`}
+          } px-2 py-1.5 rounded-lg flex gap-1 leading-4 text-center align-middle`}
         >
-          <PortfolioIcon />
-          Portfolio
+          <PortfolioIcon className="w-4 h-4" />
+          <span className="hidden sm:block">Portfolio</span>
         </button>
       </Link>
     </div>

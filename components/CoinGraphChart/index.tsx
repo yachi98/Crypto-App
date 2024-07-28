@@ -203,21 +203,19 @@ const CoinGraphChart = () => {
   }
 
   return (
-    <div className="flex mt-2">
-      <div className="dark:bg-black bg-white rounded-2xl w-1/2 h-[370px] m-2 flex flex-col p-6 relative">
+    <div className="flex flex-col md:flex-row mt-2">
+      <div className="dark:bg-black bg-white rounded-2xl md:w-[calc(50%-0.8rem)] w-full h-[370px] m-2 flex flex-col p-6 relative">
         {selectedCoinsInfo.length > 0 && (
           <div className="flex flex-col gap-8">
             <div className="flex gap-8">
-              <span className="dark:text-[#DEDEDE] flex text-base gap-1 items-center">
-                {renderInfo(selectedCoinsInfo[0].name)} (
-                {selectedCoinsInfo[0].symbol.toUpperCase()})
-              </span>
               {selectedCoinsInfo.map((selectedCoin, index) => (
                 <div key={selectedCoin.id} className="flex gap-2 items-center">
                   <span
                     className={`${coinBG[index]} w-[12px] h-[12px] flex items-center justify-center rounded`}
                   ></span>
-                  <span className="text-xs">{renderInfo(selectedCoin.id)}</span>
+                  <span className="text-xs">
+                    {selectedCoin.symbol.toUpperCase()}
+                  </span>
                   <span className="text-xs">
                     {symbol}
                     {formatNumber(selectedCoin.current_price)}
@@ -229,10 +227,16 @@ const CoinGraphChart = () => {
               </span>
             </div>
 
-            <span className="dark:text-[#DEDEDE] text-black text-3xl">
-              {symbol}
-              {formatNumber(selectedCoinsInfo[0].current_price)}
-            </span>
+            <div className="flex flex-col gap-1 text-black">
+              <span className="flex gap-1 items-center text-2xl dark:text-[#bdbdbd]">
+                {renderInfo(selectedCoinsInfo[0].name)} (
+                {selectedCoinsInfo[0].symbol.toUpperCase()})
+              </span>
+              <span className="text-3xl dark:text-[#DEDEDE]">
+                {symbol}
+                {formatNumber(selectedCoinsInfo[0].current_price)}
+              </span>
+            </div>
           </div>
         )}
         {selectedCoinsInfo[0] && (
@@ -242,7 +246,7 @@ const CoinGraphChart = () => {
         )}
       </div>
 
-      <div className="dark:bg-black bg-white rounded-2xl w-1/2 h-[370px] m-2 flex flex-col p-4">
+      <div className="dark:bg-black bg-white rounded-2xl md:w-[calc(50%-0.8rem)] w-full h-[370px] m-2 flex flex-col p-4">
         {selectedCoins[0] && (
           <div className="flex flex-col gap-8">
             <div className="flex items-center justify-between">
@@ -251,14 +255,19 @@ const CoinGraphChart = () => {
               </span>
               <TimeSelectorBar />
             </div>
-            <span className="dark:text-[#DEDEDE] text-black text-3xl">
-              {symbol}
-              {formatNumber(
-                selectedCoins[0].total_volumes[
-                  selectedCoins[0].total_volumes.length - 1
-                ]
-              )}
-            </span>
+            <div className="flex flex-col gap-1 text-black">
+              <span className="flex gap-1 items-center text-2xl dark:text-[#bdbdbd]">
+                {renderInfo(selectedCoins[0].id)}
+              </span>
+              <span className="text-3xl dark:text-[#DEDEDE]">
+                {symbol}
+                {formatNumber(
+                  selectedCoins[0].total_volumes[
+                    selectedCoins[0].total_volumes.length - 1
+                  ]
+                )}
+              </span>
+            </div>
           </div>
         )}
         {selectedCoinsInfo[0] && (

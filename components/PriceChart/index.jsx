@@ -11,7 +11,7 @@ import "slick-carousel/slick/slick-theme.css";
 
 const PrevArrow = ({ onClick }) => (
   <button
-    className="backdrop-filter dark:bg-black bg-white dark:bg-opacity-40 backdrop-blur dark:text-white text-black rounded-xl absolute left-0 top-[50%] transform -translate-y-1/2 z-50 p-3 -ml-5"
+    className="backdrop-filter dark:bg-black bg-white bg-opacity-60 backdrop-blur dark:text-white text-black rounded-lg absolute left-1 top-1/2 transform -translate-y-1/2 z-50 p-2 hidden sm:block -ml-6"
     onClick={onClick}
   >
     <ChevronLIcon />
@@ -20,7 +20,7 @@ const PrevArrow = ({ onClick }) => (
 
 const NextArrow = ({ onClick }) => (
   <button
-    className="backdrop-filter dark:bg-black bg-white dark:bg-opacity-40 backdrop-blur dark:text-white text-black rounded-xl absolute right-0 top-[50%] transform -translate-y-1/2 z-50 p-3 -mr-5"
+    className="backdrop-filter dark:bg-white/20 bg-white/60 backdrop-blur dark:text-white text-black rounded-lg absolute right-1 top-1/2 transform -translate-y-1/2 z-50 p-2 hidden md:block"
     onClick={onClick}
   >
     <ChevronRIcon />
@@ -39,26 +39,55 @@ const PriceChart = () => {
     nextArrow: <NextArrow />,
     responsive: [
       {
-        breakpoint: 1024,
+        breakpoint: 1580,
         settings: {
-          slidesToShow: 3,
-          slidesToScroll: 3,
+          slidesToShow: 7,
+          slidesToScroll: 2,
           infinite: true,
-          dots: true,
         },
       },
       {
-        breakpoint: 600,
+        breakpoint: 1280,
         settings: {
-          slidesToShow: 2,
+          slidesToShow: 6,
+          slidesToScroll: 6,
+          infinite: true,
+        },
+      },
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 6,
+          slidesToScroll: 6,
+          infinite: true,
+        },
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 4,
           slidesToScroll: 2,
           initialSlide: 2,
         },
       },
       {
+        breakpoint: 640,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1,
+        },
+      },
+      {
         breakpoint: 480,
         settings: {
-          slidesToShow: 1,
+          slidesToShow: 3,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 380,
+        settings: {
+          slidesToShow: 2,
           slidesToScroll: 1,
         },
       },
@@ -73,9 +102,7 @@ const PriceChart = () => {
       <Slider {...settings}>
         {hasCoins &&
           coinMarketData.map((coin) => (
-            <div key={coin.id} className="mr-2">
-              <PriceCoinItem coin={coin} />
-            </div>
+            <PriceCoinItem coin={coin} key={coin.id} />
           ))}
       </Slider>
     </div>

@@ -7,6 +7,7 @@ import { useDispatch } from "react-redux";
 import CloseIcon from "@/public/CloseIcon.svg";
 import axios from "axios";
 import convertDate from "@/utils/convertDate";
+import { useAppSelector } from "@/redux/store";
 import { addPortfolioData } from "@/redux/features/portfolioSlice";
 import { uid } from "uid";
 
@@ -30,6 +31,7 @@ const PortfolioModal = ({ showModal, setShowModal }: PortfolioModalProps) => {
   const [invalidCoin, setInvalidCoin] = useState<boolean>(false);
   const [invalidAmount, setInvalidAmount] = useState<boolean>(false);
   const [invalidDate, setInvalidDate] = useState<boolean>(false);
+  const { currency } = useAppSelector((state) => state.currencySlice);
   const dispatch: AppDispatch = useDispatch();
 
   useEffect(() => {
@@ -77,11 +79,11 @@ const PortfolioModal = ({ showModal, setShowModal }: PortfolioModalProps) => {
       image: image,
       purchaseDate: convertDate(dueDate),
       hasProfit: false,
-      currentPrice: { gbp: 0 },
+      currentPrice: { [currency]: 0 },
       market_data: {
-        purchasePrice: { gbp: 0 },
-        market_cap: { gbp: 0 },
-        total_volume: { gbp: 0 },
+        purchasePrice: { [currency]: 0 },
+        market_cap: { [currency]: 0 },
+        total_volume: { [currency]: 0 },
       },
     };
 
@@ -145,7 +147,7 @@ const PortfolioModal = ({ showModal, setShowModal }: PortfolioModalProps) => {
   };
 
   return (
-    <div className="w-[700px] h-[350px] dark:bg-[#0a0f1c] bg-[#fafafa] absolute top-1/4 -translate-y-1/2 left-1/2 -translate-x-1/2 rounded-2xl">
+    <div className="w-[700px] h-[350px] dark:bg-[#ffffff0f] bg-[#fafafa] absolute top-1/4 -translate-y-1/2 left-1/2 -translate-x-1/2 rounded-2xl">
       <div className="absolute right-0 p-5">
         <button onClick={() => handleCancel()}>
           <CloseIcon />
@@ -177,10 +179,10 @@ const PortfolioModal = ({ showModal, setShowModal }: PortfolioModalProps) => {
               onChange={handleSearchChange}
               onFocus={() => handleInputFocus(currencyInputRef)}
               onBlur={() => handleInputBlur(currencyInputRef)}
-              className="dark:bg-gray-900 bg-light-theme outline-none rounded-xl p-2 w-full"
+              className="dark:bg-black bg-light-theme outline-none rounded-xl p-2 w-full"
             />
             {showDropdown && (
-              <div className="col-span-2 h-full w-[320px] flex flex-col overflow-y-scroll dark:bg-gray-900 bg-white absolute z-10 rounded-2xl mt-12">
+              <div className="col-span-2 h-full w-[320px] flex flex-col overflow-y-scroll dark:bg-black bg-white absolute z-10 rounded-2xl mt-12">
                 {searchCoinResults.map((coin: SearchCoin) => (
                   <button
                     key={coin.id}
@@ -214,7 +216,7 @@ const PortfolioModal = ({ showModal, setShowModal }: PortfolioModalProps) => {
               onChange={handleAmount}
               onFocus={() => handleInputFocus(amountInputRef)}
               onBlur={() => handleInputBlur(amountInputRef)}
-              className="dark:bg-gray-900 bg-light-theme outline-none rounded-xl p-2 w-full"
+              className="dark:bg-black bg-light-theme outline-none rounded-xl p-2 w-full"
             />
             {invalidAmount && (
               <span className="text-[#a5a5a5] text-xs">
@@ -226,7 +228,7 @@ const PortfolioModal = ({ showModal, setShowModal }: PortfolioModalProps) => {
           <div className="flex flex-col">
             <input
               ref={dueDateInputRef}
-              className="dark:bg-gray-900 bg-light-theme outline-none rounded-xl p-2 w-full"
+              className="dark:bg-black bg-light-theme outline-none rounded-xl p-2 w-full"
               type="date"
               value={dueDate}
               onChange={handleDueDateChange}
@@ -244,13 +246,13 @@ const PortfolioModal = ({ showModal, setShowModal }: PortfolioModalProps) => {
           <button
             type="button"
             onClick={handleCancel}
-            className="p-2  bg-white dark:bg-gray-900 dark:hover:text-white  rounded-xl w-[100px]"
+            className="p-2  bg-white dark:bg-black dark:hover:text-white  rounded-xl w-[100px]"
           >
             Cancel
           </button>
           <button
             type="submit"
-            className="p-2  bg-white dark:bg-gray-900 dark:hover:text-white  rounded-xl w-[100px]"
+            className="p-2  bg-white dark:bg-black dark:hover:text-white  rounded-xl w-[100px]"
           >
             Save
           </button>

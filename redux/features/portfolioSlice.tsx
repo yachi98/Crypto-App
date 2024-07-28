@@ -36,7 +36,7 @@ export const addPortfolioData = createAsyncThunk(
         purchaseDate: coin.purchaseDate,
         purchaseAmount: purchaseAmountValue,
         hasProfit: false,
-        currentPrice: { gbp: purchasePrice },
+        currentPrice: { gpb: purchasePrice },
         market_data: {
           purchasePrice: { gbp: purchasePrice },
           market_cap: historicalData.market_data.market_cap || {},
@@ -58,7 +58,7 @@ export const addPortfolioData = createAsyncThunk(
           );
           return {
             value: uniqueId,
-            currentPrice: data.market_data.current_price.gbp,
+            currentPrice: data.market_data.current_price.gpb,
           };
         })
       );
@@ -72,7 +72,7 @@ export const addPortfolioData = createAsyncThunk(
 
         return {
           ...portfolioItem,
-          hasProfit: portfolioItem.market_data.purchasePrice.gbp < currentPrice,
+          hasProfit: portfolioItem.market_data.purchasePrice.gpb < currentPrice,
           currentPrice: { gbp: currentPrice },
         };
       });
