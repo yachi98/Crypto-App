@@ -62,7 +62,7 @@ const Converter = () => {
 
   return (
     <div>
-      <div className="flex gap-5 mt-5 relative">
+      <div className="flex gap-5 mt-5 relative md:flex-row flex-col">
         <CoinRow
           currency={currency}
           data={coinMarketData}

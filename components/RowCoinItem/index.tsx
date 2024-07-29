@@ -45,7 +45,7 @@ const RowCoinItem = ({ coin }: { coin: Coin }) => {
           <PriceChange price={priceChange7d} />
         </span>
         <span className="w-full max-w-[20%] px-1">
-          <div className="justify-between text-xs hidden md:inline">
+          <div className="flex justify-between text-xs hidden md:flex">
             <span
               className={
                 priceChange24h > 0 ? "text-[#00B1A7]" : "text-[#FE2264]"
