@@ -136,16 +136,16 @@ const ConverterChart = ({
   };
 
   return (
-    <div className="dark:bg-black bg-white h-[370px] w-full mt-5 rounded-2xl">
+    <div className="dark:bg-black bg-white h-[370px] w-full mt-5 rounded-2xl flex-shrink-0">
       <div className="w-full h-full p-10">
         <div className="flex justify-between">
-          <h3 className="text-xl mb-2">
+          <h3 className="mb-2 text-sm">
             {fromCoin.name}{" "}
-            <span className="uppercase">({fromCoin.symbol})</span>
+            <span className="uppercase ">({fromCoin.symbol})</span>
             <span className="dark:text-white text-black mx-3">to</span>
             {toCoin.name} <span className="uppercase">({toCoin.symbol})</span>
           </h3>
-          <h3>7 day Sparkline</h3>
+          <h3 className="text-sm hidden sm:inline">7 day Sparkline</h3>
         </div>
         <Line options={options as any} data={data} />
       </div>
