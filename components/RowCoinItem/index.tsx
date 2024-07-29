@@ -24,7 +24,7 @@ const RowCoinItem = ({ coin }: { coin: Coin }) => {
 
   return (
     <Link href={`/coin/${coin.id}`}>
-      <div className="dark:bg-black bg-white dark:hover:bg-[#ffffff0f] hover:bg-[#efefef] w-full dark:text-[#DEDEDE] text-black text-sm font-light rounded-3xl p-3 mb-2 flex gap-3 items-center">
+      <div className="dark:bg-black bg-white dark:hover:bg-[#ffffff0f] hover:bg-[#efefef] w-full dark:text-[#DEDEDE] text-black text-sm font-light rounded-3xl p-4 mb-2 flex gap-3 items-center">
         <span>{coin.market_cap_rank}</span>
         <Image src={coin.image} alt={coin.name} width={30} height={30} />
         <span className="w-[14%] px-1">
@@ -95,7 +95,7 @@ const RowCoinItem = ({ coin }: { coin: Coin }) => {
             />
           </div>
         </span>
-        <span className="w-[14%] pl-3 h-[50px]">
+        <span className="w-[10rem] h-[2rem]">
           <PriceCoinGraph
             prices={coin.sparkline_in_7d.price}
             priceChange={priceChange7d}
