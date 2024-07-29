@@ -37,7 +37,7 @@ const UserProfile = () => {
         }`}
       >
         <UserProfileIcon />
-        <span className="hidden sm:block">Daniel Yachnikov Hughes</span>
+        <span className="hidden sm:block">Daniel</span>
         <ArrowIcon
           className={`w-4 h-4 transition-transform duration-150 ${
             showDropDown ? "rotate-180" : "rotate-0"

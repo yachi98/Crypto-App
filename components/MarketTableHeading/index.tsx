@@ -7,8 +7,10 @@ const MarketTableHeading = () => {
       <span className="w-[6%] px-1">1h%</span>
       <span className="w-[6%] px-1">24h%</span>
       <span className="w-[6%] px-1">7d%</span>
-      <span className="w-full max-w-[20%] px-1">24h volume / Market Cap</span>
-      <span className="w-full max-w-[20%] px-1">
+      <span className="w-full max-w-[20%] px-1 hidden md:inline">
+        24h volume / Market Cap
+      </span>
+      <span className="w-full max-w-[20%] px-1 hidden xl:inline">
         Circulating / Total Supply
       </span>
       <span>Last 7d</span>

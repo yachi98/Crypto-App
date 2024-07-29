@@ -45,7 +45,7 @@ const RowCoinItem = ({ coin }: { coin: Coin }) => {
           <PriceChange price={priceChange7d} />
         </span>
         <span className="w-full max-w-[20%] px-1">
-          <div className="flex justify-between text-xs">
+          <div className="justify-between text-xs hidden md:inline">
             <span
               className={
                 priceChange24h > 0 ? "text-[#00B1A7]" : "text-[#FE2264]"
@@ -61,13 +61,15 @@ const RowCoinItem = ({ coin }: { coin: Coin }) => {
               {formatNumber(coin.market_cap)}
             </span>
           </div>
-          <CoinMarketBar
-            fill={priceChange24h > 0 ? "bg-[#00B1A7]" : "bg-[#FE2264]"}
-            percentage={getPercentage(coin.total_volume, coin.market_cap)}
-          />
+          <div className="hidden md:inline">
+            <CoinMarketBar
+              fill={priceChange24h > 0 ? "bg-[#00B1A7]" : "bg-[#FE2264]"}
+              percentage={getPercentage(coin.total_volume, coin.market_cap)}
+            />
+          </div>
         </span>
         <span className="w-full max-w-[20%] px-1">
-          <div className="flex justify-between text-xs">
+          <div className="justify-between text-xs hidden xl:inline">
             <span
               className={
                 priceChange24h > 0 ? "text-[#00B1A7]" : "text-[#FE2264]"
@@ -83,13 +85,15 @@ const RowCoinItem = ({ coin }: { coin: Coin }) => {
               {formatNumber(coin.market_cap)}
             </span>
           </div>
-          <CoinMarketBar
-            fill={priceChange24h > 0 ? "bg-[#00B1A7]" : "bg-[#FE2264]"}
-            percentage={getPercentage(
-              coin.circulating_supply,
-              coin.total_supply
-            )}
-          />
+          <div className="hidden xl:inline">
+            <CoinMarketBar
+              fill={priceChange24h > 0 ? "bg-[#00B1A7]" : "bg-[#FE2264]"}
+              percentage={getPercentage(
+                coin.circulating_supply,
+                coin.total_supply
+              )}
+            />
+          </div>
         </span>
         <span className="w-[14%] pl-3 h-[50px]">
           <PriceCoinGraph

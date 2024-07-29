@@ -54,7 +54,7 @@ const Home = () => {
       </div>
       {showConverter && <CoinConverterPage />}
       {!showConverter && <CoinGraphChart />}
-      {/* <CoinMarketTable /> */}
+      <CoinMarketTable />
     </main>
   );
 };
