@@ -145,7 +145,7 @@ const ConverterChart = ({
             <span className="dark:text-white text-black mx-3">to</span>
             {toCoin.name} <span className="uppercase">({toCoin.symbol})</span>
           </h3>
-          <h3 className="text-sm">7 day Sparkline</h3>
+          <h3 className="text-sm hidden sm:inline">7 day Sparkline</h3>
         </div>
         <Line options={options as any} data={data} />
       </div>
