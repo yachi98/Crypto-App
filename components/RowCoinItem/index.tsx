@@ -38,14 +38,14 @@ const RowCoinItem = ({ coin }: { coin: Coin }) => {
         <span className="w-[6%] px-1">
           <PriceChange price={priceChange1h} />
         </span>
-        <span className="w-[6%] px-1">
+        <span className="w-[6%] px-1  hidden sm:inline">
           <PriceChange price={priceChange24h} />
         </span>
-        <span className="w-[6%] px-1">
+        <span className="w-[6%] px-1  hidden sm:inline">
           <PriceChange price={priceChange7d} />
         </span>
         <span className="w-full max-w-[20%] px-1">
-          <div className="flex justify-between text-xs hidden md:flex">
+          <div className="flex justify-between text-xs hidden xl:flex">
             <span
               className={
                 priceChange24h > 0 ? "text-[#00B1A7]" : "text-[#FE2264]"
@@ -61,7 +61,7 @@ const RowCoinItem = ({ coin }: { coin: Coin }) => {
               {formatNumber(coin.market_cap)}
             </span>
           </div>
-          <div className="hidden md:inline">
+          <div className="hidden xl:inline">
             <CoinMarketBar
               fill={priceChange24h > 0 ? "bg-[#00B1A7]" : "bg-[#FE2264]"}
               percentage={getPercentage(coin.total_volume, coin.market_cap)}
@@ -95,7 +95,7 @@ const RowCoinItem = ({ coin }: { coin: Coin }) => {
             />
           </div>
         </span>
-        <span className="w-[10rem] h-[2rem]">
+        <span className="w-[15%] h-[40px]">
           <PriceCoinGraph
             prices={coin.sparkline_in_7d.price}
             priceChange={priceChange7d}
