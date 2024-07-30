@@ -21,11 +21,39 @@ export default function RootLayout({
     <html lang="en">
       <Providers>
         <body
-          className={`${inter.className} dark:bg-gradient-to-r from-black via-[#00070f] to-[#007aff] bg-[#f5f5f5] max-w-screen-2xl  m-auto p-3`}
+          className={`${inter.className} dark:bg-[#030303] bg-[#f5f5f5] max-w-screen-2xl m-auto p-3 relative`}
         >
-          <NavBar />
-          <InfoBar />
-          {children}
+          <div className="absolute inset-0 overflow-hidden max-w-screen-2xl">
+            <div
+              className="absolute rounded-full w-[1500px] h-[1000px] bg-blue-500 opacity-60"
+              style={{ top: "80%", left: "20%", filter: "blur(100px)" }}
+            ></div>
+            <div
+              className="absolute rounded-full w-[900px] h-[800px] bg-cyan-500 opacity-60"
+              style={{ top: "20%", left: "10%", filter: "blur(100px)" }}
+            ></div>
+            <div
+              className="absolute rounded-full w-[700px] h-[700px] bg-purple-500 opacity-60"
+              style={{ top: "30%", left: "30%", filter: "blur(100px)" }}
+            ></div>
+            <div
+              className="absolute rounded-full w-[750px] h-[550px] bg-sky-500 opacity-60"
+              style={{ top: "20%", left: "70%", filter: "blur(100px)" }}
+            ></div>
+            <div
+              className="absolute rounded-full w-[750px] h-[550px] bg-teal-500 opacity-60"
+              style={{ top: "70%", left: "30%", filter: "blur(100px)" }}
+            ></div>
+            <div
+              className="absolute rounded-full w-[750px] h-[550px] bg-teal-500 opacity-60"
+              style={{ top: "80%", left: "20%", filter: "blur(100px)" }}
+            ></div>
+          </div>
+          <div className="relative z-10">
+            <NavBar />
+            <InfoBar />
+            {children}
+          </div>
         </body>
       </Providers>
     </html>
