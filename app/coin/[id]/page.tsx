@@ -38,17 +38,16 @@ const CoinPage = ({ params }: { params: { id: string } }) => {
       getCoinData();
     }
   }, [params.id]);
-
   return (
-    <div className="max-w-screen-2xl m-auto h-screen p-2">
-      <div className="dark:bg-[#0000008a] bg-white w-full h-[400px] rounded-3xl mt-5 p-8 flex justify-between relative overflow-hidden z-0">
+    <div>
+      <div className="dark:bg-[#0000008a] bg-white w-full h-auto lg:h-[400px] rounded-3xl mt-5 p-8 flex flex-col lg:flex-row justify-between relative overflow-hidden z-0">
         {isLoading ? (
           <div>Fetching data...</div>
         ) : (
           <>
             {!hasError && coin && (
               <>
-                <div className="z-0 absolute w-full pointer-events-none h-[390px] bottom-50 left-40">
+                <div className="z-0 absolute w-full pointer-events-none h-[200px] lg:h-[390px] bottom-50 left-40">
                   <Image
                     src={coin.image.large}
                     alt={coin.name}
@@ -57,7 +56,7 @@ const CoinPage = ({ params }: { params: { id: string } }) => {
                     className="w-full h-full object-cover blur-3xl opacity-30"
                   />
                 </div>
-                <div className="w-2/5 pr-7">
+                <div className="w-full lg:w-2/5 pr-7">
                   <div className="flex flex-col gap-1">
                     <div className="flex items-center gap-4 z-0">
                       <Image
@@ -66,14 +65,14 @@ const CoinPage = ({ params }: { params: { id: string } }) => {
                         width={50}
                         height={50}
                       />
-                      <span className="text-xl">
+                      <span className="text-lg md:text-xl lg:text-2xl">
                         {coin.name.charAt(0).toUpperCase() +
                           coin.name.slice(1).toLowerCase()}{" "}
                         ({coin.symbol.toUpperCase()})
                       </span>
                     </div>
                     <div className="flex items-center justify-between z-10">
-                      <span className="text-3xl mt-5 z-10">
+                      <span className="text-2xl md:text-3xl lg:text-4xl mt-5 z-10">
                         {symbol}
                         {formatNumber(coin.market_data.current_price[currency])}
                       </span>
@@ -84,8 +83,10 @@ const CoinPage = ({ params }: { params: { id: string } }) => {
                   </div>
                   <div>
                     <div className="flex mt-5 items-center justify-between z-10">
-                      <h2 className="text-[#01F1E3] z-10">High 24h</h2>
-                      <span className="text-2xl z-10">
+                      <h2 className="text-lg md:text-xl lg:text-2xl text-[#01F1E3] z-10">
+                        High 24h
+                      </h2>
+                      <span className="text-xl md:text-2xl lg:text-3xl z-10">
                         {symbol}
                         {formatNumber(coin.market_data.high_24h[currency])}
                       </span>
@@ -93,11 +94,13 @@ const CoinPage = ({ params }: { params: { id: string } }) => {
                     <div>
                       <div className="flex gap-3 items-center mt-8 justify-between">
                         <div className="flex items-center gap-2 z-10">
-                          <CaretIcon className="w-[30px]" />
-                          <h3 className="text-xl">All Time High:</h3>
+                          <CaretIcon className="w-[20px] md:w-[30px]" />
+                          <h3 className="text-lg md:text-xl lg:text-2xl">
+                            All Time High:
+                          </h3>
                         </div>
                         <div>
-                          <span className="text-2xl">
+                          <span className="text-xl md:text-2xl lg:text-3xl">
                             {symbol}
                             {formatNumber(coin.market_data.ath[currency])}
                           </span>
@@ -110,11 +113,13 @@ const CoinPage = ({ params }: { params: { id: string } }) => {
                     <div className="">
                       <div className="flex gap-3 items-center mt-8 justify-between z-10">
                         <div className="flex items-center gap-2">
-                          <CaretIcon className="w-[30px] fill-[#FE2264] rotate-180" />
-                          <h3 className="text-xl z-10">All Time Low:</h3>
+                          <CaretIcon className="w-[20px] md:w-[30px] fill-[#FE2264] rotate-180" />
+                          <h3 className="text-lg md:text-xl lg:text-2xl z-10">
+                            All Time Low:
+                          </h3>
                         </div>
                         <div>
-                          <span className="text-2xl z-10">
+                          <span className="text-xl md:text-2xl lg:text-3xl z-10">
                             {symbol}
                             {formatNumber(coin.market_data.atl[currency])}
                           </span>
@@ -127,18 +132,20 @@ const CoinPage = ({ params }: { params: { id: string } }) => {
                   </div>
                 </div>
 
-                <div className="dark:text-white text-black text-sm w-3/5 text-left relative mt-3">
-                  <h3 className="text-xl">Description</h3>
+                <div className="dark:text-white text-black text-sm md:text-base lg:text-lg w-full lg:w-3/5 text-left relative mt-3 lg:mt-0">
+                  <h3 className="text-lg md:text-xl lg:text-2xl">
+                    Description
+                  </h3>
                   <div>
                     <p
-                      className="mt-5 overflow-y-hidden max-h-[11rem] scrollbar-track-transparent scrollbar-h-24 hover:overflow-y-auto  hover:scrollbar "
+                      className="mt-5 overflow-y-hidden max-h-[11rem] scrollbar-track-transparent scrollbar-h-24 hover:overflow-y-auto hover:scrollbar"
                       dangerouslySetInnerHTML={{
                         __html: coin.description.en,
                       }}
                     />
                   </div>
 
-                  <div className="flex gap-3 mt-5 absolute bottom-0">
+                  <div className="flex gap-3 mt-5 absolute bottom-0 hidden xl:flex">
                     <button className="p-3 dark:bg-gray-900 bg-[#efefef] rounded-2xl">
                       <a href={coin.links.homepage[0]} target="_blank">
                         {extractUrl(coin.links.homepage[0])}
@@ -165,24 +172,26 @@ const CoinPage = ({ params }: { params: { id: string } }) => {
         )}
       </div>
       {coin && (
-        <div className="w-full h-[330px] rounded-2xl flex gap-5 mt-5">
-          <div className="w-1/2 dark:bg-[#ffffff0f] bg-white rounded-2xl p-7 flex flex-col">
-            <h1 className="text-2xl">Market</h1>
+        <div className="w-full h-auto lg:h-[330px] rounded-2xl flex flex-col lg:flex-row gap-5 mt-5">
+          <div className="w-full lg:w-1/2 dark:bg-[#ffffff0f] bg-white rounded-2xl p-7 flex flex-col">
+            <h1 className="text-xl md:text-2xl">Market</h1>
             <div className="flex justify-between items-center mb-2">
-              <h1 className="text-[#afafaf] text-sm">MARKET CAP</h1>
+              <h1 className="text-sm md:text-base lg:text-lg text-[#afafaf]">
+                MARKET CAP
+              </h1>
               <div className="p-2 rounded-xl">
-                <span className="text-xl text-[#afafaf]">
+                <span className="text-lg md:text-xl lg:text-2xl text-[#afafaf]">
                   {symbol}
                   {formatNumber(coin.market_data.market_cap[currency])}
                 </span>
               </div>
             </div>
             <div className="flex justify-between items-center mb-2">
-              <h1 className="text-[#afafaf] text-sm">
+              <h1 className="text-sm md:text-base lg:text-lg text-[#afafaf]">
                 FULLY DILUTED VALUATION
               </h1>
               <div className="p-2 rounded-xl">
-                <span className="text-xl text-[#afafaf]">
+                <span className="text-lg md:text-xl lg:text-2xl text-[#afafaf]">
                   {symbol}
                   {formatNumber(
                     coin.market_data.fully_diluted_valuation[currency]
@@ -191,27 +200,33 @@ const CoinPage = ({ params }: { params: { id: string } }) => {
               </div>
             </div>
             <div className="flex justify-between items-center mb-2">
-              <h1 className="text-[#afafaf] text-sm">TOTAL VOLUME 24H</h1>
+              <h1 className="text-sm md:text-base lg:text-lg text-[#afafaf]">
+                TOTAL VOLUME 24H
+              </h1>
               <div className="p-2 rounded-xl">
-                <span className="text-xl text-[#afafaf]">
+                <span className="text-lg md:text-xl lg:text-2xl text-[#afafaf]">
                   {symbol}
                   {formatNumber(coin.market_data.total_volume[currency])}
                 </span>
               </div>
             </div>
             <div className="flex justify-between items-center mb-2">
-              <h1 className="text-[#afafaf] text-sm">CIRCULATING SUPPLY</h1>
+              <h1 className="text-sm md:text-base lg:text-lg text-[#afafaf]">
+                CIRCULATING SUPPLY
+              </h1>
               <div className="p-2 rounded-xl">
-                <span className="text-xl text-[#afafaf]">
+                <span className="text-lg md:text-xl lg:text-2xl text-[#afafaf]">
                   {symbol}
                   {formatNumber(coin.market_data.circulating_supply)}
                 </span>
               </div>
             </div>
             <div className="flex justify-between items-center mb-2">
-              <h1 className="text-[#afafaf] text-sm">VOLUME / MARKET</h1>
+              <h1 className="text-sm md:text-base lg:text-lg text-[#afafaf]">
+                VOLUME / MARKET
+              </h1>
               <div className="p-2 rounded-xl">
-                <span className="text-xl text-[#afafaf]">
+                <span className="text-lg md:text-xl lg:text-2xl text-[#afafaf]">
                   {symbol}
                   {formatNumber(
                     coin.market_data.total_volume[currency] /
@@ -221,8 +236,8 @@ const CoinPage = ({ params }: { params: { id: string } }) => {
               </div>
             </div>
           </div>
-          <div className="w-1/2 dark:bg-black bg-white rounded-2xl p-7">
-            <h1 className="text-xl">7D Sparkline</h1>
+          <div className="w-full lg:w-1/2 h-[250px] dark:bg-black bg-white rounded-2xl p-7">
+            <h1 className="text-lg md:text-xl lg:text-2xl">7D Sparkline</h1>
             <PriceCoinGraph
               prices={coin.market_data.sparkline_7d.price}
               priceChange={1}

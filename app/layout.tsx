@@ -23,30 +23,30 @@ export default function RootLayout({
         <body
           className={`${inter.className} dark:bg-[#030303] bg-[#f5f5f5] max-w-screen-2xl m-auto p-3 relative`}
         >
-          <div className="absolute inset-0 overflow-hidden max-w-screen-2xl">
+          <div className="absolute inset-0 overflow-hidden">
             <div
               className="absolute rounded-full w-[1500px] h-[1000px] bg-blue-500 opacity-60"
-              style={{ top: "80%", left: "20%", filter: "blur(100px)" }}
+              style={{ top: "80vh", left: "20vw", filter: "blur(100px)" }}
             ></div>
             <div
               className="absolute rounded-full w-[900px] h-[800px] bg-cyan-500 opacity-60"
-              style={{ top: "20%", left: "10%", filter: "blur(100px)" }}
+              style={{ top: "20vh", left: "10vw", filter: "blur(100px)" }}
             ></div>
             <div
               className="absolute rounded-full w-[700px] h-[700px] bg-purple-500 opacity-60"
-              style={{ top: "30%", left: "30%", filter: "blur(100px)" }}
+              style={{ top: "30vh", left: "30vw", filter: "blur(100px)" }}
             ></div>
             <div
               className="absolute rounded-full w-[750px] h-[550px] bg-sky-500 opacity-60"
-              style={{ top: "20%", left: "70%", filter: "blur(100px)" }}
+              style={{ top: "20vh", left: "70vw", filter: "blur(100px)" }}
             ></div>
             <div
               className="absolute rounded-full w-[750px] h-[550px] bg-teal-500 opacity-60"
-              style={{ top: "70%", left: "30%", filter: "blur(100px)" }}
+              style={{ top: "70vh", left: "30vw", filter: "blur(100px)" }}
             ></div>
             <div
-              className="absolute rounded-full w-[750px] h-[550px] bg-teal-500 opacity-60"
-              style={{ top: "80%", left: "20%", filter: "blur(100px)" }}
+              className="absolute rounded-full w-[750px] h-[550px] bg-teal-200 opacity-60"
+              style={{ top: "80vh", left: "20vw", filter: "blur(100px)" }}
             ></div>
           </div>
           <div className="relative z-10">
