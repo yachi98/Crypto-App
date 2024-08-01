@@ -24,28 +24,28 @@ const RowCoinItem = ({ coin }: { coin: Coin }) => {
 
   return (
     <Link href={`/coin/${coin.id}`}>
-      <div className="dark:bg-black bg-white dark:hover:bg-[#ffffff0f] hover:bg-[#efefef] w-full dark:text-[#DEDEDE] text-black text-sm font-light rounded-3xl p-4 mb-2 flex gap-3 items-center">
-        <span>{coin.market_cap_rank}</span>
+      <div className="dark:bg-black bg-white dark:hover:bg-[#ffffff0f] hover:bg-[#efefef] w-full dark:text-[#DEDEDE] text-black text-sm font-light rounded-3xl p-4 mb-2 flex items-center justify-between sm:gap-7">
+        <span className="hidden sm:inline">{coin.market_cap_rank}</span>
         <Image src={coin.image} alt={coin.name} width={30} height={30} />
-        <span className="w-[14%] px-1">
+        <span className="w-[32%] px-1">
           {coin.name.charAt(0).toUpperCase() + coin.name.slice(1).toLowerCase()}{" "}
           ({coin.symbol.toUpperCase()})
         </span>
-        <span className="w-[6%] px-1">
+        <span className="w-[32%] px-1">
           {symbol}
           {formatNumber(coin.current_price)}
         </span>
-        <span className="w-[6%] px-1">
+        <span className="w-[6%] px-1 hidden sm:inline">
           <PriceChange price={priceChange1h} />
         </span>
-        <span className="w-[6%] px-1  hidden sm:inline">
+        <span className="px-1 hidden sm:inline">
           <PriceChange price={priceChange24h} />
         </span>
-        <span className="w-[6%] px-1  hidden sm:inline">
+        <span className="px-1 hidden">
           <PriceChange price={priceChange7d} />
         </span>
-        <span className="w-full max-w-[20%] px-1">
-          <div className="flex justify-between text-xs hidden xl:flex">
+        <span className="w-full max-w-[20%] hidden px-1">
+          <div className="justify-between text-xs hidden xl:flex">
             <span
               className={
                 priceChange24h > 0 ? "text-[#00B1A7]" : "text-[#FE2264]"
@@ -68,7 +68,7 @@ const RowCoinItem = ({ coin }: { coin: Coin }) => {
             />
           </div>
         </span>
-        <span className="w-full max-w-[20%] px-1">
+        <span className="w-full max-w-[20%] hidden px-1">
           <div className="justify-between text-xs hidden xl:inline">
             <span
               className={
@@ -95,7 +95,7 @@ const RowCoinItem = ({ coin }: { coin: Coin }) => {
             />
           </div>
         </span>
-        <span className="w-[15%] h-[40px]">
+        <span className="w-[32%] h-[40px] sm:w-[25%] sm:h-[40px]">
           <PriceCoinGraph
             prices={coin.sparkline_in_7d.price}
             priceChange={priceChange7d}
