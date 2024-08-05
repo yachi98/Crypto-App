@@ -10,20 +10,20 @@ const PortfolioPage = () => {
   const { portfolioData } = useAppSelector((state) => state.portfolioData);
 
   return (
-    <div className="max-w-screen-2xl m-auto h-screen p-2 relative">
+    <div className="max-w-screen-2xl mx-auto h-screen p-2 relative">
       <div className={`w-full h-full ${showModal ? "blur-2xl" : ""}`}>
-        <div className="flex justify-between items-center">
-          <h2 className="text-3xl mt-5">Portfolio</h2>
+        <div className="flex flex-row md:flex-row justify-between items-center">
+          <h2 className="text-xl md:text-2xl lg:text-3xl mt-5">Portfolio</h2>
           <button
             onClick={() => setShowModal(true)}
-            className="p-3 dark:bg-black bg-white dark:hover:bg-[#000000ba] dark:text-[#686868] dark:hover:text-white dark:hover:border-white rounded-2xl text-md mt-5 w-[160px]"
+            className="p-3 dark:bg-black bg-white dark:hover:bg-[#000000ba] dark:text-[#686868] dark:hover:text-white dark:hover:border-white rounded-2xl text-sm md:text-md mt-5 w-[120px] md:w-[140px] lg:w-[160px]"
           >
             Add Asset
           </button>
         </div>
         {portfolioData.length === 0 && (
-          <p className="w-[550px] mt-5">
-            Manage your crypto assets with ease! Whether you‘re a seasoned
+          <p className="text-sm md:text-base lg:text-lg w-full md:w-[400px] lg:w-[550px] mt-5">
+            Manage your crypto assets with ease! Whether you’re a seasoned
             trader or just getting started in the exciting world of
             cryptocurrencies, this portfolio tool is designed to help you keep
             track of your investments effortlessly. You can add your coins by
