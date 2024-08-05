@@ -147,13 +147,13 @@ const PortfolioModal = ({ showModal, setShowModal }: PortfolioModalProps) => {
   };
 
   return (
-    <div className="w-[700px] h-[350px] dark:bg-[#ffffff0f] bg-[#fafafa] absolute top-1/4 -translate-y-1/2 left-1/2 -translate-x-1/2 rounded-2xl">
-      <div className="absolute right-0 p-5">
+    <div className="p-3 dark:bg-[#000000bd] bg-[#fafafa] absolute top-1/4 left-1/2 -translate-y-1/2 -translate-x-1/2 rounded-2xl max-w-full w-[90%] md:w-[70%] lg:w-[60%] xl:w-[50%]">
+      <div className="absolute right-0 p-3">
         <button onClick={() => handleCancel()}>
           <CloseIcon />
         </button>
       </div>
-      <div className="p-8 flex items-center gap-4">
+      <div className="p-3 flex items-center gap-4">
         {selectedCoin ? (
           <>
             <img
@@ -169,9 +169,9 @@ const PortfolioModal = ({ showModal, setShowModal }: PortfolioModalProps) => {
         )}
       </div>
       <form onSubmit={handleSubmit} className="px-8">
-        <div className="grid grid-cols-2 gap-4 items-center">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
           <label>Select currency</label>
-          <div className="flex flex-col">
+          <div className="flex flex-col relative">
             <input
               ref={currencyInputRef}
               placeholder="Select coin..."
@@ -182,8 +182,8 @@ const PortfolioModal = ({ showModal, setShowModal }: PortfolioModalProps) => {
               className="dark:bg-black bg-light-theme outline-none rounded-xl p-2 w-full"
             />
             {showDropdown && (
-              <div className="col-span-2 h-full w-[320px] flex flex-col overflow-y-scroll dark:bg-black bg-white absolute z-10 rounded-2xl mt-12">
-                {searchCoinResults.map((coin: SearchCoin) => (
+              <div className="col-span-2 h-full w-full md:w-[320px] flex flex-col overflow-y-scroll dark:bg-black bg-white absolute z-10 rounded-2xl mt-12">
+                {searchCoinResults.map((coin) => (
                   <button
                     key={coin.id}
                     className="p-2 flex gap-2 dark:hover:bg-gray-800 hover:bg-slate-100"
@@ -246,13 +246,13 @@ const PortfolioModal = ({ showModal, setShowModal }: PortfolioModalProps) => {
           <button
             type="button"
             onClick={handleCancel}
-            className="p-2  bg-white dark:bg-black dark:hover:text-white  rounded-xl w-[100px]"
+            className="p-2 bg-white dark:bg-black dark:hover:text-white rounded-xl w-[100px]"
           >
             Cancel
           </button>
           <button
             type="submit"
-            className="p-2  bg-white dark:bg-black dark:hover:text-white  rounded-xl w-[100px]"
+            className="p-2 bg-white dark:bg-black dark:hover:text-white rounded-xl w-[100px]"
           >
             Save
           </button>

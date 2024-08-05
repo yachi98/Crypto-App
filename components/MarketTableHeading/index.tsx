@@ -1,19 +1,19 @@
 const MarketTableHeading = () => {
   return (
-    <div className=" dark:bg-black bg-white w-full dark:text-[#DEDEDE] text-black text-sm font-light rounded-2xl p-4 flex gap-3 mb-2 justify-between">
-      <span className="px-1 hidden sm:inline">#</span>
-      <span className="px-1">Name</span>
-      <span className="px-1">Price</span>
-      <span className="w-[6%] px-1 hidden sm:inline">1h%</span>
-      <span className="w-[6%] px-1 hidden sm:inline">24h%</span>
-      <span className="w-[6%] px-1 hidden">7d%</span>
-      <span className="w-full px-1 hidden md:inline">
+    <div className="dark:bg-black bg-white w-full flex dark:text-[#DEDEDE] text-black p-4 mb-2 rounded-2xl text-sm">
+      <div className="hidden sm:block flex-none px-1">#</div>
+      <div className="flex-1 px-1">Name</div>
+      <div className="flex-1 px-1">Price</div>
+      <div className="hidden sm:block flex-1 px-1 w-[10%]">1h%</div>
+      <div className="hidden sm:block flex-1 px-1 w-[10%]">24h%</div>
+      <div className="hidden sm:block flex-1 px-1 w-[10%]">7d%</div>
+      <div className="hidden sm:block md:flex flex-2 px-1 w-[20%]">
         24h volume / Market Cap
-      </span>
-      <span className="w-full max-w-[20%] px-1 hidden xl:inline">
+      </div>
+      <div className="hidden xl:flex flex-2 px-1 w-[20%]">
         Circulating / Total Supply
-      </span>
-      <span className="">Last 7d</span>
+      </div>
+      <div className="flex-2 px-1">Last 7d</div>
     </div>
   );
 };

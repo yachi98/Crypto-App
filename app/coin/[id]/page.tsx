@@ -132,7 +132,7 @@ const CoinPage = ({ params }: { params: { id: string } }) => {
                   </div>
                 </div>
 
-                <div className="dark:text-white text-black text-sm md:text-base lg:text-lg w-full lg:w-3/5 text-left relative mt-3 lg:mt-0">
+                <div className="dark:text-white text-black text-sm md:text-base  w-full lg:w-3/5 text-left relative mt-3 lg:mt-0">
                   <h3 className="text-lg md:text-xl lg:text-2xl">
                     Description
                   </h3>
@@ -173,7 +173,7 @@ const CoinPage = ({ params }: { params: { id: string } }) => {
       </div>
       {coin && (
         <div className="w-full h-auto lg:h-[330px] rounded-2xl flex flex-col lg:flex-row gap-5 mt-5">
-          <div className="w-full lg:w-1/2 dark:bg-[#ffffff0f] bg-white rounded-2xl p-7 flex flex-col">
+          <div className="w-full lg:w-1/2 dark:bg-[#000000bd] bg-white rounded-2xl p-7 flex flex-col">
             <h1 className="text-xl md:text-2xl">Market</h1>
             <div className="flex justify-between items-center mb-2">
               <h1 className="text-sm md:text-base lg:text-lg text-[#afafaf]">
@@ -236,7 +236,7 @@ const CoinPage = ({ params }: { params: { id: string } }) => {
               </div>
             </div>
           </div>
-          <div className="w-full lg:w-1/2 h-[250px] dark:bg-black bg-white rounded-2xl p-7">
+          <div className="w-full lg:w-1/2 h-[330px] dark:bg-black bg-white rounded-2xl p-7">
             <h1 className="text-lg md:text-xl lg:text-2xl">7D Sparkline</h1>
             <PriceCoinGraph
               prices={coin.market_data.sparkline_7d.price}

@@ -41,10 +41,10 @@ const RowCoinItem = ({ coin }: { coin: Coin }) => {
         <span className="px-1 hidden sm:inline">
           <PriceChange price={priceChange24h} />
         </span>
-        <span className="px-1 hidden">
+        <span className="px-1 hidden md:inline">
           <PriceChange price={priceChange7d} />
         </span>
-        <span className="w-full max-w-[20%] hidden px-1">
+        <span className="w-full max-w-[20%] hidden xl:inline px-1">
           <div className="justify-between text-xs hidden xl:flex">
             <span
               className={
@@ -61,14 +61,14 @@ const RowCoinItem = ({ coin }: { coin: Coin }) => {
               {formatNumber(coin.market_cap)}
             </span>
           </div>
-          <div className="hidden xl:inline">
+          <div className="hidden xl:block">
             <CoinMarketBar
               fill={priceChange24h > 0 ? "bg-[#00B1A7]" : "bg-[#FE2264]"}
               percentage={getPercentage(coin.total_volume, coin.market_cap)}
             />
           </div>
         </span>
-        <span className="w-full max-w-[20%] hidden px-1">
+        <span className="w-full max-w-[20%] hidden xl:inline px-1">
           <div className="justify-between text-xs hidden xl:inline">
             <span
               className={
@@ -85,7 +85,7 @@ const RowCoinItem = ({ coin }: { coin: Coin }) => {
               {formatNumber(coin.market_cap)}
             </span>
           </div>
-          <div className="hidden xl:inline">
+          <div className="hidden xl:block">
             <CoinMarketBar
               fill={priceChange24h > 0 ? "bg-[#00B1A7]" : "bg-[#FE2264]"}
               percentage={getPercentage(
@@ -95,7 +95,7 @@ const RowCoinItem = ({ coin }: { coin: Coin }) => {
             />
           </div>
         </span>
-        <span className="w-[32%] h-[40px] sm:w-[25%] sm:h-[40px]">
+        <span className="w-[100px] h-[40px]">
           <PriceCoinGraph
             prices={coin.sparkline_in_7d.price}
             priceChange={priceChange7d}
