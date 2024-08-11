@@ -246,7 +246,7 @@ const CoinGraphChart = () => {
         )}
       </div>
 
-      <div className="dark:bg-black bg-white rounded-2xl md:w-[calc(50%-0.8rem)] w-full h-[370px] m-2 flex flex-col p-4">
+      <div className="dark:bg-black bg-white rounded-2xl md:w-[calc(50%-0.8rem)] lg:w-[calc(50%-0.8rem)] w-full h-[370px] m-2 flex flex-col p-4">
         {selectedCoins[0] && (
           <div className="flex flex-col gap-8">
             <div className="flex items-center justify-between">

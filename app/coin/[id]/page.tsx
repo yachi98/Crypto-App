@@ -138,7 +138,7 @@ const CoinPage = ({ params }: { params: { id: string } }) => {
                   </h3>
                   <div>
                     <p
-                      className="mt-5 overflow-y-hidden max-h-[11rem] scrollbar-track-transparent scrollbar-h-24 hover:overflow-y-auto hover:scrollbar"
+                      className="mt-5 overflow-y-hidden max-h-[11rem] scrollbar-track-transparent scrollbar-h-24 hover:overflow-y-auto hover:scrollbar text-sm"
                       dangerouslySetInnerHTML={{
                         __html: coin.description.en,
                       }}

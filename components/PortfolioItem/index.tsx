@@ -13,7 +13,7 @@ import PortfolioItemModal from "../PortfolioItemModal";
 const PortfolioItem = ({ coin }: { coin: Portfolio }) => {
   const [showModal, setShowModal] = useState(false);
   const { symbol, currency } = useAppSelector((state) => state.currencySlice);
-  const { portfolioData } = useAppSelector((state) => state.portfolioData);
+
   const dispatch: AppDispatch = useDispatch();
 
   const handleRemove = () => {
@@ -21,7 +21,13 @@ const PortfolioItem = ({ coin }: { coin: Portfolio }) => {
     setShowModal(false);
   };
 
-  // const priceChange24h = getFormattedPrice(coin.market_data.price_change_24h);
+  const { coinMarketData } = useAppSelector((state) => state.coinMarketData);
+
+  console.log(coinMarketData);
+
+  // const priceChange24h: number = getFormattedPrice(
+  //   coin.price_change_percentage_24h_in_currency
+  // );
 
   // const profit = (coin.currentPrice - purchasePrice) * portfolio.purchaseAmount;
   // const profitPercentage = getFormattedPrice((profit / purchasePrice) * 100);
@@ -33,7 +39,17 @@ const PortfolioItem = ({ coin }: { coin: Portfolio }) => {
       coin.market_data.total_volume[currency]
     ) / 100;
 
-  // const circToMaxSupplyPercentage = getFormattedPrice((coin.circulating_supply / coin.total_supply) * 100);
+  const circToMaxSupplyPercentage =
+    getPercentage(
+      coin.market_data.market_cap[currency],
+      coin.market_data.total_volume[currency]
+    ) * 100;
+
+  const priceChange24h = getFormattedPrice(
+    (coin.market_data.purchasePrice[currency] /
+      coin.market_data.market_cap[currency]) *
+      1000
+  );
 
   return (
     <div className="p-5 dark:bg-[#000000bd] bg-white h-auto rounded-3xl mb-5 relative">
@@ -80,19 +96,19 @@ const PortfolioItem = ({ coin }: { coin: Portfolio }) => {
             {getFormattedPrice(marketToVolumePercentage)}%
           </span>
         </div>
-        <div>
+        <div className="flex flex-col">
           <h3 className="text-sm hidden sm:inline">
             Circ Supply vs Max Supply:
           </h3>
-          {/* <span className="text-sm text-[#01F1E3]">
-            {getPercentage(coin.market_data.circulating_supply[currency], coin.market_data.total_supply[currency]).toFixed(2)}%
-          </span> */}
+          <span className="text-sm text-[#01F1E3]">
+            {formatNumber(circToMaxSupplyPercentage)}%
+          </span>
         </div>
-        <div>
+        <div className="flex flex-col">
           <h3 className="text-sm hidden sm:inline">Price Change 24h:</h3>
-          {/* <span className="text-sm text-[#01F1E3]">
-            {coin.market_data.price_change_percentage_24h[currency].toFixed(2)}%
-          </span> */}
+          <span className="text-sm text-[#01F1E3]">
+            {formatNumber(priceChange24h)}%
+          </span>
         </div>
         <button
           onClick={() => setShowModal(true)}

@@ -182,7 +182,7 @@ const PortfolioModal = ({ showModal, setShowModal }: PortfolioModalProps) => {
               className="dark:bg-black bg-light-theme outline-none rounded-xl p-2 w-full"
             />
             {showDropdown && (
-              <div className="col-span-2 h-full w-full md:w-[320px] flex flex-col overflow-y-scroll dark:bg-black bg-white absolute z-10 rounded-2xl mt-12">
+              <div className="col-span-2 h-[300px] w-full md:w-[320px] flex flex-col overflow-y-scroll dark:bg-black bg-white absolute z-10 rounded-2xl mt-12">
                 {searchCoinResults.map((coin) => (
                   <button
                     key={coin.id}

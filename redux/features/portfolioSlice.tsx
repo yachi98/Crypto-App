@@ -23,7 +23,7 @@ export const addPortfolioData = createAsyncThunk(
       const { data: historicalData } = await axios.get(
         `https://api.coingecko.com/api/v3/coins/${coin.coinApiId}/history?date=${coin.purchaseDate}`
       );
-      // console.log(historicalData);
+      console.log(historicalData);
 
       const purchasePrice = historicalData.market_data.current_price.gbp;
       const purchaseAmountValue = coin.purchaseAmount * purchasePrice;
