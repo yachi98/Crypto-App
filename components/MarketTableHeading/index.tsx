@@ -16,7 +16,7 @@ const MarketTableHeading = () => {
       <div className="flex-1 hidden xl:block px-1 w-[2%] md:w-[16%] xl:w-[8%]">
         Market Cap
       </div>
-      <div className="flex-1 hidden xl:block px-1 w-[8%] md:w-[16%] xl:w-[8%]">
+      <div className="flex-1 hidden xl:block px-1 w-[2%] md:w-[16%] xl:w-[8%]">
         Total Supply
       </div>
       <div className="flex-1 px-1 w-1/3 md:w-[16%] xl:w-[8%]">Last 7d</div>
