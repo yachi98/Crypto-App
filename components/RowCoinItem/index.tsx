@@ -105,7 +105,7 @@ const RowCoinItem = ({ coin }: { coin: Coin }) => {
             )}
           />
         </span>
-        <span className="w-1/3 h-[40px] bg-sky-400 md:w-[20%] xl:w-[12%]">
+        <span className="flex-1 w-1/3 h-[40px] bg-sky-400 md:w-[20%] xl:w-[12%]">
           <PriceCoinGraph
             prices={coin.sparkline_in_7d.price}
             priceChange={priceChange7d}
