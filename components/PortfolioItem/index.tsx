@@ -7,12 +7,12 @@ import getFormattedPrice from "@/utils/getFormattedDate";
 import getPercentage from "@/utils/getPercentage";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import CoinMarketBar from "../CoinMarketBar";
 import PortfolioItemModal from "../PortfolioItemModal";
 
 const PortfolioItem = ({ coin }: { coin: Portfolio }) => {
   const [showModal, setShowModal] = useState(false);
   const { symbol, currency } = useAppSelector((state) => state.currencySlice);
+
   const dispatch: AppDispatch = useDispatch();
 
   const handleRemove = () => {
@@ -20,14 +20,38 @@ const PortfolioItem = ({ coin }: { coin: Portfolio }) => {
     setShowModal(false);
   };
 
-  const marketToVolume = getFormattedPrice(
-    (coin.market_data.market_cap[currency] /
-      coin.market_data.total_volume[currency]) *
-      100
+  const { coinMarketData } = useAppSelector((state) => state.coinMarketData);
+
+  console.log(coinMarketData);
+
+  // const priceChange24h: number = getFormattedPrice(
+  //   coin.price_change_percentage_24h_in_currency
+  // );
+
+  // const profit = (coin.currentPrice - purchasePrice) * portfolio.purchaseAmount;
+  // const profitPercentage = getFormattedPrice((profit / purchasePrice) * 100);
+  // const profitFormatted = getFormattedPrice(profit);
+
+  const marketToVolumePercentage =
+    getPercentage(
+      coin.market_data.market_cap[currency],
+      coin.market_data.total_volume[currency]
+    ) / 100;
+
+  const circToMaxSupplyPercentage =
+    getPercentage(
+      coin.market_data.market_cap[currency],
+      coin.market_data.total_volume[currency]
+    ) * 100;
+
+  const priceChange24h = getFormattedPrice(
+    (coin.market_data.purchasePrice[currency] /
+      coin.market_data.market_cap[currency]) *
+      1000
   );
 
   return (
-    <div className="p-5 dark:bg-[#9c9c9c0f] bg-white h-[230px] rounded-3xl mb-5 relative">
+    <div className="p-5 dark:bg-[#000000bd] bg-white h-auto rounded-3xl mb-5 relative">
       <div className="absolute inset-0 overflow-hidden rounded-3xl pointer-events-none">
         <img
           src={coin.image}
@@ -36,10 +60,10 @@ const PortfolioItem = ({ coin }: { coin: Portfolio }) => {
         />
       </div>
       <div className="flex items-center gap-3">
-        <img src={coin.image} alt={coin.value} width={40} height={40} />
+        <img src={coin.image} alt={coin.value} width={30} height={30} />
         <h3 className="text-lg">{coin.value}</h3>
       </div>
-      <div className="grid grid-cols-4 gap-12 mt-3 items-center">
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-12 mt-3 items-center">
         <div>
           <h3 className="text-sm">Purchase Price:</h3>
           <span className="text-[#01F1E3]">
@@ -66,24 +90,28 @@ const PortfolioItem = ({ coin }: { coin: Portfolio }) => {
           <span className="text-[#01F1E3]">{coin.purchaseDate}</span>
         </div>
         <div>
-          <h3 className="text-sm">Market Cap vs Volume</h3>
+          <h3 className="text-sm">Market Cap vs Volume:</h3>
           <span className="text-sm text-[#01F1E3]">
-            {formatNumber(marketToVolume)}%
+            {getFormattedPrice(marketToVolumePercentage)}%
           </span>
-
-          <CoinMarketBar
-            fill="bg-[#01F1E3] bg-gray-800"
-            percentage={getPercentage(
-              coin.market_data.market_cap[currency],
-              coin.market_data.total_volume[currency]
-            )}
-          />
         </div>
-        <h3 className="text-sm">Circ Supply vs Max Supply</h3>
-        <h3 className="text-sm">Price change 24h</h3>
+        <div className="flex flex-col">
+          <h3 className="text-sm hidden sm:inline">
+            Circ Supply vs Max Supply:
+          </h3>
+          <span className="text-sm text-[#01F1E3]">
+            {formatNumber(circToMaxSupplyPercentage)}%
+          </span>
+        </div>
+        <div className="flex flex-col">
+          <h3 className="text-sm hidden sm:inline">Price Change 24h:</h3>
+          <span className="text-sm text-[#01F1E3]">
+            {formatNumber(priceChange24h)}%
+          </span>
+        </div>
         <button
           onClick={() => setShowModal(true)}
-          className="p-2 dark:hover:bg-[#121929] hover:bg-slate-100  rounded-xl absolute right-3 top-3"
+          className="p-2 dark:hover:bg-[#121929] hover:bg-slate-100 rounded-xl absolute right-3 top-3"
         >
           <DeleteIcon />
         </button>
