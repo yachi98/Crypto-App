@@ -1,5 +1,4 @@
 import { Portfolio } from "@/interfaces/portfolio.interface";
-import { Coin } from "@/interfaces/coin.interface";
 import DeleteIcon from "@/public/DeleteIcon.svg";
 import { removePortfolio } from "@/redux/features/portfolioSlice";
 import { AppDispatch, useAppSelector } from "@/redux/store";
