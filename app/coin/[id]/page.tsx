@@ -172,7 +172,7 @@ const CoinPage = ({ params }: { params: { id: string } }) => {
         )}
       </div>
       {coin && (
-        <div className="w-full h-auto lg:h-[330px] rounded-2xl flex flex-col lg:flex-row gap-5 mt-5">
+        <div className="w-full h-auto lg:h-[360px] rounded-2xl flex flex-col lg:flex-row gap-5 mt-5">
           <div className="w-full lg:w-1/2 dark:bg-[#000000bd] bg-white rounded-2xl p-7 flex flex-col">
             <h1 className="text-xl md:text-2xl">Market</h1>
             <div className="flex justify-between items-center mb-2">
@@ -236,7 +236,7 @@ const CoinPage = ({ params }: { params: { id: string } }) => {
               </div>
             </div>
           </div>
-          <div className="w-full lg:w-1/2 h-[330px] dark:bg-black bg-white rounded-2xl p-7">
+          <div className="w-full lg:w-1/2 h-[360px] dark:bg-black bg-white rounded-2xl p-7">
             <h1 className="text-lg md:text-xl lg:text-2xl">7D Sparkline</h1>
             <PriceCoinGraph
               prices={coin.market_data.sparkline_7d.price}

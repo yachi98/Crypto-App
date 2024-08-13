@@ -37,26 +37,26 @@ const RowCoinItem = ({ coin }: { coin: Coin }) => {
     <Link href={`/coin/${coin.id}`}>
       <div className="dark:bg-black bg-white dark:hover:bg-[#ffffff0f] hover:bg-[#efefef] w-full dark:text-[#DEDEDE] text-black text-sm font-light rounded-3xl p-4 mb-2 flex items-center justify-between">
         <span className="hidden sm:inline w-[2%]">{coin.market_cap_rank}</span>
-        <div className="w-1/3 flex items-center bg-orange-600 md:w-[20%] xl:w-[12%]">
+        <div className="w-1/3 flex items-center bg-red-500 md:w-[16%] xl:w-[8%]">
           <Image src={coin.image} alt={coin.name} width={30} height={30} />
           <span className="flex-none w-[15%] px-1 md:w-[12%]">
             {formatCoinName(coin.name)} ({coin.symbol.toUpperCase()})
           </span>
         </div>
-        <span className="w-1/3 px-1 bg-blue-500 md:w-[19%] xl:w-[8%]">
+        <span className="flex-1 w-1/3 px-1 bg-blue-500 md:w-[16%] xl:w-[8%]">
           {symbol}
           {formatNumber(coin.current_price)}
         </span>
-        <span className="flex-1 hidden md:inline w-[6%] md:w-[16%] xl:w-[8%] px-1 bg-orange-500">
+        <span className="flex-1 hidden md:inline w-[2%] md:w-[16%] xl:w-[8%] px-1 bg-orange-500">
           <PriceChange price={priceChange1h} />
         </span>
-        <span className="flex-1 hidden md:inline w-[6%] md:w-[16%] xl:w-[8%] px-1 bg-purple-600">
+        <span className="flex-1 hidden md:inline w-[2%] md:w-[16%] xl:w-[8%] px-1 bg-purple-600">
           <PriceChange price={priceChange24h} />
         </span>
-        <span className="flex-1 hidden xl:inline w-[6%] md:w-[16%] xl:w-[8%] px-1 bg-green-600">
+        <span className="flex-1 hidden xl:inline w-[2%] md:w-[16%] xl:w-[8%] px-1 bg-green-600">
           <PriceChange price={priceChange7d} />
         </span>
-        <span className="flex-1 hidden xl:inline w-[12%] px-1 bg-yellow-500 xl:w-[8%]">
+        <span className="flex-1 hidden xl:inline w-[2%] md:w-[16%] px-1 bg-yellow-500 xl:w-[8%]">
           <div className="text-xs">
             <span
               className={
@@ -79,7 +79,7 @@ const RowCoinItem = ({ coin }: { coin: Coin }) => {
             percentage={getPercentage(coin.total_volume, coin.market_cap)}
           />
         </span>
-        <span className="flex-1 hidden xl:inline w-[13%] px-1 bg-pink-500 xl:w-[8%]">
+        <span className="flex-1 hidden xl:inline w-[6%] px-1 bg-pink-500 xl:w-[8%]">
           <div className="text-xs">
             <span
               className={

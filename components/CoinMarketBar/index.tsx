@@ -8,7 +8,7 @@ const CoinMarketBar = ({
   const clampedPercentage = Math.max(0, Math.min(percentage, 100));
 
   return (
-    <div className="w-[180px] relative">
+    <div className="w-[160px] relative">
       <span
         className={`rounded-[6px] h-[3px] block ${fill} opacity-40 relative`}
       ></span>
