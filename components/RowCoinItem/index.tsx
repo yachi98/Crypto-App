@@ -56,8 +56,8 @@ const RowCoinItem = ({ coin }: { coin: Coin }) => {
         <span className="flex-1 hidden md:inline w-[2%] md:w-[16%] xl:w-[8%] px-1">
           <PriceChange price={priceChange7d} />
         </span>
-        <span className="flex-1 hidden xl:inline w-[2%] md:w-[16%] px-1 xl:w-[8%]">
-          <div className="text-xs">
+        <span className="flex-1 hidden xl:inline w-[8%] px-1">
+          <div className="text-xs flex items-center justify-between">
             <span
               className={
                 priceChange24h > 0 ? "text-[#00B1A7]" : "text-[#FE2264]"
@@ -65,7 +65,6 @@ const RowCoinItem = ({ coin }: { coin: Coin }) => {
             >
               {formatNumber(coin.total_volume)}
             </span>
-            /
             <span
               className={
                 priceChange24h > 0 ? "text-[#00B1A7]" : "text-[#FE2264]"
@@ -79,8 +78,8 @@ const RowCoinItem = ({ coin }: { coin: Coin }) => {
             percentage={getPercentage(coin.total_volume, coin.market_cap)}
           />
         </span>
-        <span className="flex-1 hidden xl:inline w-[6%] px-1 xl:w-[8%]">
-          <div className="text-xs">
+        <span className="flex-1 hidden xl:inline w-[8%] px-1">
+          <div className="text-xs flex items-center justify-between">
             <span
               className={
                 priceChange24h > 0 ? "text-[#00B1A7]" : "text-[#FE2264]"
@@ -88,7 +87,7 @@ const RowCoinItem = ({ coin }: { coin: Coin }) => {
             >
               {formatNumber(coin.circulating_supply)}
             </span>
-            /
+
             <span
               className={
                 priceChange24h > 0 ? "text-[#00B1A7]" : "text-[#FE2264]"
