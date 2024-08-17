@@ -24,8 +24,14 @@ export const addPortfolioData = createAsyncThunk(
         `https://api.coingecko.com/api/v3/coins/${coin.coinApiId}/history?date=${coin.purchaseDate}`
       );
 
+      const { data: currentData } = await axios.get(
+        `https://api.coingecko.com/api/v3/coins/${coin.coinApiId}`
+      );
+
+      const currentPrice = currentData.market_data.current_price.gbp;
+
       const purchasePrice = historicalData.market_data.current_price.gbp;
-      const purchaseAmountValue = coin.purchaseAmount * purchasePrice;
+      const purchaseAmountValue = coin.purchaseAmount;
 
       // Create a new portfolio entry with historical purchase data
       const portfolioEntry: Portfolio = {
@@ -36,7 +42,7 @@ export const addPortfolioData = createAsyncThunk(
         purchaseDate: coin.purchaseDate,
         purchaseAmount: purchaseAmountValue,
         hasProfit: false,
-        currentPrice: { gpb: purchasePrice },
+        currentPrice: { gbp: currentPrice },
         market_data: {
           purchasePrice: { gbp: purchasePrice },
           market_cap: historicalData.market_data.market_cap || {},
@@ -58,7 +64,7 @@ export const addPortfolioData = createAsyncThunk(
           );
           return {
             value: uniqueId,
-            currentPrice: data.market_data.current_price.gpb,
+            currentPrice: data.market_data.current_price.gbp,
           };
         })
       );
