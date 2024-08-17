@@ -23,21 +23,10 @@ const PortfolioItem = ({ coin }: { coin: Portfolio }) => {
   const purchasePrice = coin.market_data.purchasePrice[currency];
   const currentPrice = coin.currentPrice[currency];
   const purchaseAmount = coin.purchaseAmount;
-
-  console.log(coin.currentPrice[currency]);
-  console.log(coin.market_data.purchasePrice[currency]);
-  console.log("purchaseAmount", purchaseAmount);
-  console.log("coin", coin);
-
-  // const profit = currentPrice - purchasePrice;
   const profit = (currentPrice - purchasePrice) * purchaseAmount;
-  console.log(profit, "hello");
-
-  // Format the profit and profit percentage for display
   const profitFormatted = formatNumber(profit);
 
   const profitColor = profit >= 0 ? "#01F1E3" : "#FE2264";
-  // getFormattedPrice(profit)
 
   const marketToVolumePercentage =
     getPercentage(
