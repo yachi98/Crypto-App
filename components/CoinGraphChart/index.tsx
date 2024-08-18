@@ -211,9 +211,9 @@ const CoinGraphChart = () => {
               {selectedCoinsInfo.map((selectedCoin, index) => (
                 <div key={selectedCoin.id} className="flex gap-2 items-center">
                   <span
-                    className={`${coinBG[index]} w-[12px] h-[12px] flex items-center justify-center rounded`}
+                    className={`${coinBG[index]} w-[12px] h-[12px] items-center justify-center rounded hidden sm:flex`}
                   ></span>
-                  <span className="text-xs">
+                  <span className="text-xs text-[#bdbdbd]">
                     {selectedCoin.symbol.toUpperCase()}
                   </span>
                   <span className="text-xs">
@@ -222,7 +222,7 @@ const CoinGraphChart = () => {
                   </span>
                 </div>
               ))}
-              <span className="dark:text-[#DEDEDE] text-sm text-black absolute right-4">
+              <span className="dark:text-[#DEDEDE] text-sm text-black absolute right-4 hidden sm:block">
                 {formatDateGraph}
               </span>
             </div>
