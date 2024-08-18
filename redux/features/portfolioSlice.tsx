@@ -29,9 +29,7 @@ export const addPortfolioData = createAsyncThunk(
       );
 
       const currentPrice = currentData.market_data.current_price.gbp;
-
       const purchasePrice = historicalData.market_data.current_price.gbp;
-      const purchaseAmountValue = coin.purchaseAmount;
 
       // Create a new portfolio entry with historical purchase data
       const portfolioEntry: Portfolio = {
@@ -40,7 +38,7 @@ export const addPortfolioData = createAsyncThunk(
         value: coin.value,
         image: coin.image,
         purchaseDate: coin.purchaseDate,
-        purchaseAmount: purchaseAmountValue,
+        purchaseAmount: coin.purchaseAmount,
         hasProfit: false,
         currentPrice: { gbp: currentPrice },
         market_data: {

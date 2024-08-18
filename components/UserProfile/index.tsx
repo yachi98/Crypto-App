@@ -32,7 +32,7 @@ const UserProfile = () => {
     <div className="relative" ref={containerRef}>
       <button
         onClick={() => setShowDropDown(!showDropDown)}
-        className={`dark:bg-black bg-white rounded-xl p-2 text-xs dark:text-white text-black font-light flex items-center gap-2 justify-left ${
+        className={`dark:bg-black bg-white rounded-xl p-2 text-xs dark:text-white text-black font-light flex hidden md:block items-center gap-2 justify-left ${
           showDropDown ? "rounded-bl-none rounded-br-none" : ""
         }`}
       >
