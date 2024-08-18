@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { RootState } from "@/redux/store";
 import { Portfolio } from "@/interfaces/portfolio.interface";
 import axios from "axios";
 
@@ -18,7 +19,7 @@ let portfolio: Portfolio[] = [];
 
 export const addPortfolioData = createAsyncThunk(
   "historicalData/addPortfolioData",
-  async (coin: Portfolio, { rejectWithValue }) => {
+  async (coin: Portfolio, { rejectWithValue, getState }) => {
     try {
       const { data: historicalData } = await axios.get(
         `https://api.coingecko.com/api/v3/coins/${coin.coinApiId}/history?date=${coin.purchaseDate}`
@@ -28,8 +29,11 @@ export const addPortfolioData = createAsyncThunk(
         `https://api.coingecko.com/api/v3/coins/${coin.coinApiId}`
       );
 
-      const currentPrice = currentData.market_data.current_price.gbp;
-      const purchasePrice = historicalData.market_data.current_price.gbp;
+      const state = getState() as RootState;
+      const { currency } = state.currencySlice;
+
+      const currentPrice = currentData.market_data.current_price[currency];
+      const purchasePrice = historicalData.market_data.current_price[currency];
 
       // Create a new portfolio entry with historical purchase data
       const portfolioEntry: Portfolio = {
@@ -40,9 +44,9 @@ export const addPortfolioData = createAsyncThunk(
         purchaseDate: coin.purchaseDate,
         purchaseAmount: coin.purchaseAmount,
         hasProfit: false,
-        currentPrice: { gbp: currentPrice },
+        currentPrice: { [currency]: currentPrice },
         market_data: {
-          purchasePrice: { gbp: purchasePrice },
+          purchasePrice: { [currency]: purchasePrice },
           market_cap: historicalData.market_data.market_cap || {},
           total_volume: historicalData.market_data.total_volume || {},
         },
@@ -62,7 +66,7 @@ export const addPortfolioData = createAsyncThunk(
           );
           return {
             value: uniqueId,
-            currentPrice: data.market_data.current_price.gbp,
+            currentPrice: data.market_data.current_price[currency],
           };
         })
       );
@@ -76,8 +80,9 @@ export const addPortfolioData = createAsyncThunk(
 
         return {
           ...portfolioItem,
-          hasProfit: portfolioItem.market_data.purchasePrice.gpb < currentPrice,
-          currentPrice: { gbp: currentPrice },
+          hasProfit:
+            portfolioItem.market_data.purchasePrice[currency] < currentPrice,
+          currentPrice: { [currency]: currentPrice },
         };
       });
 
