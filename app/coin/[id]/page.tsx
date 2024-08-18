@@ -72,7 +72,7 @@ const CoinPage = ({ params }: { params: { id: string } }) => {
                       </span>
                     </div>
                     <div className="flex items-center justify-between z-10">
-                      <span className="text-2xl md:text-3xl lg:text-4xl mt-5 z-10">
+                      <span className="text-lg md:text-3xl mt-5 z-10">
                         {symbol}
                         {formatNumber(coin.market_data.current_price[currency])}
                       </span>
@@ -83,10 +83,10 @@ const CoinPage = ({ params }: { params: { id: string } }) => {
                   </div>
                   <div>
                     <div className="flex mt-5 items-center justify-between z-10">
-                      <h2 className="text-lg md:text-xl lg:text-2xl text-[#01F1E3] z-10">
+                      <h2 className="text-lg md:text-xl  text-[#01F1E3] z-10">
                         High 24h
                       </h2>
-                      <span className="text-xl md:text-2xl lg:text-3xl z-10">
+                      <span className="text-xl md:text-2xl z-10">
                         {symbol}
                         {formatNumber(coin.market_data.high_24h[currency])}
                       </span>
@@ -95,12 +95,10 @@ const CoinPage = ({ params }: { params: { id: string } }) => {
                       <div className="flex gap-3 items-center mt-8 justify-between">
                         <div className="flex items-center gap-2 z-10">
                           <CaretIcon className="w-[20px] md:w-[30px]" />
-                          <h3 className="text-lg md:text-xl lg:text-2xl">
-                            All Time High:
-                          </h3>
+                          <h3 className="text-lg md:text-xl">All Time High:</h3>
                         </div>
                         <div>
-                          <span className="text-xl md:text-2xl lg:text-3xl">
+                          <span className="text-xl md:text-2xl">
                             {symbol}
                             {formatNumber(coin.market_data.ath[currency])}
                           </span>
@@ -114,7 +112,7 @@ const CoinPage = ({ params }: { params: { id: string } }) => {
                       <div className="flex gap-3 items-center mt-8 justify-between z-10">
                         <div className="flex items-center gap-2">
                           <CaretIcon className="w-[20px] md:w-[30px] fill-[#FE2264] rotate-180" />
-                          <h3 className="text-lg md:text-xl lg:text-2xl z-10">
+                          <h3 className="text-lg md:text-xl z-10">
                             All Time Low:
                           </h3>
                         </div>

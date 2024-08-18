@@ -186,7 +186,7 @@ const PortfolioModal = ({ showModal, setShowModal }: PortfolioModalProps) => {
                 {searchCoinResults.map((coin) => (
                   <button
                     key={coin.id}
-                    className="p-2 flex gap-2 dark:hover:bg-gray-800 hover:bg-slate-100"
+                    className="p-2 flex gap-2 dark:hover:bg-[#5b5b5b40] hover:bg-slate-100"
                     onClick={() => handleCoinSelect(coin)}
                   >
                     <img

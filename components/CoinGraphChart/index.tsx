@@ -204,7 +204,7 @@ const CoinGraphChart = () => {
 
   return (
     <div className="flex flex-col md:flex-row mt-2">
-      <div className="dark:bg-black bg-white rounded-2xl md:w-[calc(50%-0.8rem)] lg:w-[calc(50%-0.8rem)] w-[calc(100%-1rem)] h-[370px] m-2 flex flex-col p-4 relative">
+      <div className="dark:bg-black bg-white rounded-2xl md:w-[calc(50%-0.8rem)] lg:w-[calc(50%-0.8rem)] w-[calc(100%-1rem)] h-[350px] m-2 flex flex-col p-4 relative">
         {selectedCoinsInfo.length > 0 && (
           <div className="flex flex-col gap-8">
             <div className="flex gap-8">
@@ -228,7 +228,7 @@ const CoinGraphChart = () => {
             </div>
 
             <div className="flex flex-col gap-1 text-black">
-              <span className="flex gap-1 items-center text-2xl dark:text-[#bdbdbd]">
+              <span className="flex gap-1 items-center text-xl dark:text-[#bdbdbd]">
                 {renderInfo(selectedCoinsInfo[0].name)} (
                 {selectedCoinsInfo[0].symbol.toUpperCase()})
               </span>
@@ -246,7 +246,7 @@ const CoinGraphChart = () => {
         )}
       </div>
 
-      <div className="dark:bg-black bg-white rounded-2xl md:w-[calc(50%-0.8rem)] lg:w-[calc(50%-0.8rem)] w-[calc(100%-1rem)] h-[370px] m-2 flex flex-col p-4">
+      <div className="dark:bg-black bg-white rounded-2xl md:w-[calc(50%-0.8rem)] lg:w-[calc(50%-0.8rem)] w-[calc(100%-1rem)] h-[350px] m-2 flex flex-col p-4">
         {selectedCoins[0] && (
           <div className="flex flex-col gap-8">
             <div className="flex items-center justify-between">
@@ -256,7 +256,7 @@ const CoinGraphChart = () => {
               <TimeSelectorBar />
             </div>
             <div className="flex flex-col gap-1 text-black">
-              <span className="flex gap-1 items-center text-2xl dark:text-[#bdbdbd]">
+              <span className="flex gap-1 items-center text-xl dark:text-[#bdbdbd]">
                 {renderInfo(selectedCoins[0].id)}
               </span>
               <span className="text-3xl dark:text-[#DEDEDE]">
