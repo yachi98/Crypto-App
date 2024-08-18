@@ -213,7 +213,7 @@ const CoinGraphChart = () => {
                   <span
                     className={`${coinBG[index]} w-[12px] h-[12px] items-center justify-center rounded hidden sm:flex`}
                   ></span>
-                  <span className="text-xs text-[#bdbdbd]">
+                  <span className="text-xs dark:text-[#bdbdbd]">
                     {selectedCoin.symbol.toUpperCase()}
                   </span>
                   <span className="text-xs">
