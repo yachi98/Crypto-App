@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { RootState } from "@/redux/store";
 import { Portfolio } from "@/interfaces/portfolio.interface";
 import axios from "axios";
 
@@ -24,8 +25,12 @@ export const addPortfolioData = createAsyncThunk(
         `https://api.coingecko.com/api/v3/coins/${coin.coinApiId}/history?date=${coin.purchaseDate}`
       );
 
-      const purchasePrice = historicalData.market_data.current_price.gbp;
-      const purchaseAmountValue = coin.purchaseAmount * purchasePrice;
+      const { data: currentData } = await axios.get(
+        `https://api.coingecko.com/api/v3/coins/${coin.coinApiId}`
+      );
+
+      const currentPrice = currentData.market_data.current_price;
+      const purchasePrice = historicalData.market_data.current_price;
 
       // Create a new portfolio entry with historical purchase data
       const portfolioEntry: Portfolio = {
@@ -34,11 +39,11 @@ export const addPortfolioData = createAsyncThunk(
         value: coin.value,
         image: coin.image,
         purchaseDate: coin.purchaseDate,
-        purchaseAmount: purchaseAmountValue,
+        purchaseAmount: coin.purchaseAmount,
         hasProfit: false,
-        currentPrice: { gpb: purchasePrice },
+        currentPrice: currentPrice,
         market_data: {
-          purchasePrice: { gbp: purchasePrice },
+          purchasePrice: purchasePrice,
           market_cap: historicalData.market_data.market_cap || {},
           total_volume: historicalData.market_data.total_volume || {},
         },
@@ -58,7 +63,7 @@ export const addPortfolioData = createAsyncThunk(
           );
           return {
             value: uniqueId,
-            currentPrice: data.market_data.current_price.gpb,
+            currentPrice: data.market_data.current_price,
           };
         })
       );
@@ -72,8 +77,8 @@ export const addPortfolioData = createAsyncThunk(
 
         return {
           ...portfolioItem,
-          hasProfit: portfolioItem.market_data.purchasePrice.gpb < currentPrice,
-          currentPrice: { gbp: currentPrice },
+          hasProfit: portfolioItem.market_data.purchasePrice < currentPrice,
+          currentPrice: currentPrice,
         };
       });
 

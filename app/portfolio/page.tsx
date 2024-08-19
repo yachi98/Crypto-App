@@ -22,7 +22,7 @@ const PortfolioPage = () => {
           </button>
         </div>
         {portfolioData.length === 0 && (
-          <p className="text-sm md:text-base lg:text-lg w-full md:w-[400px] lg:w-[550px] mt-5">
+          <p className="text-xs md:text-base w-full md:w-[400px] lg:w-[550px] mt-5">
             Manage your crypto assets with ease! Whether you’re a seasoned
             trader or just getting started in the exciting world of
             cryptocurrencies, this portfolio tool is designed to help you keep

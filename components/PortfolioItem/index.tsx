@@ -20,17 +20,13 @@ const PortfolioItem = ({ coin }: { coin: Portfolio }) => {
     setShowModal(false);
   };
 
-  const { coinMarketData } = useAppSelector((state) => state.coinMarketData);
+  const purchasePrice = coin.market_data.purchasePrice[currency];
+  const currentPrice = coin.currentPrice[currency];
+  const purchaseAmount = coin.purchaseAmount;
+  const profit = (currentPrice - purchasePrice) * purchaseAmount;
+  const profitFormatted = formatNumber(profit);
 
-  console.log(coinMarketData);
-
-  // const priceChange24h: number = getFormattedPrice(
-  //   coin.price_change_percentage_24h_in_currency
-  // );
-
-  // const profit = (coin.currentPrice - purchasePrice) * portfolio.purchaseAmount;
-  // const profitPercentage = getFormattedPrice((profit / purchasePrice) * 100);
-  // const profitFormatted = getFormattedPrice(profit);
+  const profitColor = profit >= 0 ? "#01F1E3" : "#FE2264";
 
   const marketToVolumePercentage =
     getPercentage(
@@ -79,15 +75,18 @@ const PortfolioItem = ({ coin }: { coin: Portfolio }) => {
           </span>
         </div>
         <div>
-          <h3 className="text-sm">Total:</h3>
+          <h3 className="text-sm">Total Price:</h3>
           <span className="text-[#01F1E3]">
             {symbol}
-            {formatNumber(coin.purchaseAmount)}
+            {formatNumber(coin.purchaseAmount * purchasePrice)}
           </span>
         </div>
         <div>
-          <h3 className="text-sm">Date Purchased:</h3>
-          <span className="text-[#01F1E3]">{coin.purchaseDate}</span>
+          <h3 className="text-sm">Profit:</h3>
+          <span className={`text-[${profitColor}]`}>
+            {symbol}
+            {profitFormatted}
+          </span>
         </div>
         <div>
           <h3 className="text-sm">Market Cap vs Volume:</h3>
@@ -108,6 +107,10 @@ const PortfolioItem = ({ coin }: { coin: Portfolio }) => {
           <span className="text-sm text-[#01F1E3]">
             {formatNumber(priceChange24h)}%
           </span>
+        </div>
+        <div className="flex flex-col">
+          <h3 className="text-sm">Date Purchased:</h3>
+          <span className="text-[#01F1E3]">{coin.purchaseDate}</span>
         </div>
         <button
           onClick={() => setShowModal(true)}

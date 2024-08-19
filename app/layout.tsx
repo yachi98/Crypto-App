@@ -1,11 +1,14 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Manrope } from "next/font/google";
 import Providers from "@/app/providers";
 import InfoBar from "@/components/InfoBar";
 import NavBar from "@/components/NavBar";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
+const manrope = Manrope({
+  subsets: ["latin"],
+  weight: ["400", "600", "700"],
+});
 
 export const metadata: Metadata = {
   title: "Coin Wave",
@@ -21,32 +24,24 @@ export default function RootLayout({
     <html lang="en">
       <Providers>
         <body
-          className={`${inter.className} dark:bg-[#030303] bg-[#f5f5f5] max-w-screen-2xl m-auto p-3 relative`}
+          className={`${manrope.className} dark:bg-[#030303] bg-[#f5f5f5] max-w-screen-2xl m-auto p-3 relative`}
         >
           <div className="absolute inset-0 overflow-hidden">
             <div
-              className="absolute rounded-full w-[200px] h-[1000px] bg-blue-500 opacity-60"
+              className="absolute rounded-full w-[600px] h-[1000px] bg-blue-500 opacity-40"
               style={{ top: "80vh", left: "20vw", filter: "blur(100px)" }}
             ></div>
             <div
-              className="absolute rounded-full w-[200px] h-[1800px] bg-cyan-500 opacity-60"
-              style={{ top: "20vh", left: "10vw", filter: "blur(100px)" }}
+              className="absolute rounded-full w-[600px] h-[1000px] bg-purple-500 opacity-40"
+              style={{ top: "20vh", right: "40vw", filter: "blur(100px)" }}
             ></div>
             <div
-              className="absolute rounded-full w-[200px] h-[700px] bg-purple-500 opacity-60"
+              className="absolute rounded-full w-[600px] h-[700px] bg-cyan-500 opacity-40"
               style={{ top: "30vh", left: "30vw", filter: "blur(100px)" }}
             ></div>
             <div
-              className="absolute rounded-full w-[200px] h-[1550px] bg-sky-500 opacity-60"
-              style={{ top: "20vh", left: "70vw", filter: "blur(100px)" }}
-            ></div>
-            <div
-              className="absolute rounded-full w-[200px] h-[1350px] bg-teal-500 opacity-60"
+              className="absolute rounded-full w-[400px] h-[1350px] bg-teal-500 opacity-40"
               style={{ top: "70vh", left: "30vw", filter: "blur(100px)" }}
-            ></div>
-            <div
-              className="absolute rounded-full w-[200px] h-[1250px] bg-teal-200 opacity-60"
-              style={{ top: "80vh", left: "20vw", filter: "blur(100px)" }}
             ></div>
           </div>
           <div className="relative z-10">
