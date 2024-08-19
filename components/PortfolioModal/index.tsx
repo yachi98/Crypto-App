@@ -147,7 +147,7 @@ const PortfolioModal = ({ showModal, setShowModal }: PortfolioModalProps) => {
   };
 
   return (
-    <div className="p-3 dark:bg-[#000000bd] bg-[#fafafa] absolute top-1/4 left-1/2 -translate-y-1/2 -translate-x-1/2 rounded-2xl max-w-full w-[90%] md:w-[70%] lg:w-[60%] xl:w-[50%]">
+    <div className="p-2 dark:bg-[#000000bd] bg-[#fafafa] absolute top-1/4 left-1/2 -translate-y-1/2 -translate-x-1/2 rounded-2xl max-w-full w-[90%] md:w-[70%] lg:w-[60%] xl:w-[50%]">
       <div className="absolute right-0 p-3">
         <button onClick={() => handleCancel()}>
           <CloseIcon />
@@ -242,7 +242,7 @@ const PortfolioModal = ({ showModal, setShowModal }: PortfolioModalProps) => {
             )}
           </div>
         </div>
-        <div className="flex justify-center gap-5 mt-8">
+        <div className="flex justify-center gap-5 mt-2 p-2">
           <button
             type="button"
             onClick={handleCancel}
