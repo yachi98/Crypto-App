@@ -28,28 +28,20 @@ export default function RootLayout({
         >
           <div className="absolute inset-0 overflow-hidden">
             <div
-              className="absolute rounded-full w-[200px] h-[1000px] bg-blue-500 opacity-60"
+              className="absolute rounded-full w-[600px] h-[1000px] bg-blue-500 opacity-60"
               style={{ top: "80vh", left: "20vw", filter: "blur(100px)" }}
             ></div>
             <div
-              className="absolute rounded-full w-[200px] h-[1800px] bg-cyan-500 opacity-60"
-              style={{ top: "20vh", left: "10vw", filter: "blur(100px)" }}
+              className="absolute rounded-full w-[600px] h-[1000px] bg-purple-500 opacity-60"
+              style={{ top: "20vh", right: "40vw", filter: "blur(100px)" }}
             ></div>
             <div
-              className="absolute rounded-full w-[200px] h-[700px] bg-purple-500 opacity-60"
+              className="absolute rounded-full w-[600px] h-[700px] bg-cyan-500 opacity-60"
               style={{ top: "30vh", left: "30vw", filter: "blur(100px)" }}
             ></div>
             <div
-              className="absolute rounded-full w-[200px] h-[1550px] bg-sky-500 opacity-60"
-              style={{ top: "20vh", left: "70vw", filter: "blur(100px)" }}
-            ></div>
-            <div
-              className="absolute rounded-full w-[200px] h-[1350px] bg-teal-500 opacity-60"
+              className="absolute rounded-full w-[400px] h-[1350px] bg-teal-500 opacity-60"
               style={{ top: "70vh", left: "30vw", filter: "blur(100px)" }}
-            ></div>
-            <div
-              className="absolute rounded-full w-[200px] h-[1250px] bg-teal-200 opacity-60"
-              style={{ top: "80vh", left: "20vw", filter: "blur(100px)" }}
             ></div>
           </div>
           <div className="relative z-10">

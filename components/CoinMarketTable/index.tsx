@@ -62,7 +62,7 @@ const CoinMarketTable = () => {
         <h1 className="dark:text-white text-black text-light p-4">
           Market Overview
         </h1>
-        <div className="relative flex items-center overflow-hidden">
+        <div className="relative items-center overflow-hidden hidden sm:flex">
           <label
             className={`dark:bg-black p-3 border-3 border-black bg-white cursor-pointer ${
               showDropDown ? "rounded-bl-xl rounded-tl-xl" : "rounded-xl"
