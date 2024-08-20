@@ -5,11 +5,13 @@ import { Coin } from "@/interfaces/coin.interface";
 import {
   getSelectedCoinData,
   removeCoin,
+  restoreSelectedCoins,
 } from "@/redux/features/selectedCoins";
 import { AppDispatch, useAppSelector } from "@/redux/store";
 import formatNumber from "@/utils/formatNumber";
 import getFormattedPrice from "@/utils/getFormattedDate";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 
 const PriceCoinItem = ({ coin }: { coin: Coin }) => {
@@ -20,9 +22,28 @@ const PriceCoinItem = ({ coin }: { coin: Coin }) => {
   const { symbol, currency } = useAppSelector((state) => state.currencySlice);
   const isSelected = selectedCoins.find((item) => item.id === coin.id);
 
+  const [priceCoins, setSelectedCoins] = useState<Coin[]>(() =>
+    JSON.parse(localStorage.getItem("priceCoins") || "[]")
+  );
+
+  // Sync selected coins between Redux and localStorage whenever Redux state changes
+  useEffect(() => {
+    localStorage.setItem("priceCoins", JSON.stringify(priceCoins));
+    setSelectedCoins(priceCoins);
+  }, [priceCoins]);
+
+  // Restore coins from localStorage into Redux on component mount
+  useEffect(() => {
+    const storedCoins = JSON.parse(localStorage.getItem("priceCoins") || "[]");
+    if (Array.isArray(storedCoins) && storedCoins.length > 0) {
+      dispatch(restoreSelectedCoins(storedCoins));
+    }
+  }, [dispatch]);
+
   const coinSelector = (coin: Coin) => {
     if (isSelected) {
       dispatch(removeCoin(coin.id));
+      setSelectedCoins(priceCoins.filter((item) => item.id !== coin.id));
     } else if (selectedCoins.length < 3) {
       dispatch(
         getSelectedCoinData({
@@ -31,6 +52,7 @@ const PriceCoinItem = ({ coin }: { coin: Coin }) => {
           coinId: coin.id,
         })
       );
+      setSelectedCoins([...priceCoins, coin]);
     }
   };
 
