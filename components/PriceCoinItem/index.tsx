@@ -22,28 +22,33 @@ const PriceCoinItem = ({ coin }: { coin: Coin }) => {
   const { symbol, currency } = useAppSelector((state) => state.currencySlice);
   const isSelected = selectedCoins.find((item) => item.id === coin.id);
 
-  const [priceCoins, setSelectedCoins] = useState<Coin[]>(() =>
-    JSON.parse(localStorage.getItem("priceCoins") || "[]")
-  );
+  // const [priceCoins, setSelectedCoins] = useState<Coin[]>(() =>
+  //   JSON.parse(localStorage.getItem("priceCoins") || "[]")
+  // );
 
-  // Sync selected coins between Redux and localStorage whenever Redux state changes
-  useEffect(() => {
-    localStorage.setItem("priceCoins", JSON.stringify(priceCoins));
-    setSelectedCoins(priceCoins);
-  }, [priceCoins]);
-
-  // Restore coins from localStorage into Redux on component mount
+  // // Restore coins from localStorage into Redux on component mount
   useEffect(() => {
     const storedCoins = JSON.parse(localStorage.getItem("priceCoins") || "[]");
     if (Array.isArray(storedCoins) && storedCoins.length > 0) {
       dispatch(restoreSelectedCoins(storedCoins));
     }
-  }, [dispatch]);
+  }, []);
+
+  // useEffect(() => {
+  //   localStorage.setItem("priceCoins", JSON.stringify(selectedCoins));
+  //   // setSelectedCoins(priceCoins);
+  // }, [selectedCoins]);
+
+  useEffect(() => {
+    if (selectedCoins.length > 0) {
+      localStorage.setItem("priceCoins", JSON.stringify(selectedCoins)); // Update localStorage
+    }
+  }, [selectedCoins]);
 
   const coinSelector = (coin: Coin) => {
     if (isSelected) {
       dispatch(removeCoin(coin.id));
-      setSelectedCoins(priceCoins.filter((item) => item.id !== coin.id));
+      // setSelectedCoins(priceCoins.filter((item) => item.id !== coin.id));
     } else if (selectedCoins.length < 3) {
       dispatch(
         getSelectedCoinData({
@@ -52,7 +57,7 @@ const PriceCoinItem = ({ coin }: { coin: Coin }) => {
           coinId: coin.id,
         })
       );
-      setSelectedCoins([...priceCoins, coin]);
+      // setSelectedCoins([...priceCoins, coin]);
     }
   };
 
