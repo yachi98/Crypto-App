@@ -4,8 +4,8 @@ import PriceChange from "@/components/PriceChange";
 import { Coin } from "@/interfaces/coin.interface";
 import {
   getSelectedCoinData,
+  localStorageSelectedCoins,
   removeCoin,
-  restoreSelectedCoins,
 } from "@/redux/features/selectedCoins";
 import { AppDispatch, useAppSelector } from "@/redux/store";
 import formatNumber from "@/utils/formatNumber";
@@ -20,24 +20,22 @@ const PriceCoinItem = ({ coin }: { coin: Coin }) => {
   );
   const dispatch: AppDispatch = useDispatch();
   const { symbol, currency } = useAppSelector((state) => state.currencySlice);
-  // const [selectedCoins, setSelectedCoins] = useState<Coin[]>([]);
-  const [initialized, setInitialized] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   // // Restore coins from localStorage into Redux on component mount
   useEffect(() => {
     const storedCoins = JSON.parse(localStorage.getItem("priceCoins") || "[]");
     if (Array.isArray(storedCoins) && storedCoins.length > 0) {
-      dispatch(restoreSelectedCoins(storedCoins));
-      // setSelectedCoins(storedCoins);
+      dispatch(localStorageSelectedCoins(storedCoins));
     }
-    setInitialized(true);
+    setLoading(true);
   }, []);
 
   useEffect(() => {
-    if (initialized) {
+    if (loading) {
       localStorage.setItem("priceCoins", JSON.stringify(selectedCoins));
     }
-  }, [selectedCoins, initialized]);
+  }, [selectedCoins, loading]);
 
   const coinSelector = (coin: Coin) => {
     if (isSelected) {
@@ -52,16 +50,6 @@ const PriceCoinItem = ({ coin }: { coin: Coin }) => {
       );
     }
   };
-
-  // const coinSelector = (coin: Coin) => {
-  //   if (selectedCoins.find((item) => item.id === coin.id)) {
-  //     // If the coin is already selected, remove it
-  //     setSelectedCoins(selectedCoins.filter((item) => item.id !== coin.id));
-  //   } else if (selectedCoins.length < 3) {
-  //     // If less than 3 coins are selected, add the new coin
-  //     setSelectedCoins([...selectedCoins, coin]);
-  //   }
-  // };
 
   const isSelected = selectedCoins.find((item) => item.id === coin.id);
 

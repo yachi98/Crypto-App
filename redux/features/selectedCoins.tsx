@@ -89,7 +89,7 @@ const getSelectedCoinSlice = createSlice({
       );
       state.selectedCoins = newList;
     },
-    restoreSelectedCoins: (state, action) => {
+    localStorageSelectedCoins: (state, action) => {
       if (Array.isArray(action.payload)) {
         state.selectedCoins = action.payload;
       }
@@ -120,6 +120,6 @@ const getSelectedCoinSlice = createSlice({
       });
   },
 });
-export const { changeTime, removeCoin, restoreSelectedCoins } =
+export const { changeTime, removeCoin, localStorageSelectedCoins } =
   getSelectedCoinSlice.actions;
 export default getSelectedCoinSlice.reducer;
