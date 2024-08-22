@@ -22,7 +22,7 @@ const CoinRow = ({
 }: CoinRowProps) => {
   const [showDropdown, setShowDropdown] = useState(false);
   const [coinSearch, setCoinSearch] = useState("");
-  const { symbol, currency } = useAppSelector((state) => state.currencySlice);
+  const { symbol } = useAppSelector((state) => state.currencySlice);
   const { coinMarketData } = useAppSelector((state) => state.coinMarketData);
 
   const coinResults = coinMarketData.filter((coin: Coin) =>

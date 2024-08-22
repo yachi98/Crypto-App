@@ -95,15 +95,13 @@ const PortfolioItem = ({ coin }: { coin: Portfolio }) => {
           </span>
         </div>
         <div className="flex flex-col">
-          <h3 className="text-sm hidden sm:inline">
-            Circ Supply vs Max Supply:
-          </h3>
+          <h3 className="text-sm">Circ Supply vs Max Supply:</h3>
           <span className="text-sm text-[#01F1E3]">
             {formatNumber(circToMaxSupplyPercentage)}%
           </span>
         </div>
         <div className="flex flex-col">
-          <h3 className="text-sm hidden sm:inline">Price Change 24h:</h3>
+          <h3 className="text-sm">Price Change 24h:</h3>
           <span className="text-sm text-[#01F1E3]">
             {formatNumber(priceChange24h)}%
           </span>
