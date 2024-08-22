@@ -20,35 +20,28 @@ const PriceCoinItem = ({ coin }: { coin: Coin }) => {
   );
   const dispatch: AppDispatch = useDispatch();
   const { symbol, currency } = useAppSelector((state) => state.currencySlice);
-  const isSelected = selectedCoins.find((item) => item.id === coin.id);
-
-  // const [priceCoins, setSelectedCoins] = useState<Coin[]>(() =>
-  //   JSON.parse(localStorage.getItem("priceCoins") || "[]")
-  // );
+  // const [selectedCoins, setSelectedCoins] = useState<Coin[]>([]);
+  const [initialized, setInitialized] = useState(false);
 
   // // Restore coins from localStorage into Redux on component mount
   useEffect(() => {
     const storedCoins = JSON.parse(localStorage.getItem("priceCoins") || "[]");
     if (Array.isArray(storedCoins) && storedCoins.length > 0) {
       dispatch(restoreSelectedCoins(storedCoins));
+      // setSelectedCoins(storedCoins);
     }
+    setInitialized(true);
   }, []);
 
-  // useEffect(() => {
-  //   localStorage.setItem("priceCoins", JSON.stringify(selectedCoins));
-  //   // setSelectedCoins(priceCoins);
-  // }, [selectedCoins]);
-
   useEffect(() => {
-    if (selectedCoins.length > 0) {
-      localStorage.setItem("priceCoins", JSON.stringify(selectedCoins)); // Update localStorage
+    if (initialized) {
+      localStorage.setItem("priceCoins", JSON.stringify(selectedCoins));
     }
-  }, [selectedCoins]);
+  }, [selectedCoins, initialized]);
 
   const coinSelector = (coin: Coin) => {
     if (isSelected) {
       dispatch(removeCoin(coin.id));
-      // setSelectedCoins(priceCoins.filter((item) => item.id !== coin.id));
     } else if (selectedCoins.length < 3) {
       dispatch(
         getSelectedCoinData({
@@ -57,9 +50,20 @@ const PriceCoinItem = ({ coin }: { coin: Coin }) => {
           coinId: coin.id,
         })
       );
-      // setSelectedCoins([...priceCoins, coin]);
     }
   };
+
+  // const coinSelector = (coin: Coin) => {
+  //   if (selectedCoins.find((item) => item.id === coin.id)) {
+  //     // If the coin is already selected, remove it
+  //     setSelectedCoins(selectedCoins.filter((item) => item.id !== coin.id));
+  //   } else if (selectedCoins.length < 3) {
+  //     // If less than 3 coins are selected, add the new coin
+  //     setSelectedCoins([...selectedCoins, coin]);
+  //   }
+  // };
+
+  const isSelected = selectedCoins.find((item) => item.id === coin.id);
 
   const priceChange1h: number = getFormattedPrice(
     coin.price_change_percentage_1h_in_currency
