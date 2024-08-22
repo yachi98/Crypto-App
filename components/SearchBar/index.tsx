@@ -1,10 +1,9 @@
-import { ChangeEvent, MutableRefObject } from "react";
 import { SearchCoin } from "@/interfaces/searchCoin.interface";
-import SearchIcon from "../../public/SearchIcon.svg";
-import { motion } from "framer-motion";
 import axios from "axios";
-import { useEffect, useRef, useState } from "react";
+import { motion } from "framer-motion";
 import Link from "next/link";
+import { ChangeEvent, useEffect, useRef, useState } from "react";
+import SearchIcon from "../../public/SearchIcon.svg";
 
 const SearchBar = () => {
   const [coinSearch, setCoinSearch] = useState("");
@@ -48,21 +47,6 @@ const SearchBar = () => {
       searchCoinData();
     }
   }, [debouncedSearch]);
-
-  // useEffect(() => {
-  //   const searchCoinData = async () => {
-  //     try {
-  //       const { data } = await axios.get(
-  //         `https://api.coingecko.com/api/v3/search?query=${coinSearch}&x_cg_demo_api_key=CG-duQsjCRoXZm1bJBTrL8sARut`
-  //       );
-  //       setSearchCoins(data.coins);
-  //     } catch (error) {
-  //       console.error("Error fetching historical data:", error);
-  //     }
-  //   };
-
-  //   searchCoinData();
-  // }, [coinSearch]);
 
   const searchCoinResults = searchCoins.filter((coin: SearchCoin) =>
     coin.name.toLowerCase().startsWith(coinSearch)
