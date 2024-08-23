@@ -1,15 +1,16 @@
-import { ChangeEvent, useState } from "react";
 import { SearchCoin } from "@/interfaces/searchCoin.interface";
-import SearchIcon from "../../public/SearchIcon.svg";
-import { motion } from "framer-motion";
 import axios from "axios";
-import { useEffect } from "react";
+import { motion } from "framer-motion";
 import Link from "next/link";
+import { ChangeEvent, useEffect, useRef, useState } from "react";
+import SearchIcon from "../../public/SearchIcon.svg";
 
 const SearchBar = () => {
   const [coinSearch, setCoinSearch] = useState("");
   const [searchCoins, setSearchCoins] = useState<SearchCoin[]>([]);
   const [showDropDown, setShowDropDown] = useState(false);
+  const [debouncedSearch, setDebouncedSearch] = useState("");
+  const debounceRef = useRef<number | null>(null);
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const searchValue = e.target.value.toLowerCase();
@@ -18,19 +19,34 @@ const SearchBar = () => {
   };
 
   useEffect(() => {
+    if (debounceRef.current) {
+      clearTimeout(debounceRef.current);
+    }
+    debounceRef.current = window.setTimeout(() => {
+      setDebouncedSearch(coinSearch);
+    }, 500);
+    return () => {
+      if (debounceRef.current) {
+        clearTimeout(debounceRef.current);
+      }
+    };
+  }, [coinSearch]);
+
+  useEffect(() => {
     const searchCoinData = async () => {
       try {
         const { data } = await axios.get(
-          `https://api.coingecko.com/api/v3/search?query=${coinSearch}&x_cg_demo_api_key=CG-duQsjCRoXZm1bJBTrL8sARut`
+          `https://api.coingecko.com/api/v3/search?query=${debouncedSearch}&x_cg_demo_api_key=CG-duQsjCRoXZm1bJBTrL8sARut`
         );
         setSearchCoins(data.coins);
       } catch (error) {
         console.error("Error fetching historical data:", error);
       }
     };
-
-    searchCoinData();
-  }, [coinSearch]);
+    if (debouncedSearch.trim().length > 0) {
+      searchCoinData();
+    }
+  }, [debouncedSearch]);
 
   const searchCoinResults = searchCoins.filter((coin: SearchCoin) =>
     coin.name.toLowerCase().startsWith(coinSearch)

@@ -1,5 +1,4 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { RootState } from "@/redux/store";
 import { Portfolio } from "@/interfaces/portfolio.interface";
 import axios from "axios";
 

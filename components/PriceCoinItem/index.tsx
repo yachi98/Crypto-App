@@ -4,12 +4,14 @@ import PriceChange from "@/components/PriceChange";
 import { Coin } from "@/interfaces/coin.interface";
 import {
   getSelectedCoinData,
+  localStorageSelectedCoins,
   removeCoin,
 } from "@/redux/features/selectedCoins";
 import { AppDispatch, useAppSelector } from "@/redux/store";
 import formatNumber from "@/utils/formatNumber";
 import getFormattedPrice from "@/utils/getFormattedDate";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 
 const PriceCoinItem = ({ coin }: { coin: Coin }) => {
@@ -18,7 +20,22 @@ const PriceCoinItem = ({ coin }: { coin: Coin }) => {
   );
   const dispatch: AppDispatch = useDispatch();
   const { symbol, currency } = useAppSelector((state) => state.currencySlice);
-  const isSelected = selectedCoins.find((item) => item.id === coin.id);
+  const [loading, setLoading] = useState(false);
+
+  // // Restore coins from localStorage into Redux on component mount
+  useEffect(() => {
+    const storedCoins = JSON.parse(localStorage.getItem("priceCoins") || "[]");
+    if (Array.isArray(storedCoins) && storedCoins.length > 0) {
+      dispatch(localStorageSelectedCoins(storedCoins));
+    }
+    setLoading(true);
+  }, []);
+
+  useEffect(() => {
+    if (loading) {
+      localStorage.setItem("priceCoins", JSON.stringify(selectedCoins));
+    }
+  }, [selectedCoins, loading]);
 
   const coinSelector = (coin: Coin) => {
     if (isSelected) {
@@ -33,6 +50,8 @@ const PriceCoinItem = ({ coin }: { coin: Coin }) => {
       );
     }
   };
+
+  const isSelected = selectedCoins.find((item) => item.id === coin.id);
 
   const priceChange1h: number = getFormattedPrice(
     coin.price_change_percentage_1h_in_currency

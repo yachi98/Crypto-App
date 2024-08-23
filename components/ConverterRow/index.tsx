@@ -1,9 +1,9 @@
 "use client";
 
-import Image from "next/image";
-import { useEffect, useState, ChangeEvent } from "react";
 import { Coin } from "@/interfaces/coin.interface";
 import { useAppSelector } from "@/redux/store";
+import Image from "next/image";
+import { ChangeEvent, useEffect, useState } from "react";
 
 interface CoinRowProps {
   data: Coin[];
