@@ -36,7 +36,6 @@ const Home = () => {
     <main>
       {!showConverter && coinMarketData.length > 0 && <PriceChart />}
       <div className="dark:bg-black bg-white dark:text-white text-black p-1 rounded-xl w-[180px] flex items-center mt-5 text-xs">
-        {/* <h1>{t("welcome")}</h1> */}
         <button
           onClick={() => setShowConverter(!showConverter)}
           className={`${

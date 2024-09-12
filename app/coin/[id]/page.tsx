@@ -1,16 +1,16 @@
 "use client";
 
+import PriceChange from "@/components/PriceChange";
+import PriceCoinGraph from "@/components/PriceCoinGraph";
 import { CoinPage } from "@/interfaces/coinPage";
-import { useQuery, UseQueryResult } from "react-query";
-import Image from "next/image";
-import axios from "axios";
-import { useAppSelector } from "@/redux/store";
 import CaretIcon from "@/public/CaretIcon.svg";
+import { useAppSelector } from "@/redux/store";
+import extractUrl from "@/utils/extractUrl";
 import formatDate from "@/utils/formatDate";
 import formatNumber from "@/utils/formatNumber";
-import PriceChange from "@/components/PriceChange";
-import extractUrl from "@/utils/extractUrl";
-import PriceCoinGraph from "@/components/PriceCoinGraph";
+import axios from "axios";
+import Image from "next/image";
+import { useQuery, UseQueryResult } from "react-query";
 
 const CoinDisplay = ({ params }: { params: { id: string } }) => {
   const { data, isLoading, error, refetch } = useQuery("coinData", () =>

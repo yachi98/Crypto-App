@@ -7,7 +7,6 @@ import PortfolioSwitch from "../PortfolioSwitch";
 import SorterCurrency from "../SortCurrency";
 import ThemeToggle from "../ThemeToggle";
 import UserProfile from "../UserProfile";
-import LanguageButton from "../LanguageButton/LanguageButton";
 
 const NavBar = () => {
   return (
@@ -27,7 +26,6 @@ const NavBar = () => {
       <div className="flex gap-3 items-center flex-shrink">
         <SearchBar />
         <UserProfile />
-        {/* <LanguageButton /> */}
         <SorterCurrency />
         <ThemeToggle />
       </div>
