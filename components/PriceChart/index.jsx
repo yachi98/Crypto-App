@@ -28,7 +28,7 @@ const NextArrow = ({ onClick }) => (
 );
 
 const PriceChart = () => {
-  var settings = {
+  let settings = {
     dots: false,
     infinite: false,
     speed: 500,

@@ -11,12 +11,15 @@ import { getGlobalData } from "@/redux/features/globalSlice";
 import { AppDispatch, useAppSelector } from "@/redux/store";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
+import { useTranslation } from "react-i18next";
+import { appWithTranslation } from "next-i18next";
 
 const Home = () => {
   const [showConverter, setShowConverter] = useState(false);
   const dispatch: AppDispatch = useDispatch();
   const { currency } = useAppSelector((state) => state.currencySlice);
   const { coinMarketData } = useAppSelector((state) => state.coinMarketData);
+  const { t } = useTranslation("common");
 
   useEffect(() => {
     dispatch(getGlobalData());
