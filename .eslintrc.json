@@ -4,10 +4,6 @@
     "no-console": "warn",
     "no-unused-vars": "warn",
     "no-var": "error",
-
     "no-multi-assign": "error"
-    // "spaced-comment": ["warn", "always", { "block": { "balanced": true } }],
-    // "prefer-const": "error",
-    // "no-throw-literal": "error"
   }
 }
