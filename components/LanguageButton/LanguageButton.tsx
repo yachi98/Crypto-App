@@ -1,6 +1,6 @@
-import { useRouter } from "next/router";
 import ArrowIcon from "@/public/ArrowIcon.svg";
 import World from "@/public/World.svg";
+import { useRouter } from "next/router";
 import { useState } from "react";
 
 const LanguageButton = () => {
